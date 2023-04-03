@@ -1,4 +1,4 @@
 package com.magentoapplication.utility;
 
-public class Log4j {
+public class Log4j  {
 }

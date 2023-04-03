@@ -17,38 +17,42 @@ public class TestBase {
 
     int headless=Integer.parseInt(ApplicationConfig.readFromConfigProperties(configName,"headless"));
 
-    public void setupBrowserFrondEnd(){
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        if (headless==1) {
-            options.addArguments("headless");
-            options.addArguments("window-size=1200,1100");
-            options.addArguments("disable-gbu");
-
-        } else {
-            driver.manage().window().maximize();
-            driver.get(backEndUrl);
-        }
-    }
 
     public void setupBrowserBackEnd(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions options=new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        if (headless==1){
+            options.addArguments("headless");
+            options.addArguments("window-size=1200,1100");
+            options.addArguments("disable-gbu");
+
+        }
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         driver=new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(backEndUrl);
     }
 
-    public void setupBrowserInHeadlessMode(){
+    public void setupBrowserFrontEnd(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions options=new ChromeOptions();
-        options.addArguments("headless");
-        options.addArguments("window-size=1200,1100");
-        options.addArguments("disable-gbu");
+        options.addArguments("--remote-allow-origins=*");
+        if (headless==1){
+            options.addArguments("headless");
+            options.addArguments("window-size=1200,1100");
+            options.addArguments("disable-gbu");
+
+        }
+        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         driver=new ChromeDriver(options);
-        //driver.get();
+        driver.manage().window().maximize();
+        driver.get(frondEndUrl);
+    }
+
+    public void closeBrowser(){
+        driver.close();
+        driver.quit();
     }
 
 }
