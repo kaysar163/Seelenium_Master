@@ -9,14 +9,14 @@ import org.openqa.selenium.support.PageFactory;
 public class FrontEndLoginPage {
     WebDriver driver;
 
-    DashboardPage dashboardPage;
+    FrontEndDashboardPage dashboardPage;
 
     FunctionClass functionClass;
 
     public FrontEndLoginPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
-        dashboardPage=new DashboardPage(driver);
+        dashboardPage=new FrontEndDashboardPage(driver);
         functionClass=new FunctionClass(driver);
     }
 
