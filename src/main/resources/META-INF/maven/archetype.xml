@@ -1,0 +1,9 @@
+<archetype>
+  <id>Amsterdam_eCommerce_EUR2023Automation</id>
+  <sources>
+    <source>src/main/java/App.java</source>
+  </sources>
+  <testSources>
+    <source>src/test/java/AppTest.java</source>
+  </testSources>
+</archetype>
