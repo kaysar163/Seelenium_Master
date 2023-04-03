@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class TestBase {
-    WebDriver driver;
+    public WebDriver driver;
 
     final static String configName="config.properties";
 
