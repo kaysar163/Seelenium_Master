@@ -1,5 +1,6 @@
 package com.magentoapplication.utility;
 
+import com.github.javafaker.Faker;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -38,6 +39,20 @@ public class FunctionClass {
     public void waitUntilElementPresent(WebElement element){
         WebDriverWait wait=new WebDriverWait(driver,timeout);
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+    public String generateFakeName(){
+        String faker= Faker.instance().name().firstName();
+        return faker;
+    }
+
+    public String generateFakeLastName(){
+        String faker= Faker.instance().name().lastName();
+        return faker;
+    }
+
+    public String generateFakeEmail(){
+        String faker=Faker.instance().internet().emailAddress();
+        return faker;
     }
 
 
