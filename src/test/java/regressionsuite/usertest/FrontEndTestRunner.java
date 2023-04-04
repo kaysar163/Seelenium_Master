@@ -31,7 +31,7 @@ public class FrontEndTestRunner extends TestBase{
     @Test(description = "kaysar",priority =1 )
     public void CreateAnAccount(){
         createAnAccountPage.fillAccountRegistrationForm();
-       // createAnAccountPage.verifyCreateAnAccountSuccessful();
+        createAnAccountPage.verifyCreateAnAccountSuccessful();
 
 
 }
