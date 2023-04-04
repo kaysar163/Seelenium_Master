@@ -2,6 +2,7 @@ package regressionsuite.usertest;
 
 import com.magentoapplication.usermodule.CreateAnAccountPage;
 import com.magentoapplication.usermodule.FrontEndLoginPage;
+import com.magentoapplication.usermodule.NewsletterSubscriptionPage;
 import com.magentoapplication.utility.TestBase;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -13,11 +14,13 @@ public class FrontEndTestRunner extends TestBase{
     FrontEndLoginPage frontEndLoginPage;
 
     CreateAnAccountPage createAnAccountPage;
+    NewsletterSubscriptionPage newsletterSubscriptionPage;
     @BeforeClass
     public void setUp() {
         setupBrowserFrontEnd();
         frontEndLoginPage = new FrontEndLoginPage(driver);
         createAnAccountPage=new CreateAnAccountPage(driver);
+        newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
     }
 
     @Test
@@ -33,6 +36,11 @@ public class FrontEndTestRunner extends TestBase{
 
 
 }
+    @Test
+    public void clickNewsletterSubscriptionLink(){
+        newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
+        newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
