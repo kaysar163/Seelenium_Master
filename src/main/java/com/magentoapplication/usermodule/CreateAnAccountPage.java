@@ -1,5 +1,6 @@
 package com.magentoapplication.usermodule;
 
+import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import com.magentoapplication.utility.TestBase;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ public class CreateAnAccountPage  {
     WebDriver driver;
      FunctionClass functionClass;
      FrontEndDashboardPage frontEndDashboardPage;
+    String config = "testdatafolder/testdata.properties";
 
     public CreateAnAccountPage(WebDriver driver) {
         this.driver = driver;
@@ -53,34 +55,35 @@ public class CreateAnAccountPage  {
 
     WebElement registerButton;
 
-    @FindBy(xpath ="//span[normalize-space()='Thank you for registering with eCommerce Shopping.']")
 
+    @FindBy(xpath = "(//span[text()='Thank you for registering with eCommerce Shopping.']")
     WebElement createAnAccountSuccessfulMessage;
-
 
 
     public void fillAccountRegistrationForm(){
         frontEndDashboardPage.clickOnAccountLink();
         frontEndDashboardPage.clickOnRegisterLink();
         functionClass.waitUntilElementPresent(firstName);
-        firstName.sendKeys("QAtester1");
+        firstName.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent( middleName);
-        middleName.sendKeys("QAtester2");
+        middleName.sendKeys(ApplicationConfig.readFromConfigProperties(config,"middleName"));
         functionClass.waitUntilElementPresent(lastName);
-        lastName.sendKeys("QAtester3");
+        lastName.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(emailAddress);
-        emailAddress.sendKeys("QAtester@hotmail.com");
+        emailAddress.sendKeys(functionClass.generateFakeEmail());
         functionClass.waitUntilElementPresent(password);
-        password.sendKeys("123456tensta");
+        password.sendKeys(ApplicationConfig.readFromConfigProperties(config,"password"));
         functionClass.waitUntilElementPresent( confirmPassword);
-        confirmPassword.sendKeys("123456tensta");
+        confirmPassword.sendKeys(ApplicationConfig.readFromConfigProperties(config,"confirmPassword"));
         functionClass.waitUntilElementPresent(isSubscribed);
         isSubscribed.click();
         functionClass.waitUntilElementPresent(registerButton);
         registerButton.click();
 }
-    public  boolean verifyCreateAnAccountSuccessful(){
-        createAnAccountSuccessfulMessage.isDisplayed();
-        return createAnAccountSuccessfulMessage.isDisplayed();
-}
+    public  boolean verifyCreateAnAccountSuccessful() {
+        if (createAnAccountSuccessfulMessage.isDisplayed()){
+            return true;}
+        else return false;
+    }
+
 }
