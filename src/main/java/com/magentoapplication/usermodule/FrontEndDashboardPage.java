@@ -14,8 +14,9 @@ public class FrontEndDashboardPage {
 
     public FrontEndDashboardPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionClass=new FunctionClass(driver);
+        PageFactory.initElements(driver, this);
+        functionClass = new FunctionClass(driver);
+
     }
 
     @FindBy(css = ".skip-link.skip-account")
@@ -23,12 +24,17 @@ public class FrontEndDashboardPage {
 
     @FindBy(css = "[title='Log In']")
     WebElement loginLink;
+    @FindBy(xpath = "//a[normalize-space()='Register']")
+    WebElement registerLink;
 
-    public void clickOnAccountLink(){
+    public void clickOnAccountLink() {
         functionClass.waitUntilElementPresent(accountLink);
         accountLink.click();
     }
-
+    public void clickOnRegisterLink() {
+        functionClass.waitUntilElementPresent(registerLink);
+        registerLink.click();
+}
     public void clickOnLoginLink(){
         functionClass.waitUntilElementPresent(loginLink);
         loginLink.click();
