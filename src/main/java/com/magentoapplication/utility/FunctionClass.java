@@ -74,6 +74,10 @@ public class FunctionClass {
         return zipCode;
     }
 
+    public String generateCountryName(){
+        String countryName=Faker.instance().address().country();
+        return countryName;
+    }
     public String  generateTelephoneNumber(){
         String telephoneNumber=Faker.instance().phoneNumber().cellPhone();
         return telephoneNumber;
