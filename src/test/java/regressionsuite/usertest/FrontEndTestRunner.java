@@ -84,7 +84,11 @@ public class FrontEndTestRunner extends TestBase{
         newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
         newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
     }
-
+  @Test
+  public void verifyViewMyTagsTest(){
+        myDashboardPage.viewMyTagsLink();
+      Assert.assertTrue(  myDashboardPage.verifyViewMyTags());
+  }
 
     @AfterClass
     public void tearDown(){
