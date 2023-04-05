@@ -44,7 +44,7 @@ public class FrontEndTestRunner extends TestBase{
         addProductsToShoppingCart.verification();
     }
 
-    @Test(enabled=false)
+    @Test()
     public void changePasswordTest(){
         createAnAccountPage.fillAccountRegistrationForm();
         //frontEndLoginPage.login();
@@ -52,7 +52,7 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage.verifyPasswordChanged();
     }
 
-    @Test(enabled=false)
+    @Test()
     public void clickNewsletterSubscriptionLink(){
         newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
         newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
