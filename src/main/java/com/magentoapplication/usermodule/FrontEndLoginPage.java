@@ -39,10 +39,11 @@ public class FrontEndLoginPage {
         dashboardPage.clickOnAccountLink();
         dashboardPage.clickOnLoginLink();
         functionClass.waitUntilElementPresent(emailField);
-        emailField.sendKeys(createAnAccountPage.userEmail);
+        emailField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","loginEmail"));
         functionClass.waitUntilElementPresent(passwordField);
-        passwordField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","password"));
+        passwordField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","loginPassword"));
         functionClass.waitUntilElementPresent(loginButton);
         loginButton.click();
     }
+
 }

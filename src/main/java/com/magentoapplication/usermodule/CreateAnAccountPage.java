@@ -59,7 +59,8 @@ public class CreateAnAccountPage {
     WebElement registerButton;
 
 
-    @FindBy(xpath = "//span[text()='Thank you for registering with eCommerce Shopping.']")
+    //@FindBy(xpath = "//span[text()='Thank you for registering with eCommerce Shopping.']")
+    @FindBy(css=".success-msg>ul>li>span")
     WebElement createAnAccountSuccessfulMessage;
 
 

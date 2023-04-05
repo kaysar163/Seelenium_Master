@@ -2,6 +2,7 @@ package com.magentoapplication.usermodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,9 +10,11 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MyDashboardPage {
     WebDriver driver;
-    FrontEndLoginPage frontEndLoginPage;
+
     CreateAnAccountPage createAnAccountPage;
+
     FunctionClass functionClass;
+
     String configFileName="testdatafolder/testdata.properties";
 
     public MyDashboardPage(WebDriver driver) {
@@ -19,7 +22,6 @@ public class MyDashboardPage {
         PageFactory.initElements(driver,this);
         createAnAccountPage=new CreateAnAccountPage(driver);
         functionClass=new FunctionClass(driver);
-        frontEndLoginPage=new FrontEndLoginPage(driver);
     }
 
     @FindBy(xpath = "//a[text()='Account Information']")
@@ -43,11 +45,29 @@ public class MyDashboardPage {
     @FindBy(xpath = "//span[text()='The account information has been saved.']")
     WebElement verifyChangePassword;
 
-    @FindBy(xpath ="//a[text()='My Tags']")
-     WebElement myTagsLink;
+    @FindBy(xpath = "//div[@class='my-account']//input[@id='firstname']")
+    WebElement verifyViewAccountWithFirstName;
 
-    @FindBy(xpath ="//h1[text()='My Tags']")
-    WebElement verifyMyTags;
+    @FindBy(xpath = "//div[@class='my-account']//input[@id='lastname']")
+    WebElement verifyViewAccountWithLastName;
+
+    @FindBy(xpath = "//div[@class='my-account']//input[@id='email']")
+    WebElement verifyViewAccountWithEmail;
+
+    @FindBy(xpath = "//input[@id=\"middlename\"]")
+    WebElement middleNameField;
+
+
+    public boolean viewAccountInfo(){
+        functionClass.waitUntilElementPresent(myAccountInformationLink);
+        myAccountInformationLink.click();
+        if (verifyViewAccountWithFirstName.getText().isEmpty()||verifyViewAccountWithLastName
+                .getText().isEmpty()||verifyViewAccountWithEmail.getText()
+                .isEmpty())
+            return true;
+     else return false;
+
+    }
 
     public void changePassword(){
         functionClass.waitUntilElementPresent(myAccountInformationLink);
@@ -59,15 +79,6 @@ public class MyDashboardPage {
         confirmNewPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName,"confirmNewPassword"));
         changePasswordSaveButton.click();
     }
-    public void myTagsLink(){
-        functionClass.waitUntilElementPresent(myTagsLink);
-        myTagsLink.click();
-    }
-    public boolean verifyMyTags(){
-        if (verifyMyTags.isDisplayed())
-            return true;
-        else return false;
-    }
 
     public boolean verifyPasswordChanged(){
         if (verifyChangePassword.isDisplayed())
@@ -75,6 +86,28 @@ public class MyDashboardPage {
         else return false;
     }
 
+
+    public void EditAccountInfo() {
+        functionClass.waitUntilElementPresent(myAccountInformationLink);
+        myAccountInformationLink.click();
+        functionClass.waitUntilElementPresent(middleNameField);
+        middleNameField.clear();
+        middleNameField.sendKeys(functionClass.generateMiddleName());
+        functionClass.waitUntilElementPresent(currentPasswordField);
+        currentPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName, "loginPassword"));
+        functionClass.waitUntilElementPresent(changePasswordSaveButton);
+        changePasswordSaveButton.click();
+    }
+
+
+    public boolean VerifySuccessfullyEdit() {
+        functionClass.waitUntilElementPresent(verifyChangePassword);
+        if (verifyChangePassword.isDisplayed()) {
+            return true;
+        } else
+            return false;
+
+    }
 
 
 }
