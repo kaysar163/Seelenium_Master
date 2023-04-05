@@ -77,6 +77,13 @@ public class MyDashboardPage {
 
     @FindBy(xpath = "//h1[text()='My Product Reviews']")
     WebElement verifyMyProductReviews;
+    @FindBy(css = "li>a[href=\"http://magentoqa2.unitedcoder.com/newsletter/manage/\"]")
+    WebElement newsletterLink;
+
+    public void clickNewsletterSubscriptionLink() {
+        functionClass.waitUntilElementPresent(newsletterLink);
+        newsletterLink.click();
+    }
 
 
     public boolean myProductReviews() {
