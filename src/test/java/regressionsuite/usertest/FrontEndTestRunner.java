@@ -70,6 +70,12 @@ public class FrontEndTestRunner extends TestBase{
         Assert.assertTrue(checkOutOrderPage.verifyCheckOutOrder());
 
     }
+    @Test(description = "ranagul")
+    public void viewMyordersTest(){
+        frontEndLoginPage.login();
+        Assert.assertTrue(myDashboardPage.vieworders());
+    }
+
 
     @Test(description = "User should be able to edit account information")
     public void editAccountInfoTest(){

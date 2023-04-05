@@ -5,8 +5,11 @@ import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class MyDashboardPage {
     WebDriver driver;
@@ -62,6 +65,20 @@ public class MyDashboardPage {
     @FindBy(xpath ="//div[@class=\"my-account\"]//div//h1")
     WebElement verifyMyTags;
 
+    @FindBy(xpath = "//a[text()='My Orders']")
+    WebElement myorderslink;
+
+    @FindAll(
+            @FindBy(xpath = "//div[@class='my-account']//tr")
+    )
+    List<WebElement> myOrders;
+
+    public boolean vieworders(){
+        functionClass.waitUntilElementPresent(myorderslink);
+        myorderslink.click();
+        return myOrders.size()>=1;
+
+    }
     public boolean viewAccountInfo(){
         functionClass.waitUntilElementPresent(myAccountInformationLink);
         myAccountInformationLink.click();
