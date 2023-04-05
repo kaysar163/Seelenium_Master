@@ -19,6 +19,7 @@ public class FrontEndTestRunner extends TestBase{
     AddProductsToShoppingCart addProductsToShoppingCart;
     MyWishListPage myWishListPage;
     CheckOutOrderPage checkOutOrderPage;
+    BillingAgreementPage billingAgreementPage;
 
     @BeforeClass
     public void setUp() {
@@ -29,6 +30,8 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage=new MyDashboardPage(driver);
         myWishListPage=new MyWishListPage(driver);
         checkOutOrderPage=new CheckOutOrderPage(driver);
+        addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
+
     }
 
     @Test(priority =1)
@@ -47,7 +50,16 @@ public class FrontEndTestRunner extends TestBase{
     public  void addShoppingCartTest(){
         addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
         addProductsToShoppingCart.addToShoppingCart();
-        addProductsToShoppingCart.verification();
+        Assert.assertTrue(addProductsToShoppingCart.verification());
+    }
+
+    @Test
+    public  void billingAgreementLinkTest(){
+        frontEndLoginPage.login();
+        billingAgreementPage=new BillingAgreementPage(driver);
+        billingAgreementPage.clickBillingAgreemnetsLink();
+        Assert.assertTrue(billingAgreementPage.verifyBillingAgreementsLink());
+
     }
     @Test()
     public void checkOutOrder(){
