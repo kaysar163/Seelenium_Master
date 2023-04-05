@@ -80,6 +80,7 @@ public class FrontEndTestRunner extends TestBase{
 
     @Test()
     public void clickNewsletterSubscriptionLink(){
+        frontEndLoginPage.login();
         newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
         newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
     }
