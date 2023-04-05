@@ -19,6 +19,8 @@ public class AddProductsToShoppingCart {
     FrontEndDashboardPage frontEndDashboardPage;
     final static String configFile="config.properties";
 
+     @FindBy(css = ".page-header>div>a>img.large")
+     WebElement madisonIlandLink;
 
     @FindBy(xpath = "//*[text()=\"Tori Tank\"]")
     WebElement toriTank;
@@ -75,14 +77,20 @@ public class AddProductsToShoppingCart {
         functionClass = new FunctionClass(driver);
     }
     public void addToShoppingCart() {
+        functionClass.waitUntilElementPresent(madisonIlandLink);
+        madisonIlandLink.click();
         functionClass.waitUntilElementPresent(searchBox);
         searchBox.click();
         searchBox.sendKeys(ApplicationConfig.readFromConfigProperties(configFile,"public_search_name"));
         functionClass.waitUntilElementPresent(clickSearchButton);
         clickSearchButton.click();
-        functionClass.waitUntilElementPresent(qtyNumber);
-        qtyNumber.sendKeys(ApplicationConfig.readFromConfigProperties(configFile,"number_of_product"));
+        //functionClass.waitUntilElementPresent(toriTank);
+        //functionClass.sleep(5);
+        //functionClass.waitUntilElementPresent(qtyNumber);
+        //qtyNumber.sendKeys(ApplicationConfig.readFromConfigProperties(configFile,"number_of_product"));
+        //functionClass.sleep(10);
         functionClass.waitUntilElementPresent(addToCartButton);
+        //functionClass.sleep(5);
         addToCartButton.click();
     }
 

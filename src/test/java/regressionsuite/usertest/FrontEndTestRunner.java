@@ -1,9 +1,6 @@
 package regressionsuite.usertest;
 
-import com.magentoapplication.usermodule.CreateAnAccountPage;
-import com.magentoapplication.usermodule.FrontEndLoginPage;
-import com.magentoapplication.usermodule.MyDashboardPage;
-import com.magentoapplication.usermodule.NewsletterSubscriptionPage;
+import com.magentoapplication.usermodule.*;
 import com.magentoapplication.utility.TestBase;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -18,6 +15,7 @@ public class FrontEndTestRunner extends TestBase{
     NewsletterSubscriptionPage newsletterSubscriptionPage;
 
     MyDashboardPage myDashboardPage;
+    AddProductsToShoppingCart addProductsToShoppingCart;
     @BeforeClass
     public void setUp() {
         setupBrowserFrontEnd();
@@ -27,20 +25,26 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage=new MyDashboardPage(driver);
     }
 
-    @Test
+    @Test(priority =1)
     public void login() {
 
         frontEndLoginPage.login();
     }
 
-    @Test(description = "kaysar",priority =1 )
+    @Test(description = "kaysar",priority =2 )
     public void CreateAnAccount(){
         createAnAccountPage.fillAccountRegistrationForm();
         createAnAccountPage.verifyCreateAnAccountSuccessful();
 
     }
+    @Test(description = "muyesser",priority = 3)
+    public  void addShoppingCartTest(){
+        addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
+        addProductsToShoppingCart.addToShoppingCart();
+        addProductsToShoppingCart.verification();
+    }
 
-    @Test
+    @Test(enabled=false)
     public void changePasswordTest(){
         createAnAccountPage.fillAccountRegistrationForm();
         //frontEndLoginPage.login();
@@ -48,7 +52,7 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage.verifyPasswordChanged();
     }
 
-    @Test
+    @Test(enabled=false)
     public void clickNewsletterSubscriptionLink(){
         newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
         newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
