@@ -49,6 +49,7 @@ public class FrontEndTestRunner extends TestBase{
     }
    @Test
    public void myTagsLink(){
+        frontEndLoginPage.login();
         myDashboardPage.myTagsLink();
         myDashboardPage.verifyMyTags();
    }
