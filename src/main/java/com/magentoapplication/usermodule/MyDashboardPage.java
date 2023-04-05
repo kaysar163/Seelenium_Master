@@ -54,6 +54,10 @@ public class MyDashboardPage {
     @FindBy(xpath = "//div[@class='my-account']//input[@id='email']")
     WebElement verifyViewAccountWithEmail;
 
+    @FindBy(xpath = "//input[@id=\"middlename\"]")
+    WebElement middleNameField;
+
+
     public boolean viewAccountInfo(){
         functionClass.waitUntilElementPresent(myAccountInformationLink);
         myAccountInformationLink.click();
@@ -82,6 +86,28 @@ public class MyDashboardPage {
         else return false;
     }
 
+
+    public void EditAccountInfo() {
+        functionClass.waitUntilElementPresent(myAccountInformationLink);
+        myAccountInformationLink.click();
+        functionClass.waitUntilElementPresent(middleNameField);
+        middleNameField.clear();
+        middleNameField.sendKeys(functionClass.generateMiddleName());
+        functionClass.waitUntilElementPresent(currentPasswordField);
+        currentPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName, "loginPassword"));
+        functionClass.waitUntilElementPresent(changePasswordSaveButton);
+        changePasswordSaveButton.click();
+    }
+
+
+    public boolean VerifySuccessfullyEdit() {
+        functionClass.waitUntilElementPresent(verifyChangePassword);
+        if (verifyChangePassword.isDisplayed()) {
+            return true;
+        } else
+            return false;
+
+    }
 
 
 }
