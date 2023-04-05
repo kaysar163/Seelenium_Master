@@ -18,7 +18,8 @@ public class FrontEndTestRunner extends TestBase{
     MyDashboardPage myDashboardPage;
     AddProductsToShoppingCart addProductsToShoppingCart;
     MyWishListPage myWishListPage;
-    BillingAgreementPage billingAgreementPage;
+    CheckOutOrderPage checkOutOrderPage;
+
     @BeforeClass
     public void setUp() {
         setupBrowserFrontEnd();
@@ -27,7 +28,7 @@ public class FrontEndTestRunner extends TestBase{
         newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
         myDashboardPage=new MyDashboardPage(driver);
         myWishListPage=new MyWishListPage(driver);
-        billingAgreementPage=new BillingAgreementPage(driver);
+        checkOutOrderPage=new CheckOutOrderPage(driver);
     }
 
     @Test(priority =1)
@@ -48,21 +49,26 @@ public class FrontEndTestRunner extends TestBase{
         addProductsToShoppingCart.addToShoppingCart();
         addProductsToShoppingCart.verification();
     }
+    @Test()
+    public void checkOutOrder(){
+        checkOutOrderPage.CheckOutOrderTest();
+        Assert.assertTrue(checkOutOrderPage.verifyCheckOutOrder());
 
+    }
+
+    @Test(description = "User should be able to edit account information")
+    public void editAccountInfoTest(){
+        frontEndLoginPage.login();
+        myDashboardPage.EditAccountInfo();
+        Assert.assertTrue(myDashboardPage.VerifySuccessfullyEdit());
+
+    }
     @Test()
     public void changePasswordTest(){
         createAnAccountPage.fillAccountRegistrationForm();
         //frontEndLoginPage.login();
         myDashboardPage.changePassword();
         myDashboardPage.verifyPasswordChanged();
-    }
-
-    @Test(description = "muyesser")
-    public  void billingAgreementlinkTest(){
-        frontEndLoginPage.login();
-        billingAgreementPage.clickBillingAgreemnetsLink();
-        Assert.assertTrue(billingAgreementPage.verifyBillingAgreementsLink());
-
     }
 
     @Test()
@@ -74,9 +80,16 @@ public class FrontEndTestRunner extends TestBase{
 
     @Test()
     public void clickNewsletterSubscriptionLink(){
+        frontEndLoginPage.login();
         newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
         newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
     }
+  @Test
+  public void verifyViewMyTagsTest(){
+        myDashboardPage.viewMyTagsLink();
+      Assert.assertTrue(  myDashboardPage.verifyViewMyTags());
+  }
+
     @AfterClass
     public void tearDown(){
         closeBrowser();

@@ -54,6 +54,14 @@ public class MyDashboardPage {
     @FindBy(xpath = "//div[@class='my-account']//input[@id='email']")
     WebElement verifyViewAccountWithEmail;
 
+    @FindBy(xpath = "//input[@id=\"middlename\"]")
+    WebElement middleNameField;
+
+    @FindBy(xpath ="//div[@class=\"block-content\"]//li//a//strong")
+    WebElement myTagsLink;
+    @FindBy(xpath ="//div[@class=\"my-account\"]//div//h1")
+    WebElement verifyMyTags;
+
     public boolean viewAccountInfo(){
         functionClass.waitUntilElementPresent(myAccountInformationLink);
         myAccountInformationLink.click();
@@ -75,13 +83,43 @@ public class MyDashboardPage {
         confirmNewPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName,"confirmNewPassword"));
         changePasswordSaveButton.click();
     }
-
+    public void viewMyTagsLink(){
+       functionClass.waitUntilElementPresent(myTagsLink);
+       myTagsLink.click();
+    }
+    public boolean verifyViewMyTags(){
+        if (verifyMyTags.isDisplayed())
+            return true;
+        else return false;
+    }
     public boolean verifyPasswordChanged(){
         if (verifyChangePassword.isDisplayed())
             return true;
         else return false;
     }
 
+
+    public void EditAccountInfo() {
+        functionClass.waitUntilElementPresent(myAccountInformationLink);
+        myAccountInformationLink.click();
+        functionClass.waitUntilElementPresent(middleNameField);
+        middleNameField.clear();
+        middleNameField.sendKeys(functionClass.generateMiddleName());
+        functionClass.waitUntilElementPresent(currentPasswordField);
+        currentPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName, "loginPassword"));
+        functionClass.waitUntilElementPresent(changePasswordSaveButton);
+        changePasswordSaveButton.click();
+    }
+
+
+    public boolean VerifySuccessfullyEdit() {
+        functionClass.waitUntilElementPresent(verifyChangePassword);
+        if (verifyChangePassword.isDisplayed()) {
+            return true;
+        } else
+            return false;
+
+    }
 
 
 }
