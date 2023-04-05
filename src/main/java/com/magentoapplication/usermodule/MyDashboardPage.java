@@ -57,6 +57,10 @@ public class MyDashboardPage {
     @FindBy(xpath = "//input[@id=\"middlename\"]")
     WebElement middleNameField;
 
+    @FindBy(xpath ="//div[@class=\"block-content\"]//li//a//strong")
+    WebElement myTagsLink;
+    @FindBy(xpath ="//div[@class=\"my-account\"]//div//h1")
+    WebElement verifyMyTags;
 
     public boolean viewAccountInfo(){
         functionClass.waitUntilElementPresent(myAccountInformationLink);
@@ -79,7 +83,15 @@ public class MyDashboardPage {
         confirmNewPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName,"confirmNewPassword"));
         changePasswordSaveButton.click();
     }
-
+    public void viewMyTagsLink(){
+       functionClass.waitUntilElementPresent(myTagsLink);
+       myTagsLink.click();
+    }
+    public boolean verifyViewMyTags(){
+        if (verifyMyTags.isDisplayed())
+            return true;
+        else return false;
+    }
     public boolean verifyPasswordChanged(){
         if (verifyChangePassword.isDisplayed())
             return true;
