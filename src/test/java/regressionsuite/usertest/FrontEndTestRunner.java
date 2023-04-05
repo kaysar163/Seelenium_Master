@@ -16,6 +16,7 @@ public class FrontEndTestRunner extends TestBase{
 
     MyDashboardPage myDashboardPage;
     AddProductsToShoppingCart addProductsToShoppingCart;
+    MyWishListPage myWishListPage;
     @BeforeClass
     public void setUp() {
         setupBrowserFrontEnd();
@@ -23,6 +24,7 @@ public class FrontEndTestRunner extends TestBase{
         createAnAccountPage=new CreateAnAccountPage(driver);
         newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
         myDashboardPage=new MyDashboardPage(driver);
+        myWishListPage=new MyWishListPage(driver);
     }
 
     @Test(priority =1)
@@ -50,6 +52,13 @@ public class FrontEndTestRunner extends TestBase{
         //frontEndLoginPage.login();
         myDashboardPage.changePassword();
         myDashboardPage.verifyPasswordChanged();
+    }
+
+    @Test()
+    public void viewMyWishListTest(){
+        frontEndLoginPage.login();
+        myWishListPage.clickMYWISHLISTLink();
+        myWishListPage.verifyMyWishListPageIsOpened();
     }
 
     @Test()

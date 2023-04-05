@@ -10,9 +10,9 @@ public class MyWishListPage {
     WebDriver driver;
     FunctionClass functionClass;
 
-    @FindBy(xpath=" //div[@class='links']//a[text()='My Wishlist']")
+    @FindBy(xpath="//div[@class='block-content']//a[text()='My Wishlist']")
     WebElement MYWISHLISTLink;
-    @FindBy(css = "div.page-title.title-buttons")
+    @FindBy(xpath = "//h1[text()='My Wishlist']")
     WebElement MYWISHLISTmassage;
 
     public MyWishListPage(WebDriver driver) {
