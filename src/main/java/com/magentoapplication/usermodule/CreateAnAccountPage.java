@@ -8,17 +8,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CreateAnAccountPage  {
+public class CreateAnAccountPage {
     WebDriver driver;
-     FunctionClass functionClass;
-     FrontEndDashboardPage frontEndDashboardPage;
+    FunctionClass functionClass;
+    FrontEndDashboardPage frontEndDashboardPage;
     String config = "testdatafolder/testdata.properties";
+
+    String userEmail;
+
 
     public CreateAnAccountPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        functionClass=new FunctionClass(driver);
-      frontEndDashboardPage=new FrontEndDashboardPage(driver);
+        functionClass = new FunctionClass(driver);
+        frontEndDashboardPage = new FrontEndDashboardPage(driver);
 
     }
 
@@ -43,7 +46,7 @@ public class CreateAnAccountPage  {
 
     WebElement password;
 
-    @FindBy(id ="confirmation")
+    @FindBy(id = "confirmation")
 
     WebElement confirmPassword;
 
@@ -56,34 +59,36 @@ public class CreateAnAccountPage  {
     WebElement registerButton;
 
 
-    @FindBy(xpath = "(//span[text()='Thank you for registering with eCommerce Shopping.']")
+    @FindBy(xpath = "//span[text()='Thank you for registering with eCommerce Shopping.']")
     WebElement createAnAccountSuccessfulMessage;
 
 
-    public void fillAccountRegistrationForm(){
+    public void fillAccountRegistrationForm() {
         frontEndDashboardPage.clickOnAccountLink();
         frontEndDashboardPage.clickOnRegisterLink();
         functionClass.waitUntilElementPresent(firstName);
         firstName.sendKeys(functionClass.generateFakeName());
-        functionClass.waitUntilElementPresent( middleName);
-        middleName.sendKeys(ApplicationConfig.readFromConfigProperties(config,"middleName"));
+        functionClass.waitUntilElementPresent(middleName);
+        middleName.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent(lastName);
         lastName.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(emailAddress);
-        emailAddress.sendKeys(functionClass.generateFakeEmail());
+        emailAddress.sendKeys(userEmail=functionClass.generateFakeEmail());
         functionClass.waitUntilElementPresent(password);
-        password.sendKeys(ApplicationConfig.readFromConfigProperties(config,"password"));
-        functionClass.waitUntilElementPresent( confirmPassword);
-        confirmPassword.sendKeys(ApplicationConfig.readFromConfigProperties(config,"confirmPassword"));
+        password.sendKeys(ApplicationConfig.readFromConfigProperties(config, "password"));
+        functionClass.waitUntilElementPresent(confirmPassword);
+        confirmPassword.sendKeys(ApplicationConfig.readFromConfigProperties(config, "confirmPassword"));
         functionClass.waitUntilElementPresent(isSubscribed);
         isSubscribed.click();
         functionClass.waitUntilElementPresent(registerButton);
         registerButton.click();
-}
-    public  boolean verifyCreateAnAccountSuccessful() {
-        if (createAnAccountSuccessfulMessage.isDisplayed()){
-            return true;}
-        else return false;
+    }
+
+    public boolean verifyCreateAnAccountSuccessful() {
+        functionClass.waitUntilElementPresent(createAnAccountSuccessfulMessage);
+        if (createAnAccountSuccessfulMessage.isDisplayed()) {
+            return true;
+        } else return false;
     }
 
 }
