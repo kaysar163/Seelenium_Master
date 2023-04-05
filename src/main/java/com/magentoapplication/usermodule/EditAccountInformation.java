@@ -16,7 +16,7 @@ public class EditAccountInformation {
     WebElement middleNameField;
     @FindBy(css = "#current_password")
     WebElement currentPasswordField;
-    @FindBy(xpath="//button[@title=\"Save\"]")
+    @FindBy(xpath = "//button[@title=\"Save\"]")
     WebElement saveButton;
     @FindBy(xpath = "//span[text()=\"The account information has been saved.\"]")
     WebElement successfullyEditMessage;
@@ -24,7 +24,7 @@ public class EditAccountInformation {
     WebDriver driver;
     FunctionClass functionClass;
     FrontEndDashboardPage frontEndDashboardPage;
-    String config = "testdatafolder/config.properties";
+    String config = "testdatafolder/testdata.properties";
 
     public EditAccountInformation(WebDriver driver) {
         this.driver = driver;
@@ -34,29 +34,27 @@ public class EditAccountInformation {
 
     }
 
-public void EditAccountInformation(){
+    public void EditAccountInfo() {
+        functionClass.waitUntilElementPresent(accountInformationLink);
         accountInformationLink.click();
         functionClass.waitUntilElementPresent(middleNameField);
         middleNameField.clear();
         middleNameField.sendKeys(functionClass.generateMiddleName());
         functionClass.waitUntilElementPresent(currentPasswordField);
-        currentPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(config,"password"));
-
-}
-
-public void ClickOnSaveButton(){
+        currentPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(config, "password"));
         functionClass.waitUntilElementPresent(saveButton);
         saveButton.click();
-}
+    }
 
-public boolean VerifySuccessfullyEdit(){
+
+    public boolean VerifySuccessfullyEdit() {
         functionClass.waitUntilElementPresent(successfullyEditMessage);
-        if (successfullyEditMessage.isDisplayed()){
+        if (successfullyEditMessage.isDisplayed()) {
             return true;
-        }else
+        } else
             return false;
 
-}
+    }
 
 
 }
