@@ -47,7 +47,11 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage.changePassword();
         myDashboardPage.verifyPasswordChanged();
     }
-
+   @Test
+   public void myTagsLink(){
+        myDashboardPage.myTagsLink();
+        myDashboardPage.verifyMyTags();
+   }
     @Test
     public void clickNewsletterSubscriptionLink(){
         newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
