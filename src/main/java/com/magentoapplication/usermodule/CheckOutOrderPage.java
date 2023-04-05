@@ -35,7 +35,7 @@ public class CheckOutOrderPage {
     @FindBy(css = ".sub-title")
     WebElement successMessage;
 
-    public void CheckOutOrderPage() {
+    public void CheckOutOrderTest() {
         functionClass.waitUntilElementPresent(cartButton);
         cartButton.click();
         functionClass.waitUntilElementPresent(checkOutButton);
