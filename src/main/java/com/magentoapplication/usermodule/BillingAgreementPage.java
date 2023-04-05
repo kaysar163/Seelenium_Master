@@ -25,7 +25,6 @@ public class BillingAgreementPage {
     public void clickBillingAgreemnetsLink() {
         functionClass.waitUntilElementPresent(billingAgreementLink);
         billingAgreementLink.click();
-        functionClass.sleep(3);
     }
 
     public boolean verifyBillingAgreementsLink() {
