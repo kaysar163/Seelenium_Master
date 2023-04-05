@@ -10,20 +10,31 @@ public class MyWishListPage {
     WebDriver driver;
     FunctionClass functionClass;
 
-    @FindBy (css ="a[href=\"http://magentoqa2.unitedcoder.com/wishlist/\"]>]")
-    WebElement MYWISHLISTLINK;
-    @FindBy (css = "<div.page-title.title-buttons"> )
+    @FindBy(css = "a[href=\"http://magentoqa2.unitedcoder.com/wishlist/\"]>]")
+    WebElement MYWISHLISTLink;
+    @FindBy(css = "<div.page-title.title-buttons" >)
     WebElement MYWISHLISTmassage;
-    public MyWishListPage(WebDriver driver){
-        this.driver=driver;
-        PageFactory.initElements(driver,this);
+
+    public MyWishListPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
         functionClass = new FunctionClass(driver);
     }
 
-    public void clickMYWISHLISTLink()
+    public void clickMYWISHLISTLink() {
+        functionClass.waitUntilElementPresent(MYWISHLISTLink);
+        MYWISHLISTLink.click();
+    }
 
+    public boolean verifyMyWishListPageIsOpened() {
+        if (MYWISHLISTmassage.isDisplayed())
+            return true;
+        else return false;
 
-
-
-
+    }
 }
+
+
+
+
+
