@@ -19,6 +19,7 @@ public class FrontEndTestRunner extends TestBase{
     AddProductsToShoppingCart addProductsToShoppingCart;
     MyWishListPage myWishListPage;
     CheckOutOrderPage checkOutOrderPage;
+
     @BeforeClass
     public void setUp() {
         setupBrowserFrontEnd();
@@ -54,6 +55,14 @@ public class FrontEndTestRunner extends TestBase{
         Assert.assertTrue(checkOutOrderPage.verifyCheckOutOrder());
 
     }
+
+    @Test(description = "User should be able to edit account information")
+    public void editAccountInfoTest(){
+        frontEndLoginPage.login();
+        myDashboardPage.EditAccountInfo();
+        Assert.assertTrue(myDashboardPage.VerifySuccessfullyEdit());
+
+    }
     @Test()
     public void changePasswordTest(){
         createAnAccountPage.fillAccountRegistrationForm();
@@ -74,6 +83,8 @@ public class FrontEndTestRunner extends TestBase{
         newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
         newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
     }
+
+
     @AfterClass
     public void tearDown(){
         closeBrowser();
