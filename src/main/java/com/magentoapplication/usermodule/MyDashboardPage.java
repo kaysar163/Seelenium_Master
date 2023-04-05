@@ -12,7 +12,6 @@ public class MyDashboardPage {
     FrontEndLoginPage frontEndLoginPage;
     CreateAnAccountPage createAnAccountPage;
     FunctionClass functionClass;
-
     String configFileName="testdatafolder/testdata.properties";
 
     public MyDashboardPage(WebDriver driver) {
@@ -46,6 +45,7 @@ public class MyDashboardPage {
 
     @FindBy(xpath ="//a[text()='My Tags']")
      WebElement myTagsLink;
+
     @FindBy(xpath ="//h1[text()='My Tags']")
     WebElement verifyMyTags;
 

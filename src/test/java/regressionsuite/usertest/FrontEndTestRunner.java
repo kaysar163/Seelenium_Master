@@ -5,6 +5,7 @@ import com.magentoapplication.usermodule.FrontEndLoginPage;
 import com.magentoapplication.usermodule.MyDashboardPage;
 import com.magentoapplication.usermodule.NewsletterSubscriptionPage;
 import com.magentoapplication.utility.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -13,11 +14,10 @@ import java.util.concurrent.Callable;
 
 public class FrontEndTestRunner extends TestBase{
     FrontEndLoginPage frontEndLoginPage;
-
     CreateAnAccountPage createAnAccountPage;
     NewsletterSubscriptionPage newsletterSubscriptionPage;
-
     MyDashboardPage myDashboardPage;
+
     @BeforeClass
     public void setUp() {
         setupBrowserFrontEnd();
@@ -48,10 +48,11 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage.verifyPasswordChanged();
     }
    @Test
-   public void myTagsLink(){
-        frontEndLoginPage.login();
+   public void myTagsLinkTest(){
+       frontEndLoginPage.login();
         myDashboardPage.myTagsLink();
-        myDashboardPage.verifyMyTags();
+     //   myDashboardPage.verifyMyTags();
+      Assert.assertTrue(myDashboardPage.verifyMyTags());
    }
     @Test
     public void clickNewsletterSubscriptionLink(){
