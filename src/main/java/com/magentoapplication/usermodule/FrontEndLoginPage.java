@@ -33,9 +33,9 @@ public class FrontEndLoginPage {
         dashboardPage.clickOnAccountLink();
         dashboardPage.clickOnLoginLink();
         functionClass.waitUntilElementPresent(emailField);
-        emailField.sendKeys();
+        emailField.sendKeys("Kaysar163@hotmail.com");
         functionClass.waitUntilElementPresent(passwordField);
-        passwordField.sendKeys();
+        passwordField.sendKeys("test123");
         functionClass.waitUntilElementPresent(loginButton);
         loginButton.click();
     }
