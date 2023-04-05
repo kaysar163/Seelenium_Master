@@ -2,6 +2,7 @@ package regressionsuite.usertest;
 
 import com.magentoapplication.usermodule.*;
 import com.magentoapplication.utility.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -17,6 +18,7 @@ public class FrontEndTestRunner extends TestBase{
     MyDashboardPage myDashboardPage;
     AddProductsToShoppingCart addProductsToShoppingCart;
     MyWishListPage myWishListPage;
+    CheckOutOrderPage checkOutOrderPage;
     @BeforeClass
     public void setUp() {
         setupBrowserFrontEnd();
@@ -25,6 +27,7 @@ public class FrontEndTestRunner extends TestBase{
         newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
         myDashboardPage=new MyDashboardPage(driver);
         myWishListPage=new MyWishListPage(driver);
+        checkOutOrderPage=new CheckOutOrderPage(driver);
     }
 
     @Test(priority =1)
@@ -45,7 +48,12 @@ public class FrontEndTestRunner extends TestBase{
         addProductsToShoppingCart.addToShoppingCart();
         addProductsToShoppingCart.verification();
     }
+    @Test()
+    public void checkOutOrder(){
+        checkOutOrderPage.CheckOutOrderTest();
+        Assert.assertTrue(checkOutOrderPage.verifyCheckOutOrder());
 
+    }
     @Test()
     public void changePasswordTest(){
         createAnAccountPage.fillAccountRegistrationForm();
