@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class AddProductsToShoppingCart {
     WebDriver driver;
     FunctionClass functionClass;
     FrontEndDashboardPage frontEndDashboardPage;
-    final static String configFile="testdata.properties";
+    final static String configFile="testdatafolder/testdata.properties";
 
      @FindBy(css = ".page-header>div>a>img.large")
      WebElement madisonIlandLink;
@@ -37,6 +38,10 @@ public class AddProductsToShoppingCart {
 
     @FindBy(xpath = "//li//div//button[@title='Add to Cart' and @class='button btn-cart']")
     WebElement addToCartButton;
+
+    @FindBy(xpath = "//form//div//button[@title='Add to Cart' and @class='button btn-cart']")
+    WebElement addToCartButton1;
+
 
 
 
@@ -69,6 +74,16 @@ public class AddProductsToShoppingCart {
     @FindBy(css = "li.success-msg")
     WebElement addSuccessMessage;
 
+    @FindBy(css = "[title='View Details']")
+    WebElement viewDetailsButton;
+
+    @FindBy(css = "#attribute92")
+    WebElement chooseColor;
+
+    @FindBy(css = "#attribute180")
+    WebElement chooseSize;
+
+
     public AddProductsToShoppingCart(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -83,9 +98,14 @@ public class AddProductsToShoppingCart {
         functionClass.waitUntilElementPresent(clickSearchButton);
         clickSearchButton.click();
 
-        functionClass.waitUntilElementPresent(addToCartButton);
-        //functionClass.sleep(5);
-        addToCartButton.click();
+        functionClass.waitUntilElementPresent(viewDetailsButton);
+        viewDetailsButton.click();
+        Select select=new Select(chooseColor);
+        select.selectByValue("26");
+        functionClass.waitUntilElementPresent(chooseSize);
+        Select select1=new Select(chooseSize);
+        select1.selectByValue("78");
+        addToCartButton1.click();
     }
 
 

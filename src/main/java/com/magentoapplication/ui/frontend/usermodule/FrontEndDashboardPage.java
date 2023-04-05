@@ -27,6 +27,14 @@ public class FrontEndDashboardPage {
     @FindBy(xpath = "//a[normalize-space()='Register']")
     WebElement registerLink;
 
+    @FindBy(xpath = "//a[@title='My Wishlist']//parent::li//parent::ul//a[@title='My Account']")
+    WebElement myAccountLink;
+
+    public void clickOnMyAccountLink() {
+        functionClass.waitUntilElementPresent(myAccountLink);
+        myAccountLink.click();
+    }
+
     public void clickOnAccountLink() {
         functionClass.waitUntilElementPresent(accountLink);
         accountLink.click();

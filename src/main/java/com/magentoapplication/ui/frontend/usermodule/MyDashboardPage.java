@@ -135,7 +135,7 @@ public class MyDashboardPage {
         middleNameField.clear();
         middleNameField.sendKeys(functionClass.generateMiddleName());
         functionClass.waitUntilElementPresent(currentPasswordField);
-        currentPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName, "loginPassword"));
+        currentPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName, "password"));
         functionClass.waitUntilElementPresent(changePasswordSaveButton);
         changePasswordSaveButton.click();
     }
