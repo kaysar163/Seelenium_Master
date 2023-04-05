@@ -2,7 +2,6 @@ package com.magentoapplication.usermodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -72,6 +71,19 @@ public class MyDashboardPage {
             @FindBy(xpath = "//div[@class='my-account']//tr")
     )
     List<WebElement> myOrders;
+
+    @FindBy(xpath = "//*[text()='My Product Reviews']")
+    WebElement myproductReviews;
+
+    @FindBy(xpath = "//h1[text()='My Product Reviews']")
+    WebElement verifyMyProductReviews;
+
+
+    public boolean myProductReviews() {
+        functionClass.waitUntilElementPresent(myproductReviews);
+        myproductReviews.click();
+        return verifyMyProductReviews.isDisplayed();
+    }
 
     public boolean vieworders(){
         functionClass.waitUntilElementPresent(myorderslink);

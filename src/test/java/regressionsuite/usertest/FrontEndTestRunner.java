@@ -116,6 +116,11 @@ public class FrontEndTestRunner extends TestBase{
         dowmloadablePage.clickDownloadable();
         Assert.assertTrue( dowmloadablePage.verifyMyDownloadableProducts() );
    }
+   @Test
+    public void viewMyproductreviewsTest(){
+        frontEndLoginPage.login();
+       Assert.assertTrue(myDashboardPage.myProductReviews());
+   }
 
 
 
