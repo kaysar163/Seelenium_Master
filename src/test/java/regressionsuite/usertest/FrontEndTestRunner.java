@@ -20,6 +20,7 @@ public class FrontEndTestRunner extends TestBase{
     MyWishListPage myWishListPage;
     CheckOutOrderPage checkOutOrderPage;
     BillingAgreementPage billingAgreementPage;
+    DowmloadablePage dowmloadablePage;
 
     @BeforeClass
     public void setUp() {
@@ -31,6 +32,7 @@ public class FrontEndTestRunner extends TestBase{
         myWishListPage=new MyWishListPage(driver);
         checkOutOrderPage=new CheckOutOrderPage(driver);
         addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
+        dowmloadablePage=new DowmloadablePage(driver);
 
     }
 
@@ -102,10 +104,14 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage.viewMyTagsLink();
       Assert.assertTrue(  myDashboardPage.verifyViewMyTags());
   }
+   @Test()
+    public void viewDownloadable(){
+        frontEndLoginPage.login();
+        dowmloadablePage.clickDownloadable();
+        Assert.assertTrue( dowmloadablePage.verifyMyDownloadableProducts() );
+   }
 
-//    @AfterClass
-//    public void tearDown(){
-//        closeBrowser();
-//    }
+
+
 }
 
