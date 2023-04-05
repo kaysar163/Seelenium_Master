@@ -1,55 +1,64 @@
 package regressionsuite.usertest;
 
-import com.magentoapplication.usermodule.CheckOutOrderPage;
-import com.magentoapplication.usermodule.CreateAnAccountPage;
-import com.magentoapplication.usermodule.FrontEndLoginPage;
+import com.magentoapplication.usermodule.*;
 import com.magentoapplication.utility.TestBase;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.Callable;
 
-public class FrontEndTestRunner extends TestBase {
+public class FrontEndTestRunner extends TestBase{
     FrontEndLoginPage frontEndLoginPage;
-    CheckOutOrderPage checkOutOrderPage;
 
     CreateAnAccountPage createAnAccountPage;
+    NewsletterSubscriptionPage newsletterSubscriptionPage;
 
+    MyDashboardPage myDashboardPage;
+    AddProductsToShoppingCart addProductsToShoppingCart;
     @BeforeClass
     public void setUp() {
         setupBrowserFrontEnd();
         frontEndLoginPage = new FrontEndLoginPage(driver);
-        createAnAccountPage = new CreateAnAccountPage(driver);
-        checkOutOrderPage = new CheckOutOrderPage(driver);
+        createAnAccountPage=new CreateAnAccountPage(driver);
+        newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
+        myDashboardPage=new MyDashboardPage(driver);
     }
 
-
-
-    @Test
+    @Test(priority =1)
     public void login() {
 
         frontEndLoginPage.login();
     }
 
-    @Test
-    public void CreateAnAccount() {
-
+    @Test(description = "kaysar",priority =2 )
+    public void CreateAnAccount(){
         createAnAccountPage.fillAccountRegistrationForm();
         createAnAccountPage.verifyCreateAnAccountSuccessful();
 
-
     }
-    @Test
-    public void checkOrderPge() {
-        frontEndLoginPage.login();
-        checkOutOrderPage.CheckOutOrderPage();
-        Assert.assertTrue(checkOutOrderPage.verifyCheckOutOrder());
+    @Test(description = "muyesser",priority = 3)
+    public  void addShoppingCartTest(){
+        addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
+        addProductsToShoppingCart.addToShoppingCart();
+        addProductsToShoppingCart.verification();
     }
 
+    @Test()
+    public void changePasswordTest(){
+        createAnAccountPage.fillAccountRegistrationForm();
+        //frontEndLoginPage.login();
+        myDashboardPage.changePassword();
+        myDashboardPage.verifyPasswordChanged();
+    }
+
+    @Test()
+    public void clickNewsletterSubscriptionLink(){
+        newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
+        newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
+    }
     @AfterClass
-    public void tearDown() {
+    public void tearDown(){
         closeBrowser();
     }
 }

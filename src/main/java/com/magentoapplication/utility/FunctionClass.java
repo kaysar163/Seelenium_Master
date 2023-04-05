@@ -1,8 +1,10 @@
 package com.magentoapplication.utility;
 
+import com.github.javafaker.Faker;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -39,7 +41,65 @@ public class FunctionClass {
         WebDriverWait wait=new WebDriverWait(driver,timeout);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+    public String generateFakeName(){
+        String faker= Faker.instance().name().firstName();
+        return faker;
+    }
+
+    public String generateFakeLastName(){
+        String faker= Faker.instance().name().lastName();
+        return faker;
+    }
+
+    public String generateFakeEmail(){
+        String faker=Faker.instance().internet().emailAddress();
+        return faker;
+    }
 
 
+
+    public String generateCityName(){
+       String cityName=Faker.instance().address().city();
+        return cityName;
+    }
+
+    public String generateStreetName(){
+        String streetName=Faker.instance().address().streetName();
+        return streetName;
+    }
+
+
+    public String generateZipCode(){
+        String zipCode=Faker.instance().address().zipCode();
+        return zipCode;
+    }
+
+    public String generateCountryName(){
+        String countryName=Faker.instance().address().country();
+        return countryName;
+    }
+    public String  generateTelephoneNumber(){
+        String telephoneNumber=Faker.instance().phoneNumber().cellPhone();
+        return telephoneNumber;
+    }
+
+
+    public  String generateMiddleName(){
+        Faker faker=new Faker();
+        String  middleName=Faker.instance().name().username();
+        return middleName;
+    }
+
+
+    public void waitForAlertPresent(){
+        WebDriverWait wai=new WebDriverWait(driver,timeout);
+        wai.until(ExpectedConditions.alertIsPresent());
+    }
+
+    //alertAccept
+    public void alertAccept(){
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
+    }
 
 }

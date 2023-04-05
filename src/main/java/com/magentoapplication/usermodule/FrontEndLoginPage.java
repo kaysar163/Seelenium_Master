@@ -1,5 +1,6 @@
 package com.magentoapplication.usermodule;
 
+import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,10 @@ public class FrontEndLoginPage {
 
     FrontEndDashboardPage dashboardPage;
 
+    CreateAnAccountPage createAnAccountPage;
+
+
+
     FunctionClass functionClass;
 
     public FrontEndLoginPage(WebDriver driver) {
@@ -18,6 +23,7 @@ public class FrontEndLoginPage {
         PageFactory.initElements(driver,this);
         dashboardPage=new FrontEndDashboardPage(driver);
         functionClass=new FunctionClass(driver);
+        createAnAccountPage=new CreateAnAccountPage(driver);
     }
 
     @FindBy(css = "#email")
@@ -33,10 +39,11 @@ public class FrontEndLoginPage {
         dashboardPage.clickOnAccountLink();
         dashboardPage.clickOnLoginLink();
         functionClass.waitUntilElementPresent(emailField);
-        emailField.sendKeys("Kaysar163@hotmail.com");
+        emailField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","loginEmail"));
         functionClass.waitUntilElementPresent(passwordField);
-        passwordField.sendKeys("test123");
+        passwordField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","loginPassword"));
         functionClass.waitUntilElementPresent(loginButton);
         loginButton.click();
     }
+
 }

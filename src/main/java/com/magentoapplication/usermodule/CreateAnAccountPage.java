@@ -1,5 +1,6 @@
 package com.magentoapplication.usermodule;
 
+import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import com.magentoapplication.utility.TestBase;
 import org.openqa.selenium.WebDriver;
@@ -7,16 +8,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CreateAnAccountPage  {
+public class CreateAnAccountPage {
     WebDriver driver;
-     FunctionClass functionClass;
-     FrontEndDashboardPage frontEndDashboardPage;
+    FunctionClass functionClass;
+    FrontEndDashboardPage frontEndDashboardPage;
+    String config = "testdatafolder/testdata.properties";
+
+    String userEmail;
+
 
     public CreateAnAccountPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        functionClass=new FunctionClass(driver);
-      frontEndDashboardPage=new FrontEndDashboardPage(driver);
+        functionClass = new FunctionClass(driver);
+        frontEndDashboardPage = new FrontEndDashboardPage(driver);
 
     }
 
@@ -41,7 +46,7 @@ public class CreateAnAccountPage  {
 
     WebElement password;
 
-    @FindBy(id ="confirmation")
+    @FindBy(id = "confirmation")
 
     WebElement confirmPassword;
 
@@ -53,34 +58,38 @@ public class CreateAnAccountPage  {
 
     WebElement registerButton;
 
-    @FindBy(xpath ="//span[normalize-space()='Thank you for registering with eCommerce Shopping.']")
 
+    //@FindBy(xpath = "//span[text()='Thank you for registering with eCommerce Shopping.']")
+    @FindBy(css=".success-msg>ul>li>span")
     WebElement createAnAccountSuccessfulMessage;
 
 
-
-    public void fillAccountRegistrationForm(){
+    public void fillAccountRegistrationForm() {
         frontEndDashboardPage.clickOnAccountLink();
         frontEndDashboardPage.clickOnRegisterLink();
         functionClass.waitUntilElementPresent(firstName);
-        firstName.sendKeys("QAtester1");
-        functionClass.waitUntilElementPresent( middleName);
-        middleName.sendKeys("QAtester2");
+        firstName.sendKeys(functionClass.generateFakeName());
+        functionClass.waitUntilElementPresent(middleName);
+        middleName.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent(lastName);
-        lastName.sendKeys("QAtester3");
+        lastName.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(emailAddress);
-        emailAddress.sendKeys("QAtester@hotmail.com");
+        emailAddress.sendKeys(userEmail=functionClass.generateFakeEmail());
         functionClass.waitUntilElementPresent(password);
-        password.sendKeys("123456tensta");
-        functionClass.waitUntilElementPresent( confirmPassword);
-        confirmPassword.sendKeys("123456tensta");
+        password.sendKeys(ApplicationConfig.readFromConfigProperties(config, "password"));
+        functionClass.waitUntilElementPresent(confirmPassword);
+        confirmPassword.sendKeys(ApplicationConfig.readFromConfigProperties(config, "confirmPassword"));
         functionClass.waitUntilElementPresent(isSubscribed);
         isSubscribed.click();
         functionClass.waitUntilElementPresent(registerButton);
         registerButton.click();
-}
-    public  boolean verifyCreateAnAccountSuccessful(){
-        createAnAccountSuccessfulMessage.isDisplayed();
-        return createAnAccountSuccessfulMessage.isDisplayed();
-}
+    }
+
+    public boolean verifyCreateAnAccountSuccessful() {
+        functionClass.waitUntilElementPresent(createAnAccountSuccessfulMessage);
+        if (createAnAccountSuccessfulMessage.isDisplayed()) {
+            return true;
+        } else return false;
+    }
+
 }
