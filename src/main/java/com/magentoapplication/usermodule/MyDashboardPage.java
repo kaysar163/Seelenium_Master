@@ -2,6 +2,7 @@ package com.magentoapplication.usermodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,6 +45,25 @@ public class MyDashboardPage {
     @FindBy(xpath = "//span[text()='The account information has been saved.']")
     WebElement verifyChangePassword;
 
+    @FindBy(xpath = "//div[@class='my-account']//input[@id='firstname']")
+    WebElement verifyViewAccountWithFirstName;
+
+    @FindBy(xpath = "//div[@class='my-account']//input[@id='lastname']")
+    WebElement verifyViewAccountWithLastName;
+
+    @FindBy(xpath = "//div[@class='my-account']//input[@id='email']")
+    WebElement verifyViewAccountWithEmail;
+
+    public boolean viewAccountInfo(){
+        functionClass.waitUntilElementPresent(myAccountInformationLink);
+        myAccountInformationLink.click();
+        if (verifyViewAccountWithFirstName.getText().isEmpty()||verifyViewAccountWithLastName
+                .getText().isEmpty()||verifyViewAccountWithEmail.getText()
+                .isEmpty())
+            return true;
+     else return false;
+
+    }
 
     public void changePassword(){
         functionClass.waitUntilElementPresent(myAccountInformationLink);
