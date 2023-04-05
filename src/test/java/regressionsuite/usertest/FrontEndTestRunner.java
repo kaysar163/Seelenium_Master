@@ -1,13 +1,10 @@
 package regressionsuite.usertest;
 
-import com.magentoapplication.usermodule.*;
+import com.magentoapplication.ui.frontend.usermodule.*;
 import com.magentoapplication.utility.TestBase;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.Callable;
 
 public class FrontEndTestRunner extends TestBase{
     FrontEndLoginPage frontEndLoginPage;
@@ -36,19 +33,19 @@ public class FrontEndTestRunner extends TestBase{
 
     }
 
-    @Test(priority =1)
+    @Test(priority =1,enabled = false)
     public void login() {
 
         frontEndLoginPage.login();
     }
 
-    @Test(description = "kaysar",priority =2 )
+    @Test(description = "kaysar",priority =1 )
     public void CreateAnAccount(){
         createAnAccountPage.fillAccountRegistrationForm();
         createAnAccountPage.verifyCreateAnAccountSuccessful();
 
     }
-    @Test(description = "muyesser",priority = 3)
+    @Test(description = "muyesser",priority = 2)
     public  void addShoppingCartTest(){
         addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
         addProductsToShoppingCart.addToShoppingCart();
@@ -63,21 +60,21 @@ public class FrontEndTestRunner extends TestBase{
         Assert.assertTrue(billingAgreementPage.verifyBillingAgreementsLink());
 
     }
-    @Test()
+    @Test(description = "Omercan",priority = 3)
     public void checkOutOrder(){
         frontEndLoginPage.login();
         checkOutOrderPage.CheckOutOrderTest();
         Assert.assertTrue(checkOutOrderPage.verifyCheckOutOrder());
 
     }
-    @Test(description = "ranagul")
+    @Test(description = "ranagul",priority = 4)
     public void viewMyordersTest(){
         frontEndLoginPage.login();
         Assert.assertTrue(myDashboardPage.vieworders());
     }
 
 
-    @Test(description = "User should be able to edit account information")
+    @Test(description = "User should be able to edit account information",priority = 7)
     public void editAccountInfoTest(){
         frontEndLoginPage.login();
         myDashboardPage.EditAccountInfo();
@@ -92,7 +89,7 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage.verifyPasswordChanged();
     }
 
-    @Test()
+    @Test(priority = 6)
     public void viewMyWishListTest(){
         frontEndLoginPage.login();
         myWishListPage.clickMYWISHLISTLink();
@@ -110,7 +107,7 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage.viewMyTagsLink();
       Assert.assertTrue(  myDashboardPage.verifyViewMyTags());
   }
-   @Test()
+   @Test(priority = 5)
     public void viewDownloadable(){
         frontEndLoginPage.login();
         dowmloadablePage.clickDownloadable();

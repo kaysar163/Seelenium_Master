@@ -1,8 +1,7 @@
-package com.magentoapplication.usermodule;
+package com.magentoapplication.ui.frontend.usermodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
-import com.magentoapplication.utility.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

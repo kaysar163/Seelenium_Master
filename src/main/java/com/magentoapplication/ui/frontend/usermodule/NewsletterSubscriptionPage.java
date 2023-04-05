@@ -1,4 +1,4 @@
-package com.magentoapplication.usermodule;
+package com.magentoapplication.ui.frontend.usermodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
