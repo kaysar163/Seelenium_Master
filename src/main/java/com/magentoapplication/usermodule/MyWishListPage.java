@@ -10,9 +10,9 @@ public class MyWishListPage {
     WebDriver driver;
     FunctionClass functionClass;
 
-    @FindBy(css = "a[href=\"http://magentoqa2.unitedcoder.com/wishlist/\"]>]")
+    @FindBy(xpath=" //div[@class='links']//a[text()='My Wishlist']")
     WebElement MYWISHLISTLink;
-    @FindBy(css = "<div.page-title.title-buttons" >)
+    @FindBy(css = "div.page-title.title-buttons")
     WebElement MYWISHLISTmassage;
 
     public MyWishListPage(WebDriver driver) {
