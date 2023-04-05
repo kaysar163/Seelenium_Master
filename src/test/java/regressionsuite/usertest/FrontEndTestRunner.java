@@ -51,6 +51,7 @@ public class FrontEndTestRunner extends TestBase{
     }
     @Test()
     public void checkOutOrder(){
+        frontEndLoginPage.login();
         checkOutOrderPage.CheckOutOrderTest();
         Assert.assertTrue(checkOutOrderPage.verifyCheckOutOrder());
 
@@ -90,9 +91,9 @@ public class FrontEndTestRunner extends TestBase{
       Assert.assertTrue(  myDashboardPage.verifyViewMyTags());
   }
 
-    @AfterClass
-    public void tearDown(){
-        closeBrowser();
-    }
+//    @AfterClass
+//    public void tearDown(){
+//        closeBrowser();
+//    }
 }
 

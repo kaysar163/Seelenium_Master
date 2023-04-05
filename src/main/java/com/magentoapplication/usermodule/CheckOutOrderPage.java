@@ -26,6 +26,10 @@ public class CheckOutOrderPage {
     WebElement checkOutButton;
     @FindBy(css = "button[title=\'Continue\']")
     WebElement continueButton;
+    @FindBy(xpath = "//label[@for='s_method_freeshipping_freeshipping']")
+    WebElement freeShppingButton;
+    @FindBy(xpath = "//button[@onclick='shippingMethod.save()']//span//span[contains(text(),'Continue')]")
+    WebElement verifyShippingButton;
     @FindBy(css = "#p_method_cashondelivery")
     WebElement cashOnDeliveryButton;
     @FindBy(css = "button[onclick=\'payment.save()\'] span span")
@@ -42,6 +46,11 @@ public class CheckOutOrderPage {
         checkOutButton.click();
         functionClass.waitUntilElementPresent(continueButton);
         continueButton.click();
+        functionClass.sleep(10);
+        functionClass.waitUntilElementPresent(freeShppingButton);
+        freeShppingButton.click();
+        functionClass.waitUntilElementPresent(verifyShippingButton);
+        verifyShippingButton.click();
         functionClass.waitUntilElementPresent(cashOnDeliveryButton);
         cashOnDeliveryButton.click();
         functionClass.waitUntilElementPresent(continueButton2);
