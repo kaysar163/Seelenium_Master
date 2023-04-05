@@ -2,6 +2,7 @@ package regressionsuite.usertest;
 
 import com.magentoapplication.usermodule.*;
 import com.magentoapplication.utility.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -17,6 +18,7 @@ public class FrontEndTestRunner extends TestBase{
     MyDashboardPage myDashboardPage;
     AddProductsToShoppingCart addProductsToShoppingCart;
     MyWishListPage myWishListPage;
+    BillingAgreementPage billingAgreementPage;
     @BeforeClass
     public void setUp() {
         setupBrowserFrontEnd();
@@ -25,6 +27,7 @@ public class FrontEndTestRunner extends TestBase{
         newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
         myDashboardPage=new MyDashboardPage(driver);
         myWishListPage=new MyWishListPage(driver);
+        billingAgreementPage=new BillingAgreementPage(driver);
     }
 
     @Test(priority =1)
@@ -52,6 +55,14 @@ public class FrontEndTestRunner extends TestBase{
         //frontEndLoginPage.login();
         myDashboardPage.changePassword();
         myDashboardPage.verifyPasswordChanged();
+    }
+
+    @Test(description = "muyesser")
+    public  void billingAgreementlinkTest(){
+        frontEndLoginPage.login();
+        billingAgreementPage.clickBillingAgreemnetsLink();
+        Assert.assertTrue(billingAgreementPage.verifyBillingAgreementsLink());
+
     }
 
     @Test()

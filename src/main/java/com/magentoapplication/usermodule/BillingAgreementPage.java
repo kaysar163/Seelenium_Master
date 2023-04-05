@@ -7,11 +7,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class BillingAgreementPage {
-    @FindBy(linkText = "Billing Agreements")
+    @FindBy(xpath = "//div[@class=\"block-content\"]//li//a//strong")
     WebElement billingAgreementLink;
 
-    @FindBy(xpath ="//h1[text()='Billing Agreements']")
-            WebElement verifyBillingAgreementsLink;
+    @FindBy(xpath ="//div[@class=\"my-account\"]//div//h1")
+    WebElement verifyBillingAgreementsLink;
 
     WebDriver driver;
     FunctionClass functionClass;
@@ -22,12 +22,13 @@ public class BillingAgreementPage {
         functionClass = new FunctionClass(driver);
     }
 
-    public void clickMYWISHLISTLink() {
+    public void clickBillingAgreemnetsLink() {
         functionClass.waitUntilElementPresent(billingAgreementLink);
         billingAgreementLink.click();
+        functionClass.sleep(3);
     }
 
-    public boolean verifyMyWishListPageIsOpened() {
+    public boolean verifyBillingAgreementsLink() {
         if (verifyBillingAgreementsLink.isDisplayed())
             return true;
         else return false;
