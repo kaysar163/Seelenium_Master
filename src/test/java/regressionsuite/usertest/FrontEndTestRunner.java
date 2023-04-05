@@ -101,9 +101,8 @@ public class FrontEndTestRunner extends TestBase{
 
     @Test()
     public void clickNewsletterSubscriptionLink(){
-        frontEndLoginPage.login();
-        newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
-        newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
+        myDashboardPage.clickNewsletterSubscriptionLink();
+        Assert.assertTrue(newsletterSubscriptionPage.verifySubscriptionPageIsOpened());
     }
   @Test
   public void verifyViewMyTagsTest(){

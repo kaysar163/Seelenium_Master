@@ -9,10 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 public class NewsletterSubscriptionPage {
     WebDriver driver;
     FunctionClass functionClass;
-    FrontEndLoginPage frontEndLoginPage;
 
-    @FindBy(css = "li>a[href=\"http://magentoqa2.unitedcoder.com/newsletter/manage/\"]")
-    WebElement newsletterLink;
+
     @FindBy(css = "div.page-title")
     WebElement newsletterSubscriptionMessage;
 
@@ -21,13 +19,9 @@ public class NewsletterSubscriptionPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         functionClass = new FunctionClass(driver);
-        frontEndLoginPage=new FrontEndLoginPage(driver);
     }
 
-    public void clickNewsletterSubscriptionLink() {
-        functionClass.waitUntilElementPresent(newsletterLink);
-        newsletterLink.click();
-    }
+
 
     public boolean verifySubscriptionPageIsOpened() {
         if (newsletterSubscriptionMessage.isDisplayed())
