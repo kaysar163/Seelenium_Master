@@ -9,9 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MyDashboardPage {
     WebDriver driver;
-
+    FrontEndLoginPage frontEndLoginPage;
     CreateAnAccountPage createAnAccountPage;
-
     FunctionClass functionClass;
 
     String configFileName="testdatafolder/testdata.properties";
@@ -21,6 +20,7 @@ public class MyDashboardPage {
         PageFactory.initElements(driver,this);
         createAnAccountPage=new CreateAnAccountPage(driver);
         functionClass=new FunctionClass(driver);
+        frontEndLoginPage=new FrontEndLoginPage(driver);
     }
 
     @FindBy(xpath = "//a[text()='Account Information']")
@@ -43,8 +43,9 @@ public class MyDashboardPage {
 
     @FindBy(xpath = "//span[text()='The account information has been saved.']")
     WebElement verifyChangePassword;
-
-
+    //meryem
+    @FindBy(xpath ="//a[text()='My Tags']")
+     WebElement myTagsLink;
     public void changePassword(){
         functionClass.waitUntilElementPresent(myAccountInformationLink);
         myAccountInformationLink.click();
@@ -54,6 +55,9 @@ public class MyDashboardPage {
         newPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName,"newPassword"));
         confirmNewPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName,"confirmNewPassword"));
         changePasswordSaveButton.click();
+        //meryem
+        functionClass.waitUntilElementPresent(myTagsLink);
+       myTagsLink.click();
     }
 
     public boolean verifyPasswordChanged(){
