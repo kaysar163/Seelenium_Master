@@ -1,4 +1,4 @@
-package com.magentoapplication.usermodule;
+package com.magentoapplication.ui.frontend.usermodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +26,14 @@ public class FrontEndDashboardPage {
     WebElement loginLink;
     @FindBy(xpath = "//a[normalize-space()='Register']")
     WebElement registerLink;
+
+    @FindBy(xpath = "//a[@title='My Wishlist']//parent::li//parent::ul//a[@title='My Account']")
+    WebElement myAccountLink;
+
+    public void clickOnMyAccountLink() {
+        functionClass.waitUntilElementPresent(myAccountLink);
+        myAccountLink.click();
+    }
 
     public void clickOnAccountLink() {
         functionClass.waitUntilElementPresent(accountLink);

@@ -1,4 +1,4 @@
-package com.magentoapplication.usermodule;
+package com.magentoapplication.ui.frontend.usermodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
@@ -142,7 +142,7 @@ public class MyDashboardPage {
         middleNameField.clear();
         middleNameField.sendKeys(functionClass.generateMiddleName());
         functionClass.waitUntilElementPresent(currentPasswordField);
-        currentPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName, "loginPassword"));
+        currentPasswordField.sendKeys(ApplicationConfig.readFromConfigProperties(configFileName, "password"));
         functionClass.waitUntilElementPresent(changePasswordSaveButton);
         changePasswordSaveButton.click();
     }
