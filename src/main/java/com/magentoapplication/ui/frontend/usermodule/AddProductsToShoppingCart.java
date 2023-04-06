@@ -2,6 +2,7 @@ package com.magentoapplication.ui.frontend.usermodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -42,9 +43,6 @@ public class AddProductsToShoppingCart {
     @FindBy(xpath = "//form//div//button[@title='Add to Cart' and @class='button btn-cart']")
     WebElement addToCartButton1;
 
-
-
-
     @FindBy(css = ".cart.display-single-price >ul>li>ul>li>span")
     WebElement verifyAddToCard;
 
@@ -82,13 +80,14 @@ public class AddProductsToShoppingCart {
 
     @FindBy(css = "#attribute180")
     WebElement chooseSize;
-
+    
 
     public AddProductsToShoppingCart(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         functionClass = new FunctionClass(driver);
     }
+    
     public void addToShoppingCart() {
         functionClass.waitUntilElementPresent(madisonIlandLink);
         madisonIlandLink.click();
@@ -107,22 +106,10 @@ public class AddProductsToShoppingCart {
         select1.selectByValue("78");
         addToCartButton1.click();
     }
-
-
-
-
     public boolean verification()  {
         if (addSuccessMessage.isDisplayed()){
             return true;
         }else
             return false;
-
     }
-
-
-
-
-
-
-
 }
