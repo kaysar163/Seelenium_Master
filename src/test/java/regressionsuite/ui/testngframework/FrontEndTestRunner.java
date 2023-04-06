@@ -57,7 +57,7 @@ public class FrontEndTestRunner extends TestBase{
         addProductsToShoppingCart=new ShoppingCartPage(driver);
         addProductsToShoppingCart.addToShoppingCart();
         Assert.assertTrue(addProductsToShoppingCart.verification());
-        
+
     }
 
     @Test(priority = 3)
@@ -137,7 +137,7 @@ public class FrontEndTestRunner extends TestBase{
     public void viewMyAccountInfo(){
         Assert.assertTrue(myDashboardPage.viewAccountInfo());
     }
-   
+
    @AfterClass
     public void tearDown(){
         closeBrowser();
