@@ -3,10 +3,13 @@ package regressionsuite.ui.testngframework;
 import com.magentoapplication.ui.frontend.usermodule.*;
 import com.magentoapplication.utility.TestBase;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(TestListener.class)
 public class FrontEndTestRunner extends TestBase{
     FrontEndLoginPage frontEndLoginPage;
 
@@ -23,7 +26,7 @@ public class FrontEndTestRunner extends TestBase{
     FrontEndDashboardPage frontEndDashboardPage;
 
     @BeforeClass
-    public void setUp() {
+    public void setUp(ITestContext context) {
         setupBrowserFrontEnd();
         frontEndLoginPage = new FrontEndLoginPage(driver);
         createAnAccountPage=new CreateAnAccountPage(driver);
@@ -34,6 +37,7 @@ public class FrontEndTestRunner extends TestBase{
         addProductsToShoppingCart=new ShoppingCartPage(driver);
         dowmloadablePage=new DowmloadablePage(driver);
         frontEndDashboardPage=new FrontEndDashboardPage(driver);
+        context.setAttribute("driver",driver);
     }
 
     @Test(priority =1,enabled = false)
@@ -136,7 +140,7 @@ public class FrontEndTestRunner extends TestBase{
    
    @AfterClass
     public void tearDown(){
-       // closeBrowser();
+        closeBrowser();
    }
 
 }
