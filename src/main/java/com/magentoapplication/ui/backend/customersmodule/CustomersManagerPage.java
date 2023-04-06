@@ -36,6 +36,11 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
 
+    @FindBy (xpath = "//span[text()=Customer Manager should be able to filter Customer by  website")
+    WebElement getVerifyUpdateMessage;
+
+
+
 
 
     public void assignGroupToCustomer(){
