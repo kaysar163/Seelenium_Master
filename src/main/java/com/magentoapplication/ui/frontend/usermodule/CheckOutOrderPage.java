@@ -1,4 +1,4 @@
-package com.magentoapplication.usermodule;
+package com.magentoapplication.ui.frontend.usermodule;
 
 
 import com.magentoapplication.utility.FunctionClass;
@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class CheckOutOrderPage {
     WebDriver driver;
@@ -26,6 +27,10 @@ public class CheckOutOrderPage {
     WebElement checkOutButton;
     @FindBy(css = "button[title=\'Continue\']")
     WebElement continueButton;
+    @FindBy(xpath = "//label[@for='s_method_freeshipping_freeshipping']")
+    WebElement freeShppingButton;
+    @FindBy(xpath = "//button[@onclick='shippingMethod.save()']//span//span[contains(text(),'Continue')]")
+    WebElement verifyShippingButton;
     @FindBy(css = "#p_method_cashondelivery")
     WebElement cashOnDeliveryButton;
     @FindBy(css = "button[onclick=\'payment.save()\'] span span")
@@ -35,13 +40,45 @@ public class CheckOutOrderPage {
     @FindBy(css = ".sub-title")
     WebElement successMessage;
 
-    public void CheckOutOrderPage() {
+    @FindBy(id = "billing:street1")
+    WebElement addressField;
+
+    @FindBy(id = "billing:city")
+    WebElement cityField;
+
+    @FindBy(id = "billing:region_id")
+    WebElement stateDropdown;
+
+    @FindBy(id = "billing:postcode")
+    WebElement zipcodeField;
+
+    @FindBy(id = "billing:country_id")
+    WebElement countryDropdown;
+
+    @FindBy(id = "billing:telephone")
+    WebElement telephoneField;
+
+    public void CheckOutOrderTest() {
         functionClass.waitUntilElementPresent(cartButton);
         cartButton.click();
         functionClass.waitUntilElementPresent(checkOutButton);
         checkOutButton.click();
+        functionClass.waitUntilElementPresent(addressField);
+        addressField.sendKeys(functionClass.generateStreetName());
+        cityField.sendKeys(functionClass.generateCityName());
+        Select select=new Select(stateDropdown);
+        select.selectByValue("1");
+        zipcodeField.sendKeys(functionClass.generateZipCode());
+        Select select1=new Select(countryDropdown);
+        select1.selectByValue("AX");
+        telephoneField.sendKeys(functionClass.generateTelephoneNumber());
         functionClass.waitUntilElementPresent(continueButton);
         continueButton.click();
+        functionClass.sleep(10);
+        functionClass.waitUntilElementPresent(freeShppingButton);
+        freeShppingButton.click();
+        functionClass.waitUntilElementPresent(verifyShippingButton);
+        verifyShippingButton.click();
         functionClass.waitUntilElementPresent(cashOnDeliveryButton);
         cashOnDeliveryButton.click();
         functionClass.waitUntilElementPresent(continueButton2);

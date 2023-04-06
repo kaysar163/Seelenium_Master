@@ -1,4 +1,4 @@
-package com.magentoapplication.usermodule;
+package com.magentoapplication.ui.frontend.usermodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
@@ -10,8 +10,7 @@ public class NewsletterSubscriptionPage {
     WebDriver driver;
     FunctionClass functionClass;
 
-    @FindBy(css = "a[href=\"http://magentoqa2.unitedcoder.com/newsletter/manage/\"]>strong")
-    WebElement newsletterLink;
+
     @FindBy(css = "div.page-title")
     WebElement newsletterSubscriptionMessage;
 
@@ -22,10 +21,7 @@ public class NewsletterSubscriptionPage {
         functionClass = new FunctionClass(driver);
     }
 
-    public void clickNewsletterSubscriptionLink() {
-        functionClass.waitUntilElementPresent(newsletterLink);
-        newsletterLink.click();
-    }
+
 
     public boolean verifySubscriptionPageIsOpened() {
         if (newsletterSubscriptionMessage.isDisplayed())
