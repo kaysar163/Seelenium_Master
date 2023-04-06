@@ -1,8 +1,7 @@
-package regressionsuite.usertest;
+package regressionsuite.ui.testngframework;
 
 import com.magentoapplication.ui.frontend.usermodule.*;
 import com.magentoapplication.utility.TestBase;
-import org.junit.After;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
