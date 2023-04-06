@@ -25,6 +25,11 @@ public class CustomersModuleTestRunner extends TestBase {
         customersManagerPage=new CustomersManagerPage(driver);
         context.setAttribute("driver",driver);
     }
+    @Test
+    public void emailFilterTest(){
+        customersManagerPage.FilterCustomersByEmail();
+
+    }
 
     @Test
     public void a(){
