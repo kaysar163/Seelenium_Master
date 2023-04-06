@@ -21,6 +21,7 @@ public class FrontEndTestRunner extends TestBase{
     DowmloadablePage dowmloadablePage;
 
     FrontEndDashboardPage frontEndDashboardPage;
+    UpdateShoppingCart updateShoppingCart;
 
     @BeforeClass
     public void setUp() {
@@ -34,7 +35,7 @@ public class FrontEndTestRunner extends TestBase{
         addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
         dowmloadablePage=new DowmloadablePage(driver);
         frontEndDashboardPage=new FrontEndDashboardPage(driver);
-
+        updateShoppingCart = new UpdateShoppingCart(driver);
     }
 
     @Test(priority =1,enabled = false)
@@ -43,7 +44,7 @@ public class FrontEndTestRunner extends TestBase{
         frontEndLoginPage.login();
     }
 
-    @Test(description = "kaysar",priority =1 )
+    @Test(description = "kaysar",priority =1)
     public void CreateAnAccount(){
         createAnAccountPage.fillAccountRegistrationForm();
         createAnAccountPage.verifyCreateAnAccountSuccessful();
@@ -54,10 +55,11 @@ public class FrontEndTestRunner extends TestBase{
         addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
         addProductsToShoppingCart.addToShoppingCart();
         Assert.assertTrue(addProductsToShoppingCart.verification());
+        
     }
 
     @Test(priority = 11)
-    public  void billingAgreementLinkTest(){
+    public void billingAgreementLinkTest(){
         //frontEndLoginPage.login();
         billingAgreementPage=new BillingAgreementPage(driver);
         billingAgreementPage.clickBillingAgreemnetsLink();
@@ -102,7 +104,7 @@ public class FrontEndTestRunner extends TestBase{
         myWishListPage.verifyMyWishListPageIsOpened();
     }
 
-    @Test(priority = 10,enabled = false)
+    @Test(priority = 10, enabled = false)
     public void clickNewsletterSubscriptionLink(){
         //frontEndLoginPage.login();
         //newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
@@ -124,7 +126,15 @@ public class FrontEndTestRunner extends TestBase{
         //frontEndLoginPage.login();
        Assert.assertTrue(myDashboardPage.myProductReviews());
    }
-
+    
+    @Test()
+    public void updateShoppingCartTest() {
+        updateShoppingCart.login();
+//        updateShoppingCart.addProduct();
+        updateShoppingCart.updateShoppingCart();
+        updateShoppingCart.updateVerificationMessage();
+    }
+   
    @AfterClass
     public void tearDown(){
         closeBrowser();
