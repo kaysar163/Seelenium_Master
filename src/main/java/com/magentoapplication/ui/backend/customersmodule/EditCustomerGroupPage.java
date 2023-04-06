@@ -16,6 +16,10 @@ public class EditCustomerGroupPage {
     }
     @FindBy(xpath = "//span[text()='Customer Groups']")
     WebElement customerGroupsLink;
+    @FindBy(xpath = "//table[@id=\"customerGroupGrid_table\"]//tbody/tr//td[contains(text(),'blue')]")
+    WebElement blueButton;
+    @FindBy(id = "customer_group_code")
+    WebElement groupNameFiled;
 
 
 
