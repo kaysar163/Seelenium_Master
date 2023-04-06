@@ -5,56 +5,56 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class CustomersManagerPage {
     WebDriver driver;
+
     FunctionClass functionClass;
-    String config = "testdatafolder/testdata.properties";
+
     public CustomersManagerPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
-        functionClass = new FunctionClass(driver);
+        PageFactory.initElements(driver,this);
+        functionClass=new FunctionClass(driver);
     }
 
-    @FindBy(xpath = "(//*[contains(text(),'Add New Customer')])[1]")
-    WebElement addNewCustomerLink;
-    @FindBy(id="_accountprefix")
-    WebElement prefixField;
-    @FindBy(id="_accountfirstname")
-    WebElement firstNameField;
-    @FindBy(id="_accountlastname")
-    WebElement lastNameField;
-    @FindBy(id="_accountemail")
-    WebElement emailField;
-    @FindBy(id="_accounttaxvat")
-    WebElement taxNumberField;
-    @FindBy(id="_accountpassword")
-    WebElement passwordfield;
-    @FindBy(xpath = "//*[@class='middle']//button[@title='Save Customer']")
-    WebElement SavaCustomerButton;
-    @FindBy(xpath = "//*[contains(text(),'The customer has been saved.')]")
-    WebElement customerSuccessfullySavadMessage;
+    @FindBy(xpath = "//span[text()='Customers']")
+    WebElement customerLink;
 
-    public void addCustomerMethod(String firstName,String lastName,String email,String password){
-        functionClass.waitUntilElementPresent(addNewCustomerLink);
-        addNewCustomerLink.click();
-        functionClass.waitUntilElementPresent(firstNameField);
-        firstNameField.sendKeys(firstName);
-        functionClass.waitUntilElementPresent(lastNameField);
-        lastNameField.sendKeys(lastName);
-        functionClass.waitUntilElementPresent(emailField);
-        emailField.sendKeys(email);
-        functionClass.waitUntilElementPresent(passwordfield);
-        passwordfield.sendKeys(password);
-        functionClass.waitUntilElementPresent(SavaCustomerButton);
-        SavaCustomerButton.click();
+    @FindBy(xpath = "//span[text()='Manage Customers']")
+    WebElement manageCustomersLink;
+
+    @FindBy(css = "#customerGrid_massaction-select")
+    WebElement actionsDropdown;
+
+    @FindBy(xpath = "//select[@id='visibility']")
+    WebElement groupsDropdown;
+
+    @FindBy(xpath = "//span[text()='Submit']")
+    WebElement submitButton;
+
+    @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
+    WebElement verifyUpdateMessage;
+
+
+
+    public void assignGroupToCustomer(){
+        functionClass.waitUntilElementPresent(customerLink);
+        customerLink.click();
+        functionClass.waitUntilElementPresent(manageCustomersLink);
+        manageCustomersLink.click();
+        Select select=new Select(actionsDropdown);
+        select.selectByValue("Assign a Customer Group");
+        functionClass.waitUntilElementPresent(groupsDropdown);
+        Select select1=new Select(groupsDropdown);
+        select1.selectByValue("Team1apitesttttt");
+        submitButton.click();
     }
-    public boolean verifyCustomer(){
-        functionClass.waitUntilElementPresent(customerSuccessfullySavadMessage);
-        if (customerSuccessfullySavadMessage.isDisplayed()) {
+
+    public boolean verifyUpdate(){
+        if (verifyUpdateMessage.isDisplayed())
             return true;
-        } else return false;
+        else return false;
+    }
 
-
-}
 }
