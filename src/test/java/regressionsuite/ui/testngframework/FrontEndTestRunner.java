@@ -14,14 +14,13 @@ public class FrontEndTestRunner extends TestBase{
     NewsletterSubscriptionPage newsletterSubscriptionPage;
 
     MyDashboardPage myDashboardPage;
-    AddProductsToShoppingCart addProductsToShoppingCart;
+    ShoppingCartPage addProductsToShoppingCart;
     MyWishListPage myWishListPage;
     CheckOutOrderPage checkOutOrderPage;
     BillingAgreementPage billingAgreementPage;
     DowmloadablePage dowmloadablePage;
 
     FrontEndDashboardPage frontEndDashboardPage;
-    UpdateShoppingCart updateShoppingCart;
 
     @BeforeClass
     public void setUp() {
@@ -32,10 +31,9 @@ public class FrontEndTestRunner extends TestBase{
         myDashboardPage=new MyDashboardPage(driver);
         myWishListPage=new MyWishListPage(driver);
         checkOutOrderPage=new CheckOutOrderPage(driver);
-        addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
+        addProductsToShoppingCart=new ShoppingCartPage(driver);
         dowmloadablePage=new DowmloadablePage(driver);
         frontEndDashboardPage=new FrontEndDashboardPage(driver);
-        updateShoppingCart = new UpdateShoppingCart(driver);
     }
 
     @Test(priority =1,enabled = false)
@@ -52,92 +50,93 @@ public class FrontEndTestRunner extends TestBase{
     }
     @Test(description = "muyesser",priority = 2)
     public  void addShoppingCartTest(){
-        addProductsToShoppingCart=new AddProductsToShoppingCart(driver);
+        addProductsToShoppingCart=new ShoppingCartPage(driver);
         addProductsToShoppingCart.addToShoppingCart();
         Assert.assertTrue(addProductsToShoppingCart.verification());
         
     }
 
-    @Test(priority = 11)
-    public void billingAgreementLinkTest(){
-        //frontEndLoginPage.login();
-        billingAgreementPage=new BillingAgreementPage(driver);
-        billingAgreementPage.clickBillingAgreemnetsLink();
-        Assert.assertTrue(billingAgreementPage.verifyBillingAgreementsLink());
-
+    @Test(priority = 3)
+    public void updateShoppingCartTest() {
+        addProductsToShoppingCart.updateShoppingCart();
+        Assert.assertTrue(addProductsToShoppingCart.updateVerificationMessage());
     }
-    @Test(description = "Omercan",priority = 3,dependsOnMethods = "addShoppingCartTest")
+
+    @Test(description = "Omercan",priority = 4,dependsOnMethods = "addShoppingCartTest")
     public void checkOutOrder(){
         //frontEndLoginPage.login();
         checkOutOrderPage.CheckOutOrderTest();
         Assert.assertTrue(checkOutOrderPage.verifyCheckOutOrder());
 
     }
-    @Test(description = "ranagul",priority = 4)
+
+
+    @Test(description = "ranagul",priority = 5)
     public void viewMyordersTest(){
         frontEndDashboardPage.clickOnAccountLink();
         frontEndDashboardPage.clickOnMyAccountLink();
-        //frontEndLoginPage.login();
         Assert.assertTrue(myDashboardPage.vieworders());
-    }
-
-
-    @Test(description = "User should be able to edit account information",priority = 7)
-    public void editAccountInfoTest(){
-        //frontEndLoginPage.login();
-        myDashboardPage.EditAccountInfo();
-        Assert.assertTrue(myDashboardPage.VerifySuccessfullyEdit());
-
-    }
-    @Test(priority = 8)
-    public void changePasswordTest(){
-        //createAnAccountPage.fillAccountRegistrationForm();
-        //frontEndLoginPage.login();
-        myDashboardPage.changePassword();
-        Assert.assertTrue(myDashboardPage.verifyPasswordChanged());
     }
 
     @Test(priority = 6)
     public void viewMyWishListTest(){
-        //frontEndLoginPage.login();
         myWishListPage.clickMYWISHLISTLink();
         myWishListPage.verifyMyWishListPageIsOpened();
     }
 
-    @Test(priority = 10, enabled = false)
-    public void clickNewsletterSubscriptionLink(){
+    @Test(priority = 7)
+    public void viewDownloadable(){
         //frontEndLoginPage.login();
-        //newsletterSubscriptionPage.clickNewsletterSubscriptionLink();
+        dowmloadablePage.clickDownloadable();
+        Assert.assertTrue( dowmloadablePage.verifyMyDownloadableProducts() );
+    }
+
+    @Test(priority = 8)
+    public void changePasswordTest(){
+        myDashboardPage.changePassword();
+        Assert.assertTrue(myDashboardPage.verifyPasswordChanged());
+    }
+
+    @Test(priority = 9,enabled = false)
+    public void viewMyproductreviewsTest(){
+        Assert.assertTrue(myDashboardPage.myProductReviews());
+    }
+
+    @Test(priority = 10)
+    public void billingAgreementLinkTest(){
+        billingAgreementPage=new BillingAgreementPage(driver);
+        billingAgreementPage.clickBillingAgreemnetsLink();
+        Assert.assertTrue(billingAgreementPage.verifyBillingAgreementsLink());
+
+    }
+
+    @Test(description = "User should be able to edit account information",priority = 11)
+    public void editAccountInfoTest(){
+        myDashboardPage.EditAccountInfo();
+        Assert.assertTrue(myDashboardPage.VerifySuccessfullyEdit());
+
+    }
+
+    @Test(priority = 14)
+    public void clickNewsletterSubscriptionLink(){
+        myDashboardPage.clickNewsletterSubscriptionLink();
         newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
     }
+
   @Test(priority = 12)
   public void verifyViewMyTagsTest(){
         myDashboardPage.viewMyTagsLink();
       Assert.assertTrue(  myDashboardPage.verifyViewMyTags());
   }
-   @Test(priority = 5)
-    public void viewDownloadable(){
-        //frontEndLoginPage.login();
-        dowmloadablePage.clickDownloadable();
-        Assert.assertTrue( dowmloadablePage.verifyMyDownloadableProducts() );
-   }
-   @Test(priority = 9)
-    public void viewMyproductreviewsTest(){
-        //frontEndLoginPage.login();
-       Assert.assertTrue(myDashboardPage.myProductReviews());
-   }
-    
-    @Test()
-    public void updateShoppingCartTest() {
-        updateShoppingCart.login();
-//        updateShoppingCart.addProduct();
-        updateShoppingCart.updateShoppingCart();
-        updateShoppingCart.updateVerificationMessage();
+
+    @Test(priority = 13)
+    public void viewMyAccountInfo(){
+        Assert.assertTrue(myDashboardPage.viewAccountInfo());
     }
    
    @AfterClass
     public void tearDown(){
-        closeBrowser();
+       // closeBrowser();
    }
 
 }
