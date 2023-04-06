@@ -21,7 +21,7 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//button[@id='id_eedfc4fe8ee6148c23f41a3d0c470b52']//span//span//span[contains(text(),'Search')]")
     WebElement searchButton;
 
-    public void CustomersManagerTest(){
+    public void FilterCustomersByEmail(){
         functionClass.waitUntilElementPresent(emailField);
         emailField.sendKeys(functionClass.generateFakeEmail());
         functionClass.waitUntilElementPresent(searchButton);
