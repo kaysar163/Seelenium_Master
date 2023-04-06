@@ -27,7 +27,7 @@ public class BackEndLogin  {
     @FindBy(id = "login")
     WebElement passwordField;
 
-    @FindBy(id = ".form-button")
+    @FindBy(css = ".form-button")
     WebElement loginButton;
 
     public void customersModuleLogin(){
