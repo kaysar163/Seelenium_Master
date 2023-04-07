@@ -39,7 +39,13 @@ public class CustomersModuleTestRunner extends TestBase {
    editCustomerGroupPage.editCustomerGroupInfo();
    editCustomerGroupPage.deleteCustomerGroupInfo();
    Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupEditedTest());
-//   Assert.assertTrue(editCustomerGroupPage.);
+
+    }
+    @Test
+    public void deleteCustomerGroup() {
+        editCustomerGroupPage.editCustomerGroupInfo();
+        editCustomerGroupPage.deleteCustomerGroupInfo();
+        Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupDeletedTest1());
     }
 
     @AfterClass

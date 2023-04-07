@@ -20,6 +20,7 @@ public class EditCustomerGroupPage {
         customersManagerPage = new CustomersManagerPage(driver);
     }
 
+    //meryem
     @FindBy(xpath = "//span[text()='Customer Groups']")
     WebElement customerGroupsLink;
     @FindBy(xpath = "//table[@id=\"customerGroupGrid_table\"]//tbody/tr//td[contains(text(),'blue')]")
@@ -32,13 +33,13 @@ public class EditCustomerGroupPage {
     WebElement saveCustomerButton;
     @FindBy(xpath = "//span[text()='The customer group has been saved.']")
     WebElement verifyCustomerGroupEditedMessage;
-
+    //meryem
     @FindBy(xpath = "//table[@id=\"customerGroupGrid_table\"]//tbody/tr//td[contains(text(),'cyan')]")
     WebElement cyanButton;
     @FindBy(xpath = "//span[text()='Delete Customer Group']")
     WebElement deleteCustomerGroup;
     @FindBy(xpath = "//span[text()='The customer group has been deleted.']")
-    WebElement VerifyCustomerGroupDeletedMessage;
+    WebElement verifyCustomerGroupDeletedMessage;
 
     public void editCustomerGroupInfo() {
         customersManagerPage.customerLink.click();
@@ -61,18 +62,14 @@ public class EditCustomerGroupPage {
         customersManagerPage.customerLink.click();
         cyanButton.click();
         deleteCustomerGroup.click();
+        driver.switchTo().alert().accept();
 
     }
 
-   // public boolean verifyCustomerGroupDeletedTest1() {
-        //  if (
-        //   return true;
-        //  else return false;
+    public boolean verifyCustomerGroupDeletedTest1() {
+        if (verifyCustomerGroupDeletedMessage.isDisplayed())
+            return true;
+        else return false;
 
-
-
-
-
-
-
+    }
 }
