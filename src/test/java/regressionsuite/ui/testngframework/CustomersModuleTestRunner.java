@@ -38,8 +38,8 @@ public class CustomersModuleTestRunner extends TestBase {
 
     @Test
     public void a() {
-//        customersManagerPage.assignGroupToCustomer();
-//        Assert.assertTrue(customersManagerPage.verifyUpdate());
+        customersManagerPage.assignGroupToCustomer();
+        Assert.assertTrue(customersManagerPage.verifyUpdate());
     }
 
     @Test(description= "kaysar", priority = 1)
