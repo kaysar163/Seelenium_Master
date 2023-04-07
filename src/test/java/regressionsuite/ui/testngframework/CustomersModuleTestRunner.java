@@ -89,6 +89,11 @@ public class CustomersModuleTestRunner extends TestBase {
         editCustomerGroupPage.deleteCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupDeletedTest1());
     }
+    @Test(description = "Memet")
+    public void passwordResetTest(){
+        customerInformationPage.customerPasswordChange();
+        Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();

@@ -1,6 +1,8 @@
 package com.magentoapplication.ui.backend.customersmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +22,11 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//span[text()='Customers']")
     WebElement customerLink;
-
+    @FindBy(xpath = "//tbody/tr/td[contains(text(),'Reinaldo')]//following::td[9]//a[text()='Edit']")
+    WebElement customerEditButton;
+//    WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",customerInformationPage.firstName)));
+    @FindBy(xpath = "//*[text()='The customer has been saved.']")
+    WebElement passwordChangeSuccessMessage;
     @FindBy(xpath = "//span[text()='Manage Customers']")
     WebElement manageCustomersLink;
 
@@ -42,13 +48,18 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//select[@id=\"customerGrid_filter_group\"]")
     WebElement groupFilterDropdown;
-
-
-    @FindBy(xpath = "//a[text()='Select All']")
-    WebElement SelectAll;
-    @FindBy(xpath = "//span[text()='Export']")
-    WebElement exportButton;
-
+    
+    //Locate elements for delete customer function
+    @FindBy(id="customerGrid_filter_name")
+    WebElement nameFilter;
+    @FindBy(xpath = "//button//span[contains(text(),'Search')]")
+    WebElement searchButtonForDelete;
+    @FindBy(xpath = "//tr//td[contains(text(),'495')]/following-sibling::td//a[contains(text(),'Edit')]")
+    WebElement editButtonNotRandom;
+    @FindBy(xpath = "//span[contains(text(),'Delete Customer')][1]")
+    WebElement deleteCustomer;
+    @FindBy(xpath = "//span[contains(text(),'The customer has been deleted.')]")
+    WebElement deleteSuccessMessage;
 
 
     public void FilterCustomersByEmail() {
@@ -94,22 +105,39 @@ public class CustomersManagerPage {
                 return true;
             else return false;
         }
-
-    public void exportCustomers() {
-        functionClass.waitUntilElementPresent(SelectAll);
-        SelectAll.click();
-        functionClass.waitUntilElementPresent(exportButton);
-        exportButton.click();
-
+        
+    public void deleteCustomer(){
+        functionClass.waitUntilElementPresent(nameFilter);
+        nameFilter.sendKeys("Irshad01 Toghraq01");
+        functionClass.waitUntilElementPresent(searchButtonForDelete);
+        searchButtonForDelete.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        functionClass.waitUntilElementPresent(editButtonNotRandom);
+        editButtonNotRandom.click();
+        functionClass.waitUntilElementPresent(deleteCustomer);
+        deleteCustomer.click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
     }
-
-    public boolean verifyExportCustomer() {
-        if (exportButton.isEnabled()) {
+    
+    public boolean verifyDeleteCustomer(){
+        if(deleteSuccessMessage.isDisplayed()){
+            System.out.println("Customer was deleted.");
             return true;
-        } else
+        }
+        else
             return false;
     }
 
-    }
+}
 
 
