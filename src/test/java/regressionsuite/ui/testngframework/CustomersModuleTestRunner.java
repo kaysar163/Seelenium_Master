@@ -16,6 +16,7 @@ public class CustomersModuleTestRunner extends TestBase {
     BackEndLogin backEndLogin;
 
     CustomersManagerPage customersManagerPage;
+    
 
     @BeforeClass
     public void setUp(ITestContext context){
@@ -30,6 +31,12 @@ public class CustomersModuleTestRunner extends TestBase {
     public void a(){
 //        customersManagerPage.assignGroupToCustomer();
 //        Assert.assertTrue(customersManagerPage.verifyUpdate());
+    }
+    
+    @Test
+    public void deleteCustomerTest(){
+        customersManagerPage.deleteCustomer();
+        customersManagerPage.verifyDeleteCustomer();
     }
 
     @AfterClass
