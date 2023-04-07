@@ -1,6 +1,5 @@
 package com.magentoapplication.ui.backend.customersmodule;
 
-import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -17,15 +16,15 @@ public class CustomersManagerPage {
 
     public CustomersManagerPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
-        functionClass = new FunctionClass(driver);
+        PageFactory.initElements(driver,this);
+        functionClass=new FunctionClass(driver);
     }
 
     @FindBy(xpath = "//span[text()='Customers']")
     WebElement customerLink;
     @FindBy(xpath = "//tbody/tr/td[contains(text(),'Reinaldo')]//following::td[9]//a[text()='Edit']")
     WebElement customerEditButton;
-    //    WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",customerInformationPage.firstName)));
+//    WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",customerInformationPage.firstName)));
     @FindBy(xpath = "//*[text()='The customer has been saved.']")
     WebElement passwordChangeSuccessMessage;
     @FindBy(xpath = "//span[text()='Manage Customers']")
@@ -36,6 +35,9 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//select[@id='visibility']")
     WebElement groupsDropdown;
+
+    @FindBy(css = "[type='checkbox']")
+    WebElement checkBox;
 
     @FindBy(xpath = "//span[text()='Submit']")
     WebElement submitButton;
@@ -49,9 +51,9 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//select[@id=\"customerGrid_filter_group\"]")
     WebElement groupFilterDropdown;
-
+    
     //Locate elements for delete customer function
-    @FindBy(id = "customerGrid_filter_name")
+    @FindBy(id="customerGrid_filter_name")
     WebElement nameFilter;
     @FindBy(xpath = "//button//span[contains(text(),'Search')]")
     WebElement searchButtonForDelete;
@@ -75,15 +77,6 @@ public class CustomersManagerPage {
 
     @FindBy(id = "customerGrid-total-count")
     WebElement verifyFilteredMessage;
-
-    @FindBy(id = "customerGrid_filter_billing_region")
-    WebElement filterState;
-
-   // @FindBy(xpath = "//span[text()='Search']")
-   //WebElement SearchB;
-
-    @FindBy(name ="billing_region")
-    WebElement verifyFilterSate;
 
 
     public void FilterCustomersByEmail() {
@@ -111,26 +104,27 @@ public class CustomersManagerPage {
         }
     }
 
-    public void assignGroupToCustomer() {
-        functionClass.waitUntilElementPresent(customerLink);
-        customerLink.click();
-        functionClass.waitUntilElementPresent(manageCustomersLink);
-        manageCustomersLink.click();
-        Select select = new Select(actionsDropdown);
-        select.selectByValue("Assign a Customer Group");
-        functionClass.waitUntilElementPresent(groupsDropdown);
-        Select select1 = new Select(groupsDropdown);
-        select1.selectByValue("Team1apitesttttt");
-        submitButton.click();
-    }
+        public void assignGroupToCustomer() {
+            functionClass.waitUntilElementPresent(customerLink);
+            customerLink.click();
+            functionClass.waitUntilElementPresent(manageCustomersLink);
+            manageCustomersLink.click();
+            Select select = new Select(actionsDropdown);
+            select.selectByValue("assign_group");
+            functionClass.waitUntilElementPresent(groupsDropdown);
+            Select select1 = new Select(groupsDropdown);
+            select1.selectByValue("1");
+            checkBox.click();
+            submitButton.click();
+        }
 
-    public boolean verifyUpdate() {
-        if (verifyUpdateMessage.isDisplayed())
-            return true;
-        else return false;
-    }
-
-    public void deleteCustomer() {
+        public boolean verifyUpdate() {
+            if (verifyUpdateMessage.isDisplayed())
+                return true;
+            else return false;
+        }
+        
+    public void deleteCustomer(){
         functionClass.waitUntilElementPresent(nameFilter);
         nameFilter.sendKeys("Irshad01 Toghraq01");
         functionClass.waitUntilElementPresent(searchButtonForDelete);
@@ -149,15 +143,16 @@ public class CustomersManagerPage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        Alert alert = driver.switchTo().alert();
+        Alert alert=driver.switchTo().alert();
         alert.accept();
     }
-
-    public boolean verifyDeleteCustomer() {
-        if (deleteSuccessMessage.isDisplayed()) {
+    
+    public boolean verifyDeleteCustomer(){
+        if(deleteSuccessMessage.isDisplayed()){
             System.out.println("Customer was deleted.");
             return true;
-        } else
+        }
+        else
             return false;
     }
 
@@ -186,26 +181,11 @@ public class CustomersManagerPage {
 
     }
 
-    public boolean verifyCustomerFilteredByCountry() {
+    public boolean verifyCustomerFilteredByCountry(){
         return driver.getPageSource().contains("Turkey");
 
 
     }
-
-    public void filterCustomerBySate() {
-        functionClass.waitUntilElementPresent(filterState);
-        filterState.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","State"));
-        functionClass.waitUntilElementPresent(SearchButton);
-        SearchButton.click();
-    }
-
-    public boolean verifyCustomerFilterByState() {
-        functionClass.waitUntilElementPresent(verifyFilterSate);
-        if (verifyFilterSate.isDisplayed());
-            return true;
-    }
-
-
 }
 
 
