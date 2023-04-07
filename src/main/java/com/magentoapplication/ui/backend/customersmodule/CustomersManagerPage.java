@@ -14,52 +14,53 @@ public class CustomersManagerPage {
 
     public CustomersManagerPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionClass=new FunctionClass(driver);
+        PageFactory.initElements( driver, this );
+        functionClass = new FunctionClass( driver );
     }
 
-    @FindBy(xpath = "//span[text()='Customers']")
-    WebElement customerLink;
-
-    @FindBy(xpath = "//span[text()='Manage Customers']")
-    WebElement manageCustomersLink;
-
-    @FindBy(css = "#customerGrid_massaction-select")
-    WebElement actionsDropdown;
-
-    @FindBy(xpath = "//select[@id='visibility']")
-    WebElement groupsDropdown;
-
-    @FindBy(xpath = "//span[text()='Submit']")
-    WebElement submitButton;
-
-    @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
-    WebElement verifyUpdateMessage;
-
-    @FindBy (xpath = "//span[text()=Customer Manager should be able to filter Customer by  website")
-    WebElement getVerifyUpdateMessage;
 
 
+        @FindBy(xpath = "//span[text()='Customers']")
+        WebElement customerLink;
+
+        @FindBy(xpath = "//span[text()='Manage Customers']")
+        WebElement manageCustomersLink;
+
+        @FindBy(css = "#customerGrid_massaction-select")
+        WebElement actionsDropdown;
+
+        @FindBy(xpath = "//select[@id='visibility']")
+        WebElement groupsDropdown;
+
+        @FindBy(xpath = "//span[text()='Submit']")
+        WebElement submitButton;
+
+        @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
+        WebElement verifyUpdateMessage;
+
+        @FindBy(xpath = "//span[text()=by website")
+        WebElement logOutButton;
 
 
+        public void assignGroupToCustomer() {
+            functionClass.waitUntilElementPresent( customerLink );
+            customerLink.click( );
+            functionClass.waitUntilElementPresent( manageCustomersLink );
+            manageCustomersLink.click( );
+            Select select = new Select( actionsDropdown );
+            select.selectByValue( "Assign a Customer Group" );
+            functionClass.waitUntilElementPresent( groupsDropdown );
+            Select select1 = new Select( groupsDropdown );
+            select1.selectByValue( "Team1apitesttttt" );
+            submitButton.click( );
+        }
 
-    public void assignGroupToCustomer(){
-        functionClass.waitUntilElementPresent(customerLink);
-        customerLink.click();
-        functionClass.waitUntilElementPresent(manageCustomersLink);
-        manageCustomersLink.click();
-        Select select=new Select(actionsDropdown);
-        select.selectByValue("Assign a Customer Group");
-        functionClass.waitUntilElementPresent(groupsDropdown);
-        Select select1=new Select(groupsDropdown);
-        select1.selectByValue("Team1apitesttttt");
-        submitButton.click();
+        public boolean verifyUpdate() {
+            if (verifyUpdateMessage.isDisplayed( ))
+                return true;
+            else return false;
+        }
+
     }
 
-    public boolean verifyUpdate(){
-        if (verifyUpdateMessage.isDisplayed())
-            return true;
-        else return false;
-    }
 
-}
