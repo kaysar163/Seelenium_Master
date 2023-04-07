@@ -23,8 +23,8 @@ public class EditCustomerGroupPage {
     //meryem
     @FindBy(xpath = "//span[text()='Customer Groups']")
     WebElement customerGroupsLink;
-    @FindBy(xpath = "//table[@id=\"customerGroupGrid_table\"]//tbody/tr//td[contains(text(),'blue')]")
-    WebElement blueButton;
+    @FindBy(xpath = "//table[@id=\"customerGroupGrid_table\"]//tbody/tr//td[contains(text(),'728')]")
+    WebElement editCustomerGroupButton;
     @FindBy(id = "customer_group_code")
     WebElement groupNameFiled;
     @FindBy(id = "tax_class_id")
@@ -34,8 +34,8 @@ public class EditCustomerGroupPage {
     @FindBy(xpath = "//span[text()='The customer group has been saved.']")
     WebElement verifyCustomerGroupEditedMessage;
     //meryem
-    @FindBy(xpath = "//table[@id=\"customerGroupGrid_table\"]//tbody/tr//td[contains(text(),'cyan')]")
-    WebElement cyanButton;
+    @FindBy(xpath = "(//span[contains(text(),'Delete Customer Group')])[1]")
+    WebElement deleteGroupButton;
     @FindBy(xpath = "//span[text()='Delete Customer Group']")
     WebElement deleteCustomerGroup;
     @FindBy(xpath = "//span[text()='The customer group has been deleted.']")
@@ -44,7 +44,7 @@ public class EditCustomerGroupPage {
     public void editCustomerGroupInfo() {
         customersManagerPage.customerLink.click();
         customerGroupsLink.click();
-        blueButton.click();
+        editCustomerGroupButton.click();
         groupNameFiled.clear();
         groupNameFiled.sendKeys(functionClass.generateFakeName());
         Select meryem = new Select(taxDropdown);
@@ -60,8 +60,9 @@ public class EditCustomerGroupPage {
 
     public void deleteCustomerGroupInfo() {
         customersManagerPage.customerLink.click();
-        cyanButton.click();
-        deleteCustomerGroup.click();
+        customerGroupsLink.click();
+        editCustomerGroupButton.click();
+        deleteGroupButton.click();
         driver.switchTo().alert().accept();
 
     }

@@ -37,13 +37,11 @@ public class CustomersModuleTestRunner extends TestBase {
     @Test
     public void editCustomerGroup() {
    editCustomerGroupPage.editCustomerGroupInfo();
-   editCustomerGroupPage.deleteCustomerGroupInfo();
    Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupEditedTest());
 
     }
     @Test
     public void deleteCustomerGroup() {
-        editCustomerGroupPage.editCustomerGroupInfo();
         editCustomerGroupPage.deleteCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupDeletedTest1());
     }
