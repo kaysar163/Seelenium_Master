@@ -1,7 +1,7 @@
 package regressionsuite.ui.testngframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
-import com.magentoapplication.ui.backend.customersmodule.CustomerManagerExportCustomers;
+import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomersManagerPage;
 import com.magentoapplication.utility.TestBase;
 import org.testng.Assert;
@@ -17,36 +17,32 @@ public class CustomersModuleTestRunner extends TestBase {
     BackEndLogin backEndLogin;
 
     CustomersManagerPage customersManagerPage;
-    CustomerManagerExportCustomers customerManagerExportCustomers;
+    CustomerInformationPage customerInformationPage;
 
     @BeforeClass
-    public void setUp(ITestContext context){
+    public void setUp(ITestContext context) {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.customersModuleLogin();
-        customersManagerPage=new CustomersManagerPage(driver);
-        context.setAttribute("driver",driver);
-        customerManagerExportCustomers=new CustomerManagerExportCustomers(driver);
+        customersManagerPage = new CustomersManagerPage(driver);
+        customerInformationPage=new CustomerInformationPage(driver);
+        context.setAttribute("driver", driver);
     }
 
-    //@Test()
-    //public void a(){
+    @Test
+    public void a() {
 //        customersManagerPage.assignGroupToCustomer();
 //        Assert.assertTrue(customersManagerPage.verifyUpdate());
-    //}
-
-    @Test()
-    public void exportCustomerTest(){
-
-        customerManagerExportCustomers.exportCustomers();
-        Assert.assertTrue(customerManagerExportCustomers.verifyExportCustomer());
-
-
     }
 
+    @Test(description= "kaysar", priority = 1)
+    public void ManageraddnewcusstomerTest(){
+        customerInformationPage.addCustomerMethod();
+        Assert.assertTrue(customerInformationPage.verifyCustomer());
+
+}
     @AfterClass
     public void tearDown(){
-
         closeBrowser();
     }
 }
