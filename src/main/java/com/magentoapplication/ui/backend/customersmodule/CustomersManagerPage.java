@@ -61,6 +61,12 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//span[contains(text(),'The customer has been deleted.')]")
     WebElement deleteSuccessMessage;
 
+    @FindBy(xpath = "//a[text()='Select All']")
+    WebElement SelectAll;
+    @FindBy(xpath = "//span[text()='Export']")
+    WebElement exportButton;
+
+
 
     public void FilterCustomersByEmail() {
         functionClass.waitUntilElementPresent(emailField);
@@ -137,6 +143,22 @@ public class CustomersManagerPage {
         else
             return false;
     }
+
+    public void exportCustomers() {
+        functionClass.waitUntilElementPresent(SelectAll);
+        SelectAll.click();
+        functionClass.waitUntilElementPresent(exportButton);
+        exportButton.click();
+
+    }
+
+    public boolean verifyExportCustomer() {
+        if (exportButton.isEnabled()) {
+            return true;
+        } else
+            return false;
+    }
+
 
 }
 
