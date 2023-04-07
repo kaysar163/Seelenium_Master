@@ -35,8 +35,17 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
+    @FindBy(id = "customerGrid_filter_email")
+    WebElement emailField;
+    @FindBy(xpath = "(//span[contains(text(),'Search')])[2]")
+    WebElement searchButton;
 
-
+    public void FilterCustomersByEmail() {
+        functionClass.waitUntilElementPresent(emailField);
+        emailField.sendKeys(functionClass.generateFakeEmail());
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+    }
 
     public void assignGroupToCustomer(){
         functionClass.waitUntilElementPresent(customerLink);
