@@ -44,7 +44,7 @@ public class CustomersModuleTestRunner extends TestBase {
 
 }
     @Test (description = "muyesser",priority = 2)
-    public void ManagerExpertCustomers (){
+    public void ManagerExportCustomers (){
         customersManagerPage.exportCustomers();
         Assert.assertTrue(customersManagerPage.verifyExportCustomer());
 
