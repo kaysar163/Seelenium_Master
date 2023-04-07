@@ -35,26 +35,46 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
+    @FindBy(xpath = "//select[@id=\"customerGrid_filter_group\"]")
+    WebElement groupFilterDropdown;
+    @FindBy(xpath = "//span[text()=\"Search\"]")
+    WebElement searchButton;
 
+    public void filterTheCustomerByGroup() {
+        functionClass.waitUntilElementPresent(groupFilterDropdown);
+        groupFilterDropdown.click();
+        Select selectGroup = new Select(groupFilterDropdown);
+        selectGroup.selectByVisibleText("sabahet");
+        functionClass.sleep(2);
+        searchButton.click();
 
-
-    public void assignGroupToCustomer(){
-        functionClass.waitUntilElementPresent(customerLink);
-        customerLink.click();
-        functionClass.waitUntilElementPresent(manageCustomersLink);
-        manageCustomersLink.click();
-        Select select=new Select(actionsDropdown);
-        select.selectByValue("Assign a Customer Group");
-        functionClass.waitUntilElementPresent(groupsDropdown);
-        Select select1=new Select(groupsDropdown);
-        select1.selectByValue("Team1apitesttttt");
-        submitButton.click();
     }
 
-    public boolean verifyUpdate(){
-        if (verifyUpdateMessage.isDisplayed())
+    public boolean verifyFilterTheCustomerByGroup() {
+        if (driver.getPageSource().contains("sabahet")) {
             return true;
-        else return false;
-    }
+        } else {
+            return false;
+        }
+//        public void assignGroupToCustomer(){
+//            functionClass.waitUntilElementPresent(customerLink);
+//            customerLink.click();
+//            functionClass.waitUntilElementPresent(manageCustomersLink);
+//            manageCustomersLink.click();
+//            Select select = new Select(actionsDropdown);
+//            select.selectByValue("Assign a Customer Group");
+//            functionClass.waitUntilElementPresent(groupsDropdown);
+//            Select select1 = new Select(groupsDropdown);
+//            select1.selectByValue("Team1apitesttttt");
+//            submitButton.click();
+//        }
+//
+//        public boolean verifyUpdate(){
+//            if (verifyUpdateMessage.isDisplayed())
+//                return true;
+//            else return false;
+//        }
 
+
+    }
 }

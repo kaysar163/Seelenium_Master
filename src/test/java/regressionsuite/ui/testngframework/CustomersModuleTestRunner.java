@@ -26,6 +26,12 @@ public class CustomersModuleTestRunner extends TestBase {
         context.setAttribute("driver",driver);
     }
 
+
+    @Test(description = "Filter the Customer By Group Test-Rizvangul")
+    public void FilterTheCustomerByGroupTest() {
+        customersManagerPage.filterTheCustomerByGroup();
+        Assert.assertTrue(customersManagerPage.verifyFilterTheCustomerByGroup());
+    }
     @Test
     public void a(){
 //        customersManagerPage.assignGroupToCustomer();
