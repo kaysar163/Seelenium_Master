@@ -36,7 +36,27 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
 
+    @FindBy(xpath = "//a[text()='Select All']")
+    WebElement SelectAll;
+    @FindBy(xpath = "//span[text()='Export']")
+    WebElement exportBtn;
 
+
+
+    public void exportCustomers() {
+        functionClass.waitUntilElementPresent(SelectAll);
+        SelectAll.click();
+        functionClass.waitUntilElementPresent(exportBtn);
+        exportBtn.click();
+
+    }
+
+    public boolean verifyExportCustomer() {
+        if (exportBtn.isEnabled()) {
+            return true;
+        } else
+            return false;
+    }
 
     public void assignGroupToCustomer(){
         functionClass.waitUntilElementPresent(customerLink);
