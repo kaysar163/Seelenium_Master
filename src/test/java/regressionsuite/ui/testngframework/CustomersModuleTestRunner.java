@@ -61,6 +61,12 @@ public class CustomersModuleTestRunner extends TestBase {
         customersManagerPage.FilterCustomersByEmail();
     }
 
+    @Test(description= "Fazilet", priority = 5)
+    public void filterCustomerByCountry(){
+        customersManagerPage.filterCustomerByCountry();
+        Assert.assertTrue(customersManagerPage.verifyCustomerFilteredByCountry());
+    }
+
     @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 4)
     public void FilterTheCustomerByGroupTest(){
         customersManagerPage.filterTheCustomerByGroup();

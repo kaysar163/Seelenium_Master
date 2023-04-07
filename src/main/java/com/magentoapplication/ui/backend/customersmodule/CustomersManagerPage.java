@@ -66,6 +66,14 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//span[text()='Export']")
     WebElement exportButton;
 
+    @FindBy(id = "customerGrid_filter_billing_country_id")
+    WebElement CountryDropdown;
+
+    @FindBy(css = "button[title='Search']")
+    WebElement SearchButton;
+
+    @FindBy(id = "customerGrid-total-count")
+    WebElement verifyFilteredMessage;
 
 
     public void FilterCustomersByEmail() {
@@ -159,7 +167,24 @@ public class CustomersManagerPage {
             return false;
     }
 
+    public void filterCustomerByCountry() {
+        functionClass.waitUntilElementPresent(CountryDropdown);
+        CountryDropdown.click();
+        Select select = new Select(CountryDropdown);
+        select.selectByValue("TR");
+        functionClass.waitUntilElementPresent(SearchButton);
+        SearchButton.click();
 
+    }
+
+    public boolean verifyCustomerFilteredByCountry(){
+        return driver.getPageSource().contains("Turkey");
+
+
+    }
 }
+
+
+
 
 
