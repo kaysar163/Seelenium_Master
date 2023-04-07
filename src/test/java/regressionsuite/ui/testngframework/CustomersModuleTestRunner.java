@@ -3,6 +3,7 @@ package regressionsuite.ui.testngframework;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomersManagerPage;
+import com.magentoapplication.ui.backend.customersmodule.EditCustomerGroupPage;
 import com.magentoapplication.utility.TestBase;
 import org.apache.commons.collections4.sequence.EditScript;
 import org.testng.Assert;
@@ -16,7 +17,7 @@ import org.testng.annotations.Test;
 public class CustomersModuleTestRunner extends TestBase {
 
     BackEndLogin backEndLogin;
-
+    EditCustomerGroupPage editCustomerGroupPage;
     CustomersManagerPage customersManagerPage;
     CustomerInformationPage customerInformationPage;
 
@@ -27,6 +28,7 @@ public class CustomersModuleTestRunner extends TestBase {
         backEndLogin.customersModuleLogin();
         customersManagerPage = new CustomersManagerPage(driver);
         customerInformationPage=new CustomerInformationPage(driver);
+        editCustomerGroupPage=new EditCustomerGroupPage(driver);
         context.setAttribute("driver", driver);
     }
 
@@ -59,7 +61,17 @@ public class CustomersModuleTestRunner extends TestBase {
         customersManagerPage.deleteCustomer();
         Assert.assertTrue(customersManagerPage.verifyDeleteCustomer());
     }
-    
+    @Test(description = "meryem", priority = 14)
+    public void editCustomerGroup() {
+        editCustomerGroupPage.editCustomerGroupInfo();
+        Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupEditedTest());
+
+    }
+    @Test(description = "meryem", priority = 15)
+    public void deleteCustomerGroup() {
+        editCustomerGroupPage.deleteCustomerGroupInfo();
+        Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupDeletedTest1());
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
