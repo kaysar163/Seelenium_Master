@@ -32,6 +32,18 @@ public class CustomersModuleTestRunner extends TestBase {
 //        Assert.assertTrue(customersManagerPage.verifyUpdate());
     }
 
+
+
+    @Test
+    public void filterCustomerByCountry(){
+        customersManagerPage.filterCustomerByCountry();
+        Assert.assertTrue(customersManagerPage.verifyCustomerFilteredByCountry());
+    }
+
+
+
+
+
     @AfterClass
     public void tearDown(){
         closeBrowser();

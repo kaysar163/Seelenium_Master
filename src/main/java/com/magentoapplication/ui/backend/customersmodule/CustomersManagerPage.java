@@ -73,12 +73,12 @@ public class CustomersManagerPage {
         select.selectByValue("TR");
         functionClass.waitUntilElementPresent(SearchButton);
         SearchButton.click();
+
     }
 
     public boolean verifyCustomerFilteredByCountry(){
-        if (verifyFilteredMessage.isDisplayed())
-           return true;
-        else return false;
+    return driver.getPageSource().contains("Turkey");
+
 
    }
 }
