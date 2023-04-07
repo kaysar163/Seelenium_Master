@@ -44,12 +44,34 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//span[text()='Export']")
     WebElement exportButton;
 
+    @FindBy(xpath = "//a[text()='Select All']")
+    WebElement SelectAll;
+    @FindBy(xpath = "//span[text()='Export']")
+    WebElement exportButton;
+
     public void FilterCustomersByEmail() {
         functionClass.waitUntilElementPresent(emailField);
         emailField.sendKeys(functionClass.generateFakeEmail());
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
     }
+
+    public void exportCustomers() {
+        functionClass.waitUntilElementPresent(SelectAll);
+        SelectAll.click();
+        functionClass.waitUntilElementPresent(exportButton);
+        exportButton.click();
+
+    }
+
+    public boolean verifyExportCustomer() {
+        if (exportButton.isEnabled()) {
+            return true;
+        } else
+            return false;
+    }
+
+
 
     public void assignGroupToCustomer(){
         functionClass.waitUntilElementPresent(customerLink);

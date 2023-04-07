@@ -51,6 +51,7 @@ public class CustomersModuleTestRunner extends TestBase {
     }
     @Test(description= "omercan", priority = 3)
     public void emailFilterTest() {
+
         customersManagerPage.FilterCustomersByEmail();
     }
 
