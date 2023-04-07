@@ -37,7 +37,7 @@ public class CustomersManagerPage {
     WebElement verifyUpdateMessage;
     @FindBy(id = "customerGrid_filter_email")
     WebElement emailField;
-    @FindBy(xpath = "//span[contains(text(),'Search')])[2]")
+    @FindBy(xpath = "(//span[contains(text(),'Search')])[2]")
     WebElement searchButton;
 
     public void FilterCustomersByEmail() {

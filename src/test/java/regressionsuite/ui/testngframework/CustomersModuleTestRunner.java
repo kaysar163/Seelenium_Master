@@ -18,27 +18,25 @@ public class CustomersModuleTestRunner extends TestBase {
     CustomersManagerPage customersManagerPage;
 
     @BeforeClass
-    public void setUp(ITestContext context){
+    public void setUp(ITestContext context) {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.customersModuleLogin();
-        customersManagerPage=new CustomersManagerPage(driver);
-        context.setAttribute("driver",driver);
+        customersManagerPage = new CustomersManagerPage(driver);
+        context.setAttribute("driver", driver);
     }
+
     @Test
-    public void emailFilterTest(){
+    public void emailFilterTest() {
         customersManagerPage.FilterCustomersByEmail();
-
-    }
-
-    @Test
-    public void a(){
+     //   @Test
+     //   public void a () {
 //        customersManagerPage.assignGroupToCustomer();
 //        Assert.assertTrue(customersManagerPage.verifyUpdate());
-    }
+        }
 
-    @AfterClass
-    public void tearDown(){
-        closeBrowser();
+        @AfterClass
+        public void tearDown () {
+            closeBrowser();
+        }
     }
-}
