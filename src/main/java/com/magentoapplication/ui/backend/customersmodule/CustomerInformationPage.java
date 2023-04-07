@@ -12,7 +12,7 @@ public class CustomerInformationPage {
     WebDriver driver;
     FunctionClass functionClass;
     CustomersManagerPage customersManagerPage;
-    String cusAccountPassword= ApplicationConfig.readFromConfigProperties("config.properties","backEndPassword");
+
     public CustomerInformationPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -37,7 +37,7 @@ public class CustomerInformationPage {
     WebElement SavaCustomerButton;
     @FindBy(xpath = "//*[contains(text(),'The customer has been saved.')]")
     WebElement customerSuccessfullySavadMessage;
-    @FindBy(css = "//a[@id='customer_info_tabs_account' and @class='tab-item-link']")
+    @FindBy(xpath = "//a[@id='customer_info_tabs_account' and @class='tab-item-link']")
     WebElement accountInformation;
     @FindBy(xpath = "//input[@id='account-send-pass' and @name='account[new_password]']")
     WebElement accountInformationCheckBox;
@@ -72,8 +72,8 @@ public class CustomerInformationPage {
         customersManagerPage.customerEditButton.click();
         accountInformation.click();
         accountInformationCheckBox.click();
-        accountPassword.sendKeys(cusAccountPassword);
-        saveCustomerButton.sendKeys();
+        accountPassword.sendKeys(ApplicationConfig.readFromConfigProperties("config.properties","backEndPassword"));
+        saveCustomerButton.click();
     }
     public boolean passwordSuccessfullyChanged(){
         if(customersManagerPage.passwordChangeSuccessMessage.isDisplayed())
