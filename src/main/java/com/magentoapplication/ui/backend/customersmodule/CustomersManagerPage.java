@@ -39,15 +39,11 @@ public class CustomersManagerPage {
     WebElement emailField;
     @FindBy(xpath = "(//span[contains(text(),'Search')])[2]")
     WebElement searchButton;
-    @FindBy(xpath = "//a[text()='Select All']")
-    WebElement SelectAll;
-    @FindBy(xpath = "//span[text()='Export']")
-    WebElement exportButton;
 
-    @FindBy(xpath = "//a[text()='Select All']")
-    WebElement SelectAll;
-    @FindBy(xpath = "//span[text()='Export']")
-    WebElement exportButton;
+    @FindBy(xpath = "//select[@id=\"customerGrid_filter_group\"]")
+    WebElement groupFilterDropdown;
+
+
 
     public void FilterCustomersByEmail() {
         functionClass.waitUntilElementPresent(emailField);
@@ -56,57 +52,43 @@ public class CustomersManagerPage {
         searchButton.click();
     }
 
-    public void exportCustomers() {
-        functionClass.waitUntilElementPresent(SelectAll);
-        SelectAll.click();
-        functionClass.waitUntilElementPresent(exportButton);
-        exportButton.click();
+    public void filterTheCustomerByGroup() {
+        functionClass.waitUntilElementPresent(groupFilterDropdown);
+        groupFilterDropdown.click();
+        Select selectGroup = new Select(groupFilterDropdown);
+        selectGroup.selectByVisibleText("sabahet");
+        functionClass.sleep(2);
+        searchButton.click();
 
     }
 
-    public boolean verifyExportCustomer() {
-        if (exportButton.isEnabled()) {
+    public boolean verifyFilterTheCustomerByGroup() {
+        if (driver.getPageSource().contains("sabahet")) {
             return true;
-        } else
+        } else {
             return false;
+        }
+    }
+
+        public void assignGroupToCustomer() {
+            functionClass.waitUntilElementPresent(customerLink);
+            customerLink.click();
+            functionClass.waitUntilElementPresent(manageCustomersLink);
+            manageCustomersLink.click();
+            Select select = new Select(actionsDropdown);
+            select.selectByValue("Assign a Customer Group");
+            functionClass.waitUntilElementPresent(groupsDropdown);
+            Select select1 = new Select(groupsDropdown);
+            select1.selectByValue("Team1apitesttttt");
+            submitButton.click();
+        }
+
+        public boolean verifyUpdate() {
+            if (verifyUpdateMessage.isDisplayed())
+                return true;
+            else return false;
+        }
+
     }
 
 
-
-    public void assignGroupToCustomer(){
-        functionClass.waitUntilElementPresent(customerLink);
-        customerLink.click();
-        functionClass.waitUntilElementPresent(manageCustomersLink);
-        manageCustomersLink.click();
-        Select select=new Select(actionsDropdown);
-        select.selectByValue("Assign a Customer Group");
-        functionClass.waitUntilElementPresent(groupsDropdown);
-        Select select1=new Select(groupsDropdown);
-        select1.selectByValue("Team1apitesttttt");
-        submitButton.click();
-    }
-
-    public boolean verifyUpdate(){
-        if (verifyUpdateMessage.isDisplayed())
-            return true;
-        else return false;
-    }
-
-
-    public void exportCustomers() {
-        functionClass.waitUntilElementPresent(SelectAll);
-        SelectAll.click();
-        functionClass.waitUntilElementPresent(exportButton);
-        exportButton.click();
-
-    }
-
-    public boolean verifyExportCustomer() {
-        if (exportButton.isEnabled()) {
-            return true;
-        } else
-            return false;
-    }
-
-
-}
