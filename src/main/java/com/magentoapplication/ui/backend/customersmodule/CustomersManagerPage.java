@@ -66,20 +66,19 @@ public class CustomersManagerPage {
     }
 
 
-//public void filterCustomerByCountry(){
-       // functionClass.waitUntilElementPresent(CountryDropdown);
-        //CountryDropdown.click();
-       // Select select=new Select(CountryDropdown);
-       // select.selectByValue("TR");
-        //functionClass.waitUntilElementPresent(SearchButton);
-        //SearchButton.click();
-
+    public void filterCustomerByCountry() {
+        functionClass.waitUntilElementPresent(CountryDropdown);
+        CountryDropdown.click();
+        Select select = new Select(CountryDropdown);
+        select.selectByValue("TR");
+        functionClass.waitUntilElementPresent(SearchButton);
+        SearchButton.click();
     }
 
-    //public boolean verifyCustomerfilteredByCountry(){
-        //if (verifyFilteredMessage.isDisplayed())
-           // return true;
-        //else return false;
+    public boolean verifyCustomerFilteredByCountry(){
+        if (verifyFilteredMessage.isDisplayed())
+           return true;
+        else return false;
 
-   // }
-//}
+   }
+}
