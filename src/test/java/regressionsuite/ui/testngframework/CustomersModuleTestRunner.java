@@ -42,7 +42,7 @@ public class CustomersModuleTestRunner extends TestBase {
         Assert.assertTrue(customerInformationPage.verifyCustomer());
 
 }
-    @Test (description = "muyesser")
+    @Test (description = "muyesser",priority = 2)
     public void ManagerExpertCustomers (){
         customersManagerPage.exportCustomers();
         Assert.assertTrue(customersManagerPage.verifyExportCustomer());
