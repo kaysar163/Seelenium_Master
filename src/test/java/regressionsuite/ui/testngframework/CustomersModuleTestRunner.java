@@ -45,9 +45,16 @@ public class CustomersModuleTestRunner extends TestBase {
         Assert.assertTrue(customerInformationPage.verifyCustomer());
 
 }
+
     @Test(description= "omercan", priority = 3)
     public void emailFilterTest() {
         customersManagerPage.FilterCustomersByEmail();
+    }
+
+    @Test(description = "muyesser",priority = 2)
+    public void exportCustomerTest(){
+        customersManagerPage.exportCustomers();
+        customersManagerPage.verifyExportCustomer();
     }
 
     @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 4)
