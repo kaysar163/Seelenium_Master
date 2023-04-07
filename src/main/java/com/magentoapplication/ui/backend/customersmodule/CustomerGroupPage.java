@@ -18,10 +18,10 @@ public class CustomerGroupPage {
     }
 
 
-    @FindBy(xpath = "//span[text()='Customer Groups']")
+    @FindBy(xpath ="//span[text()='Customer Groups']")
     WebElement customerGroupsLink;
 
-    @FindBy(xpath = "//button[@title='Add New Customer Group']")
+    @FindBy( xpath = "//div[@class='content-header']//button)[1]")
     WebElement AddNewCustomerGroupButton;
 
     @FindBy(id="customer_group_code")
@@ -38,21 +38,25 @@ public class CustomerGroupPage {
 
 
     public void  AddNewCustomerGroup(){
-        customerGroupsLink.click();
+
         functionClass.waitUntilElementPresent(customerGroupsLink);
         AddNewCustomerGroupButton.click();
         functionClass.waitUntilElementPresent(AddNewCustomerGroupButton);
+        AddNewCustomerGroupButton.click();
         GroupNameField.clear();
         GroupNameField.sendKeys(functionClass.generateFakeName());
         Select select=new Select(TaxClassDropdown);
         select.selectByValue("5");
-        SaveCustomerGroupButton.click();
         functionClass.waitUntilElementPresent(SaveCustomerGroupButton);
+        SaveCustomerGroupButton.click();
 
     }
 
     public boolean verifyTheCustomerGroupHasBeenSaved() {
-        return (TheCustomerGroupHasBeenSavedMessage.isDisplayed());
+       if (TheCustomerGroupHasBeenSavedMessage.isDisplayed()){
+           return true;}
+       else
+           return false;}
 
 
 
@@ -63,4 +67,5 @@ public class CustomerGroupPage {
 
 
 
-}
+
+
