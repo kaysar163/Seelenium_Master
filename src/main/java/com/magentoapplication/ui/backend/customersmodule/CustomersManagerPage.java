@@ -14,8 +14,8 @@ public class CustomersManagerPage {
 
     public CustomersManagerPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionClass=new FunctionClass(driver);
+        PageFactory.initElements(driver, this);
+        functionClass = new FunctionClass(driver);
     }
 
     @FindBy(xpath = "//span[text()='Customers']")
@@ -42,45 +42,44 @@ public class CustomersManagerPage {
     @FindBy(css = "button[title='Search']")
     WebElement SearchButton;
 
-    @FindBy(id = "customerGrid_total_count")
+    @FindBy(id = "customerGrid-total-count")
     WebElement verifyFilteredMessage;
 
 
-
-    public void assignGroupToCustomer(){
+    public void assignGroupToCustomer() {
         functionClass.waitUntilElementPresent(customerLink);
         customerLink.click();
         functionClass.waitUntilElementPresent(manageCustomersLink);
         manageCustomersLink.click();
-        Select select=new Select(actionsDropdown);
+        Select select = new Select(actionsDropdown);
         select.selectByValue("Assign a Customer Group");
         functionClass.waitUntilElementPresent(groupsDropdown);
-        Select select1=new Select(groupsDropdown);
+        Select select1 = new Select(groupsDropdown);
         select1.selectByValue("Team1apitesttttt");
         submitButton.click();
     }
 
-    public boolean verifyUpdate(){
+    public boolean verifyUpdate() {
         if (verifyUpdateMessage.isDisplayed())
             return true;
         else return false;
     }
 
 
-    public void filterCustomerByCountry(){
-        functionClass.waitUntilElementPresent(CountryDropdown);
-        CountryDropdown.click();
-        Select select=new Select(CountryDropdown);
-        select.selectByValue("TR");
-        functionClass.waitUntilElementPresent(SearchButton);
-        SearchButton.click();
+//public void filterCustomerByCountry(){
+       // functionClass.waitUntilElementPresent(CountryDropdown);
+        //CountryDropdown.click();
+       // Select select=new Select(CountryDropdown);
+       // select.selectByValue("TR");
+        //functionClass.waitUntilElementPresent(SearchButton);
+        //SearchButton.click();
 
     }
 
-    public boolean verifyCustomerfilteredByCountry(){
-        if (verifyFilteredMessage.isDisplayed())
-            return true;
-        else return false;
+    //public boolean verifyCustomerfilteredByCountry(){
+        //if (verifyFilteredMessage.isDisplayed())
+           // return true;
+        //else return false;
 
-    }
-}
+   // }
+//}
