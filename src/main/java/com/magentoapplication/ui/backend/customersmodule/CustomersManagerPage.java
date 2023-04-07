@@ -44,6 +44,12 @@ public class CustomersManagerPage {
     WebElement groupFilterDropdown;
 
 
+    @FindBy(xpath = "//a[text()='Select All']")
+    WebElement SelectAll;
+    @FindBy(xpath = "//span[text()='Export']")
+    WebElement exportButton;
+
+
 
     public void FilterCustomersByEmail() {
         functionClass.waitUntilElementPresent(emailField);
@@ -88,6 +94,21 @@ public class CustomersManagerPage {
                 return true;
             else return false;
         }
+
+    public void exportCustomers() {
+        functionClass.waitUntilElementPresent(SelectAll);
+        SelectAll.click();
+        functionClass.waitUntilElementPresent(exportButton);
+        exportButton.click();
+
+    }
+
+    public boolean verifyExportCustomer() {
+        if (exportButton.isEnabled()) {
+            return true;
+        } else
+            return false;
+    }
 
     }
 
