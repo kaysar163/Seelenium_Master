@@ -79,6 +79,14 @@ public class CustomersModuleTestRunner extends TestBase {
         Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
     }
 
+    @Test(description = "renagul")
+    public void FilterCustomerBySate(){
+        backEndLogin= new BackEndLogin(driver);
+          customersManagerPage.filterCustomerBySate();
+          Assert.assertTrue(customersManagerPage.verifyCustomerFilterByState());
+
+    }
+
     @Test(description = "Irshad", priority = 11)
     public void deleteCustomerTest(){
         customersManagerPage.deleteCustomer();
