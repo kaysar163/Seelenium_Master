@@ -7,6 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CustomerInformationPage {
     WebDriver driver;
@@ -43,7 +47,7 @@ public class CustomerInformationPage {
     WebElement accountInformationCheckBox;
     @FindBy(css = "input#_accountcurrent_password")
     WebElement accountPassword;
-    @FindBy(xpath = "(//*[text()='Save Customer'])[1]")
+    @FindBy(xpath = "(//button[@class='scalable save' and @title='Save Customer'])[2]")
     WebElement saveCustomerButton;
     public void addCustomerMethod(){
         functionClass.waitUntilElementPresent(addNewCustomerLink);
@@ -76,6 +80,7 @@ public class CustomerInformationPage {
         saveCustomerButton.click();
     }
     public boolean passwordSuccessfullyChanged(){
+        functionClass.waitUntilElementPresent(customersManagerPage.passwordChangeSuccessMessage);
         if(customersManagerPage.passwordChangeSuccessMessage.isDisplayed())
             return true;
         else return false;
