@@ -36,6 +36,15 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
 
+    @FindBy(id = "customerGrid_filter_billing_country_id")
+    WebElement CountryDropdown;
+
+    @FindBy(css = "button[title='Search']")
+    WebElement SearchButton;
+
+    @FindBy(id = "customerGrid_total_count")
+    WebElement verifyFilteredMessage;
+
 
 
     public void assignGroupToCustomer(){
@@ -57,4 +66,21 @@ public class CustomersManagerPage {
         else return false;
     }
 
+
+    public void filterCustomerByCountry(){
+        functionClass.waitUntilElementPresent(CountryDropdown);
+        CountryDropdown.click();
+        Select select=new Select(CountryDropdown);
+        select.selectByValue("TR");
+        functionClass.waitUntilElementPresent(SearchButton);
+        SearchButton.click();
+
+    }
+
+    public boolean verifyCustomerfilteredByCountry(){
+        if (verifyFilteredMessage.isDisplayed())
+            return true;
+        else return false;
+
+    }
 }
