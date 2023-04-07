@@ -13,7 +13,7 @@ public class MyWishListPage {
     @FindBy(xpath="//div[@class='block-content']//a[text()='My Wishlist']")
     WebElement MYWISHLISTLink;
     @FindBy(xpath = "//h1[text()='My Wishlist']")
-    WebElement MYWISHLISTmassage;
+    WebElement MYWISHLISTmessage;
 
     public MyWishListPage(WebDriver driver) {
         this.driver = driver;
@@ -26,8 +26,10 @@ public class MyWishListPage {
         MYWISHLISTLink.click();
     }
 
+
     public boolean verifyMyWishListPageIsOpened() {
-        if (MYWISHLISTmassage.isDisplayed())
+        if (MYWISHLISTmessage.isDisplayed())
+
             return true;
         else return false;
 
