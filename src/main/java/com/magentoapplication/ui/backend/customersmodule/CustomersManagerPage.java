@@ -2,6 +2,7 @@ package com.magentoapplication.ui.backend.customersmodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,7 +22,11 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//span[text()='Customers']")
     WebElement customerLink;
-
+    @FindBy(xpath = "//tbody/tr/td[contains(text(),'Reinaldo')]//following::td[9]//a[text()='Edit']")
+    WebElement customerEditButton;
+//    WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",customerInformationPage.firstName)));
+    @FindBy(xpath = "//*[text()='The customer has been saved.']")
+    WebElement passwordChangeSuccessMessage;
     @FindBy(xpath = "//span[text()='Manage Customers']")
     WebElement manageCustomersLink;
 
@@ -55,6 +60,20 @@ public class CustomersManagerPage {
     WebElement deleteCustomer;
     @FindBy(xpath = "//span[contains(text(),'The customer has been deleted.')]")
     WebElement deleteSuccessMessage;
+
+    @FindBy(xpath = "//a[text()='Select All']")
+    WebElement SelectAll;
+    @FindBy(xpath = "//span[text()='Export']")
+    WebElement exportButton;
+
+    @FindBy(id = "customerGrid_filter_billing_country_id")
+    WebElement CountryDropdown;
+
+    @FindBy(css = "button[title='Search']")
+    WebElement SearchButton;
+
+    @FindBy(id = "customerGrid-total-count")
+    WebElement verifyFilteredMessage;
 
 
     public void FilterCustomersByEmail() {
@@ -133,6 +152,39 @@ public class CustomersManagerPage {
             return false;
     }
 
+    public void exportCustomers() {
+        functionClass.waitUntilElementPresent(SelectAll);
+        SelectAll.click();
+        functionClass.waitUntilElementPresent(exportButton);
+        exportButton.click();
+
+    }
+
+    public boolean verifyExportCustomer() {
+        if (exportButton.isEnabled()) {
+            return true;
+        } else
+            return false;
+    }
+
+    public void filterCustomerByCountry() {
+        functionClass.waitUntilElementPresent(CountryDropdown);
+        CountryDropdown.click();
+        Select select = new Select(CountryDropdown);
+        select.selectByValue("TR");
+        functionClass.waitUntilElementPresent(SearchButton);
+        SearchButton.click();
+
+    }
+
+    public boolean verifyCustomerFilteredByCountry(){
+        return driver.getPageSource().contains("Turkey");
+
+
+    }
 }
+
+
+
 
 

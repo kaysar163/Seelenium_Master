@@ -1,6 +1,7 @@
 package regressionsuite.ui.testngframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomersManagerPage;
 import com.magentoapplication.ui.backend.customersmodule.EditCustomerGroupPage;
@@ -20,6 +21,7 @@ public class CustomersModuleTestRunner extends TestBase {
     EditCustomerGroupPage editCustomerGroupPage;
     CustomersManagerPage customersManagerPage;
     CustomerInformationPage customerInformationPage;
+    CustomerGroupPage customerGroupPage;
 
     @BeforeClass
     public void setUp(ITestContext context) {
@@ -29,6 +31,7 @@ public class CustomersModuleTestRunner extends TestBase {
         customersManagerPage = new CustomersManagerPage(driver);
         customerInformationPage=new CustomerInformationPage(driver);
         editCustomerGroupPage=new EditCustomerGroupPage(driver);
+        customerGroupPage=new CustomerGroupPage(driver);
         context.setAttribute("driver", driver);
     }
 
@@ -44,10 +47,24 @@ public class CustomersModuleTestRunner extends TestBase {
         customerInformationPage.addCustomerMethod();
         Assert.assertTrue(customerInformationPage.verifyCustomer());
 
+
+
 }
+    @Test(description = "manager can export customers-muyesser",priority = 2)
+    public void managerExportCustomerTest(){
+        customersManagerPage.exportCustomers();
+        Assert.assertTrue(customersManagerPage.verifyExportCustomer());
+
+    }
     @Test(description= "omercan", priority = 3)
     public void emailFilterTest() {
         customersManagerPage.FilterCustomersByEmail();
+    }
+
+    @Test(description= "Fazilet", priority = 5)
+    public void filterCustomerByCountry(){
+        customersManagerPage.filterCustomerByCountry();
+        Assert.assertTrue(customersManagerPage.verifyCustomerFilteredByCountry());
     }
 
     @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 4)
@@ -55,7 +72,13 @@ public class CustomersModuleTestRunner extends TestBase {
         customersManagerPage.filterTheCustomerByGroup();
         Assert.assertTrue(customersManagerPage.verifyFilterTheCustomerByGroup());
     }
-    
+
+    @Test(description = "Fazilet", priority = 10)
+    public void AddNewCustomerGroup(){
+        customerGroupPage.addNewCustomerGroup();
+        Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
+    }
+
     @Test(description = "Irshad", priority = 11)
     public void deleteCustomerTest(){
         customersManagerPage.deleteCustomer();
@@ -71,6 +94,11 @@ public class CustomersModuleTestRunner extends TestBase {
     public void deleteCustomerGroup() {
         editCustomerGroupPage.deleteCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupDeletedTest1());
+    }
+    @Test(description = "Memet")
+    public void passwordResetTest(){
+        customerInformationPage.customerPasswordChange();
+        Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());
     }
     @AfterClass
     public void tearDown(){
