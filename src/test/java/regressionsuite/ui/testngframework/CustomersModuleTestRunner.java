@@ -29,6 +29,7 @@ public class CustomersModuleTestRunner extends TestBase {
         context.setAttribute("driver", driver);
     }
 
+
     @Test
     public void a() {
 //        customersManagerPage.assignGroupToCustomer();
@@ -41,15 +42,12 @@ public class CustomersModuleTestRunner extends TestBase {
         Assert.assertTrue(customerInformationPage.verifyCustomer());
 
 }
-   @Test(description = "muyesser")
-   public void customerManagerCanExportCustomerTest(){
-        customersManagerPage.exportCustomers();
-        Assert.assertTrue(customersManagerPage.verifyExportCustomer());
-   }
-
+    @Test(description= "omercan", priority = 3)
+    public void emailFilterTest() {
+        customersManagerPage.FilterCustomersByEmail();
+    }
     @AfterClass
     public void tearDown(){
-
         closeBrowser();
     }
 }

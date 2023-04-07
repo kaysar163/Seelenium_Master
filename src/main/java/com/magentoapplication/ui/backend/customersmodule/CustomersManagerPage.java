@@ -35,27 +35,16 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
+    @FindBy(id = "customerGrid_filter_email")
+    WebElement emailField;
+    @FindBy(xpath = "(//span[contains(text(),'Search')])[2]")
+    WebElement searchButton;
 
-    @FindBy(xpath = "//a[text()='Select All']")
-    WebElement SelectAll;
-    @FindBy(xpath = "//span[text()='Export']")
-    WebElement exportBtn;
-
-
-
-    public void exportCustomers() {
-        functionClass.waitUntilElementPresent(SelectAll);
-        SelectAll.click();
-        functionClass.waitUntilElementPresent(exportBtn);
-        exportBtn.click();
-
-    }
-
-    public boolean verifyExportCustomer() {
-        if (exportBtn.isEnabled()) {
-            return true;
-        } else
-            return false;
+    public void FilterCustomersByEmail() {
+        functionClass.waitUntilElementPresent(emailField);
+        emailField.sendKeys(functionClass.generateFakeEmail());
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
     }
 
     public void assignGroupToCustomer(){
