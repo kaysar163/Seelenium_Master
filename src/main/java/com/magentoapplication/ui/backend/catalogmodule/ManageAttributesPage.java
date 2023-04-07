@@ -18,4 +18,15 @@ public class ManageAttributesPage {
         functionClass=new FunctionClass(driver);
         catalogDashboardPage=new CatalogDashboardPage(driver);
     }
+
+    // Elements
+
+
+
+
+
+    // Methods
+
+
+
 }

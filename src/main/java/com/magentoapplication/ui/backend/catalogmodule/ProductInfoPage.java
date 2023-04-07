@@ -18,4 +18,18 @@ public class ProductInfoPage {
         functionClass=new FunctionClass(driver);
         catalogDashboardPage=new CatalogDashboardPage(driver);
     }
+
+    // Elements
+
+
+
+
+
+    // Methods
+
+
+
+
+
+
 }

@@ -36,6 +36,9 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//select[@id='visibility']")
     WebElement groupsDropdown;
 
+    @FindBy(css = "[type='checkbox']")
+    WebElement checkBox;
+
     @FindBy(xpath = "//span[text()='Submit']")
     WebElement submitButton;
 
@@ -107,10 +110,11 @@ public class CustomersManagerPage {
             functionClass.waitUntilElementPresent(manageCustomersLink);
             manageCustomersLink.click();
             Select select = new Select(actionsDropdown);
-            select.selectByValue("Assign a Customer Group");
+            select.selectByValue("assign_group");
             functionClass.waitUntilElementPresent(groupsDropdown);
             Select select1 = new Select(groupsDropdown);
-            select1.selectByValue("Team1apitesttttt");
+            select1.selectByValue("1");
+            checkBox.click();
             submitButton.click();
         }
 
