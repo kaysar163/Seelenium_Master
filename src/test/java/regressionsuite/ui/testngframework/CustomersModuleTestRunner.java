@@ -1,8 +1,10 @@
 package regressionsuite.ui.testngframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomersManagerPage;
 import com.magentoapplication.utility.TestBase;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -16,6 +18,7 @@ public class CustomersModuleTestRunner extends TestBase {
     BackEndLogin backEndLogin;
 
     CustomersManagerPage customersManagerPage;
+    CustomerGroupPage    customerGroupPage;
 
     @BeforeClass
     public void setUp(ITestContext context){
@@ -23,6 +26,7 @@ public class CustomersModuleTestRunner extends TestBase {
         backEndLogin=new BackEndLogin(driver);
         backEndLogin.customersModuleLogin();
         customersManagerPage=new CustomersManagerPage(driver);
+        customerGroupPage=new CustomerGroupPage(driver);
         context.setAttribute("driver",driver);
     }
 
@@ -31,6 +35,19 @@ public class CustomersModuleTestRunner extends TestBase {
 //        customersManagerPage.assignGroupToCustomer();
 //        Assert.assertTrue(customersManagerPage.verifyUpdate());
     }
+
+
+    @Test
+    public void AddNewCustomerGroup(){
+        customerGroupPage.AddNewCustomerGroup();
+        Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
+
+
+
+
+    }
+
+
 
     @AfterClass
     public void tearDown(){

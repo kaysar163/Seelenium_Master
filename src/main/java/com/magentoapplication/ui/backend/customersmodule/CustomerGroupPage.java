@@ -49,8 +49,7 @@ public class CustomerGroupPage {
     }
 
     public boolean verifyTheCustomerGroupHasBeenSaved() {
-        return TheCustomerGroupHasBeenSavedMessage.isDisplayed();
-
+        return (TheCustomerGroupHasBeenSavedMessage.isDisplayed());
 
 
 
