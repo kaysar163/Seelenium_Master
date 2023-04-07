@@ -53,8 +53,16 @@ public class CustomersModuleTestRunner extends TestBase {
     public void emailFilterTest() {
         customersManagerPage.FilterCustomersByEmail();
     }
+
+    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 4)
+    public void FilterTheCustomerByGroupTest(){
+        customersManagerPage.filterTheCustomerByGroup();
+        Assert.assertTrue(customersManagerPage.verifyFilterTheCustomerByGroup());
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
     }
+
+
 }
