@@ -41,8 +41,15 @@ public class CustomersModuleTestRunner extends TestBase {
         Assert.assertTrue(customerInformationPage.verifyCustomer());
 
 }
+   @Test(description = "muyesser")
+   public void customerManagerCanExportCustomerTest(){
+        customersManagerPage.exportCustomers();
+        Assert.assertTrue(customersManagerPage.verifyExportCustomer());
+   }
+
     @AfterClass
     public void tearDown(){
+
         closeBrowser();
     }
 }
