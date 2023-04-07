@@ -35,6 +35,10 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
+    @FindBy(xpath = "//*[text()='Edit']")
+    WebElement customerEditButton;
+    @FindBy(xpath = "//*[text()='The customer has been saved.']")
+    WebElement passwordChangeSuccessMessage;
 
 
 
