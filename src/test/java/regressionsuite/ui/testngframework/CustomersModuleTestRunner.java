@@ -4,7 +4,6 @@ import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomersManagerPage;
 import com.magentoapplication.utility.TestBase;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -39,7 +38,7 @@ public class CustomersModuleTestRunner extends TestBase {
 
     @Test
     public void AddNewCustomerGroup(){
-        customerGroupPage.AddNewCustomerGroup();
+        customerGroupPage.addNewCustomerGroup();
         Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
 
 
