@@ -21,7 +21,10 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//span[text()='Customers']")
     WebElement customerLink;
-
+    @FindBy(xpath = "//tbody/tr/td[contains(text(),'Reinaldo')]//following::td[9]//a[text()='Edit']")
+    WebElement customerEditButton;
+    @FindBy(xpath = "//*[text()='The customer has been saved.']")
+    WebElement passwordChangeSuccessMessage;
     @FindBy(xpath = "//span[text()='Manage Customers']")
     WebElement manageCustomersLink;
 

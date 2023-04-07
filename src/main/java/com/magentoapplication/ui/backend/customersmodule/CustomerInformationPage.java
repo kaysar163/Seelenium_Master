@@ -49,6 +49,7 @@ public class CustomerInformationPage {
     WebElement accountPassword;
     @FindBy(xpath = "(//button[@class='scalable save' and @title='Save Customer'])[2]")
     WebElement saveCustomerButton;
+
     public void addCustomerMethod(){
         functionClass.waitUntilElementPresent(addNewCustomerLink);
         addNewCustomerLink.click();
