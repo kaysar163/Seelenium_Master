@@ -16,6 +16,8 @@ public class CustomerInformationPage {
     WebDriver driver;
     FunctionClass functionClass;
     CustomersManagerPage customersManagerPage;
+    String firstName;
+
 
     public CustomerInformationPage(WebDriver driver) {
         this.driver = driver;
@@ -54,7 +56,7 @@ public class CustomerInformationPage {
         functionClass.waitUntilElementPresent(addNewCustomerLink);
         addNewCustomerLink.click();
         functionClass.waitUntilElementPresent(firstNameField);
-        firstNameField.sendKeys(functionClass.generateFakeName());
+        firstNameField.sendKeys(firstName=functionClass.generateFakeName());
         functionClass.waitUntilElementPresent(lastNameField);
         lastNameField.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(emailField);

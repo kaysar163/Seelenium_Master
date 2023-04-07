@@ -2,6 +2,7 @@ package com.magentoapplication.ui.backend.customersmodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,7 @@ public class CustomersManagerPage {
     WebElement customerLink;
     @FindBy(xpath = "//tbody/tr/td[contains(text(),'Reinaldo')]//following::td[9]//a[text()='Edit']")
     WebElement customerEditButton;
+//    WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",customerInformationPage.firstName)));
     @FindBy(xpath = "//*[text()='The customer has been saved.']")
     WebElement passwordChangeSuccessMessage;
     @FindBy(xpath = "//span[text()='Manage Customers']")

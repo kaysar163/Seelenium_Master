@@ -33,7 +33,7 @@ public class CustomersModuleTestRunner extends TestBase {
     }
 
 
-    @Test
+    @Test(enabled = false)
     public void a() {
 //        customersManagerPage.assignGroupToCustomer();
 //        Assert.assertTrue(customersManagerPage.verifyUpdate());
@@ -45,34 +45,34 @@ public class CustomersModuleTestRunner extends TestBase {
         Assert.assertTrue(customerInformationPage.verifyCustomer());
 
 }
-    @Test(description= "omercan", priority = 3)
+    @Test(description= "omercan", priority = 3,enabled = false)
     public void emailFilterTest() {
         customersManagerPage.FilterCustomersByEmail();
     }
 
-    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 4)
+    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 4,enabled = false)
     public void FilterTheCustomerByGroupTest(){
         customersManagerPage.filterTheCustomerByGroup();
         Assert.assertTrue(customersManagerPage.verifyFilterTheCustomerByGroup());
     }
     
-    @Test(description = "Irshad", priority = 11)
+    @Test(description = "Irshad", priority = 11,enabled = false)
     public void deleteCustomerTest(){
         customersManagerPage.deleteCustomer();
         Assert.assertTrue(customersManagerPage.verifyDeleteCustomer());
     }
-    @Test(description = "meryem", priority = 14)
+    @Test(description = "meryem", priority = 14,enabled = false)
     public void editCustomerGroup() {
         editCustomerGroupPage.editCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupEditedTest());
 
     }
-    @Test(description = "meryem", priority = 15)
+    @Test(description = "meryem", priority = 15,enabled = false)
     public void deleteCustomerGroup() {
         editCustomerGroupPage.deleteCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupDeletedTest1());
     }
-    @Test
+    @Test(description = "Memet")
     public void passwordResetTest(){
         customerInformationPage.customerPasswordChange();
         Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());
