@@ -1,6 +1,7 @@
 package regressionsuite.ui.testngframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomersManagerPage;
 import com.magentoapplication.utility.TestBase;
 import org.testng.Assert;
@@ -16,31 +17,45 @@ public class CustomersModuleTestRunner extends TestBase {
     BackEndLogin backEndLogin;
 
     CustomersManagerPage customersManagerPage;
-    
+    CustomerInformationPage customerInformationPage;
 
     @BeforeClass
-    public void setUp(ITestContext context){
+    public void setUp(ITestContext context) {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.customersModuleLogin();
-        customersManagerPage=new CustomersManagerPage(driver);
-        context.setAttribute("driver",driver);
+        customersManagerPage = new CustomersManagerPage(driver);
+        customerInformationPage=new CustomerInformationPage(driver);
+        context.setAttribute("driver", driver);
     }
 
+
     @Test
-    public void a(){
+    public void a() {
 //        customersManagerPage.assignGroupToCustomer();
 //        Assert.assertTrue(customersManagerPage.verifyUpdate());
     }
-    
-    @Test
-    public void deleteCustomerTest(){
-        customersManagerPage.deleteCustomer();
-        customersManagerPage.verifyDeleteCustomer();
+
+    @Test(description= "kaysar", priority = 1)
+    public void ManageraddnewcusstomerTest(){
+        customerInformationPage.addCustomerMethod();
+        Assert.assertTrue(customerInformationPage.verifyCustomer());
+
+}
+    @Test(description= "omercan", priority = 3)
+    public void emailFilterTest() {
+        customersManagerPage.FilterCustomersByEmail();
     }
 
+    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 4)
+    public void FilterTheCustomerByGroupTest(){
+        customersManagerPage.filterTheCustomerByGroup();
+        Assert.assertTrue(customersManagerPage.verifyFilterTheCustomerByGroup());
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
     }
+
+
 }
