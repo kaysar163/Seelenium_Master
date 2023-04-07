@@ -54,7 +54,7 @@ public class CustomersModuleTestRunner extends TestBase {
     @Test(description = "muyesser",priority = 2)
     public void exportCustomerTest(){
         customersManagerPage.exportCustomers();
-        customersManagerPage.verifyExportCustomer();
+        Assert.assertTrue(customersManagerPage.verifyExportCustomer());
     }
 
     @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 4)
