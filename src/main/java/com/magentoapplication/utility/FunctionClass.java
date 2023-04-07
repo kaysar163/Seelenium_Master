@@ -15,82 +15,88 @@ public class FunctionClass {
 
     WebDriver driver;
 
-    int timeout=Integer.parseInt(ApplicationConfig.readFromConfigProperties("config.properties","timeout"));
+    int timeout = Integer.parseInt(ApplicationConfig.readFromConfigProperties("config.properties", "timeout"));
 
     public FunctionClass(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
-    public void sleep(int seconds){
+    public void sleep(int seconds) {
         try {
-            Thread.sleep(1000*seconds);
+            Thread.sleep(1000 * seconds);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String currentDate(){
-        DateTime time=new DateTime();
-        DateTimeFormatter formatter= DateTimeFormat.forPattern("yyyy-MM-dd-HH");
-        String timeStamp=time.toString(formatter);
+    public String currentDate() {
+        DateTime time = new DateTime();
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd-HH");
+        String timeStamp = time.toString(formatter);
         return timeStamp;
     }
 
-    public void waitUntilElementPresent(WebElement element){
-        WebDriverWait wait=new WebDriverWait(driver,timeout);
+    public void waitUntilElementPresent(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-    public String generateFakeName(){
-        String faker= Faker.instance().name().firstName();
+
+    public String generateFakeName() {
+        String faker = Faker.instance().name().firstName();
         return faker;
     }
 
-    public String generateFakeLastName(){
-        String faker= Faker.instance().name().lastName();
+    public String generateFakeLastName() {
+        String faker = Faker.instance().name().lastName();
         return faker;
     }
 
-    public String generateFakeEmail(){
-        String faker=Faker.instance().internet().emailAddress();
+    public String generateFakeEmail() {
+        String faker = Faker.instance().internet().emailAddress();
         return faker;
     }
 
 
-
-    public String generateCityName(){
-       String cityName=Faker.instance().address().city();
+    public String generateCityName() {
+        String cityName = Faker.instance().address().city();
         return cityName;
     }
 
-    public String generateStreetName(){
-        String streetName=Faker.instance().address().streetName();
+    public String generateStreetName() {
+        String streetName = Faker.instance().address().streetName();
         return streetName;
     }
 
 
-    public String generateZipCode(){
-        String zipCode=Faker.instance().address().zipCode();
+    public String generateZipCode() {
+        String zipCode = Faker.instance().address().zipCode();
         return zipCode;
     }
 
-    public String generateCountryName(){
-        String countryName=Faker.instance().address().country();
+    public String generateCountryName() {
+        String countryName = Faker.instance().address().country();
         return countryName;
     }
-    public String  generateTelephoneNumber(){
-        String telephoneNumber=Faker.instance().phoneNumber().cellPhone();
+
+    public String generateTelephoneNumber() {
+        String telephoneNumber = Faker.instance().phoneNumber().cellPhone();
         return telephoneNumber;
     }
 
 
-    public  String generateMiddleName(){
-        Faker faker=new Faker();
-        String  middleName=Faker.instance().name().username();
+    public String generateMiddleName() {
+        Faker faker = new Faker();
+        String middleName = Faker.instance().name().username();
         return middleName;
     }
 
+    public String generateFakePassword(){
+        Faker faker=new Faker();
+        String  password=Faker.instance().internet().password();
+        return password;
 
+    }
     public void waitForAlertPresent(){
         WebDriverWait wai=new WebDriverWait(driver,timeout);
         wai.until(ExpectedConditions.alertIsPresent());
