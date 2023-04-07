@@ -41,6 +41,11 @@ public class CustomersModuleTestRunner extends TestBase {
         Assert.assertTrue(customerInformationPage.verifyCustomer());
 
 }
+    @Test
+    public void passwordResetTest(){
+        customerInformationPage.customerPasswordChange();
+        Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
