@@ -13,12 +13,13 @@ public class CatalogDashboardPage {
 
     FunctionClass functionClass;
 
-    Actions actions=new Actions(driver);
+    Actions actions;
 
     public CatalogDashboardPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
+        actions=new Actions(driver);
     }
 
     //Catalog Module CatalogDashboardPage Links
