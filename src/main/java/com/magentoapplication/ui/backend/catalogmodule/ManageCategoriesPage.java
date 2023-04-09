@@ -1,6 +1,8 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
+import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -24,6 +26,8 @@ public class ManageCategoriesPage {
 
 
     // Elements
+    @FindBy(xpath ="(//h3[contains(text(),'apple13')])[1]")
+    WebElement rootCategory;
     @FindBy(xpath = "//span[contains(text(),'Delete Category')]")
     WebElement deleteCategoryButton;
    @FindBy(xpath = "//span[contains(text(),'The category has been deleted.')]")
@@ -55,8 +59,12 @@ public class ManageCategoriesPage {
         functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
         catalogDashboardPage.clickOnCatalogLink();
         catalogDashboardPage.clickOnManageCategoriesLink();
+        functionClass.waitUntilElementPresent(rootCategory);
+        rootCategory.click();
         functionClass.waitUntilElementPresent(deleteCategoryButton);
         deleteCategoryButton.click();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
     }
     public boolean deleteCategorySuccessful(){
         functionClass.waitUntilElementPresent(deleteCatSucMessage);
