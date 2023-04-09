@@ -3,9 +3,11 @@ package regressionsuite.ui.testngframework;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.*;
 import com.magentoapplication.utility.TestBase;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class CatalogModuleTestRunner extends TestBase {
 
@@ -37,6 +39,12 @@ public class CatalogModuleTestRunner extends TestBase {
         productInfoPage=new ProductInfoPage(driver);
         searchTermsPage=new SearchTermsPage(driver);
     }
+    @Test(description = "Memet")
+    public void subCatDeleteTest(){
+        manageCategoriesPage.subCatDelete();
+        Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
+    }
+
 
 
 
