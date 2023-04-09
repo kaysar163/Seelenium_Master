@@ -1,5 +1,6 @@
 package com.magentoapplication.ui.backend.customersmodule;
 
+import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -82,6 +83,14 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//span[text()='Reset Filter']")
     WebElement resetFilterButton;
+
+
+
+    @FindBy(xpath = "//tbody//tr//td[contains(text(),'istanbul')]")
+    WebElement verifyFilteredState;
+
+    @FindBy(id = "customerGrid_filter_billing_region")
+    WebElement filterState;
 
 
 
@@ -197,6 +206,18 @@ public class CustomersManagerPage {
         return driver.getPageSource().contains("Turkey");
 
 
+    }
+    public void filterCustomerBySate() {
+        functionClass.waitUntilElementPresent(filterState);
+        filterState.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","State"));
+        functionClass.waitUntilElementPresent(SearchButton);
+        SearchButton.click();
+    }
+
+    public boolean verifyCustomerFilterByState() {
+        functionClass.waitUntilElementPresent(verifyFilteredState);
+        if (verifyFilteredState.isDisplayed());
+        return true;
     }
 }
 

@@ -62,6 +62,13 @@ public class CustomersModuleTestRunner extends TestBase {
         customersManagerPage.FilterCustomersByEmail();
     }
 
+    @Test(description = "renagul")
+    public void FilterCustomerBySate() {
+        backEndLogin = new BackEndLogin(driver);
+        customersManagerPage.filterCustomerBySate();
+        Assert.assertTrue(customersManagerPage.verifyCustomerFilterByState());
+    }
+
     @Test(description= "Fazilet", priority = 4)
     public void filterCustomerByCountry(){
         customersManagerPage.filterCustomerByCountry();
@@ -79,6 +86,8 @@ public class CustomersModuleTestRunner extends TestBase {
         customerGroupPage.addNewCustomerGroup();
         Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
     }
+
+
 
     @Test(description = "Irshad",dependsOnMethods = {"managerAddNewCustomerTest"}, priority = 7)
     public void deleteCustomerTest(){
