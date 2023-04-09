@@ -39,6 +39,11 @@ public class CatalogModuleTestRunner extends TestBase {
         productInfoPage=new ProductInfoPage(driver);
         searchTermsPage=new SearchTermsPage(driver);
     }
+    @Test(description = "kaysar", priority = 1)
+    public void AddRootCategoriesTest() {
+        manageCategoriesPage.fillCategoryInformationAndSave();
+        Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
+    }
     @Test(description = "Memet")
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
