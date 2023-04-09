@@ -4,6 +4,7 @@ import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -79,6 +80,61 @@ public class MyDashboardPage {
     WebElement verifyMyProductReviews;
     @FindBy(css = "li>a[href=\"http://magentoqa2.unitedcoder.com/newsletter/manage/\"]")
     WebElement newsletterLink;
+
+    //update view address elements
+        @FindBy(xpath = "//a[text()=\"Address Book\"]")
+        WebElement mayadressbooklink;
+        @FindBy(xpath = "//a[text()='Change Billing Address']")
+        WebElement changeAddressLink;
+
+        @FindBy(name="firstname")
+        WebElement firstNameField;
+
+        @FindBy(name  = "lastname")
+        WebElement lastNameField;
+
+        @FindBy(name  = "city")
+        WebElement cityField;
+
+        @FindBy(name = "postcode")
+        WebElement zipField;
+
+        @FindBy(css = ".buttons-set > button")
+        WebElement saveAddressButton;
+
+        @FindBy(css = ".success-msg span")
+        WebElement successMsg;
+
+
+        public void updateAddressBook(){
+            //functionClass.sleep(3);
+            functionClass.waitUntilElementPresent(mayadressbooklink);
+            mayadressbooklink.click();
+            functionClass.waitUntilElementPresent(changeAddressLink);
+            changeAddressLink.click();
+            functionClass.waitUntilElementPresent(firstNameField);
+            firstNameField.clear();
+            firstNameField.sendKeys(functionClass.generateFakeName());
+            functionClass.waitUntilElementPresent(lastNameField);
+            lastNameField.clear();
+            lastNameField.sendKeys(functionClass.generateFakeLastName());
+            functionClass.waitUntilElementPresent(cityField);
+            cityField.clear();
+            cityField.sendKeys(functionClass.generateCityName());
+            functionClass.waitUntilElementPresent(zipField);
+            zipField.clear();
+            zipField.sendKeys(functionClass.generateZipCode());
+            functionClass.waitUntilElementPresent(saveAddressButton);
+            saveAddressButton.click();
+        }
+
+        public boolean verifyUpdatedAddress() {
+            if(successMsg.getText().equalsIgnoreCase("The address has been saved."))
+                return true;
+            else
+                return false;
+        }
+
 
     public void clickNewsletterSubscriptionLink() {
         functionClass.waitUntilElementPresent(newsletterLink);

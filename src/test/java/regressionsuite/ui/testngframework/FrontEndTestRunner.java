@@ -44,6 +44,7 @@ public class FrontEndTestRunner extends TestBase{
     public void login() {
 
         frontEndLoginPage.login();
+
     }
 
     @Test(description = "kaysar",priority =1)
@@ -88,25 +89,31 @@ public class FrontEndTestRunner extends TestBase{
         myWishListPage.verifyMyWishListPageIsOpened();
     }
 
-    @Test(priority = 7)
+    @Test(priority =7)
+    public void updateAndViewAddressBook() {
+        myDashboardPage.updateAddressBook();
+        Assert.assertTrue(myDashboardPage.verifyUpdatedAddress());
+    }
+
+    @Test(priority = 8)
     public void viewDownloadable(){
         //frontEndLoginPage.login();
         dowmloadablePage.clickDownloadable();
         Assert.assertTrue( dowmloadablePage.verifyMyDownloadableProducts() );
     }
 
-    @Test(priority = 8)
+    @Test(priority = 9)
     public void changePasswordTest(){
         myDashboardPage.changePassword();
         Assert.assertTrue(myDashboardPage.verifyPasswordChanged());
     }
 
-    @Test(priority = 9,enabled = false)
+    @Test(priority = 10)
     public void viewMyproductreviewsTest(){
         Assert.assertTrue(myDashboardPage.myProductReviews());
     }
 
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void billingAgreementLinkTest(){
         billingAgreementPage=new BillingAgreementPage(driver);
         billingAgreementPage.clickBillingAgreemnetsLink();
@@ -114,26 +121,26 @@ public class FrontEndTestRunner extends TestBase{
 
     }
 
-    @Test(description = "User should be able to edit account information",priority = 11)
+    @Test(description = "User should be able to edit account information",priority = 12)
     public void editAccountInfoTest(){
         myDashboardPage.EditAccountInfo();
         Assert.assertTrue(myDashboardPage.VerifySuccessfullyEdit());
 
     }
 
-    @Test(priority = 14)
+    @Test(priority = 15)
     public void clickNewsletterSubscriptionLink(){
         myDashboardPage.clickNewsletterSubscriptionLink();
         newsletterSubscriptionPage.verifySubscriptionPageIsOpened();
     }
 
-  @Test(priority = 12)
+  @Test(priority = 13)
   public void verifyViewMyTagsTest(){
         myDashboardPage.viewMyTagsLink();
       Assert.assertTrue(  myDashboardPage.verifyViewMyTags());
   }
 
-    @Test(priority = 13)
+    @Test(priority = 14)
     public void viewMyAccountInfo(){
         Assert.assertTrue(myDashboardPage.viewAccountInfo());
     }

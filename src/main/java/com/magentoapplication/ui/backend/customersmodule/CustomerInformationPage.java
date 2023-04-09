@@ -2,21 +2,18 @@ package com.magentoapplication.ui.backend.customersmodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class CustomerInformationPage {
     WebDriver driver;
     FunctionClass functionClass;
     CustomersManagerPage customersManagerPage;
-    String firstName;
+
 
 
     public CustomerInformationPage(WebDriver driver) {
@@ -56,11 +53,13 @@ public class CustomerInformationPage {
         functionClass.waitUntilElementPresent(addNewCustomerLink);
         addNewCustomerLink.click();
         functionClass.waitUntilElementPresent(firstNameField);
-        firstNameField.sendKeys(firstName=functionClass.generateFakeName());
+        TestHelperClass.setCustomerFirstName(functionClass.generateFakeName());
+        firstNameField.sendKeys(TestHelperClass.getCustomerFirstName());
         functionClass.waitUntilElementPresent(lastNameField);
         lastNameField.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(emailField);
-        emailField.sendKeys(functionClass.generateFakeEmail());
+        TestHelperClass.setEmail(functionClass.generateFakeEmail());
+        emailField.sendKeys(TestHelperClass.getEmail());
         functionClass.waitUntilElementPresent(passwordfield);
         passwordfield.sendKeys(functionClass.generateFakePassword());
         functionClass.waitUntilElementPresent(SavaCustomerButton);
@@ -76,7 +75,8 @@ public class CustomerInformationPage {
         functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
         Actions actions=new Actions(driver);
         actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
-        customersManagerPage.customerEditButton.click();
+        WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",TestHelperClass.getCustomerFirstName())));
+        cusEditButt.click();
         accountInformation.click();
         accountInformationCheckBox.click();
         accountPassword.sendKeys(ApplicationConfig.readFromConfigProperties("config.properties","backEndPassword"));

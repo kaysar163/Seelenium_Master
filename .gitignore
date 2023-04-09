@@ -2,6 +2,4 @@ screenShot/
 target/
 .idea/
 .iml
-.logfile.log
-
-
+logfile.log

@@ -14,10 +14,12 @@ public class CustomersManagerPage {
 
     FunctionClass functionClass;
 
+
     public CustomersManagerPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
+
     }
 
     @FindBy(xpath = "//span[text()='Customers']")
@@ -57,8 +59,8 @@ public class CustomersManagerPage {
     WebElement nameFilter;
     @FindBy(xpath = "//button//span[contains(text(),'Search')]")
     WebElement searchButtonForDelete;
-    @FindBy(xpath = "//tr//td[contains(text(),'495')]/following-sibling::td//a[contains(text(),'Edit')]")
-    WebElement editButtonNotRandom;
+//    @FindBy(xpath = "//tr//td[contains(text(),'495')]/following-sibling::td//a[contains(text(),'Edit')]")
+//    WebElement editButtonNotRandom;
     @FindBy(xpath = "//span[contains(text(),'Delete Customer')][1]")
     WebElement deleteCustomer;
     @FindBy(xpath = "//span[contains(text(),'The customer has been deleted.')]")
@@ -78,16 +80,24 @@ public class CustomersManagerPage {
     @FindBy(id = "customerGrid-total-count")
     WebElement verifyFilteredMessage;
 
+    @FindBy(xpath = "//span[text()='Reset Filter']")
+    WebElement resetFilterButton;
+
+
 
     public void FilterCustomersByEmail() {
+        functionClass.waitUntilElementPresent(resetFilterButton);
+        resetFilterButton.click();
         functionClass.waitUntilElementPresent(emailField);
-        emailField.sendKeys(functionClass.generateFakeEmail());
+        emailField.sendKeys(TestHelperClass.getEmail());
         functionClass.waitUntilElementPresent(searchButton);
+        functionClass.sleep(2);
         searchButton.click();
     }
 
     public void filterTheCustomerByGroup() {
         functionClass.waitUntilElementPresent(groupFilterDropdown);
+        functionClass.sleep(1);
         groupFilterDropdown.click();
         Select selectGroup = new Select(groupFilterDropdown);
         selectGroup.selectByVisibleText("sabahet");
@@ -105,6 +115,9 @@ public class CustomersManagerPage {
     }
 
         public void assignGroupToCustomer() {
+            functionClass.waitUntilElementPresent(resetFilterButton);
+            functionClass.sleep(1);
+            resetFilterButton.click();
             functionClass.waitUntilElementPresent(customerLink);
             customerLink.click();
             functionClass.waitUntilElementPresent(manageCustomersLink);
@@ -113,8 +126,9 @@ public class CustomersManagerPage {
             select.selectByValue("assign_group");
             functionClass.waitUntilElementPresent(groupsDropdown);
             Select select1 = new Select(groupsDropdown);
-            select1.selectByValue("1");
-            checkBox.click();
+            select1.selectByValue("313");
+            WebElement checkbox=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]//parent::tr//input",TestHelperClass.getEmail())));
+            checkbox.click();
             submitButton.click();
         }
 
@@ -126,23 +140,17 @@ public class CustomersManagerPage {
         
     public void deleteCustomer(){
         functionClass.waitUntilElementPresent(nameFilter);
-        nameFilter.sendKeys("Irshad01 Toghraq01");
+        nameFilter.sendKeys(TestHelperClass.getCustomerFirstName());
         functionClass.waitUntilElementPresent(searchButtonForDelete);
         searchButtonForDelete.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        functionClass.waitUntilElementPresent(editButtonNotRandom);
-        editButtonNotRandom.click();
+        functionClass.sleep(1);
+        WebElement editButton=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]//following::a[1]",TestHelperClass.getEmail())));
+        functionClass.waitUntilElementPresent(editButton);
+        functionClass.sleep(1);
+        editButton.click();
         functionClass.waitUntilElementPresent(deleteCustomer);
         deleteCustomer.click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        functionClass.sleep(1);
         Alert alert=driver.switchTo().alert();
         alert.accept();
     }
@@ -172,7 +180,11 @@ public class CustomersManagerPage {
     }
 
     public void filterCustomerByCountry() {
+        functionClass.waitUntilElementPresent(resetFilterButton);
+        functionClass.sleep(1);
+        resetFilterButton.click();
         functionClass.waitUntilElementPresent(CountryDropdown);
+        functionClass.sleep(1);
         CountryDropdown.click();
         Select select = new Select(CountryDropdown);
         select.selectByValue("TR");
