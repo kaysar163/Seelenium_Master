@@ -80,7 +80,7 @@ public class CustomersModuleTestRunner extends TestBase {
     }
 
     @Test(description = "renagul")
-    public void FilterCustomerBySate(){
+    public void filterCustomerBySate(){
         backEndLogin= new BackEndLogin(driver);
           customersManagerPage.filterCustomerBySate();
           Assert.assertTrue(customersManagerPage.verifyCustomerFilterByState());
