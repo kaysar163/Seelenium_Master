@@ -53,7 +53,8 @@ public class CatalogModuleTestRunner extends TestBase {
     @Test(description = "kaysar", priority = 13)
     public void AddNewSeachTermTest() {
         searchTermsPage.NewSearchInfo();
-        searchTermsPage.VerifyAddNewSerach();
+        Assert.assertTrue( searchTermsPage.VerifyAddNewSerach());
+
 
     }
 
