@@ -24,12 +24,40 @@ public class ManageCategoriesPage {
 
 
     // Elements
+    @FindBy(xpath = "(//span[contains(text(),'Add Root Category')])[1]")
+
+    WebElement Addrootcategory;
+
+    @FindBy(id = "group_4name")
+
+    WebElement rootName;
+    @FindBy( id="group_4is_active")
+
+    WebElement isActive;
+    @FindBy(id = "group_4description")
+
+    WebElement description;
+    @FindBy(id = "group_4meta_title")
+
+    WebElement pagaTitle;
+    @FindBy(id = "group_4meta_keywords")
+    WebElement metaKeywords;
+    @FindBy(id = "group_4meta_description")
+    WebElement metaDescription;
+    @FindBy(id = "group_4include_in_menu")
+    WebElement IncludeInNavigationMenu;
+    @FindBy(xpath = ("//span[contains(text(),'Save Category')]"))
+    WebElement SavaCategoriesButton;
+    @FindBy(xpath= "//span[normalize-space()='The category has been saved.']")
+    WebElement SuccessfulSavesMessage;
+
     @FindBy(xpath = "//*[text()='pc portable (0)']")
     WebElement subCat;
     @FindBy(xpath = "//*[@class='scalable delete']")
     WebElement deleteCatButton;
     @FindBy(xpath = "//*[text()='The category has been deleted.']")
     WebElement sucCatDeletedMessage;
+
     public void subCatDelete(){
         functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
         catalogDashboardPage.clickOnCatalogLink();
