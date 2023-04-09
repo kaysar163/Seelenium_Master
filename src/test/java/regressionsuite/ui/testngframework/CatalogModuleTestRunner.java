@@ -26,7 +26,6 @@ public class CatalogModuleTestRunner extends TestBase {
     SearchTermsPage searchTermsPage;
 
 
-
     @BeforeClass
     public void setUp(ITestContext context){
         setupBrowserBackEnd();
