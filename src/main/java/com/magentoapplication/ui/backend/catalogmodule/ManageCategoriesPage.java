@@ -24,6 +24,10 @@ public class ManageCategoriesPage {
 
 
     // Elements
+    @FindBy(xpath = "//span[contains(text(),'Delete Category')]")
+    WebElement deleteCategoryButton;
+   @FindBy(xpath = "//span[contains(text(),'The category has been deleted.')]")
+   WebElement deleteCatSucMessage;
     @FindBy(xpath = "//*[text()='pc portable (0)']")
     WebElement subCat;
     @FindBy(xpath = "//*[@class='scalable delete']")
@@ -47,12 +51,18 @@ public class ManageCategoriesPage {
             return true;
         else return false;
     }
+    public void deleteRootCat(){
+        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
+        catalogDashboardPage.clickOnCatalogLink();
+        catalogDashboardPage.clickOnManageCategoriesLink();
+        functionClass.waitUntilElementPresent(deleteCategoryButton);
+        deleteCategoryButton.click();
+    }
+    public boolean deleteCategorySuccessful(){
+        functionClass.waitUntilElementPresent(deleteCatSucMessage);
+        if (deleteCatSucMessage.isDisplayed())
+            return true;
+        else return false;
 
-
-
-
-    // Methods
-
-
-
+    }
 }

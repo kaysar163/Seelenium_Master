@@ -44,6 +44,11 @@ public class CatalogModuleTestRunner extends TestBase {
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
     }
+    @Test(description = "Omercan")
+    public void deleteRootCatTes(){
+        manageCategoriesPage.deleteRootCat();
+        Assert.assertTrue(manageCategoriesPage.deleteCategorySuccessful());
+    }
 
 
 
