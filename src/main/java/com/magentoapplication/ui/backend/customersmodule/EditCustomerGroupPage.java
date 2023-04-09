@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.customersmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,8 +24,8 @@ public class EditCustomerGroupPage {
     //meryem
     @FindBy(xpath = "//span[text()='Customer Groups']")
     WebElement customerGroupsLink;
-    @FindBy(xpath = "//table[@id=\"customerGroupGrid_table\"]//tbody/tr//td[contains(text(),'728')]")
-    WebElement editCustomerGroupButton;
+//    @FindBy(xpath = "//table[@id=\"customerGroupGrid_table\"]//tbody/tr//td[contains(text(),'728')]")
+//    WebElement editCustomerGroupButton;
     @FindBy(id = "customer_group_code")
     WebElement groupNameFiled;
     @FindBy(id = "tax_class_id")
@@ -36,17 +37,29 @@ public class EditCustomerGroupPage {
     //meryem
     @FindBy(xpath = "(//span[contains(text(),'Delete Customer Group')])[1]")
     WebElement deleteGroupButton;
-    @FindBy(xpath = "//span[text()='Delete Customer Group']")
-    WebElement deleteCustomerGroup;
+
+    @FindBy(id = "customerGroupGrid_filter_type")
+    WebElement groupNameSearchField;
+
+    @FindBy(xpath = "//span[text()='Search']")
+    WebElement searButton;
     @FindBy(xpath = "//span[text()='The customer group has been deleted.']")
     WebElement verifyCustomerGroupDeletedMessage;
 
     public void editCustomerGroupInfo() {
-        customersManagerPage.customerLink.click();
-        customerGroupsLink.click();
+//        customersManagerPage.customerLink.click();
+//        customerGroupsLink.click();
+        functionClass.waitUntilElementPresent(groupNameSearchField);
+        groupNameSearchField.sendKeys(TestHelperClass.getGroupName());
+        functionClass.waitUntilElementPresent(searButton);
+        searButton.click();
+        WebElement editCustomerGroupButton=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",TestHelperClass.getGroupName())));
+        functionClass.waitUntilElementPresent(editCustomerGroupButton);
+        functionClass.sleep(1);
         editCustomerGroupButton.click();
         groupNameFiled.clear();
-        groupNameFiled.sendKeys(functionClass.generateFakeName());
+        TestHelperClass.setChangedGroupName(functionClass.generateFakeName());
+        groupNameFiled.sendKeys(TestHelperClass.getChangedGroupName());
         Select meryem = new Select(taxDropdown);
         meryem.selectByValue("3");
         saveCustomerButton.click();
@@ -59,8 +72,13 @@ public class EditCustomerGroupPage {
     }
 
     public void deleteCustomerGroupInfo() {
-        customersManagerPage.customerLink.click();
-        customerGroupsLink.click();
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(groupNameSearchField);
+        groupNameSearchField.sendKeys(TestHelperClass.getGroupName());
+        functionClass.waitUntilElementPresent(searButton);
+        searButton.click();
+        WebElement editCustomerGroupButton=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",TestHelperClass.getChangedGroupName())));
+        functionClass.waitUntilElementPresent(editCustomerGroupButton);
         editCustomerGroupButton.click();
         deleteGroupButton.click();
         driver.switchTo().alert().accept();

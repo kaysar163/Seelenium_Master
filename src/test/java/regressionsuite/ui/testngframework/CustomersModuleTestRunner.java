@@ -23,6 +23,7 @@ public class CustomersModuleTestRunner extends TestBase {
     CustomerInformationPage customerInformationPage;
     CustomerGroupPage customerGroupPage;
 
+
     @BeforeClass
     public void setUp(ITestContext context) {
         setupBrowserBackEnd();
@@ -36,14 +37,14 @@ public class CustomersModuleTestRunner extends TestBase {
     }
 
 
-    @Test
-    public void a() {
+    @Test(priority = 6)
+    public void assignACustomerToCustomerGroupTest() {
         customersManagerPage.assignGroupToCustomer();
         Assert.assertTrue(customersManagerPage.verifyUpdate());
     }
 
     @Test(description= "kaysar", priority = 1)
-    public void ManageraddnewcusstomerTest(){
+    public void managerAddNewCustomerTest(){
         customerInformationPage.addCustomerMethod();
         Assert.assertTrue(customerInformationPage.verifyCustomer());
 
@@ -61,49 +62,41 @@ public class CustomersModuleTestRunner extends TestBase {
         customersManagerPage.FilterCustomersByEmail();
     }
 
-    @Test(description= "Fazilet", priority = 5)
+    @Test(description= "Fazilet", priority = 4)
     public void filterCustomerByCountry(){
         customersManagerPage.filterCustomerByCountry();
         Assert.assertTrue(customersManagerPage.verifyCustomerFilteredByCountry());
     }
 
-    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 4)
-    public void FilterTheCustomerByGroupTest(){
+    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 5)
+    public void filterTheCustomerByGroupTest(){
         customersManagerPage.filterTheCustomerByGroup();
         Assert.assertTrue(customersManagerPage.verifyFilterTheCustomerByGroup());
     }
 
-    @Test(description = "Fazilet", priority = 10)
-    public void AddNewCustomerGroup(){
+    @Test(description = "Fazilet", priority = 8)
+    public void addNewCustomerGroup(){
         customerGroupPage.addNewCustomerGroup();
         Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
     }
 
-    @Test(description = "renagul")
-    public void filterCustomerBySate(){
-        backEndLogin= new BackEndLogin(driver);
-          customersManagerPage.filterCustomerBySate();
-          Assert.assertTrue(customersManagerPage.verifyCustomerFilterByState());
-
-    }
-
-    @Test(description = "Irshad", priority = 11)
+    @Test(description = "Irshad",dependsOnMethods = {"managerAddNewCustomerTest"}, priority = 7)
     public void deleteCustomerTest(){
         customersManagerPage.deleteCustomer();
         Assert.assertTrue(customersManagerPage.verifyDeleteCustomer());
     }
-    @Test(description = "meryem", priority = 14)
+    @Test(description = "meryem",dependsOnMethods = {"addNewCustomerGroup"}, priority = 9)
     public void editCustomerGroup() {
         editCustomerGroupPage.editCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupEditedTest());
 
     }
-    @Test(description = "meryem", priority = 15)
+    @Test(description = "meryem",dependsOnMethods = {"addNewCustomerGroup"}, priority = 10)
     public void deleteCustomerGroup() {
         editCustomerGroupPage.deleteCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupDeletedTest1());
     }
-    @Test(description = "Memet")
+    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 6)
     public void passwordResetTest(){
         customerInformationPage.customerPasswordChange();
         Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());

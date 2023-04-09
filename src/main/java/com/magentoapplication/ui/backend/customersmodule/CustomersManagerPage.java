@@ -1,6 +1,5 @@
 package com.magentoapplication.ui.backend.customersmodule;
 
-import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -15,17 +14,19 @@ public class CustomersManagerPage {
 
     FunctionClass functionClass;
 
+
     public CustomersManagerPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
-        functionClass = new FunctionClass(driver);
+        PageFactory.initElements(driver,this);
+        functionClass=new FunctionClass(driver);
+
     }
 
     @FindBy(xpath = "//span[text()='Customers']")
     WebElement customerLink;
     @FindBy(xpath = "//tbody/tr/td[contains(text(),'Reinaldo')]//following::td[9]//a[text()='Edit']")
     WebElement customerEditButton;
-    //    WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",customerInformationPage.firstName)));
+//    WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",customerInformationPage.firstName)));
     @FindBy(xpath = "//*[text()='The customer has been saved.']")
     WebElement passwordChangeSuccessMessage;
     @FindBy(xpath = "//span[text()='Manage Customers']")
@@ -52,14 +53,14 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//select[@id=\"customerGrid_filter_group\"]")
     WebElement groupFilterDropdown;
-
+    
     //Locate elements for delete customer function
-    @FindBy(id = "customerGrid_filter_name")
+    @FindBy(id="customerGrid_filter_name")
     WebElement nameFilter;
     @FindBy(xpath = "//button//span[contains(text(),'Search')]")
     WebElement searchButtonForDelete;
-    @FindBy(xpath = "//tr//td[contains(text(),'495')]/following-sibling::td//a[contains(text(),'Edit')]")
-    WebElement editButtonNotRandom;
+//    @FindBy(xpath = "//tr//td[contains(text(),'495')]/following-sibling::td//a[contains(text(),'Edit')]")
+//    WebElement editButtonNotRandom;
     @FindBy(xpath = "//span[contains(text(),'Delete Customer')][1]")
     WebElement deleteCustomer;
     @FindBy(xpath = "//span[contains(text(),'The customer has been deleted.')]")
@@ -79,30 +80,24 @@ public class CustomersManagerPage {
     @FindBy(id = "customerGrid-total-count")
     WebElement verifyFilteredMessage;
 
-
-    @FindBy(id = "customerGrid_filter_billing_region")
-    WebElement filterState;
-
-    @FindBy(css = "button[title='Search']")
-    WebElement SearchB;
-
-    @FindBy(xpath ="//tbody//tr//td[contains(text(),'istanbul')]" )
-    WebElement verifyByState;
-
-
-
+    @FindBy(xpath = "//span[text()='Reset Filter']")
+    WebElement resetFilterButton;
 
 
 
     public void FilterCustomersByEmail() {
+        functionClass.waitUntilElementPresent(resetFilterButton);
+        resetFilterButton.click();
         functionClass.waitUntilElementPresent(emailField);
-        emailField.sendKeys(functionClass.generateFakeEmail());
+        emailField.sendKeys(TestHelperClass.getEmail());
         functionClass.waitUntilElementPresent(searchButton);
+        functionClass.sleep(2);
         searchButton.click();
     }
 
     public void filterTheCustomerByGroup() {
         functionClass.waitUntilElementPresent(groupFilterDropdown);
+        functionClass.sleep(1);
         groupFilterDropdown.click();
         Select selectGroup = new Select(groupFilterDropdown);
         selectGroup.selectByVisibleText("sabahet");
@@ -119,54 +114,53 @@ public class CustomersManagerPage {
         }
     }
 
-    public void assignGroupToCustomer() {
-        functionClass.waitUntilElementPresent(customerLink);
-        customerLink.click();
-        functionClass.waitUntilElementPresent(manageCustomersLink);
-        manageCustomersLink.click();
-        Select select = new Select(actionsDropdown);
-        select.selectByValue("assign_group");
-        functionClass.waitUntilElementPresent(groupsDropdown);
-        Select select1 = new Select(groupsDropdown);
-        select1.selectByValue("1");
-        checkBox.click();
-        submitButton.click();
-    }
+        public void assignGroupToCustomer() {
+            functionClass.waitUntilElementPresent(resetFilterButton);
+            functionClass.sleep(1);
+            resetFilterButton.click();
+            functionClass.waitUntilElementPresent(customerLink);
+            customerLink.click();
+            functionClass.waitUntilElementPresent(manageCustomersLink);
+            manageCustomersLink.click();
+            Select select = new Select(actionsDropdown);
+            select.selectByValue("assign_group");
+            functionClass.waitUntilElementPresent(groupsDropdown);
+            Select select1 = new Select(groupsDropdown);
+            select1.selectByValue("313");
+            WebElement checkbox=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]//parent::tr//input",TestHelperClass.getEmail())));
+            checkbox.click();
+            submitButton.click();
+        }
 
-    public boolean verifyUpdate() {
-        if (verifyUpdateMessage.isDisplayed())
-            return true;
-        else return false;
-    }
-
-    public void deleteCustomer() {
+        public boolean verifyUpdate() {
+            if (verifyUpdateMessage.isDisplayed())
+                return true;
+            else return false;
+        }
+        
+    public void deleteCustomer(){
         functionClass.waitUntilElementPresent(nameFilter);
-        nameFilter.sendKeys("Irshad01 Toghraq01");
+        nameFilter.sendKeys(TestHelperClass.getCustomerFirstName());
         functionClass.waitUntilElementPresent(searchButtonForDelete);
         searchButtonForDelete.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        functionClass.waitUntilElementPresent(editButtonNotRandom);
-        editButtonNotRandom.click();
+        functionClass.sleep(1);
+        WebElement editButton=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]//following::a[1]",TestHelperClass.getEmail())));
+        functionClass.waitUntilElementPresent(editButton);
+        functionClass.sleep(1);
+        editButton.click();
         functionClass.waitUntilElementPresent(deleteCustomer);
         deleteCustomer.click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        Alert alert = driver.switchTo().alert();
+        functionClass.sleep(1);
+        Alert alert=driver.switchTo().alert();
         alert.accept();
     }
-
-    public boolean verifyDeleteCustomer() {
-        if (deleteSuccessMessage.isDisplayed()) {
+    
+    public boolean verifyDeleteCustomer(){
+        if(deleteSuccessMessage.isDisplayed()){
             System.out.println("Customer was deleted.");
             return true;
-        } else
+        }
+        else
             return false;
     }
 
@@ -186,7 +180,11 @@ public class CustomersManagerPage {
     }
 
     public void filterCustomerByCountry() {
+        functionClass.waitUntilElementPresent(resetFilterButton);
+        functionClass.sleep(1);
+        resetFilterButton.click();
         functionClass.waitUntilElementPresent(CountryDropdown);
+        functionClass.sleep(1);
         CountryDropdown.click();
         Select select = new Select(CountryDropdown);
         select.selectByValue("TR");
@@ -195,30 +193,12 @@ public class CustomersManagerPage {
 
     }
 
-    public boolean verifyCustomerFilteredByCountry() {
+    public boolean verifyCustomerFilteredByCountry(){
         return driver.getPageSource().contains("Turkey");
 
 
     }
-
-    public void filterCustomerBySate() {
-        functionClass.waitUntilElementPresent(filterState);
-        filterState.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "State"));
-        functionClass.waitUntilElementPresent(SearchButton);
-
-        SearchButton.click();
-    }
-
-    public boolean verifyCustomerFilterByState() {
-        functionClass.waitUntilElementPresent(verifyByState);
-        if (verifyByState.isDisplayed());
-        return true;
-    }
-
-
-
-    }
-
+}
 
 
 

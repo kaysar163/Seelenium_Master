@@ -28,36 +28,37 @@ public class CustomerGroupPage {
     WebElement customerGroupsLink;
 
     @FindBy( xpath = "(//span[contains(text(),'Add New Customer Group')])[1]")
-    WebElement AddNewCustomerGroupButton;
+    WebElement addNewCustomerGroupButton;
 
     @FindBy(id="customer_group_code")
-    WebElement GroupNameField;
+    WebElement groupNameField;
 
     @FindBy(id="tax_class_id")
-    WebElement TaxClassDropdown;
+    WebElement taxClassDropdown;
 
     @FindBy(xpath = "//button[@class='scalable save' and @title='Save Customer Group']")
-    WebElement SaveCustomerGroupButton;
+    WebElement saveCustomerGroupButton;
 
     @FindBy(xpath = "//span[contains(text(),'The customer group has been saved.')]")
-    WebElement TheCustomerGroupHasBeenSavedMessage;
+    WebElement theCustomerGroupHasBeenSavedMessage;
 
 
     public void addNewCustomerGroup(){
         Actions actions=new Actions(driver);
         actions.moveToElement(customersManagerPage.customerLink).moveToElement(customerGroupsLink).click().build().perform();
-        AddNewCustomerGroupButton.click();
-        GroupNameField.clear();
-        GroupNameField.sendKeys(functionClass.generateFakeName());
-        Select select=new Select(TaxClassDropdown);
+        addNewCustomerGroupButton.click();
+        groupNameField.clear();
+        TestHelperClass.setGroupName(functionClass.generateFakeName());
+        groupNameField.sendKeys(TestHelperClass.getGroupName());
+        Select select=new Select(taxClassDropdown);
         select.selectByValue("5");
-        functionClass.waitUntilElementPresent(SaveCustomerGroupButton);
-        SaveCustomerGroupButton.click();
+        functionClass.waitUntilElementPresent(saveCustomerGroupButton);
+        saveCustomerGroupButton.click();
 
     }
 
     public boolean verifyTheCustomerGroupHasBeenSaved() {
-       if (TheCustomerGroupHasBeenSavedMessage.isDisplayed()){
+       if (theCustomerGroupHasBeenSavedMessage.isDisplayed()){
            return true;}
        else
            return false;}
