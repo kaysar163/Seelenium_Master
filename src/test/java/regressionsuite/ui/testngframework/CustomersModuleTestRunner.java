@@ -18,37 +18,22 @@ public class CustomersModuleTestRunner extends TestBase {
     CustomersManagerPage customersManagerPage;
 
     @BeforeClass
-    public void setUp(ITestContext context) {
-        setupBrowserBackEnd( );
-        backEndLogin = new BackEndLogin( driver );
-        backEndLogin.customersModuleLogin( );
-        customersManagerPage = new CustomersManagerPage( driver );
-        context.setAttribute( "driver", driver );
+    public void setUp(ITestContext context){
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.customersModuleLogin();
+        customersManagerPage=new CustomersManagerPage(driver);
+        context.setAttribute("driver",driver);
     }
 
     @Test
-    public void a() {
+    public void a(){
 //        customersManagerPage.assignGroupToCustomer();
 //        Assert.assertTrue(customersManagerPage.verifyUpdate());
     }
 
     @AfterClass
-    public void tearDown() {
-        closeBrowser( );
+    public void tearDown(){
+        closeBrowser();
     }
-
-    @Test
-    public void filterCustomersByCountryWebsiteState() {
-        filterCustomersByCountryWebsiteState( );
-        filterCustomersByCountryWebsiteState( );
-        Assert.assertTrue( true );
-    }
-
 }
-
-
-
-
-
-
-
