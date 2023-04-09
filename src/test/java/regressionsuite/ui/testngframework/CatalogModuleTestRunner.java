@@ -50,8 +50,13 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
     }
 
+    @Test(description = "kaysar", priority = 13)
+    public void AddNewSeachTermTest() {
+        searchTermsPage.NewSearchInfo();
+        Assert.assertTrue( searchTermsPage.VerifyAddNewSerach());
 
 
+    }
 
     @AfterClass
     public void tearDown(){
