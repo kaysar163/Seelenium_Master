@@ -58,6 +58,12 @@ public class CatalogModuleTestRunner extends TestBase {
 
     }
 
+    @Test(description = "abdusattar")
+    public void addSubCategory(){
+        manageCategoriesPage.addSubCategory();
+        Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
+    }
+
     @AfterClass
     public void tearDown(){
         closeBrowser();
