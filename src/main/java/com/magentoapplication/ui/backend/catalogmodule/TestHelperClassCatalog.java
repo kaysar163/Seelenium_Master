@@ -1,6 +1,6 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
-public class TestHelperClass {
+public class TestHelperClassCatalog {
 
     private static String subName;
 
@@ -9,6 +9,6 @@ public class TestHelperClass {
     }
 
     public static void setSubName(String subName) {
-        TestHelperClass.subName = subName;
+        TestHelperClassCatalog.subName = subName;
     }
 }

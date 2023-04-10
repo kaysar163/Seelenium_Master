@@ -69,7 +69,8 @@ public class ManageCategoriesPage {
         functionClass.waitUntilElementPresent(addSubCategoryButton);
         addSubCategoryButton.click();
         functionClass.waitUntilElementPresent(rootName);
-        rootName.sendKeys(functionClass.generateFakeName());
+        TestHelperClassCatalog.setSubName(functionClass.generateFakeName());
+        rootName.sendKeys(TestHelperClassCatalog.getSubName());
         Select select=new Select(isActive);
         select.selectByValue("1");
         functionClass.waitUntilElementPresent(description);
