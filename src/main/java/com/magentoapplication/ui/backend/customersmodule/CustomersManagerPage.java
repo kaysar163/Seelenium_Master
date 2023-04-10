@@ -231,11 +231,5 @@ public class CustomersManagerPage {
         SearchButton.click( );
 
     }
+
 }
-
-
-
-
-
-
-
