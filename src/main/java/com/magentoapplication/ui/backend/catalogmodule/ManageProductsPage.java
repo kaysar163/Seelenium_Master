@@ -39,8 +39,8 @@ public class ManageProductsPage {
     @FindBy(xpath="//span[text()='Search']")
     WebElement Searchbutton;
 
-    @FindBy(xpath = "//tr[@class=\"even pointer\"]//td[3]")
-    WebElement productnamerow;
+    @FindBy(xpath = "//a[text()='Edit'][1]")
+    WebElement editIcon;
 
     @FindBy(xpath = "//span[text()='Delete']")
     WebElement Deletebutton;
@@ -58,8 +58,10 @@ public class ManageProductsPage {
        functionClass.sleep(2);
        functionClass.waitUntilElementPresent(Searchbutton);
        Searchbutton.click();
-       functionClass.waitUntilElementPresent(productnamerow);
-       productnamerow.click();
+       functionClass.sleep(2);
+       functionClass.waitUntilElementPresent(editIcon);
+       editIcon.click();
+       functionClass.sleep(2);
        functionClass.waitUntilElementPresent(Deletebutton);
        Deletebutton.click();
        functionClass.waitForAlertPresent();
