@@ -25,19 +25,13 @@ public class ProductInfoPage {
 
     // Elements
 
-    @FindBy(xpath = "//span[text()='Catalog']")
-    WebElement cataloglink;
 
-    @FindBy(xpath = "//span[text()='Manage Products']")
-    WebElement manageproductslink;
 
-    @FindBy(id="productGrid_product_filter_name")
-    WebElement namefield;
 
-    @FindBy(id="id_13dac701a91cfeac9a4c2d96ac74dc16")
-    WebElement searchbutton;
 
-    @FindBy
+
+
+
 
 
 
