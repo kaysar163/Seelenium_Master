@@ -30,16 +30,12 @@ public class ManageCategoriesPage {
     WebElement Addrootcategory;
 
     @FindBy(id = "group_4name")
-
     WebElement rootName;
     @FindBy( id="group_4is_active")
-
     WebElement isActive;
     @FindBy(id = "group_4description")
-
     WebElement description;
     @FindBy(id = "group_4meta_title")
-
     WebElement pagaTitle;
     @FindBy(id = "group_4meta_keywords")
     WebElement metaKeywords;
@@ -51,6 +47,15 @@ public class ManageCategoriesPage {
     WebElement SavaCategoriesButton;
     @FindBy(xpath= "//span[normalize-space()='The category has been saved.']")
     WebElement SuccessfulSavesMessage;
+
+    // meryem edit
+    @FindBy(xpath = "//span[text()='Books (6)']//parent::a")
+    WebElement rootCategoryLink;
+    @FindBy(xpath = "//span[text()='Save Category']")
+    WebElement saveCategoryButton;
+    @FindBy(xpath = "//span[text()='The category has been saved.']")
+    WebElement categorySavedMessage;
+
 
     @FindBy(xpath = "//*[text()='pc portable (0)']")
     WebElement subCat;
@@ -90,6 +95,29 @@ public class ManageCategoriesPage {
             return true;
         } else return false;
     }
+    // meryem
+    public void editCatogoriesInfo(){
+        catalogDashboardPage. clickOnCatalogLink();
+        catalogDashboardPage.clickOnManageCategoriesLink();
+        functionClass.waitUntilElementPresent(rootCategoryLink);
+        rootCategoryLink.click();
+        functionClass.waitUntilElementPresent(rootName);
+        rootName.clear();
+        rootName.sendKeys(functionClass.generateFakeName());
+        functionClass.waitUntilElementPresent(saveCategoryButton);
+       saveCategoryButton.click();
+
+
+    }
+
+    public boolean verifyEditCatogories(){
+        functionClass.waitUntilElementPresent(categorySavedMessage);
+        if (categorySavedMessage.isDisplayed()) {
+            return true;
+        } else return false;
+    }
+
+
     public void subCatDelete(){
         functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
         catalogDashboardPage.clickOnCatalogLink();
