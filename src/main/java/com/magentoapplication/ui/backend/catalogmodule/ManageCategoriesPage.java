@@ -1,8 +1,10 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
+import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -15,6 +17,7 @@ public class ManageCategoriesPage {
 
     CatalogDashboardPage catalogDashboardPage;
 
+
     public ManageCategoriesPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -24,6 +27,7 @@ public class ManageCategoriesPage {
 
 
     // Elements
+    String config = "testdatafolder/testdata.properties";
     @FindBy(xpath = "(//span[contains(text(),'Add Root Category')])[1]")
 
     WebElement addRootCategory;
@@ -50,6 +54,9 @@ public class ManageCategoriesPage {
     WebElement savaCategoriesButton;
     @FindBy(xpath= "//span[normalize-space()='The category has been saved.']")
     WebElement successfulSavesMessage;
+
+    @FindBy (xpath = "//span[contains(text(),'Dewitt Kirlin (1)')]")
+    WebElement subcat1;
 
     @FindBy(xpath = "//*[text()='pc portable (0)']")
     WebElement subCat;
@@ -117,6 +124,33 @@ public class ManageCategoriesPage {
         if (successfulSavesMessage.isDisplayed()) {
             return true;
         } else return false;
+    }
+
+    public void  editSubCategory(){
+        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
+        catalogDashboardPage. clickOnCatalogLink();
+        catalogDashboardPage.clickOnManageCategoriesLink();
+        functionClass.sleep(3);
+       // Actions actions=new Actions(driver);
+        //actions.moveToElement(subcat1).click().perform();
+        functionClass.waitUntilElementPresent(subcat1);
+        subcat1.click();
+        functionClass.sleep(3);
+        functionClass.waitUntilElementPresent(description);
+        description.clear();
+        description.isSelected();
+        description.sendKeys("good");
+        functionClass.waitUntilElementPresent(savaCategoriesButton);
+        savaCategoriesButton.click();
+
+    }
+
+    public  boolean verifyEditSubCategory(){
+        functionClass.waitUntilElementPresent(successfulSavesMessage);
+        if(successfulSavesMessage.isDisplayed()){
+            return true;
+        }
+        else return false;
     }
     public void subCatDelete(){
         functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
