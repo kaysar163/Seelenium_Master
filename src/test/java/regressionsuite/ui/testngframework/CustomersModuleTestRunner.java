@@ -86,6 +86,13 @@ public class CustomersModuleTestRunner extends TestBase {
         Assert.assertTrue(customerGroupPage.verifyUpdateExistingCustomerGroups());
     }
 
+    @Test(description= "Mirehmidi",priority = 5)
+    public void FilterCustomersBywebsite() {
+        customersManagerPage.filterCustomersBywebsite();
+    }
+
+
+
     @Test(description = "Fazilet", priority = 8)
     public void addNewCustomerGroup(){
         customerGroupPage.addNewCustomerGroup();
