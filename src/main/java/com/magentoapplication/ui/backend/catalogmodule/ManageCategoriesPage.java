@@ -26,7 +26,7 @@ public class ManageCategoriesPage {
 
 
     // Elements
-    @FindBy(xpath ="(//h3[contains(text(),'apple13')])[1]")
+    @FindBy(xpath ="//span[text()='close (0)']//parent::a")
     WebElement rootCategory;
     @FindBy(xpath = "//span[contains(text(),'Delete Category')]")
     WebElement deleteCategoryButton;
