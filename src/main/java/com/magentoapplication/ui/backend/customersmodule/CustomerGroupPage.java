@@ -114,7 +114,15 @@ public class CustomerGroupPage {
             return false;
 }
 
+    public boolean verifyWebsite() {
+        functionClass.waitUntilElementPresent( TheCustomerGroupHasBeenSavedMessage );
+        if (TheCustomerGroupHasBeenSavedMessage.getText().contains( "saved" )){
+            return true;
+        }else
+            return false;
+
     }
+}
 
 
 

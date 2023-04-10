@@ -232,5 +232,10 @@ public class CustomersManagerPage {
 
     }
 
-}
+    public boolean verifyWebsite() {
+        if (verifyUpdateMessage.isDisplayed())
+            return true;
+        else return false;
 
+    }
+}
