@@ -1,5 +1,6 @@
 package com.magentoapplication.ui.backend.customersmodule;
 
+import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,12 +21,20 @@ public class CustomerGroupPage {
         customersManagerPage=new CustomersManagerPage(driver);
     }
 
+    @FindBy(xpath = "//td[contains(text(),\"Brenda11\")]")
+    WebElement existingGroupName;
 
+    String config = "testdatafolder/testdata.properties";
+
+    @FindBy(id = "tax_class_id")
+    WebElement TaxClass;
 
     @FindBy(xpath = "//span[text()='Customers']")
     WebElement customerLink;
         @FindBy(xpath ="//span[text()='Customer Groups']")
     WebElement customerGroupsLink;
+
+
 
     @FindBy( xpath = "(//span[contains(text(),'Add New Customer Group')])[1]")
     WebElement addNewCustomerGroupButton;
@@ -39,8 +48,20 @@ public class CustomerGroupPage {
     @FindBy(xpath = "//button[@class='scalable save' and @title='Save Customer Group']")
     WebElement saveCustomerGroupButton;
 
+    @FindBy(id="customerGroupGrid_filter_type")
+    WebElement groupFilterField;
+
     @FindBy(xpath = "//span[contains(text(),'The customer group has been saved.')]")
     WebElement theCustomerGroupHasBeenSavedMessage;
+    @FindBy(xpath="//button[@class=\"scalable task\"]")
+    WebElement groupSearchButton;
+
+    @FindBy(xpath = "//span[contains(text(),'The customer group has been saved.')]")
+    WebElement TheCustomerGroupHasBeenSavedMessage;
+
+    @FindBy(xpath = "//button[@class='scalable save' and @title='Save Customer Group']")
+    WebElement SaveCustomerGroupButton;
+    //gulzar-customer -group
 
 
     public void addNewCustomerGroup(){
@@ -64,7 +85,34 @@ public class CustomerGroupPage {
            return false;}
 
 
+    public void updateExistingCustomerGroups( ){
+        Actions actions=new Actions(driver);
+        actions.moveToElement(customersManagerPage.customerLink).moveToElement(customerGroupsLink).click().build().perform();
+        functionClass.waitUntilElementPresent(groupFilterField);
+        groupFilterField.click();
+        groupFilterField.sendKeys(ApplicationConfig.readFromConfigProperties(config,"groupname"));
+        functionClass.waitUntilElementPresent(groupSearchButton);
+        groupSearchButton.click();
 
+        functionClass.waitUntilElementPresent(existingGroupName);
+        existingGroupName.click();
+        //existingGroupName.sendKeys(functionClass.generateFakeName());
+
+        functionClass.waitUntilElementPresent(TaxClass);
+        TaxClass.click();
+        Select select=new Select(TaxClass);
+        select.selectByIndex(3);
+        functionClass.waitUntilElementPresent(SaveCustomerGroupButton);
+        SaveCustomerGroupButton.click();
+
+    }
+    public boolean verifyUpdateExistingCustomerGroups(){
+        functionClass.waitUntilElementPresent(TheCustomerGroupHasBeenSavedMessage);
+        if (TheCustomerGroupHasBeenSavedMessage.getText().contains("saved")){
+            return true;
+        }else
+            return false;
+}
 
     }
 
