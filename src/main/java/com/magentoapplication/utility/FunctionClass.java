@@ -108,4 +108,9 @@ public class FunctionClass {
         alert.accept();
     }
 
+    public String generateFakeRedirectURL() {
+        return "https://www.fakeurl.com/path?param=value";
+
+
+    }
 }
