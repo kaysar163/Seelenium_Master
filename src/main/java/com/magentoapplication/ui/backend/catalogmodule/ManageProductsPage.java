@@ -62,6 +62,7 @@ public class ManageProductsPage {
        productnamerow.click();
        functionClass.waitUntilElementPresent(Deletebutton);
        Deletebutton.click();
+       functionClass.waitForAlertPresent();
        Alert alert=driver.switchTo().alert();
        alert.accept();
        functionClass.waitUntilElementPresent(deletesuccessfulmessage);
