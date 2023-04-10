@@ -36,13 +36,13 @@ public class ManageProductsPage {
     @FindBy(id="productGrid_product_filter_name")
     WebElement namefield;
 
-    @FindBy(id="id_13dac701a91cfeac9a4c2d96ac74dc16")
+    @FindBy(xpath="//span[text()='Search']")
     WebElement Searchbutton;
 
     @FindBy(xpath = "//tr[@class=\"even pointer\"]//td[3]")
     WebElement productnamerow;
 
-    @FindBy(id = "id_c14232bc8e83f6022184e2887b6f8641")
+    @FindBy(xpath = "//span[text()='Delete']")
     WebElement Deletebutton;
 
     @FindBy(xpath = "//span[text()='The product has been deleted.']")

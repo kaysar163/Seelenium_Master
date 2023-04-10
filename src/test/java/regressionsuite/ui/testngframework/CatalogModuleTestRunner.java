@@ -58,6 +58,14 @@ public class CatalogModuleTestRunner extends TestBase {
 
     }
 
+    @Test(description = "Fazilet", priority = 7)
+    public void deleteproducttest(){
+        manageProductsPage.deleteproduct();
+        Assert.assertTrue(manageProductsPage.verifydeletedproduct());
+    }
+
+
+
     @AfterClass
     public void tearDown(){
         closeBrowser();
