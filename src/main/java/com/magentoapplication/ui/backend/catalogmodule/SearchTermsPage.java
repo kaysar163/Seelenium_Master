@@ -1,11 +1,15 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import sun.security.util.ObjectIdentifier;
+
+import static sun.security.pkcs.PKCS9Attribute.getName;
 
 public class SearchTermsPage {
 
@@ -76,10 +80,32 @@ public class SearchTermsPage {
         }else return false;
 
     }
+
+    public void editProduct(){
+        FunctionClass functionPage = null;
+        functionPage.sleep(1);
+        functionClass.waitUntilElementPresent(SynonymFor);
+        SynonymFor.sendKeys(functionClass.generateFakeName());
+        functionClass.waitUntilElementPresent( RedirectURL);
+        RedirectURL.sendKeys(functionClass.generateFakeRedirectURL());
+        functionClass.waitUntilElementPresent(DisplayinSuggestedTerms);
+        Select select1=new Select(DisplayinSuggestedTerms);
+        select1.selectByValue("0");
+        functionClass.waitUntilElementPresent(SaveSearch);
+        SaveSearch.click();
+    }
+
+
+    public boolean VerifyEdit() {
+        functionClass.waitUntilElementPresent( SuccessfulSavesMessage );
+        if (SuccessfulSavesMessage.isDisplayed( )) {
+
+            return true;
+        } else
+            return false;
+
+    }
 }
-
-
-
 
 
 
