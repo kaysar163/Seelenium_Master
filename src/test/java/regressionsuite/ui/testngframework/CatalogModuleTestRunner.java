@@ -73,6 +73,14 @@ public class CatalogModuleTestRunner extends TestBase {
 
     }
 
+    @Test(description = "Mirehmidi",priority = 14)
+    public void SeachEditTest(){
+        searchTermsPage.NewSearchInfo();
+        Assert.assertTrue(searchTermsPage.VerifyEditNewSerach());
+    }
+
+
+
     @Test(description = "abdusattar")
     public void addSubCategory(){
         manageCategoriesPage.addSubCategory();

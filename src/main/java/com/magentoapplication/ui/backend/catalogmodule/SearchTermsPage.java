@@ -95,7 +95,7 @@ public class SearchTermsPage {
     }
 
 
-    public boolean VerifyAddNewSerach() {
+    public boolean VerifyEditNewSerach() {
         functionClass.waitUntilElementPresent( SuccessfulSavesMessage );
         if (SuccessfulSavesMessage.isDisplayed( )) {
 
