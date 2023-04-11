@@ -59,6 +59,11 @@ public class CatalogModuleTestRunner extends TestBase {
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
     }
+    @Test(description = "Omercan",priority = 3,dependsOnMethods ={"AddRootCategoriesTest"} )
+    public void deleteRootCatTes(){
+        manageCategoriesPage.deleteRootCat();
+        Assert.assertTrue(manageCategoriesPage.deleteCategorySuccessful());
+    }
 
     @Test(description = "kaysar", priority = 13)
     public void AddNewSeachTermTest() {

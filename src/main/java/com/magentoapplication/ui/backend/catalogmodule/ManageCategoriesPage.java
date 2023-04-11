@@ -2,10 +2,7 @@ package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -29,6 +26,12 @@ public class ManageCategoriesPage {
 
 
     // Elements
+//    @FindBy(xpath ="//span[text()='close (0)']//parent::a")
+//    WebElement rootCategory;
+    @FindBy(xpath = "//span[contains(text(),'Delete Category')]")
+    WebElement deleteCategoryButton;
+    @FindBy(xpath = "//span[contains(text(),'The category has been deleted.')]")
+    WebElement deleteCatSucMessage;
     String config = "testdatafolder/testdata.properties";
     @FindBy(xpath = "(//span[contains(text(),'Add Root Category')])[1]")
 
@@ -153,7 +156,8 @@ public class ManageCategoriesPage {
         rootCategoryLink.click();
         functionClass.waitUntilElementPresent(rootName);
         rootName.clear();
-        rootName.sendKeys(functionClass.generateFakeName());
+        TestHelperClassCatalog.setChangeRootName(functionClass.generateFakeName());
+        rootName.sendKeys(TestHelperClassCatalog.getChangeRootName());
         functionClass.waitUntilElementPresent(saveCategoryButton);
         functionClass.sleep(2);
         saveCategoryButton.click();
@@ -167,6 +171,28 @@ public class ManageCategoriesPage {
             return true;
         } else return false;
     }
+    public void deleteRootCat(){
+        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
+        catalogDashboardPage.clickOnCatalogLink();
+        catalogDashboardPage.clickOnManageCategoriesLink();
+        WebElement rootCategoryLink=driver.findElement
+                (By.xpath(String.format("//span[text()='%s (0)']//parent::a",TestHelperClassCatalog
+                        .getRootName())));
+        functionClass.waitUntilElementPresent(rootCategoryLink);
+        rootCategoryLink.click();
+        functionClass.waitUntilElementPresent(deleteCategoryButton);
+        deleteCategoryButton.click();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
+    }
+    public boolean deleteCategorySuccessful(){
+        functionClass.waitUntilElementPresent(deleteCatSucMessage);
+        if (deleteCatSucMessage.isDisplayed())
+            return true;
+        else return false;
+
+    }
+
 
     public void  editSubCategory(){
         functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
