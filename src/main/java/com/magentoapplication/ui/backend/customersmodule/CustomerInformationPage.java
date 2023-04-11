@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class CustomerInformationPage {
     WebDriver driver;
@@ -48,6 +49,39 @@ public class CustomerInformationPage {
     WebElement accountPassword;
     @FindBy(xpath = "(//button[@class='scalable save' and @title='Save Customer'])[2]")
     WebElement saveCustomerButton;
+    //Add to the new address element
+    @FindBy(id = "customer_info_tabs_addresses")
+    WebElement addressesButton;
+
+    @FindBy(name = "add_address_button")
+    WebElement addAddressesButton;
+
+    @FindBy(id = "address_item_billing_item1")
+    WebElement defualtBilling;
+
+    @FindBy(id = "address_item_shipping_item1")
+    WebElement defaultShpping;
+
+    @FindBy(xpath = "(//*[contains(@id,'street0')])[2]")
+    WebElement streetAddress;
+
+    @FindBy(id = "_item1city")
+    WebElement city;
+
+    @FindBy(css = ".input-text.required-entry.validate-select")
+    WebElement stateProvince;
+
+    @FindBy(css = "input[id='_item1postcode']")
+    WebElement zipPostalCode;
+
+    @FindBy(css = "input[id='_item1telephone']")
+    WebElement telephone;
+
+    @FindBy(xpath = "(//button[@class='scalable save'])[1]")
+    WebElement saveButton2;
+
+    @FindBy(xpath = "//span[text()='The customer has been saved.']")
+    WebElement verifyAddNewAddress;
 
     public void addCustomerMethod(){
         functionClass.waitUntilElementPresent(addNewCustomerLink);
@@ -94,6 +128,46 @@ public class CustomerInformationPage {
     public boolean passwordSuccessfullyChanged(){
         functionClass.waitUntilElementPresent(customersManagerPage.passwordChangeSuccessMessage);
         if(customersManagerPage.passwordChangeSuccessMessage.isDisplayed())
+            return true;
+        else return false;
+    }
+    public void customerManagerCanAddANewAddressForACustomer() {
+        functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
+        WebElement cusEditButt = driver.findElement(By.xpath("//tbody/tr/td[contains(text(),'elias.gerlach@yahoo.com')]//following::td[8]//a[text()='Edit']"));
+        functionClass.waitUntilElementPresent(cusEditButt);
+        cusEditButt.click();
+        functionClass.waitUntilElementPresent(addressesButton);
+        addressesButton.click();
+        functionClass.waitUntilElementPresent(addAddressesButton);
+        addAddressesButton.click();
+        functionClass.waitUntilElementPresent(defualtBilling);
+        defualtBilling.click();
+        functionClass.waitUntilElementPresent(defaultShpping);
+        defaultShpping.click();
+        functionClass.sleep(5);
+        functionClass.waitUntilElementPresent(streetAddress);
+        //streetAddress.clear();
+        streetAddress.sendKeys(functionClass.generateStreetName());
+        functionClass.waitUntilElementPresent(city);
+        city.sendKeys(functionClass.generateCityName());
+        functionClass.waitUntilElementPresent(stateProvince);
+        Select select = new Select(stateProvince);
+        select.selectByValue("12");
+        zipPostalCode.sendKeys(functionClass.generateZipCode());
+        telephone.sendKeys(functionClass.generateTelephoneNumber());
+        //functionClass.waitUntilElementPresent(saveCustomerButton);
+        functionClass.sleep(3);
+        Actions actions1=new Actions(driver);
+        actions1.click(saveButton2).build().perform();
+        //saveCustomerButton.click();
+
+    }
+    public boolean verifyAddNewAddress() {
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(verifyAddNewAddress);
+        if (verifyAddNewAddress.isDisplayed())
             return true;
         else return false;
     }

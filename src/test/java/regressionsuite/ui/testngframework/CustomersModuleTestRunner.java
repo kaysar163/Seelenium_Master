@@ -108,6 +108,15 @@ public class CustomersModuleTestRunner extends TestBase {
         customersManagerPage.deleteCustomer();
         Assert.assertTrue(customersManagerPage.verifyDeleteCustomer());
     }
+
+    @Test
+    public void addNewAddressTest(){
+        customerInformationPage.customerManagerCanAddANewAddressForACustomer();
+        Assert.assertTrue(customerInformationPage.verifyAddNewAddress());
+
+    }
+
+
     @Test(description = "meryem",dependsOnMethods = {"addNewCustomerGroup"}, priority = 9)
     public void editCustomerGroup() {
         editCustomerGroupPage.editCustomerGroupInfo();
