@@ -75,7 +75,8 @@ public class EditCustomerGroupPage {
     public void deleteCustomerGroupInfo() {
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(groupNameSearchField);
-        groupNameSearchField.sendKeys(TestHelperClass.getGroupName());
+        groupNameSearchField.clear();
+        groupNameSearchField.sendKeys(TestHelperClass.getChangedGroupName());
         functionClass.waitUntilElementPresent(searButton);
         searButton.click();
         WebElement editCustomerGroupButton=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",TestHelperClass.getChangedGroupName())));

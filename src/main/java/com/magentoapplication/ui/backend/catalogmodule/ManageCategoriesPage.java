@@ -1,5 +1,6 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
+import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class ManageCategoriesPage {
 
     CatalogDashboardPage catalogDashboardPage;
 
+
     public ManageCategoriesPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
@@ -25,17 +27,22 @@ public class ManageCategoriesPage {
 
 
     // Elements
+    String config = "testdatafolder/testdata.properties";
     @FindBy(xpath = "(//span[contains(text(),'Add Root Category')])[1]")
 
-    WebElement Addrootcategory;
+    WebElement addRootCategory;
 
     @FindBy(id = "group_4name")
+
     WebElement rootName;
     @FindBy( id="group_4is_active")
+
     WebElement isActive;
     @FindBy(id = "group_4description")
+
     WebElement description;
     @FindBy(id = "group_4meta_title")
+
     WebElement pagaTitle;
     @FindBy(id = "group_4meta_keywords")
     WebElement metaKeywords;
@@ -44,18 +51,12 @@ public class ManageCategoriesPage {
     @FindBy(id = "group_4include_in_menu")
     WebElement IncludeInNavigationMenu;
     @FindBy(xpath = ("//span[contains(text(),'Save Category')]"))
-    WebElement SavaCategoriesButton;
+    WebElement savaCategoriesButton;
     @FindBy(xpath= "//span[normalize-space()='The category has been saved.']")
-    WebElement SuccessfulSavesMessage;
+    WebElement successfulSavesMessage;
 
-    // meryem edit
-    @FindBy(xpath = "//span[text()='Books (6)']//parent::a")
-    WebElement rootCategoryLink;
-    @FindBy(xpath = "//span[text()='Save Category']")
-    WebElement saveCategoryButton;
-    @FindBy(xpath = "//span[text()='The category has been saved.']")
-    WebElement categorySavedMessage;
-
+    @FindBy (xpath = "//span[contains(text(),'Dewitt Kirlin (1)')]")
+    WebElement subcat1;
 
     @FindBy(xpath = "//*[text()='pc portable (0)']")
     WebElement subCat;
@@ -64,12 +65,41 @@ public class ManageCategoriesPage {
     @FindBy(xpath = "//*[text()='The category has been deleted.']")
     WebElement sucCatDeletedMessage;
 
+    //sattar add sub category
+
+    @FindBy(id = "add_subcategory_button")
+    WebElement addSubCategoryButton;
+
+    public void addSubCategory(){
+        catalogDashboardPage.catalogLink.click();
+        catalogDashboardPage.clickOnManageCategoriesLink();
+        functionClass.waitUntilElementPresent(addSubCategoryButton);
+        addSubCategoryButton.click();
+        functionClass.waitUntilElementPresent(rootName);
+        TestHelperClassCatalog.setSubName(functionClass.generateFakeName());
+        rootName.sendKeys(TestHelperClassCatalog.getSubName());
+        Select select=new Select(isActive);
+        select.selectByValue("1");
+        functionClass.waitUntilElementPresent(description);
+        description.sendKeys(functionClass.generateZipCode());
+        functionClass.waitUntilElementPresent(pagaTitle);
+        pagaTitle.sendKeys(functionClass.generateStreetName());
+        functionClass.waitUntilElementPresent(savaCategoriesButton);
+        savaCategoriesButton.click();
+    }
+
+    public boolean verifyAddSubCategory(){
+        functionClass.waitUntilElementPresent(successfulSavesMessage);
+        if (successfulSavesMessage.isDisplayed())
+            return true;
+        return false;
+    }
 
     public  void fillCategoryInformationAndSave() {
         catalogDashboardPage. clickOnCatalogLink();
         catalogDashboardPage.clickOnManageCategoriesLink();
-        functionClass.waitUntilElementPresent(Addrootcategory);
-        Addrootcategory.click();
+        functionClass.waitUntilElementPresent(addRootCategory);
+        addRootCategory.click();
         functionClass.waitUntilElementPresent(rootName);
         rootName.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent(isActive);
@@ -86,38 +116,42 @@ public class ManageCategoriesPage {
         functionClass.waitUntilElementPresent(IncludeInNavigationMenu);
         Select select1=new Select(IncludeInNavigationMenu);
         select1.selectByValue("0");
-        functionClass.waitUntilElementPresent(SavaCategoriesButton);
-        SavaCategoriesButton.click();
+        functionClass.waitUntilElementPresent(savaCategoriesButton);
+        savaCategoriesButton.click();
     }
     public boolean VerifyAddCatogories(){
-        functionClass.waitUntilElementPresent(SuccessfulSavesMessage);
-        if (SuccessfulSavesMessage.isDisplayed()) {
+        functionClass.waitUntilElementPresent(successfulSavesMessage);
+        if (successfulSavesMessage.isDisplayed()) {
             return true;
         } else return false;
     }
-    // meryem
-    public void editCatogoriesInfo(){
+
+    public void  editSubCategory(){
+        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
         catalogDashboardPage. clickOnCatalogLink();
         catalogDashboardPage.clickOnManageCategoriesLink();
-        functionClass.waitUntilElementPresent(rootCategoryLink);
-        rootCategoryLink.click();
-        functionClass.waitUntilElementPresent(rootName);
-        rootName.clear();
-        rootName.sendKeys(functionClass.generateFakeName());
-        functionClass.waitUntilElementPresent(saveCategoryButton);
-       saveCategoryButton.click();
-
+        functionClass.sleep(3);
+       // Actions actions=new Actions(driver);
+        //actions.moveToElement(subcat1).click().perform();
+        functionClass.waitUntilElementPresent(subcat1);
+        subcat1.click();
+        functionClass.sleep(3);
+        functionClass.waitUntilElementPresent(description);
+        description.clear();
+        description.isSelected();
+        description.sendKeys("good");
+        functionClass.waitUntilElementPresent(savaCategoriesButton);
+        savaCategoriesButton.click();
 
     }
 
-    public boolean verifyEditCatogories(){
-        functionClass.waitUntilElementPresent(categorySavedMessage);
-        if (categorySavedMessage.isDisplayed()) {
+    public  boolean verifyEditSubCategory(){
+        functionClass.waitUntilElementPresent(successfulSavesMessage);
+        if(successfulSavesMessage.isDisplayed()){
             return true;
-        } else return false;
+        }
+        else return false;
     }
-
-
     public void subCatDelete(){
         functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
         catalogDashboardPage.clickOnCatalogLink();
