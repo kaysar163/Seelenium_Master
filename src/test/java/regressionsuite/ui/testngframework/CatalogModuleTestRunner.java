@@ -25,6 +25,8 @@ public class CatalogModuleTestRunner extends TestBase {
 
     SearchTermsPage searchTermsPage;
 
+    CatalogDashboardPage catalogDashboardPage;
+
 
 
     @BeforeClass
@@ -70,6 +72,13 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
     }
 
+
+    @Test(description = "rizvangul")
+    public void addProductTest(){
+        manageProductsPage.addProduct();
+        Assert.assertTrue(manageProductsPage.verifyAddProduct());
+
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
