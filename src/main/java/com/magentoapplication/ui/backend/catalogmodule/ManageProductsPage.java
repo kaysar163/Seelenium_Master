@@ -1,9 +1,11 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -67,6 +69,19 @@ public class ManageProductsPage {
     @FindBy(xpath = "//span[text()=\"The product has been saved.\"]")
     WebElement editProductSuccessMassage;
 
+    //Fazilet
+
+    @FindBy(id="productGrid_product_filter_name")
+    WebElement nameField;
+
+    @FindBy(xpath="//span[text()='Search']")
+    WebElement searchButton;
+
+    @FindBy(xpath = "//span[text()='Delete']")
+    WebElement deleteButton;
+
+    @FindBy(xpath = "//span[text()='The product has been deleted.']")
+    WebElement deletesuccessfulmessage;
 
     public void addProduct() {
         functionClass.waitUntilElementPresent(catalogLink);
@@ -167,4 +182,38 @@ public class ManageProductsPage {
 
     }
 
+
+    public void deleteproduct(){
+
+        Actions actions=new Actions(driver);
+        actions.moveToElement(catalogDashboardPage.catalogLink).moveToElement(catalogDashboardPage.manageProductsLink).click().build().perform();
+        nameField.sendKeys(TestHelperClassCatalog.getChangedProductName());
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(editIcon);
+        editIcon.click();
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(deleteButton);
+        deleteButton.click();
+        functionClass.waitForAlertPresent();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
+
+
+
+    }
+
+
+    public boolean verifydeletedproduct(){
+        if (deletesuccessfulmessage.getText().equals("The product has been deleted."))
+            return true;
+        else
+            return false;
+    }
+
 }
+
+
+
