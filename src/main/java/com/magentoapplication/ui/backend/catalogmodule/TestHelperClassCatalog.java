@@ -6,6 +6,25 @@ public class TestHelperClassCatalog {
     private static String rootName;
     private static String changeRootName;
 
+    private static String productName;
+    private static  String changedProductName;
+
+    public static String getChangedProductName() {
+        return changedProductName;
+    }
+
+    public static void setChangedProductName(String changedProductName) {
+        TestHelperClassCatalog.changedProductName = changedProductName;
+    }
+
+    public static String getProductName() {
+        return productName;
+    }
+
+    public static void setProductName(String productName) {
+        TestHelperClassCatalog.productName = productName;
+    }
+
     public static String getSubName() {
         return subName;
     }
