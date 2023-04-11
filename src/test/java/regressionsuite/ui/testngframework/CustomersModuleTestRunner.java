@@ -135,7 +135,7 @@ public class CustomersModuleTestRunner extends TestBase {
     }
     @AfterClass
     public void tearDown(){
-       // closeBrowser();
+        closeBrowser();
     }
 
 

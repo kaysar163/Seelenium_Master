@@ -135,7 +135,7 @@ public class CustomerInformationPage {
         functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
         Actions actions = new Actions(driver);
         actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
-        WebElement cusEditButt = driver.findElement(By.xpath("//tbody/tr/td[contains(text(),'eldon.fay35@luettgen.name')]//following::td[8]//a[text()='Edit']"));
+        WebElement cusEditButt = driver.findElement(By.xpath("//tbody/tr/td[contains(text(),'elias.gerlach@yahoo.com')]//following::td[8]//a[text()='Edit']"));
         functionClass.waitUntilElementPresent(cusEditButt);
         cusEditButt.click();
         functionClass.waitUntilElementPresent(addressesButton);
