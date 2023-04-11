@@ -72,8 +72,8 @@ public class ManageCategoriesPage {
     @FindBy (xpath = "//span[contains(text(),'Dewitt Kirlin (1)')]")
     WebElement subcat1;
 
-    @FindBy(xpath = "//*[text()='pc portable (0)']")
-    WebElement subCat;
+//    @FindBy(xpath = "//*[text()='pc portable (0)']")
+//    WebElement subCat;
     @FindBy(xpath = "//*[@class='scalable delete']")
     WebElement deleteCatButton;
     @FindBy(xpath = "//*[text()='The category has been deleted.']")
@@ -91,7 +91,9 @@ public class ManageCategoriesPage {
         addSubCategoryButton.click();
         functionClass.waitUntilElementPresent(rootName);
         TestHelperClassCatalog.setSubName(functionClass.generateFakeName());
+        functionClass.sleep(3);
         rootName.sendKeys(TestHelperClassCatalog.getSubName());
+        functionClass.sleep(3);
         Select select=new Select(isActive);
         select.selectByValue("1");
         functionClass.waitUntilElementPresent(description);
@@ -225,7 +227,10 @@ public class ManageCategoriesPage {
         catalogDashboardPage.clickOnCatalogLink();
         catalogDashboardPage.clickOnManageCategoriesLink();
         functionClass.sleep(10);
+        String subCatName=TestHelperClassCatalog.getSubName();
+        WebElement subCat=driver.findElement(By.xpath(String.format("//*[text()='%s (0)']",subCatName)));
         subCat.click();
+//        subCat.click();
         functionClass.waitUntilElementPresent(deleteCatButton);
         deleteCatButton.click();
         functionClass.waitForAlertPresent();

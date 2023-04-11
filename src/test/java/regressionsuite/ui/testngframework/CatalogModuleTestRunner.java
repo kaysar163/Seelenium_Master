@@ -54,7 +54,7 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.verifyEditCatogories());
     }
 
-    @Test(description = "Memet")
+    @Test(description = "Memet",dependsOnMethods = "addSubCategory")
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
@@ -72,6 +72,14 @@ public class CatalogModuleTestRunner extends TestBase {
 
 
     }
+
+    @Test(description = "Mirehmidi",priority = 14)
+    public void SeachEditTest(){
+        searchTermsPage.NewSearchInfo();
+        Assert.assertTrue(searchTermsPage.VerifyEditNewSerach());
+    }
+
+
 
     @Test(description = "abdusattar")
     public void addSubCategory(){
