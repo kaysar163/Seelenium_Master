@@ -25,6 +25,8 @@ public class CatalogModuleTestRunner extends TestBase {
 
     SearchTermsPage searchTermsPage;
 
+    CatalogDashboardPage catalogDashboardPage;
+
 
     @BeforeClass
     public void setUp(ITestContext context){
@@ -69,6 +71,20 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
     }
 
+
+    @Test(description = "rizvangul")
+    public void addProductTest(){
+        manageProductsPage.addProduct();
+        Assert.assertTrue(manageProductsPage.verifyAddProduct());
+
+    }
+
+    @Test(description = "rizvangul")
+    public void editProductTest(){
+        manageProductsPage.editProduct();
+        Assert.assertTrue(manageProductsPage.verifyEditProduct());
+
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
