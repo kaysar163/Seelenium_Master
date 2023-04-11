@@ -136,4 +136,10 @@ public class ManageCategoriesPage {
         else return false;
     }
 
+    public void editSubCategory() {
+    }
+
+    public boolean verifyEditSubCategory() {
+        return false;
+    }
 }

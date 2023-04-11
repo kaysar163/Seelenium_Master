@@ -20,13 +20,4 @@ public class ManageProductsPage {
     }
 
 
-    // Elements
-
-
-
-
-
-    // Methods
-
-
 }

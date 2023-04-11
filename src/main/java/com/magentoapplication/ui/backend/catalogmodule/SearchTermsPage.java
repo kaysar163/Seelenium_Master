@@ -81,7 +81,7 @@ public class SearchTermsPage {
 
     }
 
-    public void editProduct(){
+    public void SeachEditTest(){
         FunctionClass functionPage = null;
         functionPage.sleep(1);
         functionClass.waitUntilElementPresent(SynonymFor);
@@ -96,7 +96,7 @@ public class SearchTermsPage {
     }
 
 
-    public boolean VerifyEdit() {
+    public boolean VerifyAddNewSerach() {
         functionClass.waitUntilElementPresent( SuccessfulSavesMessage );
         if (SuccessfulSavesMessage.isDisplayed( )) {
 

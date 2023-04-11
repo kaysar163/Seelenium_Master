@@ -25,6 +25,8 @@ public class CatalogModuleTestRunner extends TestBase {
 
     SearchTermsPage searchTermsPage;
 
+    CatalogDashboardPage catalogDashboardPage;
+
 
 
     @BeforeClass
@@ -58,12 +60,40 @@ public class CatalogModuleTestRunner extends TestBase {
 
     }
 
+    @Test(description = "Mirehmidi",priority = 14)
+    public void SeachEditTest(){
+        searchTermsPage.NewSearchInfo();
+        Assert.assertEquals( searchTermsPage.VerifyAddNewSerach());
+    }
+
+
+
     @Test(description = "abdusattar")
     public void addSubCategory(){
         manageCategoriesPage.addSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
     }
 
+    @Test(description = "muyesser")
+    public void editSubCategoryTest(){
+        manageCategoriesPage.editSubCategory();
+        Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
+    }
+
+
+    @Test(description = "rizvangul")
+    public void addProductTest(){
+        manageProductsPage.editProduct();
+        Assert.assertTrue(manageProductsPage.verifyAddProduct());
+
+    }
+
+    @Test(description = "rizvangul")
+    public void editProductTest(){
+        manageProductsPage.editProduct();
+        Assert.assertTrue(manageProductsPage.verifyEditProduct());
+
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
