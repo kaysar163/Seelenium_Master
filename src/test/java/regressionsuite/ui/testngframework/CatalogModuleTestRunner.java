@@ -79,6 +79,13 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
     }
+
+    @Test(description = "rizvangul")
+    public void editProductTest(){
+        manageProductsPage.editProduct();
+        Assert.assertTrue(manageProductsPage.verifyEditProduct());
+
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();

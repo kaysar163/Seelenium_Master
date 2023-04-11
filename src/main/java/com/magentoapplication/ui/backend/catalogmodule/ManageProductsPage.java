@@ -59,6 +59,13 @@ public class ManageProductsPage {
     @FindBy(xpath = "//span[text()=\"The product has been saved.\"]")
     WebElement addProductSuccessMassage;
 
+    @FindBy(xpath = "(//a[text()=\"Edit\"])[2]")
+    WebElement editIcon;
+    @FindBy(xpath = "//span[text()=\"Prices\"]")
+    WebElement productPricesPageLink;
+    @FindBy(xpath = "//span[text()=\"The product has been saved.\"]")
+    WebElement editProductSuccessMassage;
+
 
     public void addProduct() {
         functionClass.waitUntilElementPresent(catalogLink);
@@ -126,6 +133,33 @@ public class ManageProductsPage {
 
     }
 
+    public void editProduct() {
+        functionClass.waitUntilElementPresent(catalogLink);
+        catalogLink.click();
+        functionClass.waitUntilElementPresent(manageProductsLink);
+        manageProductsLink.click();
+        functionClass.waitUntilElementPresent(editIcon);
+        editIcon.click();
+        functionClass.waitUntilElementPresent(productName);
+        productName.clear();
+        productName.sendKeys(functionClass.generateProductName());
+        functionClass.waitUntilElementPresent(productPricesPageLink);
+        productPricesPageLink.click();
+        functionClass.waitUntilElementPresent(productPrice);
+        productPrice.clear();
+        productPrice.sendKeys(functionClass.generateProductPrice());
+        functionClass.waitUntilElementPresent(saveButton);
+        saveButton.click();
+
+    }
+
+    public boolean verifyEditProduct() {
+        functionClass.waitUntilElementPresent(editProductSuccessMassage);
+        if (editProductSuccessMassage.isDisplayed())
+            return true;
+        else return false;
+
+    }
 
     // Method
 }
