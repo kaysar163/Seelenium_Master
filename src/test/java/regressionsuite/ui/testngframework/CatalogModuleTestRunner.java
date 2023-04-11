@@ -46,10 +46,23 @@ public class CatalogModuleTestRunner extends TestBase {
         manageCategoriesPage.fillCategoryInformationAndSave();
         Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
+
+    @Test(description = "meryem", priority = 2,dependsOnMethods = {"AddRootCategoriesTest"})
+
+    public void EditCategoriesTest() {
+        manageCategoriesPage.editCatogoriesInfo();
+        Assert.assertTrue(manageCategoriesPage.verifyEditCatogories());
+    }
+
     @Test(description = "Memet")
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
+    }
+    @Test(description = "Omercan",priority = 3,dependsOnMethods ={"AddRootCategoriesTest"} )
+    public void deleteRootCatTes(){
+        manageCategoriesPage.deleteRootCat();
+        Assert.assertTrue(manageCategoriesPage.deleteCategorySuccessful());
     }
 
     @Test(description = "kaysar", priority = 13)
@@ -59,14 +72,6 @@ public class CatalogModuleTestRunner extends TestBase {
 
 
     }
-
-    @Test(description = "Mirehmidi",priority = 14)
-    public void SeachEditTest(){
-        searchTermsPage.NewSearchInfo();
-        Assert.assertEquals( searchTermsPage.VerifyAddNewSerach());
-    }
-
-
 
     @Test(description = "abdusattar")
     public void addSubCategory(){
@@ -83,7 +88,7 @@ public class CatalogModuleTestRunner extends TestBase {
 
     @Test(description = "rizvangul")
     public void addProductTest(){
-        manageProductsPage.editProduct();
+        manageProductsPage.addProduct();
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
     }
