@@ -47,7 +47,8 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
 
-    @Test(description = "meryem", priority = 2)
+    @Test(description = "meryem", priority = 2,dependsOnMethods = {"AddRootCategoriesTest"})
+
     public void EditCategoriesTest() {
         manageCategoriesPage.editCatogoriesInfo();
         Assert.assertTrue(manageCategoriesPage.verifyEditCatogories());
