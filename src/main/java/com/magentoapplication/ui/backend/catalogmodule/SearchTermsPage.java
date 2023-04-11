@@ -82,8 +82,7 @@ public class SearchTermsPage {
     }
 
     public void SeachEditTest(){
-        FunctionClass functionPage = null;
-        functionPage.sleep(1);
+        functionClass.sleep(1);
         functionClass.waitUntilElementPresent(SynonymFor);
         SynonymFor.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent( RedirectURL);
