@@ -28,6 +28,7 @@ public class CatalogModuleTestRunner extends TestBase {
     CatalogDashboardPage catalogDashboardPage;
 
 
+
     @BeforeClass
     public void setUp(ITestContext context){
         setupBrowserBackEnd();
@@ -45,10 +46,23 @@ public class CatalogModuleTestRunner extends TestBase {
         manageCategoriesPage.fillCategoryInformationAndSave();
         Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
-    @Test(description = "Memet",dependsOnMethods = "addSubCategory")
+
+    @Test(description = "meryem", priority = 2,dependsOnMethods = {"AddRootCategoriesTest"})
+
+    public void EditCategoriesTest() {
+        manageCategoriesPage.editCatogoriesInfo();
+        Assert.assertTrue(manageCategoriesPage.verifyEditCatogories());
+    }
+
+    @Test(description = "Memet")
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
+    }
+    @Test(description = "Omercan",priority = 3,dependsOnMethods ={"AddRootCategoriesTest"} )
+    public void deleteRootCatTes(){
+        manageCategoriesPage.deleteRootCat();
+        Assert.assertTrue(manageCategoriesPage.deleteCategorySuccessful());
     }
 
     @Test(description = "kaysar", priority = 13)

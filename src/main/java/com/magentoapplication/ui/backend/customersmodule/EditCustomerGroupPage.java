@@ -34,6 +34,7 @@ public class EditCustomerGroupPage {
     WebElement saveCustomerButton;
     @FindBy(xpath = "//span[text()='The customer group has been saved.']")
     WebElement verifyCustomerGroupEditedMessage;
+
     //meryem
     @FindBy(xpath = "(//span[contains(text(),'Delete Customer Group')])[1]")
     WebElement deleteGroupButton;
