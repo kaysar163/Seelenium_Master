@@ -90,7 +90,7 @@ public class CustomerGroupPage {
         actions.moveToElement(customersManagerPage.customerLink).moveToElement(customerGroupsLink).click().build().perform();
         functionClass.waitUntilElementPresent(groupFilterField);
         groupFilterField.click();
-        groupFilterField.sendKeys(ApplicationConfig.readFromConfigProperties(config,"groupname"));
+        groupFilterField.sendKeys(TestHelperClass.getGroupName());
         functionClass.waitUntilElementPresent(groupSearchButton);
         groupSearchButton.click();
 

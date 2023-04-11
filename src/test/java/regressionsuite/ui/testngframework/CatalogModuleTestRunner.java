@@ -21,7 +21,6 @@ public class CatalogModuleTestRunner extends TestBase {
 
     ManageProductsPage manageProductsPage;
 
-    ProductInfoPage productInfoPage;
 
     SearchTermsPage searchTermsPage;
 
@@ -38,7 +37,6 @@ public class CatalogModuleTestRunner extends TestBase {
         manageAttributesPage=new ManageAttributesPage(driver);
         manageCategoriesPage=new ManageCategoriesPage(driver);
         manageProductsPage=new ManageProductsPage(driver);
-        productInfoPage=new ProductInfoPage(driver);
         searchTermsPage=new SearchTermsPage(driver);
     }
     @Test(description = "kaysar", priority = 1)
