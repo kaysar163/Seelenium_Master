@@ -93,7 +93,7 @@ public class CatalogModuleTestRunner extends TestBase {
 
     }
 
-    @Test(description = "rizvangul")
+    @Test(description = "rizvangul",dependsOnMethods ={"addProductTest"})
     public void editProductTest(){
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());

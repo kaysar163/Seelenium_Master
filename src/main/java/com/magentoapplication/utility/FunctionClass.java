@@ -129,7 +129,7 @@ public class FunctionClass {
 
     public String generateProductPrice() {
         Faker faker = new Faker();
-        int productPrice = Faker.instance().number().randomDigit();
+        int productPrice = Faker.instance().number().randomDigitNotZero();
         return String.valueOf(productPrice);
     }
     public void waitForAlertPresent(){

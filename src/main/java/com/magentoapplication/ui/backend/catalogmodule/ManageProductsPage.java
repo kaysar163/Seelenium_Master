@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -59,7 +60,7 @@ public class ManageProductsPage {
     @FindBy(xpath = "//span[text()=\"The product has been saved.\"]")
     WebElement addProductSuccessMassage;
 
-    @FindBy(xpath = "(//a[text()=\"Edit\"])[2]")
+    @FindBy(xpath = "(//a[text()=\"Edit\"])[1]")
     WebElement editIcon;
     @FindBy(xpath = "//span[text()=\"Prices\"]")
     WebElement productPricesPageLink;
@@ -89,7 +90,9 @@ public class ManageProductsPage {
         continueButton.click();
 
         functionClass.waitUntilElementPresent(productName);
-        productName.sendKeys(functionClass.generateProductName());
+        TestHelperClassCatalog.setProductName(functionClass.generateProductName());
+        productName.sendKeys(TestHelperClassCatalog.getProductName());
+
         functionClass.waitUntilElementPresent(productDescription);
         productDescription.sendKeys(functionClass.generateProductDescription());
         functionClass.waitUntilElementPresent(productShortDescription);
@@ -138,11 +141,14 @@ public class ManageProductsPage {
         catalogLink.click();
         functionClass.waitUntilElementPresent(manageProductsLink);
         manageProductsLink.click();
-        functionClass.waitUntilElementPresent(editIcon);
-        editIcon.click();
+        WebElement editProductName=driver.findElement (By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a",
+                TestHelperClassCatalog.getProductName())));
+        functionClass.waitUntilElementPresent(editProductName);
+        editProductName.click();
         functionClass.waitUntilElementPresent(productName);
         productName.clear();
-        productName.sendKeys(functionClass.generateProductName());
+        TestHelperClassCatalog.setChangedProductName(functionClass.generateProductName());
+        productName.sendKeys(TestHelperClassCatalog.getChangedProductName());
         functionClass.waitUntilElementPresent(productPricesPageLink);
         productPricesPageLink.click();
         functionClass.waitUntilElementPresent(productPrice);
@@ -161,5 +167,4 @@ public class ManageProductsPage {
 
     }
 
-    // Method
 }
