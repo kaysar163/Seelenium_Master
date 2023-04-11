@@ -219,9 +219,23 @@ public class CustomersManagerPage {
         if (verifyFilteredState.isDisplayed());
         return true;
     }
+
+    public void filterCustomersBywebsite() {
+        functionClass.waitUntilElementPresent( resetFilterButton );
+        functionClass.sleep( 1 );
+        resetFilterButton.click( );
+        functionClass.waitUntilElementPresent( CountryDropdown );
+        functionClass.sleep( 1 );
+        CountryDropdown.click( );
+        functionClass.waitUntilElementPresent( SearchButton );
+        SearchButton.click( );
+
+    }
+
+    public boolean verifyWebsite() {
+        if (verifyUpdateMessage.isDisplayed())
+            return true;
+        else return false;
+
+    }
 }
-
-
-
-
-
