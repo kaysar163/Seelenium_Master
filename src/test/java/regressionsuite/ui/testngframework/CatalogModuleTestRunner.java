@@ -94,19 +94,25 @@ public class CatalogModuleTestRunner extends TestBase {
     }
 
 
-    @Test(description = "rizvangul")
+    @Test(description = "rizvangul",priority = 1)
     public void addProductTest(){
         manageProductsPage.addProduct();
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
     }
 
-    @Test(description = "rizvangul",dependsOnMethods ={"addProductTest"})
+    @Test(description = "rizvangul",dependsOnMethods ={"addProductTest"},priority = 2)
     public void editProductTest(){
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
 
     }
+    @Test(description = "Fazilet",dependsOnMethods ={"editProductTest"},priority = 3)
+    public void deleteProductTest() {
+        manageProductsPage.deleteproduct();
+        Assert.assertTrue(manageProductsPage.verifydeletedproduct());
+    }
+
     @AfterClass
     public void tearDown(){
         closeBrowser();
