@@ -1,7 +1,11 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.apache.xmlbeans.impl.xb.xsdschema.FieldDocument;
+import org.apache.xmlbeans.impl.xb.xsdschema.SelectorDocument;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class ProductInfoPage {
@@ -20,6 +24,13 @@ public class ProductInfoPage {
     }
 
     // Elements
+
+
+
+
+
+
+
 
 
 

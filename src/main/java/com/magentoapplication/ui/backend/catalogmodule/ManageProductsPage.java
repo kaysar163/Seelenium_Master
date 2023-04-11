@@ -1,8 +1,11 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -59,13 +62,26 @@ public class ManageProductsPage {
     @FindBy(xpath = "//span[text()=\"The product has been saved.\"]")
     WebElement addProductSuccessMassage;
 
-    @FindBy(xpath = "(//a[text()=\"Edit\"])[2]")
+    @FindBy(xpath = "(//a[text()=\"Edit\"])[1]")
     WebElement editIcon;
     @FindBy(xpath = "//span[text()=\"Prices\"]")
     WebElement productPricesPageLink;
     @FindBy(xpath = "//span[text()=\"The product has been saved.\"]")
     WebElement editProductSuccessMassage;
 
+    //Fazilet
+
+    @FindBy(id="productGrid_product_filter_name")
+    WebElement nameField;
+
+    @FindBy(xpath="//span[text()='Search']")
+    WebElement searchButton;
+
+    @FindBy(xpath = "//span[text()='Delete']")
+    WebElement deleteButton;
+
+    @FindBy(xpath = "//span[text()='The product has been deleted.']")
+    WebElement deletesuccessfulmessage;
 
     public void addProduct() {
         functionClass.waitUntilElementPresent(catalogLink);
@@ -89,7 +105,9 @@ public class ManageProductsPage {
         continueButton.click();
 
         functionClass.waitUntilElementPresent(productName);
-        productName.sendKeys(functionClass.generateProductName());
+        TestHelperClassCatalog.setProductName(functionClass.generateProductName());
+        productName.sendKeys(TestHelperClassCatalog.getProductName());
+
         functionClass.waitUntilElementPresent(productDescription);
         productDescription.sendKeys(functionClass.generateProductDescription());
         functionClass.waitUntilElementPresent(productShortDescription);
@@ -138,11 +156,14 @@ public class ManageProductsPage {
         catalogLink.click();
         functionClass.waitUntilElementPresent(manageProductsLink);
         manageProductsLink.click();
-        functionClass.waitUntilElementPresent(editIcon);
-        editIcon.click();
+        WebElement editProductName=driver.findElement (By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a",
+                TestHelperClassCatalog.getProductName())));
+        functionClass.waitUntilElementPresent(editProductName);
+        editProductName.click();
         functionClass.waitUntilElementPresent(productName);
         productName.clear();
-        productName.sendKeys(functionClass.generateProductName());
+        TestHelperClassCatalog.setChangedProductName(functionClass.generateProductName());
+        productName.sendKeys(TestHelperClassCatalog.getChangedProductName());
         functionClass.waitUntilElementPresent(productPricesPageLink);
         productPricesPageLink.click();
         functionClass.waitUntilElementPresent(productPrice);
@@ -161,5 +182,38 @@ public class ManageProductsPage {
 
     }
 
-    // Method
+
+    public void deleteproduct(){
+
+        Actions actions=new Actions(driver);
+        actions.moveToElement(catalogDashboardPage.catalogLink).moveToElement(catalogDashboardPage.manageProductsLink).click().build().perform();
+        nameField.sendKeys(TestHelperClassCatalog.getChangedProductName());
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(editIcon);
+        editIcon.click();
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(deleteButton);
+        deleteButton.click();
+        functionClass.waitForAlertPresent();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
+
+
+
+    }
+
+
+    public boolean verifydeletedproduct(){
+        if (deletesuccessfulmessage.getText().equals("The product has been deleted."))
+            return true;
+        else
+            return false;
+    }
+
 }
+
+
+

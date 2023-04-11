@@ -46,10 +46,23 @@ public class CatalogModuleTestRunner extends TestBase {
         manageCategoriesPage.fillCategoryInformationAndSave();
         Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
-    @Test(description = "Memet")
+
+    @Test(description = "meryem", priority = 2,dependsOnMethods = {"AddRootCategoriesTest"})
+
+    public void EditCategoriesTest() {
+        manageCategoriesPage.editCatogoriesInfo();
+        Assert.assertTrue(manageCategoriesPage.verifyEditCatogories());
+    }
+
+    @Test(description = "Memet",dependsOnMethods = "addSubCategory")
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
+    }
+    @Test(description = "Omercan",priority = 3,dependsOnMethods ={"AddRootCategoriesTest"} )
+    public void deleteRootCatTes(){
+        manageCategoriesPage.deleteRootCat();
+        Assert.assertTrue(manageCategoriesPage.deleteCategorySuccessful());
     }
 
     @Test(description = "kaysar", priority = 13)
@@ -59,6 +72,14 @@ public class CatalogModuleTestRunner extends TestBase {
 
 
     }
+
+    @Test(description = "Mirehmidi",priority = 14)
+    public void SeachEditTest(){
+        searchTermsPage.NewSearchInfo();
+        Assert.assertTrue(searchTermsPage.VerifyEditNewSerach());
+    }
+
+
 
     @Test(description = "abdusattar")
     public void addSubCategory(){
@@ -73,19 +94,25 @@ public class CatalogModuleTestRunner extends TestBase {
     }
 
 
-    @Test(description = "rizvangul")
+    @Test(description = "rizvangul",priority = 1)
     public void addProductTest(){
         manageProductsPage.addProduct();
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
     }
 
-    @Test(description = "rizvangul")
+    @Test(description = "rizvangul",dependsOnMethods ={"addProductTest"},priority = 2)
     public void editProductTest(){
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
 
     }
+    @Test(description = "Fazilet",dependsOnMethods ={"editProductTest"},priority = 3)
+    public void deleteProductTest() {
+        manageProductsPage.deleteproduct();
+        Assert.assertTrue(manageProductsPage.verifydeletedproduct());
+    }
+
     @AfterClass
     public void tearDown(){
         closeBrowser();
