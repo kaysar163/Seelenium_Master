@@ -72,10 +72,19 @@ public class CustomerInformationPage {
         } else return false;
     }
     public void customerPasswordChange(){
-        functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
-        Actions actions=new Actions(driver);
-        actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
+//        functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
+//        Actions actions=new Actions(driver);
+//        actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
+        functionClass.waitUntilElementPresent(customersManagerPage.resetFilterButton);
+        functionClass.sleep(2);
+        customersManagerPage.resetFilterButton.click();
+        functionClass.waitUntilElementPresent(customersManagerPage.emailField);
+        customersManagerPage.emailField.sendKeys(TestHelperClass.getEmail());
+        functionClass.waitUntilElementPresent(customersManagerPage.searchButton);
+        customersManagerPage.searchButton.click();
         WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",TestHelperClass.getCustomerFirstName())));
+        functionClass.waitUntilElementPresent(cusEditButt);
+        functionClass.sleep(1);
         cusEditButt.click();
         accountInformation.click();
         accountInformationCheckBox.click();

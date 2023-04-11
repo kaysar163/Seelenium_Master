@@ -97,6 +97,41 @@ public class FunctionClass {
         return password;
 
     }
+
+    public String generateProductName(){
+        Faker faker=new Faker();
+        String productName=Faker.instance().name().name();
+        return productName;
+    }
+
+    public String generateProductDescription(){
+        Faker faker=new Faker();
+        String productDescription=Faker.instance().book().author();
+        return productDescription;
+    }
+
+    public String generateProductShortDescription(){
+        Faker faker=new Faker();
+        String productShortDescription=Faker.instance().book().publisher();
+        return productShortDescription;
+    }
+
+    public String generateProductSku(){
+        Faker faker=new Faker();
+        String productSku=Faker.instance().code().asin();
+        return productSku;
+    }
+    public String generateProductWeight(){
+        Faker faker=new Faker();
+        int productWeight=Faker.instance().number().numberBetween(150,500);
+        return String.valueOf(productWeight);
+    }
+
+    public String generateProductPrice() {
+        Faker faker = new Faker();
+        int productPrice = Faker.instance().number().randomDigitNotZero();
+        return String.valueOf(productPrice);
+    }
     public void waitForAlertPresent(){
         WebDriverWait wai=new WebDriverWait(driver,timeout);
         wai.until(ExpectedConditions.alertIsPresent());
