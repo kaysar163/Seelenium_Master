@@ -97,9 +97,15 @@ public class CatalogModuleTestRunner extends TestBase {
         searchTermsPage.deleteExistingSearchTerm();
         Assert.assertTrue(searchTermsPage.verifyDeleteSearchFunction());
     }
+    @Test(description = "Gülzar",dependsOnMethods = "AddNewSeachTermTest")
+    public void filterExistingSearchTermTestt(){
+        searchTermsPage.filterExistingSearchTermTest();
+        Assert.assertTrue(searchTermsPage.verifyFilterTermTest());
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
     }
 
 }
+
