@@ -4,9 +4,12 @@ import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class ManageCategoriesPage {
 
@@ -83,6 +86,14 @@ public class ManageCategoriesPage {
 
     @FindBy(id = "add_subcategory_button")
     WebElement addSubCategoryButton;
+
+    @FindBy(xpath = "//*[text()='Category Products']")
+    WebElement categoryProductsLink;
+
+    @FindAll({@FindBy(css="div.tree-holder>div>ul>div>li")})
+    List<WebElement> allCategories;
+
+
 
     public void addSubCategory(){
         catalogDashboardPage.catalogLink.click();
@@ -240,6 +251,14 @@ public class ManageCategoriesPage {
     public boolean subCatDeleteSuccessful(){
         functionClass.waitUntilElementPresent(sucCatDeletedMessage);
         if(sucCatDeletedMessage.isDisplayed())
+            return true;
+        else return false;
+    }
+
+    public boolean viewCategoryProducts(){
+        catalogDashboardPage.clickOnCatalogLink();
+        catalogDashboardPage.clickOnManageCategoriesLink();
+        if (allCategories.size()>=1)
             return true;
         else return false;
     }

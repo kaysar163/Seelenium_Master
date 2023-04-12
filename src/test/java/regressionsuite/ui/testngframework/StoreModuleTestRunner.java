@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 import javax.security.auth.spi.LoginModule;
 
@@ -47,13 +48,18 @@ public class StoreModuleTestRunner extends TestBase {
         manageStoresPage.deleteStore();
         Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
     }
-@Test(description = "gulzar")
-public void createStoreTest(){
-        manageStoresPage.createStore();
-        Assert.assertTrue((manageStoresPage.verifyCreatStore()));
-}
 
+    @Test(description = "Muradil")
 
+    public void createWebsiteTest(){
+        manageStoresPage.createWebsite();
+        Assert.assertTrue(manageStoresPage.verifyCreateWebsite());
+    }
+    @Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"})
+    public void deleteWebsiteTest() {
+        manageStoresPage.deleteWebsite();
+        Assert.assertTrue(manageStoresPage.verifyDeleteWebsite());
+    }
 
 
     @AfterClass
