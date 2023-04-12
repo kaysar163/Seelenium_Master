@@ -77,6 +77,7 @@ public class ManageStoresPage {
         functionClass.waitUntilElementPresent(saveWebsiteButton);
         saveWebsiteButton.click();
 
+
 }
     public boolean verifyCreateWebsite(){
         functionClass.waitUntilElementPresent(createWebsiteSuccessMassage);
@@ -122,4 +123,10 @@ public class ManageStoresPage {
     }
 
 
+    public void CatologPoductDeletetest() {
+    }
+
+    public boolean verifyCatologPoducDelettest() {
+        return false;
+    }
 }

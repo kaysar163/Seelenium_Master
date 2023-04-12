@@ -16,50 +16,5 @@ public class ManageProductsPage {
     }
 
 
-    //Elements Muyesser add product
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //Elements Muyesser edit product
-
-
-
-
-
-
-
-
-
-
-    //Elements Muyesser add method
-
-
-
-
-
-
-
-
-
-
-
-
-    //Elements Muyesser edit method
-
-
-
 
 }

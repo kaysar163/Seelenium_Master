@@ -60,5 +60,6 @@ public class ProductInfoPage {
             return true;
         else return false;
         }
-    }
 
+
+}
