@@ -40,4 +40,6 @@ public class ManageStoresPage {
             return true;
         else return false;
     }
+
+
 }
