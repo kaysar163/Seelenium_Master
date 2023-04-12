@@ -57,9 +57,10 @@ public class StoreModuleTestRunner extends TestBase {
     }
     @Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"})
     public void deleteWebsiteTest() {
-        manageStoresPage.deleteWebsite();
-        Assert.assertTrue(manageStoresPage.verifyDeleteWebsite());
+        manageStoresPage.deleteWebsite( );
+        Assert.assertTrue( manageStoresPage.verifyDeleteWebsite( ) );
     }
+
 
 
     @AfterClass
@@ -67,3 +68,4 @@ public class StoreModuleTestRunner extends TestBase {
         closeBrowser();
     }
 }
+
