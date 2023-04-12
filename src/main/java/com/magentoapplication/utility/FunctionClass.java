@@ -140,8 +140,8 @@ public class FunctionClass {
     }
     public String generateWebsiteCode() {
         Faker faker = new Faker();
-        String websiteCode = faker.bothify("??-###-??");
-        return websiteCode;
+        String websiteCode =Faker.instance().bothify("????_###");
+        return String.valueOf(websiteCode);
     }
 
     public String generateSortOrder() {

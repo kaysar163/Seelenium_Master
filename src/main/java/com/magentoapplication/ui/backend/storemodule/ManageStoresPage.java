@@ -30,13 +30,13 @@ public class ManageStoresPage {
     WebElement createWebsiteButton;
     @FindBy(xpath = "//input[@id=\"website_name\"]")
     WebElement websiteNameField;
-    @FindBy(xpath = "//input[@id=\"website_code\"]")
+    @FindBy(xpath = "//*[@id='website_code']")
     WebElement websiteCodeField;
     @FindBy(xpath = "//input[@id=\"website_sort_order\"]")
     WebElement websiteSortOrderField;
-    @FindBy(xpath = "//*[@id='id_d681d4dae92c5613d1c63525035a1644']")
+    @FindBy(xpath = "(//span[text()='Save Website'])[1]")
     WebElement saveWebsiteButton;
-    @FindBy(xpath = "//*[@title='Delete Website']")
+    @FindBy(xpath = "(//span[text()='Delete Website'])[1]")
     WebElement deleteWebsiteButton;
 
     @FindBy(xpath = "//span[text()='The website has been saved.']")
@@ -49,16 +49,15 @@ public class ManageStoresPage {
         systemLink.click();
         functionClass.waitUntilElementPresent(manageStoresLink);
         manageStoresLink.click();
-
+        functionClass.waitUntilElementPresent(createWebsiteButton);
+        createWebsiteButton.click();
         functionClass.waitUntilElementPresent(websiteNameField);
         TestHelperClassStore.setWebsiteName(functionClass.generateWebsiteName());
         websiteNameField.sendKeys(TestHelperClassStore.getWebsiteName());
-
         functionClass.waitUntilElementPresent(websiteCodeField);
-        websiteSortOrderField.sendKeys(functionClass.generateWebsiteCode());
+        websiteCodeField.sendKeys(functionClass.generateWebsiteCode());
         functionClass.waitUntilElementPresent(websiteSortOrderField);
         websiteSortOrderField.sendKeys(functionClass.generateSortOrder());
-
         functionClass.waitUntilElementPresent(saveWebsiteButton);
         saveWebsiteButton.click();
 
@@ -77,10 +76,12 @@ public class ManageStoresPage {
         functionClass.waitUntilElementPresent(manageStoresLink);
         manageStoresLink.click();
         WebElement myWebsiteName=driver.findElement
-                (By.xpath(String.format("", TestHelperClassStore.getChangedWebsiteName())));
+                (By.xpath(String.format("//tr//td//a[contains(text(),'%s')]",
+                        TestHelperClassStore.getWebsiteName())));
         functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(myWebsiteName);
         myWebsiteName.click();
-        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(deleteWebsiteButton);
         deleteWebsiteButton.click();
 
     }
