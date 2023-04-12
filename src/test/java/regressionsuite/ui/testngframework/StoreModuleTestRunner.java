@@ -38,18 +38,29 @@ public class StoreModuleTestRunner extends TestBase {
         orderViewPage=new OrderViewPage(driver);
         productInfoPage=new ProductInfoPage(driver);
     }
+    @Test(description = "Memet")
+    public void updateProductCategoryTest(){
+        productInfoPage.updateProductCategories();
+        Assert.assertTrue(productInfoPage.productCategoryUpdatedSuccessfully());
+    }
+    @Test(description = "Memet")
+    public void deleteStoreTest(){
+        manageStoresPage.deleteStore();
+        Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
+    }
+
 
 @Test(description = "rizvangul")
 
-    public void createWebsiteTest(){
-        manageStoresPage.createWebsite();
-    Assert.assertTrue(manageStoresPage.verifyCreateWebsite());
-}
-@Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"})
-public void deleteWebsiteTest(){
-        manageStoresPage.deleteWebsite();
-        Assert.assertTrue(manageStoresPage.verifyDeleteWebsite());
-}
+//    public void createWebsiteTest(){
+//        manageStoresPage.createWebsite();
+//    Assert.assertTrue(manageStoresPage.verifyCreateWebsite());
+//}
+//@Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"})
+//public void deleteWebsiteTest(){
+//        manageStoresPage.deleteWebsite();
+//        Assert.assertTrue(manageStoresPage.verifyDeleteWebsite());
+//}
     @AfterClass
     public void tearDown(){
         closeBrowser();

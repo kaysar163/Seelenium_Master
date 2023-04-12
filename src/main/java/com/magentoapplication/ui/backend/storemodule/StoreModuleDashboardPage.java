@@ -34,6 +34,10 @@ public class StoreModuleDashboardPage {
 
     @FindBy(xpath = "//span[text()='Manage Stores']//parent::a")
     WebElement manageStoresLink;
+    @FindBy(css = "ul#nav>li:nth-child(2)")
+    WebElement catalogLink;
+    @FindBy(xpath = "(//*[text()='Manage Products'])[1]")
+    WebElement manageProductsLink;
 
     //Methods
     public void clickOnOrderLink(){
@@ -44,6 +48,10 @@ public class StoreModuleDashboardPage {
     public void clickOnManageStoresLink(){
         functionClass.waitUntilElementPresent(systemLink);
         actions.moveToElement(systemLink).click(manageStoresLink).build().perform();
+    }
+    public void clickOnManageProductsLink(){
+        functionClass.waitUntilElementPresent(catalogLink);
+        actions.moveToElement(catalogLink).moveToElement(manageProductsLink).click().build().perform();
     }
 
 
