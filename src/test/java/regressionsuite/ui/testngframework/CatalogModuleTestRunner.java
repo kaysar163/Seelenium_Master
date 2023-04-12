@@ -2,6 +2,7 @@ package regressionsuite.ui.testngframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.*;
+import com.magentoapplication.ui.backend.storemodule.ProductInfoPage;
 import com.magentoapplication.utility.TestBase;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -21,6 +22,7 @@ public class CatalogModuleTestRunner extends TestBase {
 
     ManageProductsPage manageProductsPage;
 
+    ProductInfoPage productInfoPage;
 
     SearchTermsPage searchTermsPage;
 
@@ -37,6 +39,7 @@ public class CatalogModuleTestRunner extends TestBase {
         manageAttributesPage=new ManageAttributesPage(driver);
         manageCategoriesPage=new ManageCategoriesPage(driver);
         manageProductsPage=new ManageProductsPage(driver);
+        productInfoPage=new ProductInfoPage(driver);
         searchTermsPage=new SearchTermsPage(driver);
     }
     @Test(description = "kaysar", priority = 1)
@@ -44,40 +47,24 @@ public class CatalogModuleTestRunner extends TestBase {
         manageCategoriesPage.fillCategoryInformationAndSave();
         Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
-
-    @Test(description = "meryem", priority = 2,dependsOnMethods = {"AddRootCategoriesTest"})
-
-    public void EditCategoriesTest() {
-        manageCategoriesPage.editCatogoriesInfo();
-        Assert.assertTrue(manageCategoriesPage.verifyEditCatogories());
-    }
-
-    @Test(description = "Memet",dependsOnMethods = "addSubCategory")
+    @Test(description = "Memet")
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
     }
-    @Test(description = "Omercan",priority = 3,dependsOnMethods ={"AddRootCategoriesTest"} )
-    public void deleteRootCatTes(){
-        manageCategoriesPage.deleteRootCat();
-        Assert.assertTrue(manageCategoriesPage.deleteCategorySuccessful());
-    }
 
-    @Test(description = "kaysar", priority = 13)
+    @Test(description = "kaysar")
     public void AddNewSeachTermTest() {
         searchTermsPage.NewSearchInfo();
         Assert.assertTrue( searchTermsPage.VerifyAddNewSerach());
 
 
     }
-
-    @Test(description = "Mirehmidi",priority = 14)
-    public void SeachEditTest(){
-        searchTermsPage.NewSearchInfo();
-        Assert.assertTrue(searchTermsPage.VerifyEditNewSerach());
+    @Test(description = "Muyesser",dependsOnMethods = "AddNewSeachTermTest")
+    public void deleteExistingSearchTermTest(){
+        searchTermsPage.deleteExistingSearchTerm();
+        Assert.assertTrue(searchTermsPage.verifyDeleteSearchFunction());
     }
-
-
 
     @Test(description = "abdusattar")
     public void addSubCategory(){
@@ -85,35 +72,46 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
     }
 
-    @Test(description = "muyesser")
+    @Test(description = "muyesser",dependsOnMethods = "addSubCategory")
     public void editSubCategoryTest(){
         manageCategoriesPage.editSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
     }
 
 
-    @Test(description = "rizvangul",priority = 1)
+    @Test(description = "rizvangul")
     public void addProductTest(){
         manageProductsPage.addProduct();
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
     }
 
-    @Test(description = "rizvangul",dependsOnMethods ={"addProductTest"},priority = 2)
+    @Test(description = "rizvangul")
     public void editProductTest(){
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
 
     }
-    @Test(description = "Fazilet",dependsOnMethods ={"editProductTest"},priority = 3)
-    public void deleteProductTest() {
-        manageProductsPage.deleteproduct();
-        Assert.assertTrue(manageProductsPage.verifydeletedproduct());
+    @Test(description = "muyesser",dependsOnMethods = "AddNewSeachTermTest")
+    public void deleteSearchTest(){
+        searchTermsPage.deleteExistingSearchTerm();
+        Assert.assertTrue(searchTermsPage.verifyDeleteSearchFunction());
+    }
+    @Test(description = "Gülzar",dependsOnMethods = "AddNewSeachTermTest")
+    public void filterExistingSearchTermTestt(){
+        searchTermsPage.filterExistingSearchTermTest();
+        Assert.assertTrue(searchTermsPage.verifyFilterTermTest());
     }
 
+    @Test(description = "renagul")
+    public void viewCategoriesTest(){
+        Assert.assertTrue(manageCategoriesPage.viewCategoryProducts());
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
     }
 
+
 }
+

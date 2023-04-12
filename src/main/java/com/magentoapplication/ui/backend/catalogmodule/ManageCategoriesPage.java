@@ -4,9 +4,12 @@ import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class ManageCategoriesPage {
 
@@ -69,8 +72,8 @@ public class ManageCategoriesPage {
     WebElement categorySavedMessage;
 
 
-    @FindBy (xpath = "//span[contains(text(),'Dewitt Kirlin (1)')]")
-    WebElement subcat1;
+//    @FindBy (xpath = "//span[contains(text(),'Dewitt Kirlin (1)')]")
+//    WebElement subcat1;
 
 //    @FindBy(xpath = "//*[text()='pc portable (0)']")
 //    WebElement subCat;
@@ -83,6 +86,14 @@ public class ManageCategoriesPage {
 
     @FindBy(id = "add_subcategory_button")
     WebElement addSubCategoryButton;
+
+    @FindBy(xpath = "//*[text()='Category Products']")
+    WebElement categoryProductsLink;
+
+    @FindAll({@FindBy(css="div.tree-holder>div>ul>div>li")})
+    List<WebElement> allCategories;
+
+
 
     public void addSubCategory(){
         catalogDashboardPage.catalogLink.click();
@@ -203,8 +214,9 @@ public class ManageCategoriesPage {
         functionClass.sleep(3);
        // Actions actions=new Actions(driver);
         //actions.moveToElement(subcat1).click().perform();
-        functionClass.waitUntilElementPresent(subcat1);
-        subcat1.click();
+        WebElement subCat=driver.findElement(By.xpath(String.format("//span[contains(text(),'%s (0)')]",TestHelperClassCatalog.getSubName())));
+        functionClass.waitUntilElementPresent(subCat);
+        subCat.click();
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(description);
         description.clear();
@@ -239,6 +251,14 @@ public class ManageCategoriesPage {
     public boolean subCatDeleteSuccessful(){
         functionClass.waitUntilElementPresent(sucCatDeletedMessage);
         if(sucCatDeletedMessage.isDisplayed())
+            return true;
+        else return false;
+    }
+
+    public boolean viewCategoryProducts(){
+        catalogDashboardPage.clickOnCatalogLink();
+        catalogDashboardPage.clickOnManageCategoriesLink();
+        if (allCategories.size()>=1)
             return true;
         else return false;
     }
