@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.storemodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -51,6 +52,13 @@ public class ManageStoresPage {
     @FindBy(xpath = "//span[text()='The website has been saved.']")
     WebElement createWebsiteSuccessMassage;
 
+    @FindBy(xpath = "(//span[text()='Delete Website'])[1]")
+    WebElement deleteWebsiteButton;
+
+    @FindBy(xpath = "//span[text()='The website has been deleted.']")
+    WebElement deleteWebsiteSuccessMassage;
+
+
     public void createWebsite(){
          functionClass.waitUntilElementPresent(systemLink);
          systemLink.click();
@@ -78,8 +86,28 @@ public class ManageStoresPage {
     }
 
 
+    public void deleteWebsite(){
+        functionClass.waitUntilElementPresent(systemLink);
+        systemLink.click();
+        functionClass.waitUntilElementPresent(manageStoresLink);
+        manageStoresLink.click();
+        WebElement myWebsiteName=driver.findElement
+                (By.xpath(String.format("//tr//td//a[contains(text(),'%s')]",
+                        TestHelperClassStore.getWebsiteName())));
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(myWebsiteName);
+        myWebsiteName.click();
+        functionClass.waitUntilElementPresent(deleteWebsiteButton);
+        deleteWebsiteButton.click();
 
-    //Methods
+    }
+
+    public boolean verifyDeleteWebsite(){
+        functionClass.waitUntilElementPresent(deleteWebsiteSuccessMassage);
+        if (deleteWebsiteSuccessMassage.isDisplayed())
+            return true;
+        else return false;
+    }
     public void deleteStore(){
         storeModuleDashboardPage.clickOnManageStoresLink();
         storeName.click();
