@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class ManageProductsPage {
+
     WebDriver driver;
 
     FunctionClass functionClass;

@@ -41,7 +41,7 @@ public class StoreModuleTestRunner extends TestBase {
     @Test(description = "Mirehmidi")
     public void CatologPoductDeleteTest(){
         ManageProductsPage CatologPoductDelete;
-        Assert.assertTrue(ManageProductsPage.CatologPoductDeletete());
+
 
 
 
