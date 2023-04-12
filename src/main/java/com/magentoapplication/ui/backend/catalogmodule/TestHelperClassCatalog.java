@@ -27,7 +27,7 @@ public class TestHelperClassCatalog {
         TestHelperClassCatalog.productName = productName;
     }
 
-    private static String searchQuery ;
+
     private static String SynonymFor;
 
 

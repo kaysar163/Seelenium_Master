@@ -2,6 +2,7 @@ package regressionsuite.ui.testngframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.*;
+import com.magentoapplication.ui.backend.storemodule.ProductInfoPage;
 import com.magentoapplication.utility.TestBase;
 import org.testng.Assert;
 import org.testng.ITestContext;
