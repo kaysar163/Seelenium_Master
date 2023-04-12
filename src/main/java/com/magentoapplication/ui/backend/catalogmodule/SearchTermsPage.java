@@ -30,7 +30,7 @@ public class SearchTermsPage {
     @FindBy( id= "query_text")
 
     WebElement SearchQuery;
-    @FindBy(name = "search_query")
+    @FindBy(xpath = "//input[@name='search_query']")
     WebElement searchQuery1;
 
     @FindBy(id = "store_id")
@@ -52,14 +52,14 @@ public class SearchTermsPage {
 
     WebElement SuccessfulSavesMessage;
 
-    @FindBy(xpath = "//span[text()=\"Search\"]")
+    @FindBy(xpath = "//span[text()='Search']")
     WebElement searchButton;
 
 
 
-    @FindBy(xpath = "//button[@title=\"Delete Search\"]")
+    @FindBy(xpath = "//button[@title='Delete Search']")
     WebElement deleteButton;
-    @FindBy(xpath = "//span[contains(text(),\"The search was deleted.\")]")
+    @FindBy(xpath = "//span[contains(text(),'The search was deleted.')]")
     WebElement successfulDeletedSearchMessage;
 
     public void NewSearchInfo(){

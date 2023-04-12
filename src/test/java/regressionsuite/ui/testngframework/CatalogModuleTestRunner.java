@@ -41,23 +41,28 @@ public class CatalogModuleTestRunner extends TestBase {
         productInfoPage=new ProductInfoPage(driver);
         searchTermsPage=new SearchTermsPage(driver);
     }
-    @Test(description = "kaysar", priority = 1,enabled = false)
+    @Test(description = "kaysar", priority = 1)
     public void AddRootCategoriesTest() {
         manageCategoriesPage.fillCategoryInformationAndSave();
         Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
-    @Test(description = "Memet",enabled = false)
+    @Test(description = "Memet")
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
     }
 
-    @Test(description = "kaysar", priority = 13,enabled = false)
+    @Test(description = "kaysar")
     public void AddNewSeachTermTest() {
         searchTermsPage.NewSearchInfo();
         Assert.assertTrue( searchTermsPage.VerifyAddNewSerach());
 
 
+    }
+    @Test(description = "Muyesser",dependsOnMethods = "AddNewSeachTermTest")
+    public void deleteExistingSearchTermTest(){
+        searchTermsPage.deleteExistingSearchTerm();
+        Assert.assertTrue(searchTermsPage.verifyDeleteSearchFunction());
     }
 
     @Test(description = "abdusattar")
@@ -66,27 +71,27 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
     }
 
-    @Test(description = "muyesser",dependsOnMethods = "add")
+    @Test(description = "muyesser",dependsOnMethods = "addSubCategory")
     public void editSubCategoryTest(){
         manageCategoriesPage.editSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
     }
 
 
-    @Test(description = "rizvangul",enabled = false)
+    @Test(description = "rizvangul")
     public void addProductTest(){
         manageProductsPage.addProduct();
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
     }
 
-    @Test(description = "rizvangul",enabled = false)
+    @Test(description = "rizvangul")
     public void editProductTest(){
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
 
     }
-    @Test(description = "muyesser",enabled = false)
+    @Test(description = "muyesser")
     public void deleteSearchTest(){
         searchTermsPage.deleteExistingSearchTerm();
         Assert.assertTrue(searchTermsPage.verifyDeleteSearchFunction());
