@@ -14,6 +14,7 @@ public class StoreModuleDashboardPage {
     FunctionClass functionClass;
 
     Actions actions;
+    private WebElement CatologPoductDeleteLink;
 
     public StoreModuleDashboardPage(WebDriver driver) {
         this.driver = driver;
@@ -46,7 +47,14 @@ public class StoreModuleDashboardPage {
         actions.moveToElement(systemLink).click(manageStoresLink).build().perform();
     }
 
+    public void clickOnManageDeleteProductLink(){
+        functionClass.waitUntilElementPresent(CatologPoductDeleteLink);
+        actions.moveToElement(CatologPoductDeleteLink).moveToElement(CatologPoductDeleteLink).click().build().perform();
+
+        }
+    }
+
 
     //span[text()='Sales']//parent::a
 
-}
+
