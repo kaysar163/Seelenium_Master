@@ -55,6 +55,6 @@ public class StoreModuleDashboardPage {
     }
 
 
-    //span[text()='Sales']//parent::a
+
 
 
