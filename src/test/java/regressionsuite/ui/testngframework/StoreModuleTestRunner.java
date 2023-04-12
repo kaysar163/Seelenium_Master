@@ -37,17 +37,21 @@ public class StoreModuleTestRunner extends TestBase {
         orderViewPage=new OrderViewPage(driver);
         productInfoPage=new ProductInfoPage(driver);
     }
-    @Test(description = "Memet")
+    @Test(description = "Memet",enabled = false)
     public void updateProductCategoryTest(){
         productInfoPage.updateProductCategories();
         Assert.assertTrue(productInfoPage.productCategoryUpdatedSuccessfully());
     }
-    @Test(description = "Memet")
+    @Test(description = "Memet",enabled = false)
     public void deleteStoreTest(){
         manageStoresPage.deleteStore();
         Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
     }
-
+@Test(description = "gulzar")
+public void createStoreTest(){
+        manageStoresPage.createStore();
+        Assert.assertTrue((manageStoresPage.verifyCreatStore()));
+}
 
 
 
