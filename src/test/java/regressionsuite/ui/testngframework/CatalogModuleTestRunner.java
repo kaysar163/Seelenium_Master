@@ -2,6 +2,7 @@ package regressionsuite.ui.testngframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.*;
+import com.magentoapplication.ui.backend.storemodule.ProductInfoPage;
 import com.magentoapplication.utility.TestBase;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -96,9 +97,15 @@ public class CatalogModuleTestRunner extends TestBase {
         searchTermsPage.deleteExistingSearchTerm();
         Assert.assertTrue(searchTermsPage.verifyDeleteSearchFunction());
     }
+    @Test(description = "Gülzar",dependsOnMethods = "AddNewSeachTermTest")
+    public void filterExistingSearchTermTestt(){
+        searchTermsPage.filterExistingSearchTermTest();
+        Assert.assertTrue(searchTermsPage.verifyFilterTermTest());
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
     }
 
 }
+
