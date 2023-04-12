@@ -25,8 +25,8 @@ public class CustomerInformationPage {
     }
     @FindBy(xpath = "(//*[contains(text(),'Add New Customer')])[1]")
     WebElement addNewCustomerLink;
-    @FindBy(id="_accountprefix")
-    WebElement prefixField;
+    @FindBy(id="//a[text()='Edit']")
+    WebElement customerEditButton;
     @FindBy(id="_accountfirstname")
     WebElement firstNameField;
     @FindBy(id="_accountlastname")
@@ -41,7 +41,7 @@ public class CustomerInformationPage {
     WebElement SavaCustomerButton;
     @FindBy(xpath = "//*[contains(text(),'The customer has been saved.')]")
     WebElement customerSuccessfullySavadMessage;
-    @FindBy(xpath = "//a[@id='customer_info_tabs_account' and @class='tab-item-link']")
+    @FindBy(xpath = "//a[@id='customer_info_tabs_account' and @title='Account Information']")
     WebElement accountInformation;
     @FindBy(xpath = "//input[@id='account-send-pass' and @name='account[new_password]']")
     WebElement accountInformationCheckBox;
@@ -109,17 +109,20 @@ public class CustomerInformationPage {
 //        functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
 //        Actions actions=new Actions(driver);
 //        actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
-        functionClass.waitUntilElementPresent(customersManagerPage.resetFilterButton);
-        functionClass.sleep(2);
-        customersManagerPage.resetFilterButton.click();
-        functionClass.waitUntilElementPresent(customersManagerPage.emailField);
-        customersManagerPage.emailField.sendKeys(TestHelperClass.getEmail());
-        functionClass.waitUntilElementPresent(customersManagerPage.searchButton);
-        customersManagerPage.searchButton.click();
-        WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",TestHelperClass.getCustomerFirstName())));
+//        functionClass.waitUntilElementPresent(customersManagerPage.resetFilterButton);
+//        functionClass.sleep(2);
+//        customersManagerPage.resetFilterButton.click();
+//        functionClass.waitUntilElementPresent(customersManagerPage.emailField);
+//        customersManagerPage.emailField.sendKeys(TestHelperClass.getEmail());
+//        functionClass.waitUntilElementPresent(customersManagerPage.searchButton);
+//        functionClass.sleep(2);
+//        customersManagerPage.searchButton.click();
+        WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[8]//a[text()='Edit']",TestHelperClass.getEmail())));
+        System.out.println(cusEditButt+"email editing");
         functionClass.waitUntilElementPresent(cusEditButt);
         functionClass.sleep(1);
-        cusEditButt.click();
+        Actions actions=new Actions(driver);
+        actions.click(cusEditButt).build().perform();
         accountInformation.click();
         accountInformationCheckBox.click();
         accountPassword.sendKeys(ApplicationConfig.readFromConfigProperties("config.properties","backEndPassword"));
@@ -135,7 +138,9 @@ public class CustomerInformationPage {
         functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
         Actions actions = new Actions(driver);
         actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
-        WebElement cusEditButt = driver.findElement(By.xpath("//tbody/tr/td[contains(text(),'elias.gerlach@yahoo.com')]//following::td[8]//a[text()='Edit']"));
+        WebElement cusEditButt = driver.findElement(By.xpath(String.format
+                ("//tbody/tr/td[contains(text(),'%s')]//following::td[8]//a[text()='Edit']",TestHelperClass.getEmail())));
+        System.out.println(cusEditButt+"email add address");
         functionClass.waitUntilElementPresent(cusEditButt);
         cusEditButt.click();
         functionClass.waitUntilElementPresent(addressesButton);
@@ -146,7 +151,7 @@ public class CustomerInformationPage {
         defualtBilling.click();
         functionClass.waitUntilElementPresent(defaultShpping);
         defaultShpping.click();
-        functionClass.sleep(5);
+        functionClass.sleep(1);
         functionClass.waitUntilElementPresent(streetAddress);
         //streetAddress.clear();
         streetAddress.sendKeys(functionClass.generateStreetName());
@@ -158,14 +163,13 @@ public class CustomerInformationPage {
         zipPostalCode.sendKeys(functionClass.generateZipCode());
         telephone.sendKeys(functionClass.generateTelephoneNumber());
         //functionClass.waitUntilElementPresent(saveCustomerButton);
-        functionClass.sleep(3);
+        functionClass.sleep(1);
         Actions actions1=new Actions(driver);
         actions1.click(saveButton2).build().perform();
         //saveCustomerButton.click();
 
     }
     public boolean verifyAddNewAddress() {
-        functionClass.sleep(2);
         functionClass.waitUntilElementPresent(verifyAddNewAddress);
         if (verifyAddNewAddress.isDisplayed())
             return true;
