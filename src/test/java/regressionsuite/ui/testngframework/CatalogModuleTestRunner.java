@@ -52,18 +52,52 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.verifyEditCatogories());
     }
 
-    @Test(description = "Memet",dependsOnMethods = "addSubCategory")
-    public void subCatDeleteTest(){
-        manageCategoriesPage.subCatDelete();
-        Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
-    }
     @Test(description = "Omercan",priority = 3,dependsOnMethods ={"AddRootCategoriesTest"} )
     public void deleteRootCatTes(){
         manageCategoriesPage.deleteRootCat();
         Assert.assertTrue(manageCategoriesPage.deleteCategorySuccessful());
     }
 
-    @Test(description = "kaysar", priority = 13)
+    @Test(description = "abdusattar",priority = 4)
+    public void addSubCategory(){
+        manageCategoriesPage.addSubCategory();
+        Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
+    }
+
+
+    @Test(description = "muyesser",dependsOnMethods = "addSubCategory",priority = 5)
+    public void editSubCategoryTest(){
+        manageCategoriesPage.editSubCategory();
+        Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
+    }
+
+    @Test(description = "Memet",dependsOnMethods = "addSubCategory",priority = 6)
+    public void subCatDeleteTest(){
+        manageCategoriesPage.subCatDelete();
+        Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
+    }
+
+
+    @Test(description = "rizvangul",priority = 7)
+    public void addProductTest(){
+        manageProductsPage.addProduct();
+        Assert.assertTrue(manageProductsPage.verifyAddProduct());
+
+    }
+
+    @Test(description = "rizvangul",dependsOnMethods ={"addProductTest"},priority = 8)
+    public void editProductTest(){
+        manageProductsPage.editProduct();
+        Assert.assertTrue(manageProductsPage.verifyEditProduct());
+
+    }
+    @Test(description = "Fazilet",dependsOnMethods ={"editProductTest"},priority = 9)
+    public void deleteProductTest() {
+        manageProductsPage.deleteproduct();
+        Assert.assertTrue(manageProductsPage.verifydeletedproduct());
+    }
+
+    @Test(description = "kaysar", priority = 10)
     public void AddNewSeachTermTest() {
         searchTermsPage.NewSearchInfo();
         Assert.assertTrue( searchTermsPage.VerifyAddNewSerach());
@@ -71,45 +105,12 @@ public class CatalogModuleTestRunner extends TestBase {
 
     }
 
-    @Test(description = "Mirehmidi",priority = 14)
+    @Test(description = "Mirehmidi",priority = 11)
     public void SeachEditTest(){
         searchTermsPage.NewSearchInfo();
         Assert.assertTrue(searchTermsPage.VerifyEditNewSerach());
     }
 
-
-
-    @Test(description = "abdusattar")
-    public void addSubCategory(){
-        manageCategoriesPage.addSubCategory();
-        Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
-    }
-
-    @Test(description = "muyesser")
-    public void editSubCategoryTest(){
-        manageCategoriesPage.editSubCategory();
-        Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
-    }
-
-
-    @Test(description = "rizvangul",priority = 1)
-    public void addProductTest(){
-        manageProductsPage.addProduct();
-        Assert.assertTrue(manageProductsPage.verifyAddProduct());
-
-    }
-
-    @Test(description = "rizvangul",dependsOnMethods ={"addProductTest"},priority = 2)
-    public void editProductTest(){
-        manageProductsPage.editProduct();
-        Assert.assertTrue(manageProductsPage.verifyEditProduct());
-
-    }
-    @Test(description = "Fazilet",dependsOnMethods ={"editProductTest"},priority = 3)
-    public void deleteProductTest() {
-        manageProductsPage.deleteproduct();
-        Assert.assertTrue(manageProductsPage.verifydeletedproduct());
-    }
 
     @AfterClass
     public void tearDown(){

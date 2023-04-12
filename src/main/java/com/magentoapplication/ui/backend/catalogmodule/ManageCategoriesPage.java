@@ -69,8 +69,8 @@ public class ManageCategoriesPage {
     WebElement categorySavedMessage;
 
 
-    @FindBy (xpath = "//span[contains(text(),'Dewitt Kirlin (1)')]")
-    WebElement subcat1;
+//    @FindBy (xpath = "//span[contains(text(),'Dewitt Kirlin (1)')]")
+//    WebElement subcat1;
 
 //    @FindBy(xpath = "//*[text()='pc portable (0)']")
 //    WebElement subCat;
@@ -203,8 +203,9 @@ public class ManageCategoriesPage {
         functionClass.sleep(3);
        // Actions actions=new Actions(driver);
         //actions.moveToElement(subcat1).click().perform();
-        functionClass.waitUntilElementPresent(subcat1);
-        subcat1.click();
+        WebElement subCat=driver.findElement(By.xpath(String.format("//span[contains(text(),'%s (0)')]",TestHelperClassCatalog.getSubName())));
+        functionClass.waitUntilElementPresent(subCat);
+        subCat.click();
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(description);
         description.clear();
