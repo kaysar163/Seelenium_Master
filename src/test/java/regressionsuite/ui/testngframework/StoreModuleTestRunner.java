@@ -3,9 +3,11 @@ package regressionsuite.ui.testngframework;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.storemodule.*;
 import com.magentoapplication.utility.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 import javax.security.auth.spi.LoginModule;
 
@@ -38,7 +40,10 @@ public class StoreModuleTestRunner extends TestBase {
     }
 
 
-
+public void createWebsiteTest(){
+        manageStoresPage.createWebsite();
+    Assert.assertTrue(manageStoresPage.verifyCreateWebsite());
+}
 
     @AfterClass
     public void tearDown(){

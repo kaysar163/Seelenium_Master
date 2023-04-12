@@ -132,6 +132,24 @@ public class FunctionClass {
         int productPrice = Faker.instance().number().randomDigitNotZero();
         return String.valueOf(productPrice);
     }
+
+    public String generateWebsiteName(){
+        Faker faker=new Faker();
+        String websiteName=Faker.instance().name().name();
+        return websiteName;
+    }
+    public String generateWebsiteCode() {
+        Faker faker = new Faker();
+        String websiteCode = faker.bothify("??-###-??");
+        return websiteCode;
+    }
+
+    public String generateSortOrder() {
+        Faker faker = new Faker();
+        int sortOrder = Faker.instance().number().randomDigitNotZero();
+        return String.valueOf(sortOrder);
+    }
+
     public void waitForAlertPresent(){
         WebDriverWait wai=new WebDriverWait(driver,timeout);
         wai.until(ExpectedConditions.alertIsPresent());
