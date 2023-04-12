@@ -135,12 +135,12 @@ public class ManageCategoriesPage {
         TestHelperClassCatalog.setSubName(functionClass.generateFakeName());
         String subcatName=TestHelperClassCatalog.getSubName();
 
-        WebElement subCategoryButton =driver.findElement(By.xpath("//span[text()='"+subcatName+" (0)']"));
-        functionClass.waitUntilElementPresent(subCategoryButton);
+        WebElement subCatButton =driver.findElement(By.xpath(String.format("//span[contains(text(),'%s (0)')]",TestHelperClassCatalog.getSubName())));
+
        // Actions actions=new Actions(driver);
         //actions.moveToElement(subcat1).click().perform();
 
-        subCategoryButton.click();
+        subCatButton.click();
         functionClass.waitUntilElementPresent(isActive);
         Select select=new Select(isActive);
         select.selectByValue("1");

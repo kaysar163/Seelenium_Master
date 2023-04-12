@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,11 +55,7 @@ public class SearchTermsPage {
     @FindBy(xpath = "//span[text()=\"Search\"]")
     WebElement searchButton;
 
-    @FindBy(xpath = "//input[@value=\"370\"]")
-    WebElement checkBox;
 
-    @FindBy(xpath = "//a[text()=\"Edit\"]")
-    WebElement editButton;
 
     @FindBy(xpath = "//button[@title=\"Delete Search\"]")
     WebElement deleteButton;
@@ -71,12 +68,17 @@ public class SearchTermsPage {
         functionClass.waitUntilElementPresent(AddNewSearchTerm);
         AddNewSearchTerm.click();
         functionClass.waitUntilElementPresent(SearchQuery);
-        SearchQuery.sendKeys(functionClass.generateFakeName());
+        TestHelperClassCatalog.setSearchQuery(functionClass.generateFakeName());
+        functionClass.sleep(3);
+        SearchQuery.sendKeys(TestHelperClassCatalog.getSearchQuery());
+
         functionClass.waitUntilElementPresent(Store);
         Select select=new Select(Store);
         select.selectByValue("28");
         functionClass.waitUntilElementPresent(SynonymFor);
-        SynonymFor.sendKeys(functionClass.generateFakeName());
+        TestHelperClassCatalog.setSynonymFor(functionClass.generateFakeName());
+        functionClass.sleep(2);
+        SynonymFor.sendKeys(TestHelperClassCatalog.getSynonymFor());
         functionClass.waitUntilElementPresent( RedirectURL);
         RedirectURL.sendKeys(functionClass.generateFakeRedirectURL());
         functionClass.waitUntilElementPresent(DisplayinSuggestedTerms);
@@ -100,15 +102,14 @@ public class SearchTermsPage {
         functionClass.waitUntilElementPresent(searchQuery1);
         searchQuery1.click();
        // functionClass.sleep(2);
-        searchQuery1.sendKeys("jordan air");
+        searchQuery1.sendKeys(TestHelperClassCatalog.getSearchQuery());
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
 
-        //WebElement editProductName=driver.findElement (By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a",
-                //TestHelperClassCatalog.getProductName())))
-        functionClass.waitUntilElementPresent(editButton);
-        editButton.click();
+        WebElement editButton1= driver.findElement(By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a",TestHelperClassCatalog.getSearchQuery())));
+
+        editButton1.click();
         functionClass.waitUntilElementPresent(deleteButton);
         deleteButton.click();
         functionClass.alertAccept();
