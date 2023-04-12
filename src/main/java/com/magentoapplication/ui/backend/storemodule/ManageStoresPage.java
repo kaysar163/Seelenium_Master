@@ -77,6 +77,7 @@ public class ManageStoresPage {
         functionClass.waitUntilElementPresent(saveWebsiteButton);
         saveWebsiteButton.click();
 
+
 }
     public boolean verifyCreateWebsite(){
         functionClass.waitUntilElementPresent(createWebsiteSuccessMassage);
