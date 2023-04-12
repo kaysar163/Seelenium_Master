@@ -8,8 +8,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import javax.security.auth.spi.LoginModule;
-
 public class StoreModuleTestRunner extends TestBase {
 
     BackEndLogin backEndLogin;
@@ -39,13 +37,12 @@ public class StoreModuleTestRunner extends TestBase {
     }
 
     @Test(description = "Mirehmidi")
-    public void CatologPoductDeleteTest(){
+    public boolean CatologPoductDeleteTest() {
         ManageProductsPage CatologPoductDelete;
-
-
-
-
+        Assert.assertTrue(CatologPoductDeleteTest());
+        return false;
     }
+
 
 
 
@@ -55,6 +52,4 @@ public class StoreModuleTestRunner extends TestBase {
         closeBrowser();
     }
 
-    private class CatologPoductDeleteTes {
-    }
 }
