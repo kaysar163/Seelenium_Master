@@ -2,6 +2,7 @@ package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -131,10 +132,18 @@ public class ManageCategoriesPage {
         catalogDashboardPage. clickOnCatalogLink();
         catalogDashboardPage.clickOnManageCategoriesLink();
         functionClass.sleep(3);
+        TestHelperClassCatalog.setSubName(functionClass.generateFakeName());
+        String subcatName=TestHelperClassCatalog.getSubName();
+
+        WebElement subCategoryButton =driver.findElement(By.xpath("//span[text()='"+subcatName+" (0)']"));
+        functionClass.waitUntilElementPresent(subCategoryButton);
        // Actions actions=new Actions(driver);
         //actions.moveToElement(subcat1).click().perform();
-        functionClass.waitUntilElementPresent(subcat1);
-        subcat1.click();
+
+        subCategoryButton.click();
+        functionClass.waitUntilElementPresent(isActive);
+        Select select=new Select(isActive);
+        select.selectByValue("1");
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(description);
         description.clear();

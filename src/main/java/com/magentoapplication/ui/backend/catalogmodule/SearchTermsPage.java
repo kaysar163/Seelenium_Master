@@ -29,6 +29,8 @@ public class SearchTermsPage {
     @FindBy( id= "query_text")
 
     WebElement SearchQuery;
+    @FindBy(name = "search_query")
+    WebElement searchQuery1;
 
     @FindBy(id = "store_id")
 
@@ -48,6 +50,21 @@ public class SearchTermsPage {
     @FindBy(xpath = "(//span[normalize-space()='You saved the search term.'])[1]")
 
     WebElement SuccessfulSavesMessage;
+
+    @FindBy(xpath = "//span[text()=\"Search\"]")
+    WebElement searchButton;
+
+    @FindBy(xpath = "//input[@value=\"370\"]")
+    WebElement checkBox;
+
+    @FindBy(xpath = "//a[text()=\"Edit\"]")
+    WebElement editButton;
+
+    @FindBy(xpath = "//button[@title=\"Delete Search\"]")
+    WebElement deleteButton;
+    @FindBy(xpath = "//span[contains(text(),\"The search was deleted.\")]")
+    WebElement successfulDeletedSearchMessage;
+
     public void NewSearchInfo(){
         catalogDashboardPage. clickOnCatalogLink();
         catalogDashboardPage.clickOnSearchTerms();
@@ -76,6 +93,40 @@ public class SearchTermsPage {
         }else return false;
 
     }
+    public  void deleteExistingSearchTerm(){
+        catalogDashboardPage. clickOnCatalogLink();
+        catalogDashboardPage.clickOnSearchTerms();
+        //functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(searchQuery1);
+        searchQuery1.click();
+       // functionClass.sleep(2);
+        searchQuery1.sendKeys("jordan air");
+        functionClass.sleep(3);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+
+        //WebElement editProductName=driver.findElement (By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a",
+                //TestHelperClassCatalog.getProductName())))
+        functionClass.waitUntilElementPresent(editButton);
+        editButton.click();
+        functionClass.waitUntilElementPresent(deleteButton);
+        deleteButton.click();
+        functionClass.alertAccept();
+
+
+
+
+    }
+    public boolean verifyDeleteSearchFunction(){
+
+        if (successfulDeletedSearchMessage.isDisplayed()){
+            return true;
+        }
+        else return false;
+    }
+
+
+
 }
 
 

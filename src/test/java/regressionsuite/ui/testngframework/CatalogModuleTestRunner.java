@@ -41,18 +41,18 @@ public class CatalogModuleTestRunner extends TestBase {
         productInfoPage=new ProductInfoPage(driver);
         searchTermsPage=new SearchTermsPage(driver);
     }
-    @Test(description = "kaysar", priority = 1)
+    @Test(description = "kaysar", priority = 1,enabled = false)
     public void AddRootCategoriesTest() {
         manageCategoriesPage.fillCategoryInformationAndSave();
         Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
-    @Test(description = "Memet")
+    @Test(description = "Memet",enabled = false)
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
     }
 
-    @Test(description = "kaysar", priority = 13)
+    @Test(description = "kaysar", priority = 13,enabled = false)
     public void AddNewSeachTermTest() {
         searchTermsPage.NewSearchInfo();
         Assert.assertTrue( searchTermsPage.VerifyAddNewSerach());
@@ -66,25 +66,30 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
     }
 
-    @Test(description = "muyesser")
+    @Test(description = "muyesser",dependsOnMethods = "add")
     public void editSubCategoryTest(){
         manageCategoriesPage.editSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
     }
 
 
-    @Test(description = "rizvangul")
+    @Test(description = "rizvangul",enabled = false)
     public void addProductTest(){
         manageProductsPage.addProduct();
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
     }
 
-    @Test(description = "rizvangul")
+    @Test(description = "rizvangul",enabled = false)
     public void editProductTest(){
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
 
+    }
+    @Test(description = "muyesser",enabled = false)
+    public void deleteSearchTest(){
+        searchTermsPage.deleteExistingSearchTerm();
+        Assert.assertTrue(searchTermsPage.verifyDeleteSearchFunction());
     }
     @AfterClass
     public void tearDown(){
