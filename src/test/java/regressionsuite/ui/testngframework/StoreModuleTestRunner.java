@@ -3,6 +3,7 @@ package regressionsuite.ui.testngframework;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.storemodule.*;
 import com.magentoapplication.utility.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -35,6 +36,11 @@ public class StoreModuleTestRunner extends TestBase {
         ordersPage=new OrdersPage(driver);
         orderViewPage=new OrderViewPage(driver);
         productInfoPage=new ProductInfoPage(driver);
+    }
+    @Test(description = "Omercan")
+    public void cancelOrdersTest(){
+       ordersPage.cancelOrders();
+        Assert.assertTrue(ordersPage.cancelOrdersSuccessful());
     }
 
 
