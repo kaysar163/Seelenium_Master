@@ -20,10 +20,12 @@ public class ManageStoresPage {
         storeModuleDashboardPage=new StoreModuleDashboardPage(driver);
     }
     //Elements
-    @FindBy(xpath = "//*[contains(text(),'hhh')]")
+    @FindBy(xpath = "//*[contains(text(),'    Big Jewelry shop ')]")
     WebElement storeName;
     @FindBy(xpath = "(//button[@title='Delete Store']//span/span/span[1])[1]")
     WebElement deleteStore;
+    @FindBy(css = "li.success-msg")
+    WebElement deleteStoreSuccessMessage;
 
     //Methods
     public void deleteStore(){
@@ -31,8 +33,11 @@ public class ManageStoresPage {
         storeName.click();
         functionClass.waitUntilElementPresent(deleteStore);
         deleteStore.click();
-        functionClass.alertAccept();
-
-
+    }
+    public boolean storeDeletedSuccessfully(){
+        functionClass.waitUntilElementPresent(deleteStoreSuccessMessage);
+        if(deleteStoreSuccessMessage.isDisplayed())
+            return true;
+        else return false;
     }
 }

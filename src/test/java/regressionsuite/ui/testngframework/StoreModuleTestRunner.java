@@ -42,6 +42,11 @@ public class StoreModuleTestRunner extends TestBase {
         productInfoPage.updateProductCategories();
         Assert.assertTrue(productInfoPage.productCategoryUpdatedSuccessfully());
     }
+    @Test(description = "Memet")
+    public void deleteStoreTest(){
+        manageStoresPage.deleteStore();
+        Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
+    }
 
 
 
