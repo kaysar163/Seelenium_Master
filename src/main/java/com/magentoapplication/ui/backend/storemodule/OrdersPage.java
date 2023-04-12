@@ -1,7 +1,9 @@
 package com.magentoapplication.ui.backend.storemodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,6 +40,8 @@ public class OrdersPage {
     WebElement cancelBut;
     @FindBy(xpath = "//span[contains(text(),'The order has been cancelled.')]")
     WebElement cancelSucMessage;
+    @FindBy(xpath = "//div[@class=\"content\"]//input[@name=\"order[billing_address][firstname]\"]")
+    WebElement cusName;
 
 
 
@@ -48,16 +52,19 @@ public class OrdersPage {
 
     //Meryem create Order Method
 
-
+//(//td[contains(text(),'Deandrea Gottlieb')]//preceding-sibling::td)[1]
 
    public void cancelOrders(){
        functionClass.waitUntilElementPresent(storeModuleDashboardPage.salesLink);
        functionClass.waitUntilElementPresent(storeModuleDashboardPage.orderLink);
        storeModuleDashboardPage.clickOnOrderLink();
-       functionClass.waitUntilElementPresent(ordersPage);
-       ordersPage.isDisplayed();
+//       functionClass.waitUntilElementPresent(ordersPage);
+//       ordersPage.isDisplayed();
+       functionClass.waitUntilElementPresent(cusName);
+       TestHelperClassStore.setCustomerName(functionClass.generateFakeName());
        functionClass.waitUntilElementPresent(orderNumField);
-       orderNumField.sendKeys();
+       WebElement orderNum=driver.findElement(By.xpath(String.format("(//td[contains(text(),'%s')]//preceding-sibling::td)[1]"),TestHelperClassStore.getCustomerName()));
+       orderNumField.sendKeys("orderNum");
        functionClass.waitUntilElementPresent(searchBut);
        searchBut.click();
        functionClass.waitUntilElementPresent(selectedNum);
