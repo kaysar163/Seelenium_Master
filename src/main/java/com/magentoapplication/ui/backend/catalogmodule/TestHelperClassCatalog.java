@@ -11,6 +11,8 @@ public class TestHelperClassCatalog {
 
     private static String searchQuery;
 
+
+
     public static String getChangedProductName() {
         return changedProductName;
     }
@@ -67,11 +69,11 @@ public class TestHelperClassCatalog {
         return changeRootName;
     }
 
-    public static String getSearchQuery() {
+    public static String getsearchQuery() {
         return searchQuery;
     }
 
-    public static void setSearchQuery(String searchQuery) {
+    public static void setsearchQuery(String searchQuery) {
         TestHelperClassCatalog.searchQuery = searchQuery;
 }
 
