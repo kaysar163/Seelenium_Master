@@ -102,10 +102,16 @@ public class CatalogModuleTestRunner extends TestBase {
         searchTermsPage.filterExistingSearchTermTest();
         Assert.assertTrue(searchTermsPage.verifyFilterTermTest());
     }
+
+    @Test(description = "renagul")
+    public void viewCategoriesTest(){
+        Assert.assertTrue(manageCategoriesPage.viewCategoryProducts());
+    }
     @AfterClass
     public void tearDown(){
         closeBrowser();
     }
+
 
 }
 
