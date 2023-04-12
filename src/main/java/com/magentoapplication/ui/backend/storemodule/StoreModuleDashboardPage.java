@@ -18,9 +18,9 @@ public class StoreModuleDashboardPage {
 
     public StoreModuleDashboardPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionClass=new FunctionClass(driver);
-        actions=new Actions(driver);
+        PageFactory.initElements( driver, this );
+        functionClass = new FunctionClass( driver );
+        actions = new Actions( driver );
     }
 
     //Elements
@@ -37,22 +37,22 @@ public class StoreModuleDashboardPage {
     WebElement manageStoresLink;
 
     //Methods
-    public void clickOnOrderLink(){
-        functionClass.waitUntilElementPresent(salesLink);
-        actions.moveToElement(salesLink).click(orderLink).build().perform();
+    public void clickOnOrderLink() {
+        functionClass.waitUntilElementPresent( salesLink );
+        actions.moveToElement( salesLink ).click( orderLink ).build( ).perform( );
     }
 
-    public void clickOnManageStoresLink(){
-        functionClass.waitUntilElementPresent(systemLink);
-        actions.moveToElement(systemLink).click(manageStoresLink).build().perform();
+    public void clickOnManageStoresLink() {
+        functionClass.waitUntilElementPresent( systemLink );
+        actions.moveToElement( systemLink ).click( manageStoresLink ).build( ).perform( );
     }
 
-    public void clickOnManageDeleteProductLink(){
-        functionClass.waitUntilElementPresent(CatologPoductDeleteLink);
-        actions.moveToElement(CatologPoductDeleteLink).moveToElement(CatologPoductDeleteLink).click().build().perform();
+    public void clickOnManageDeleteProductLink() {
+        functionClass.waitUntilElementPresent( CatologPoductDeleteLink );
+        actions.moveToElement( CatologPoductDeleteLink ).moveToElement( CatologPoductDeleteLink ).click( ).build( ).perform( );
 
-        }
     }
+}
 
 
 
