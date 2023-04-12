@@ -122,4 +122,10 @@ public class ManageStoresPage {
     }
 
 
+    public void CatologPoductDeletetest() {
+    }
+
+    public boolean verifyCatologPoducDelettest() {
+        return false;
+    }
 }
