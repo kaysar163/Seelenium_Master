@@ -16,6 +16,11 @@ public class ManageProductsPage {
     }
 
 
+    public static boolean CatologPoductDeletete() {
+        return false;
+    }
+
+
     //Elements Muyesser add product
 
 
