@@ -105,6 +105,7 @@ public class CatalogModuleTestRunner extends TestBase {
 
     }
 
+
     @Test(description = "Mirehmidi",priority = 11)
     public void SeachEditTest(){
         searchTermsPage.NewSearchInfo();
@@ -117,4 +118,10 @@ public class CatalogModuleTestRunner extends TestBase {
         closeBrowser();
     }
 
-}
+
+
+    @Test(description = "Gülzar",dependsOnMethods = "AddNewSeachTermTest")
+    public void filterExistingSearchTermTestt(){
+        searchTermsPage.filterExistingSearchTermTest();
+        Assert.assertTrue(searchTermsPage.verifyFilterTermTest());
+}}

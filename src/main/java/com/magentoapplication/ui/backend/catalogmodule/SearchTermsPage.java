@@ -48,7 +48,15 @@ public class SearchTermsPage {
     @FindBy(xpath = "(//span[contains(text(),'Save Search')])[1]")
 
     WebElement SaveSearch;
-    @FindBy(xpath = "(//span[normalize-space()='You saved the search term.'])[1]")
+   // @FindBy(xpath = "(//span[normalize-space()='You saved the search term.'])[1]")
+
+    @FindBy(xpath = "//span[text()='Search']")
+
+    WebElement searchButton;
+
+    @FindBy(xpath = "//input[@name='search_query']")
+
+    WebElement searchQuery1;
 
     WebElement SuccessfulSavesMessage;
     public void NewSearchInfo(){
@@ -103,8 +111,35 @@ public class SearchTermsPage {
             return false;
 
     }
+
+
+    public void  filterExistingSearchTermTest(){
+        catalogDashboardPage. clickOnCatalogLink();
+        catalogDashboardPage.clickOnSearchTerms();
+        //functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(searchQuery1);
+        searchQuery1.click();
+        // functionClass.sleep(2);
+        searchQuery1.sendKeys(TestHelperClassCatalog.getSearchQuery());
+        functionClass.sleep(3);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+    }
+
+    public boolean verifyFilterTermTest(){
+        if (driver.getPageSource().contains(TestHelperClassCatalog.getSearchQuery())) {
+            return true;
+        } else
+            return false;
+
+
 }
 
+
+
+
+
+   }
 
 
 
