@@ -18,12 +18,14 @@ public class StoreModuleDashboardPage {
 
     public StoreModuleDashboardPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements( driver, this );
-        functionClass = new FunctionClass( driver );
-        actions = new Actions( driver );
+        PageFactory.initElements(driver, this);
+        functionClass = new FunctionClass(driver);
+        actions = new Actions(driver);
     }
 
     //Elements
+    @FindBy(xpath = "//span[normalize-space()='Catalog']")
+    WebElement categoriesLink;
     @FindBy(xpath = "//span[text()='Sales']//parent::a")
     WebElement salesLink;
 
@@ -41,6 +43,12 @@ public class StoreModuleDashboardPage {
     WebElement manageProductsLink;
 
     //Methods
+    public void clickOnCategoriesLink(){
+        functionClass.waitUntilElementPresent(categoriesLink);
+        actions.moveToElement( categoriesLink ).build( ).perform( );
+    }
+
+
     public void clickOnOrderLink() {
         functionClass.waitUntilElementPresent( salesLink );
         actions.moveToElement( salesLink ).click( orderLink ).build( ).perform( );

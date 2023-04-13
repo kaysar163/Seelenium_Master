@@ -27,16 +27,21 @@ public class StoreModuleTestRunner extends TestBase {
     ProductInfoPage productInfoPage;
 
     @BeforeClass
-    public void setUp(){
+    public void setUp() {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.storeModuleLogin();
-        manageCategoriesPage=new ManageCategoriesPage(driver);
-        manageProductsPage=new ManageProductsPage(driver);
-        manageStoresPage=new ManageStoresPage(driver);
-        ordersPage=new OrdersPage(driver);
-        orderViewPage=new OrderViewPage(driver);
-        productInfoPage=new ProductInfoPage(driver);
+        manageCategoriesPage = new ManageCategoriesPage(driver);
+        manageProductsPage = new ManageProductsPage(driver);
+        manageStoresPage = new ManageStoresPage(driver);
+        ordersPage = new OrdersPage(driver);
+        orderViewPage = new OrderViewPage(driver);
+        productInfoPage = new ProductInfoPage(driver);
+    }
+    @Test(description = "kaysar")
+    public void addProductTest(){
+        manageProductsPage.addproductcategories ();
+        Assert.assertTrue( manageProductsPage.VerifySuccessmessage());
     }
     @Test(description = "Memet")
     public void updateProductCategoryTest(){
