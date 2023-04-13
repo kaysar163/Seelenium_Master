@@ -93,6 +93,35 @@ public class ManageCategoriesPage {
     @FindAll({@FindBy(css="div.tree-holder>div>ul>div>li")})
     List<WebElement> allCategories;
 
+    //Muradil filter products
+
+    @FindBy(xpath = "//span[text()='Catalog']")
+    WebElement catalogLink;
+
+    @FindBy(xpath = "//span[text()='Manage Products']")
+    WebElement manageProductsLink;
+
+    @FindBy(xpath = "//span[text()='Manage Categories']")
+    WebElement manageCategoriesLink;
+
+    @FindBy(xpath = "//span[text()='Attributes']")
+    WebElement attributesLink;
+
+    @FindBy(xpath = "//span[text()='Manage Attributes']")
+    WebElement manageAttributesLink;
+
+    @FindBy(xpath = "//span[text()='Search Terms']")
+    WebElement searchTerms;
+
+    @FindBy(xpath = "//span[text()='Category Products']")
+    WebElement categoryProductsTab;
+
+    @FindBy(xpath = "//input[@id='catalog_category_products_filter_name']")
+    WebElement categoryProductsFilterNameField;
+
+    @FindBy(xpath = "//span[text()='Search']")
+    WebElement categoryProductsSearchButton;
+
 
 
     public void addSubCategory(){
@@ -261,6 +290,29 @@ public class ManageCategoriesPage {
         if (allCategories.size()>=1)
             return true;
         else return false;
+    }
+
+    public void filterProductsInTheCategoryProductsTab(){
+        functionClass.waitUntilElementPresent(catalogLink);
+        functionClass.sleep(2);
+        catalogLink.click();
+        functionClass.waitUntilElementPresent(manageCategoriesLink);
+        manageCategoriesLink.click();
+        functionClass.waitUntilElementPresent(categoryProductsTab);
+        functionClass.sleep(3);
+        categoryProductsTab.click();
+        functionClass.waitUntilElementPresent(categoryProductsFilterNameField);
+        categoryProductsFilterNameField.sendKeys("kaysar");
+        functionClass.waitUntilElementPresent(categoryProductsSearchButton);
+        categoryProductsSearchButton.click();
+    }
+
+    public boolean verifyFilterProductsInTheCategoryProductsTab(){
+        if (driver.getPageSource().contains("kaysar")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

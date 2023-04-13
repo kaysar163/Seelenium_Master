@@ -41,6 +41,7 @@ public class CatalogModuleTestRunner extends TestBase {
         manageProductsPage=new ManageProductsPage(driver);
         productInfoPage=new ProductInfoPage(driver);
         searchTermsPage=new SearchTermsPage(driver);
+        catalogDashboardPage=new CatalogDashboardPage(driver);
     }
     @Test(description = "kaysar", priority = 1)
     public void AddRootCategoriesTest() {
@@ -71,7 +72,6 @@ public class CatalogModuleTestRunner extends TestBase {
         manageCategoriesPage.addSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
     }
-
     @Test(description = "muyesser",dependsOnMethods = "addSubCategory")
     public void editSubCategoryTest(){
         manageCategoriesPage.editSubCategory();
@@ -85,6 +85,13 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
     }
+
+    @Test(description = "muradil")
+    public void filterProductsInTheCategoryProductsTabTest(){
+        manageCategoriesPage.filterProductsInTheCategoryProductsTab();
+        Assert.assertTrue(manageCategoriesPage.verifyFilterProductsInTheCategoryProductsTab());
+    }
+
 
     @Test(description = "rizvangul")
     public void editProductTest(){
