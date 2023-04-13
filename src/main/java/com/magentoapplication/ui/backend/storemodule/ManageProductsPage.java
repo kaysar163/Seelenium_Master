@@ -154,7 +154,7 @@ public class ManageProductsPage {
         short_description.sendKeys(functionClass.generateProductDescription());
         functionClass.waitUntilElementPresent(sku);
         sku.clear();
-        sku.sendKeys(functionClass.generateProductSku()+System.currentTimeMillis());
+        sku.sendKeys(functionClass.generateProductSku());
         functionClass.waitUntilElementPresent(Weight);
         Weight.clear();
         Weight.sendKeys(functionClass.generateProductWeight());
