@@ -10,6 +10,11 @@ public class Log4j  {
         DOMConfigurator.configure("log4j.xml");
     }
 
+    public void testStart(String message){
+        logger.info(message);
+    }
+
+
     public void info(String message){
         logger.info(message);
     }
@@ -21,4 +26,9 @@ public class Log4j  {
     public void error(String message){
         logger.error(message);
     }
+
+    public void testEnd(String message){
+        logger.info(message);
+    }
+
 }
