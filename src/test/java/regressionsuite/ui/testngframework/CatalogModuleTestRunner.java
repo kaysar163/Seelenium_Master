@@ -26,9 +26,7 @@ public class CatalogModuleTestRunner extends TestBase {
     SearchTermsPage searchTermsPage;
 
     CatalogDashboardPage catalogDashboardPage;
-
-
-
+    
     @BeforeClass
     public void setUp(ITestContext context){
         setupBrowserBackEnd();
@@ -41,11 +39,13 @@ public class CatalogModuleTestRunner extends TestBase {
         productInfoPage=new ProductInfoPage(driver);
         searchTermsPage=new SearchTermsPage(driver);
     }
+    
     @Test(description = "kaysar", priority = 1)
     public void AddRootCategoriesTest() {
         manageCategoriesPage.fillCategoryInformationAndSave();
         Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
+    
     @Test(description = "Memet")
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
@@ -56,8 +56,6 @@ public class CatalogModuleTestRunner extends TestBase {
     public void AddNewSeachTermTest() {
         searchTermsPage.NewSearchInfo();
         Assert.assertTrue( searchTermsPage.VerifyAddNewSerach());
-
-
     }
 
     @Test(description = "abdusattar")
@@ -71,8 +69,7 @@ public class CatalogModuleTestRunner extends TestBase {
         manageCategoriesPage.editSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
     }
-
-
+    
     @Test(description = "rizvangul")
     public void addProductTest(){
         manageProductsPage.addProduct();
@@ -85,6 +82,12 @@ public class CatalogModuleTestRunner extends TestBase {
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
 
+    }
+    
+    @Test(description = "Toghraq")
+    public void addAttributeUnderCatalogTest(){
+        manageAttributesPage.addAttributeUnderCatalog();
+        Assert.assertTrue(manageAttributesPage.attributeSaveMessage());
     }
     @AfterClass
     public void tearDown(){
