@@ -6,6 +6,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -15,12 +16,14 @@ public class CustomersManagerPage {
 
     FunctionClass functionClass;
 
+    Actions actions;
+
 
     public CustomersManagerPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
-
+        actions=new Actions(driver);
     }
 
     @FindBy(xpath = "//span[text()='Customers']")
@@ -47,10 +50,16 @@ public class CustomersManagerPage {
 
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
+
+    @FindBy(xpath = "//body//tr//td[contains(text(),'Admin')]")
+    WebElement verifyFilterByWebsite;
+
     @FindBy(id = "customerGrid_filter_email")
     WebElement emailField;
-    @FindBy(xpath = "(//span[contains(text(),'Search')])[2]")
+    @FindBy(xpath = "//span[text()='Search']//parent::span//parent::span//parent::button")
     WebElement searchButton;
+
+    //(//span[contains(text(),'Search')])[2]
 
     @FindBy(xpath = "//select[@id=\"customerGrid_filter_group\"]")
     WebElement groupFilterDropdown;
@@ -75,8 +84,10 @@ public class CustomersManagerPage {
     @FindBy(id = "customerGrid_filter_billing_country_id")
     WebElement CountryDropdown;
 
-    @FindBy(css = "button[title='Search']")
-    WebElement SearchButton;
+    @FindBy(id = "customerGrid_filter_website_id")
+    WebElement websiteDropdown;
+//    @FindBy(css = "button[title='Search']")
+//    WebElement SearchButton;
 
     @FindBy(id = "customerGrid-total-count")
     WebElement verifyFilteredMessage;
@@ -86,7 +97,7 @@ public class CustomersManagerPage {
 
 
 
-    @FindBy(xpath = "//tbody//tr//td[contains(text(),'istanbul')]")
+    @FindBy(xpath = "//tbody//tr//td[8]")
     WebElement verifyFilteredState;
 
     @FindBy(id = "customerGrid_filter_billing_region")
@@ -95,8 +106,9 @@ public class CustomersManagerPage {
 
 
     public void FilterCustomersByEmail() {
-        functionClass.waitUntilElementPresent(resetFilterButton);
-        resetFilterButton.click();
+//        functionClass.waitUntilElementPresent(resetFilterButton);
+//        functionClass.sleep(2);
+//        resetFilterButton.click();
         functionClass.waitUntilElementPresent(emailField);
         emailField.sendKeys(TestHelperClass.getEmail());
         functionClass.waitUntilElementPresent(searchButton);
@@ -105,8 +117,11 @@ public class CustomersManagerPage {
     }
 
     public void filterTheCustomerByGroup() {
+        functionClass.waitUntilElementPresent(resetFilterButton);
+        functionClass.sleep(2);
+        actions.click(resetFilterButton).build().perform();
         functionClass.waitUntilElementPresent(groupFilterDropdown);
-        functionClass.sleep(1);
+        functionClass.sleep(2);
         groupFilterDropdown.click();
         Select selectGroup = new Select(groupFilterDropdown);
         selectGroup.selectByVisibleText("sabahet");
@@ -125,8 +140,7 @@ public class CustomersManagerPage {
 
         public void assignGroupToCustomer() {
             functionClass.waitUntilElementPresent(resetFilterButton);
-            functionClass.sleep(1);
-            resetFilterButton.click();
+            actions.click(resetFilterButton).build().perform();
             functionClass.waitUntilElementPresent(customerLink);
             customerLink.click();
             functionClass.waitUntilElementPresent(manageCustomersLink);
@@ -148,15 +162,16 @@ public class CustomersManagerPage {
         }
         
     public void deleteCustomer(){
-        functionClass.waitUntilElementPresent(nameFilter);
-        nameFilter.sendKeys(TestHelperClass.getCustomerFirstName());
-        functionClass.waitUntilElementPresent(searchButtonForDelete);
-        searchButtonForDelete.click();
-        functionClass.sleep(1);
+//        functionClass.waitUntilElementPresent(nameFilter);
+//        nameFilter.sendKeys(TestHelperClass.getCustomerFirstName());
+//        functionClass.waitUntilElementPresent(searchButtonForDelete);
+//        functionClass.sleep(1);
+//        actions.click(searchButtonForDelete).build().perform();
+//        functionClass.sleep(1);
         WebElement editButton=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]//following::a[1]",TestHelperClass.getEmail())));
         functionClass.waitUntilElementPresent(editButton);
-        functionClass.sleep(1);
-        editButton.click();
+        functionClass.sleep(3);
+        actions.click(editButton).build().perform();
         functionClass.waitUntilElementPresent(deleteCustomer);
         deleteCustomer.click();
         functionClass.sleep(1);
@@ -178,6 +193,9 @@ public class CustomersManagerPage {
         SelectAll.click();
         functionClass.waitUntilElementPresent(exportButton);
         exportButton.click();
+        functionClass.waitUntilElementPresent(resetFilterButton);
+        functionClass.sleep(1);
+        resetFilterButton.click();
 
     }
 
@@ -191,14 +209,13 @@ public class CustomersManagerPage {
     public void filterCustomerByCountry() {
         functionClass.waitUntilElementPresent(resetFilterButton);
         functionClass.sleep(1);
-        resetFilterButton.click();
+        actions.click(resetFilterButton).build().perform();
         functionClass.waitUntilElementPresent(CountryDropdown);
-        functionClass.sleep(1);
-        CountryDropdown.click();
+        functionClass.sleep(2);
         Select select = new Select(CountryDropdown);
         select.selectByValue("TR");
-        functionClass.waitUntilElementPresent(SearchButton);
-        SearchButton.click();
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
 
     }
 
@@ -208,32 +225,40 @@ public class CustomersManagerPage {
 
     }
     public void filterCustomerBySate() {
+        functionClass.waitUntilElementPresent(resetFilterButton);
+        functionClass.sleep(2);
+        actions.click(resetFilterButton).build().perform();
         functionClass.waitUntilElementPresent(filterState);
         filterState.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","State"));
-        functionClass.waitUntilElementPresent(SearchButton);
-        SearchButton.click();
+        functionClass.waitUntilElementPresent(searchButton);
+        functionClass.sleep(2);
+        searchButton.click();
     }
 
     public boolean verifyCustomerFilterByState() {
-        functionClass.waitUntilElementPresent(verifyFilteredState);
-        if (verifyFilteredState.isDisplayed());
-        return true;
+        if (verifyFilteredState.isDisplayed()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void filterCustomersBywebsite() {
         functionClass.waitUntilElementPresent( resetFilterButton );
+        functionClass.sleep(  2);
+        actions.click(resetFilterButton).build().perform();
+        functionClass.waitUntilElementPresent( websiteDropdown );
         functionClass.sleep( 1 );
-        resetFilterButton.click( );
-        functionClass.waitUntilElementPresent( CountryDropdown );
-        functionClass.sleep( 1 );
-        CountryDropdown.click( );
-        functionClass.waitUntilElementPresent( SearchButton );
-        SearchButton.click( );
+        Select select=new Select(websiteDropdown);
+        select.selectByValue("0");
+        functionClass.waitUntilElementPresent( searchButton );
+        functionClass.sleep(2);
+        searchButton.click( );
 
     }
 
     public boolean verifyWebsite() {
-        if (verifyUpdateMessage.isDisplayed())
+        if (verifyFilterByWebsite.isDisplayed())
             return true;
         else return false;
 

@@ -7,4 +7,10 @@
             </class>
         </classes>
     </test>
+    <test name="Backend Customer Module Test">
+        <classes>
+            <class name="regressionsuite.ui.testngframework.CustomersModuleTestRunner">
+            </class>
+        </classes>
+    </test>
 </suite>
