@@ -28,12 +28,12 @@ public class OrdersPage {
 //    WebElement salesLink;
 //    @FindBy(xpath = "//span[contains(text(),'Orders')]")
 //    WebElement ordersButton;
-    @FindBy(xpath = "(//h3[contains(text(),'Orders')])[1]")
-    WebElement ordersPage;
+//    @FindBy(xpath = "(//h3[contains(text(),'Orders')])[1]")
+//    WebElement ordersPage;
     @FindBy(id = "sales_order_grid_filter_real_order_id")
     WebElement orderNumField;
-    @FindBy(xpath = "(//span[contains(text(),'Search')])[2]")
-    WebElement searchBut;
+//    @FindBy(xpath = "(//span[contains(text(),'Search')])[2]")
+//    WebElement searchBut;
     @FindBy(xpath = "//td[contains(text(),'100000338 ')]")
     WebElement selectedNum;
     @FindBy(xpath = "(//span[contains(text(),'Cancel')])[2]")
@@ -52,7 +52,6 @@ public class OrdersPage {
 
     //Meryem create Order Method
 
-//(//td[contains(text(),'Deandrea Gottlieb')]//preceding-sibling::td)[1]
 
    public void cancelOrders(){
        functionClass.waitUntilElementPresent(storeModuleDashboardPage.salesLink);
@@ -62,13 +61,12 @@ public class OrdersPage {
 //       ordersPage.isDisplayed();
        functionClass.waitUntilElementPresent(cusName);
        TestHelperClassStore.setCustomerName(functionClass.generateFakeName());
-       functionClass.waitUntilElementPresent(orderNumField);
-       WebElement orderNum=driver.findElement(By.xpath(String.format("(//td[contains(text(),'%s')]//preceding-sibling::td)[1]"),TestHelperClassStore.getCustomerName()));
-       orderNumField.sendKeys("orderNum");
-       functionClass.waitUntilElementPresent(searchBut);
-       searchBut.click();
-       functionClass.waitUntilElementPresent(selectedNum);
-       selectedNum.click();
+       WebElement viewButton=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]//following-sibling::td//a",TestHelperClassStore.getCustomerName())));
+       viewButton.click();
+//       functionClass.waitUntilElementPresent(searchBut);
+//       searchBut.click();
+//       functionClass.waitUntilElementPresent(selectedNum);
+//       selectedNum.click();
        functionClass.waitUntilElementPresent(cancelBut);
        cancelBut.click();
        Alert alert=driver.switchTo().alert();
