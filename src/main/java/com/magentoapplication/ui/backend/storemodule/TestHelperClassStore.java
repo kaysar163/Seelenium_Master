@@ -4,6 +4,16 @@ public class TestHelperClassStore {
     private static String productName;
     private static String storeName;
 
+    public static String getCategoryProductName() {
+        return CategoryProductName;
+    }
+
+    public static void setCategoryProductName(String categoryProductName) {
+        CategoryProductName = categoryProductName;
+    }
+
+    private  static String CategoryProductName;
+
     public static String getStoreName() {
         return storeName;
     }
