@@ -1,8 +1,11 @@
 package com.magentoapplication.ui.backend.storemodule;
 
+import com.magentoapplication.ui.backend.catalogmodule.TestHelperClassCatalog;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -48,19 +51,28 @@ public class ManageProductsPage {
     WebElement visibilityDropDown;
     @FindBy(xpath="(//span[contains(text(),'Save')])[1]")
     WebElement SaveButton;
-    @FindBy(id="product_info_tabs_group_8")
+    @FindBy(css = "a[title='Prices']")
     WebElement PriceLink;
-    @FindBy(id="price")
+    @FindBy(xpath="//input[@id='price']")
     WebElement Price;
     @FindBy(id="tax_class_id")
     WebElement TaxClass;
-    @FindBy(xpath="//*[contains(text(),'The product has been saved.')]")
+    @FindBy(xpath="//span[contains(text(),'The product has been saved.')]")
     WebElement addProductsuccesMessage;
     @FindBy(id="product_info_tabs_categories")
     WebElement categories;
     @FindBy(id="ext-gen353")
     WebElement husby;
 
+    @FindBy(id="ext-gen439")
+    WebElement changedCategory;
+
+    public void addProductsFunction(){
+         storeModuleDashboardPage.catalogLink.click();
+         storeModuleDashboardPage.clickOnManageProductsLink();
+         AddProductButton.click();
+
+    }
 
     public void addproductcategories () {
        storeModuleDashboardPage.clickOnCategoriesLink();
@@ -83,7 +95,7 @@ public class ManageProductsPage {
         functionClass.waitUntilElementPresent(short_description);
         short_description.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent(sku);
-        sku.sendKeys(functionClass.generateFakeName());
+        sku.sendKeys(functionClass.generateFakeName()+System.currentTimeMillis());
         functionClass.waitUntilElementPresent(Weight);
         Weight.sendKeys(functionClass.generateProductWeight());
         functionClass.waitUntilElementPresent(SetProductasNewfromDate);
@@ -97,7 +109,12 @@ public class ManageProductsPage {
         Select select3 = new Select(visibilityDropDown);
         select3.selectByValue("4");
         functionClass.waitUntilElementPresent(PriceLink);
+        Actions actions=new Actions(driver);
+        actions.moveToElement(PriceLink).build().perform();
         PriceLink.click();
+        //javascriptClick(PriceLink.click();
+        //driver.switchTo().PriceLink.click();
+        functionClass.sleep(2);
         functionClass.waitUntilElementPresent(Price);
         Price.sendKeys(functionClass.generateProductPrice());
         functionClass.waitUntilElementPresent(TaxClass);
@@ -113,6 +130,51 @@ public class ManageProductsPage {
     public  boolean VerifySuccessmessage(){
         functionClass.waitUntilElementPresent(addProductsuccesMessage);
         if (addProductsuccesMessage.isDisplayed()){
+            return true;
+        }
+        else return false;
+    }
+
+    public void editProduct(){
+        storeModuleDashboardPage.clickOnCategoriesLink();
+        storeModuleDashboardPage.clickOnManageProductsLink();
+        WebElement editButton=driver.findElement (By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a",
+                TestHelperClassStore.getCategoryProductName())));
+        functionClass.waitUntilElementPresent(editButton);
+        editButton.click();
+        functionClass.waitUntilElementPresent(name);
+        name.clear();
+        TestHelperClassStore.setChangedProductName(functionClass.generateFakeName());
+        name.sendKeys(TestHelperClassStore.getChangedProductName());
+        functionClass.waitUntilElementPresent(description);
+        description.clear();
+        description.sendKeys(functionClass.generateProductDescription());
+        functionClass.waitUntilElementPresent(short_description);
+        short_description.clear();
+        short_description.sendKeys(functionClass.generateProductDescription());
+        functionClass.waitUntilElementPresent(sku);
+        sku.clear();
+        sku.sendKeys(functionClass.generateProductSku());
+        functionClass.waitUntilElementPresent(Weight);
+        Weight.clear();
+        Weight.sendKeys(functionClass.generateProductWeight());
+        functionClass.waitUntilElementPresent(url_key);
+        url_key.sendKeys(functionClass.generateFakeRedirectURL());
+
+        functionClass.waitUntilElementPresent(PriceLink);
+        Actions actions=new Actions(driver);
+        actions.moveToElement(PriceLink).build().perform();
+        PriceLink.click();
+        functionClass.waitUntilElementPresent(Price);
+        Price.clear();
+        Price.sendKeys(functionClass.generateProductPrice());
+
+        functionClass.waitUntilElementPresent(SaveButton);
+        SaveButton.click();
+    }
+    public boolean verifyEditProduct(){
+        functionClass.waitUntilElementPresent(addProductsuccesMessage);
+        if(addProductsuccesMessage.isDisplayed()){
             return true;
         }
         else return false;

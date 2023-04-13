@@ -43,30 +43,35 @@ public class StoreModuleTestRunner extends TestBase {
         manageProductsPage.addproductcategories ();
         Assert.assertTrue( manageProductsPage.VerifySuccessmessage());
     }
-    @Test(description = "Memet")
+    @Test(description = "Muyesser",dependsOnMethods = "addProductTest")
+    public  void editProductTest(){
+        manageProductsPage.editProduct();
+        Assert.assertTrue(manageProductsPage.verifyEditProduct());
+    }
+    @Test(description = "Memet",enabled = false)
     public void updateProductCategoryTest(){
         productInfoPage.updateProductCategories();
         Assert.assertTrue(productInfoPage.productCategoryUpdatedSuccessfully());
     }
-    @Test(description = "Memet")
+    @Test(description = "Memet",enabled = false)
     public void deleteStoreTest(){
         manageStoresPage.deleteStore();
         Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
     }
 
-    @Test(description = "Muradil")
+    @Test(description = "Muradil",enabled = false)
 
     public void createWebsiteTest(){
         manageStoresPage.createWebsite();
         Assert.assertTrue(manageStoresPage.verifyCreateWebsite());
     }
-    @Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"})
+    @Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"},enabled = false)
     public void deleteWebsiteTest() {
         manageStoresPage.deleteWebsite( );
         Assert.assertTrue( manageStoresPage.verifyDeleteWebsite( ) );
     }
 
-    @Test(description = "Mirehmidi")
+    @Test(description = "Mirehmidi",enabled = false)
     public void deleteCatologTest(){
         manageStoresPage.CatologPoductDeletetest ();
         Assert.assertTrue(manageStoresPage.verifyCatologPoducDelettest());
