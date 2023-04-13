@@ -99,6 +99,13 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
 
     }
+    
+    @Test(description = "Toghraq")
+    public void addAttributeUnderCatalogTest() {
+        manageAttributesPage.addAttributeUnderCatalog();
+        Assert.assertTrue(manageAttributesPage.attributeSaveMessage());
+    }
+    
     @Test(description = "muyesser",dependsOnMethods = "AddNewSeachTermTest")
     public void deleteSearchTest(){
         searchTermsPage.deleteExistingSearchTerm();
