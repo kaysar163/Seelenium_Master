@@ -23,7 +23,8 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
+        String testName=iTestResult.getName();
+        log.testStart(testName+"Test Started");
     }
 
     @Override
@@ -55,11 +56,14 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
-
+        String testName=iTestContext.getName();
+        log.testStart(testName+"Test Started");
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
+        String testName=iTestContext.getName();
+        log.testEnd(testName+"Test Ended");
 
     }
 }

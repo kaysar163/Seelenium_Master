@@ -125,9 +125,12 @@ public class ManageCategoriesPage {
 
 
     public void addSubCategory(){
+        functionClass.waitUntilElementPresent(catalogLink);
         catalogDashboardPage.catalogLink.click();
-        catalogDashboardPage.clickOnManageCategoriesLink();
+        functionClass.waitUntilElementPresent(catalogDashboardPage.manageCategoriesLink);
+        catalogDashboardPage.manageCategoriesLink.click();
         functionClass.waitUntilElementPresent(addSubCategoryButton);
+        functionClass.sleep(1);
         addSubCategoryButton.click();
         functionClass.waitUntilElementPresent(rootName);
         TestHelperClassCatalog.setSubName(functionClass.generateFakeName());
@@ -141,10 +144,12 @@ public class ManageCategoriesPage {
         functionClass.waitUntilElementPresent(pagaTitle);
         pagaTitle.sendKeys(functionClass.generateStreetName());
         functionClass.waitUntilElementPresent(savaCategoriesButton);
+        functionClass.sleep(2);
         savaCategoriesButton.click();
     }
 
     public boolean verifyAddSubCategory(){
+        functionClass.sleep(1);
         functionClass.waitUntilElementPresent(successfulSavesMessage);
         if (successfulSavesMessage.isDisplayed())
             return true;
@@ -152,8 +157,12 @@ public class ManageCategoriesPage {
     }
 
     public  void fillCategoryInformationAndSave() {
-        catalogDashboardPage. clickOnCatalogLink();
-        catalogDashboardPage.clickOnManageCategoriesLink();
+        functionClass.waitUntilElementPresent(catalogLink);
+        catalogLink.click();
+        functionClass.waitUntilElementPresent(manageCategoriesLink);
+        manageCategoriesLink.click();
+//        catalogDashboardPage. clickOnCatalogLink();
+//        catalogDashboardPage.clickOnManageCategoriesLink();
         functionClass.waitUntilElementPresent(addRootCategory);
         addRootCategory.click();
         functionClass.waitUntilElementPresent(rootName);
@@ -199,6 +208,7 @@ public class ManageCategoriesPage {
         functionClass.waitUntilElementPresent(rootName);
         rootName.clear();
         TestHelperClassCatalog.setChangeRootName(functionClass.generateFakeName());
+        functionClass.sleep(2);
         rootName.sendKeys(TestHelperClassCatalog.getChangeRootName());
         functionClass.waitUntilElementPresent(saveCategoryButton);
         functionClass.sleep(2);
@@ -218,9 +228,12 @@ public class ManageCategoriesPage {
         catalogDashboardPage.clickOnCatalogLink();
         catalogDashboardPage.clickOnManageCategoriesLink();
         WebElement rootCategoryLink=driver.findElement
-                (By.xpath(String.format("//span[text()='%s (0)']//parent::a",TestHelperClassCatalog
-                        .getRootName())));
+                (By.xpath(String.format("//span[contains(text(),'%s (0)')]//parent::a",TestHelperClassCatalog
+                        .getChangeRootName())));
         functionClass.waitUntilElementPresent(rootCategoryLink);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", rootCategoryLink);
+        functionClass.sleep(1);
         rootCategoryLink.click();
         functionClass.waitUntilElementPresent(deleteCategoryButton);
         deleteCategoryButton.click();
@@ -228,6 +241,7 @@ public class ManageCategoriesPage {
         alert.accept();
     }
     public boolean deleteCategorySuccessful(){
+        functionClass.sleep(2);
         functionClass.waitUntilElementPresent(deleteCatSucMessage);
         if (deleteCatSucMessage.isDisplayed())
             return true;
@@ -237,9 +251,9 @@ public class ManageCategoriesPage {
 
 
     public void  editSubCategory(){
-        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
-        catalogDashboardPage. clickOnCatalogLink();
-        catalogDashboardPage.clickOnManageCategoriesLink();
+//        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
+//        catalogDashboardPage. clickOnCatalogLink();
+//        catalogDashboardPage.clickOnManageCategoriesLink();
         functionClass.sleep(3);
        // Actions actions=new Actions(driver);
         //actions.moveToElement(subcat1).click().perform();
@@ -264,15 +278,16 @@ public class ManageCategoriesPage {
         else return false;
     }
     public void subCatDelete(){
-        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
-        catalogDashboardPage.clickOnCatalogLink();
-        catalogDashboardPage.clickOnManageCategoriesLink();
+//        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
+//        catalogDashboardPage.clickOnCatalogLink();
+//        catalogDashboardPage.clickOnManageCategoriesLink();
         functionClass.sleep(10);
         String subCatName=TestHelperClassCatalog.getSubName();
         WebElement subCat=driver.findElement(By.xpath(String.format("//*[text()='%s (0)']",subCatName)));
         subCat.click();
 //        subCat.click();
         functionClass.waitUntilElementPresent(deleteCatButton);
+        functionClass.sleep(2);
         deleteCatButton.click();
         functionClass.waitForAlertPresent();
         functionClass.alertAccept();

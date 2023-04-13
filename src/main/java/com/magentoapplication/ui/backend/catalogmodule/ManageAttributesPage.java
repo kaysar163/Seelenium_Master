@@ -2,6 +2,7 @@ package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,13 +18,18 @@ public class ManageAttributesPage {
     FunctionClass functionClass;
     
     CatalogDashboardPage catalogDashboardPage;
-    
+
+    static final String config="testdatafolder/testdata.properties";
+
+    String attribute=ApplicationConfig.readFromConfigProperties(config, "attributeCode")+ System.currentTimeMillis();
+    String input=ApplicationConfig.readFromConfigProperties(config,"adminInput")+System.currentTimeMillis();
+    String productName=ApplicationConfig.readFromConfigProperties(config,"productName");
     @FindBy(id = "productGrid_product_filter_name")
-    WebElement productName;
+    WebElement productNameField;
     @FindBy(xpath = "//button//span[contains(text(),'Search')]")
     WebElement searchButton;
-    @FindBy(xpath = "//tr//td[contains(text(),'1795')]//following-sibling::td//a[contains(text(),'Edit')]")
-    WebElement editProduct;
+//    @FindBy(xpath = "//tr//td[contains(text(),'1795')]//following-sibling::td//a[contains(text(),'Edit')]")
+//    WebElement editProduct;
     @FindBy(xpath = "(//span[contains(text(),'Create New Attribute')])[1]")
     WebElement createNewAttribute;
     @FindBy(xpath = "//tbody[1]//tr[1]//td[2]//input[@id='attribute_code']")
@@ -49,37 +55,22 @@ public class ManageAttributesPage {
         functionClass = new FunctionClass(driver);
         catalogDashboardPage = new CatalogDashboardPage(driver);
     }
-    //adds a new attribute
-//    public void addNewAttribute(){
-//        functionClass.waitUntilElementPresent(addAttributeButton);
-//        addAttributeButton.click();
-//        functionClass.waitUntilElementPresent(attributeCodeField);
-//        attributeCodeField.sendKeys("cowboyhatcattleman");
-//        Select dropdown1 = new Select(scopeDropdown);
-//        dropdown1.selectByValue("1");
-//        Select dropdown2 = new Select(applyToDropdown);
-//        dropdown2.selectByValue("1");
-//        Select dropdown3 = new Select(applyToSecond);
-//        dropdown3.selectByValue("simple");
-//        functionClass.waitUntilElementPresent(manageLabelOrOptions);
-//        manageLabelOrOptions.click();
-//        functionClass.waitUntilElementPresent(inputAdmin);
-//        inputAdmin.sendKeys("TexanCowboy");
-//        functionClass.waitUntilElementPresent(buttonSaveAttribute);
-//        buttonSaveAttribute.click();
-//    }
     
     //adds attribute under a catalog
     public void addAttributeUnderCatalog() {
-        functionClass.waitUntilElementPresent(productName);
-        productName.sendKeys("cattleman");
+        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
+        catalogDashboardPage.catalogLink.click();
+        functionClass.waitUntilElementPresent(catalogDashboardPage.manageProductsLink);
+        catalogDashboardPage.manageProductsLink.click();
+        functionClass.waitUntilElementPresent(productNameField);
+        productNameField.clear();
+        productNameField.sendKeys(productName);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        functionClass.sleep(2);
+        WebElement editProduct=driver.findElement(By.xpath(String.format
+                ("(//tr//td[contains(text(),'%s')]//following-sibling::td//a[contains(text(),'Edit')])[1]"
+                        ,productName)));
         functionClass.waitUntilElementPresent(editProduct);
         editProduct.click();
         functionClass.waitUntilElementPresent(createNewAttribute);
@@ -91,7 +82,7 @@ public class ManageAttributesPage {
             if(!eachWindow.equalsIgnoreCase(currentWindow)) {
                 driver.switchTo().window(eachWindow);
                 driver.manage().window().maximize();
-               attributeCodeField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "attributeCode")+ System.currentTimeMillis());
+               attributeCodeField.sendKeys(attribute);
             }
         }
 //        functionClass.waitUntilElementPresent(attributeCodeField);
@@ -105,24 +96,17 @@ public class ManageAttributesPage {
         functionClass.waitUntilElementPresent(manageLabelOrOptions);
         manageLabelOrOptions.click();
         functionClass.waitUntilElementPresent(inputAdmin);
-        inputAdmin.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","adminInput")+System.currentTimeMillis());
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        inputAdmin.sendKeys(input);
+        functionClass.sleep(3);
         functionClass.waitUntilElementPresent(btnSaveAttribute);
         btnSaveAttribute.click();
     }
     
     public boolean attributeSaveMessage() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        functionClass.sleep(2);
         if (saveAttributeMessage.isDisplayed()) {
             System.out.println("A new attribute under a catalog was successfully created.");
+            driver.switchTo().defaultContent();
             return true;
         } else
             return false;
