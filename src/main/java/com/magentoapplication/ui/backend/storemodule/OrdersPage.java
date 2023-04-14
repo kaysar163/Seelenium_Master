@@ -2,9 +2,12 @@ package com.magentoapplication.ui.backend.storemodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import static java.awt.SystemColor.window;
 
 public class OrdersPage {
 
@@ -84,9 +87,12 @@ public class OrdersPage {
         functionClass.waitUntilElementPresent(createNewCustomerNewButton);
         createNewCustomerNewButton.click();
         functionClass.waitUntilElementPresent(selectedStore);
+        functionClass.sleep(3);
         selectedStore.click();
         functionClass.waitUntilElementPresent(addProductsButton);
         functionClass.sleep(3);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(addProductsButton).build().perform();
         addProductsButton.click();
         functionClass.waitUntilElementPresent(selectedProduct);
         selectedProduct.click();
@@ -117,6 +123,7 @@ public class OrdersPage {
         submitOrderButton.click();
         //   JavascriptExecutor jse = (JavascriptExecutor) driver;
         //  jse.executeScript("arguments[0].scrollIntoView()", submitOrderButton);
+
     }
 
     public boolean verifyOrderCreated() {
