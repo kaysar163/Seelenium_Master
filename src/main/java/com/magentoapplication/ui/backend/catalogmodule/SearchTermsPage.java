@@ -71,17 +71,17 @@ public class SearchTermsPage {
         functionClass.waitUntilElementPresent(AddNewSearchTerm);
         AddNewSearchTerm.click();
         functionClass.waitUntilElementPresent(SearchQuery);
-        TestHelperClassCatalog.setSearchQuery(functionClass.generateFakeName());
+        TestHelperCatalog.setSearchQuery(functionClass.generateFakeName());
         functionClass.sleep(3);
-        SearchQuery.sendKeys(TestHelperClassCatalog.getSearchQuery());
+        SearchQuery.sendKeys(TestHelperCatalog.getSearchQuery());
 
         functionClass.waitUntilElementPresent(Store);
         Select select=new Select(Store);
         select.selectByValue("28");
         functionClass.waitUntilElementPresent(synonymFor);
-        TestHelperClassCatalog.setSynonymFor(functionClass.generateFakeName());
+        TestHelperCatalog.setSynonymFor(functionClass.generateFakeName());
         functionClass.sleep(2);
-        synonymFor.sendKeys(TestHelperClassCatalog.getSynonymFor());
+        synonymFor.sendKeys(TestHelperCatalog.getSynonymFor());
         functionClass.waitUntilElementPresent(redirectURL);
         redirectURL.sendKeys(functionClass.generateFakeRedirectURL());
         functionClass.waitUntilElementPresent(DisplayinSuggestedTerms);
@@ -106,13 +106,13 @@ public class SearchTermsPage {
         functionClass.waitUntilElementPresent(searchQuery1);
         searchQuery1.click();
         // functionClass.sleep(2);
-        searchQuery1.sendKeys(TestHelperClassCatalog.getSearchQuery());
+        searchQuery1.sendKeys(TestHelperCatalog.getSearchQuery());
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
 
         WebElement editButton1= driver.findElement(By.xpath(String.format
-                ("//tr//td[contains(text(),'%s')]//following-sibling::td//a",TestHelperClassCatalog.getSearchQuery())));
+                ("//tr//td[contains(text(),'%s')]//following-sibling::td//a", TestHelperCatalog.getSearchQuery())));
         System.out.println(editButton1);
         functionClass.waitUntilElementPresent(editButton1);
         editButton1.click();
@@ -149,7 +149,7 @@ public class SearchTermsPage {
 //        functionClass.waitUntilElementPresent(searchButton);
 //        searchButton.click();
 
-        WebElement editButton1= driver.findElement(By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a",TestHelperClassCatalog.getSearchQuery())));
+        WebElement editButton1= driver.findElement(By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a", TestHelperCatalog.getSearchQuery())));
         System.out.println(editButton1);
 
         editButton1.click();
@@ -177,14 +177,14 @@ public class SearchTermsPage {
         functionClass.waitUntilElementPresent(searchQuery1);
         searchQuery1.click();
         // functionClass.sleep(2);
-        searchQuery1.sendKeys(TestHelperClassCatalog.getSearchQuery());
+        searchQuery1.sendKeys(TestHelperCatalog.getSearchQuery());
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
     }
 
     public boolean verifyFilterTermTest(){
-        if (driver.getPageSource().contains(TestHelperClassCatalog.getSearchQuery())) {
+        if (driver.getPageSource().contains(TestHelperCatalog.getSearchQuery())) {
             return true;
         } else
             return false;
