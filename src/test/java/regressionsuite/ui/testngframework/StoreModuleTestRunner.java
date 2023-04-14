@@ -50,7 +50,7 @@ public class StoreModuleTestRunner extends TestBase {
     }
     @Test(description = "kaysar")
     public void addProductTest(){
-        manageProductsPage.addproductcategories ();
+        manageProductsPage.addproduct();
         Assert.assertTrue( manageProductsPage.VerifySuccessmessage());
     }
     @Test(description = "Muyesser",dependsOnMethods = "addProductTest")
