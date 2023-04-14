@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 import javax.security.auth.spi.LoginModule;
 
@@ -26,28 +27,76 @@ public class StoreModuleTestRunner extends TestBase {
     ProductInfoPage productInfoPage;
 
     @BeforeClass
-    public void setUp(){
+    public void setUp() {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.storeModuleLogin();
-        manageCategoriesPage=new ManageCategoriesPage(driver);
-        manageProductsPage=new ManageProductsPage(driver);
-        manageStoresPage=new ManageStoresPage(driver);
-        ordersPage=new OrdersPage(driver);
-        orderViewPage=new OrderViewPage(driver);
-        productInfoPage=new ProductInfoPage(driver);
+        manageCategoriesPage = new ManageCategoriesPage(driver);
+        manageProductsPage = new ManageProductsPage(driver);
+        manageStoresPage = new ManageStoresPage(driver);
+        ordersPage = new OrdersPage(driver);
+        orderViewPage = new OrderViewPage(driver);
+        productInfoPage = new ProductInfoPage(driver);
     }
-    @Test(description = "Omercan")
+    @Test(description = "meryem",priority = 1)
+    public void addNewOrderTest(){
+      ordersPage.addNewOrder();
+      Assert.assertTrue(ordersPage.verifyOrderCreated());
+    }
+    @Test(description = "meryem",dependsOnMethods ="addNewOrderTest",priority = 2)
+    public void editOrderTest(){
+        ordersPage.EditOrder();
+        Assert.assertTrue(ordersPage.verifyEditOrder());
+    }
+    @Test(description = "kaysar",enabled = false)
+    public void addProductTest(){
+        manageProductsPage.addproductcategories ();
+        Assert.assertTrue( manageProductsPage.VerifySuccessmessage());
+    }
+    @Test(description = "Muyesser",dependsOnMethods = "addProductTest",enabled = false)
+    public  void editProductTest(){
+        manageProductsPage.editProduct();
+        Assert.assertTrue(manageProductsPage.verifyEditProduct());
+    }
+    @Test(description = "Memet",enabled = false)
+    public void updateProductCategoryTest(){
+        productInfoPage.updateProductCategories();
+        Assert.assertTrue(productInfoPage.productCategoryUpdatedSuccessfully());
+    }
+    @Test(description = "Memet",enabled = false)
+    public void deleteStoreTest(){
+        manageStoresPage.deleteStore();
+        Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
+    }
+    @Test(description = "Omercan",dependsOnMethods = "addNewOrderTest",priority = 3,enabled = false)
     public void cancelOrdersTest(){
        ordersPage.cancelOrders();
         Assert.assertTrue(ordersPage.cancelOrdersSuccessful());
     }
 
+    @Test(description = "Muradil",enabled = false)
 
-
-
-    @AfterClass
-    public void tearDown(){
-        closeBrowser();
+    public void createWebsiteTest(){
+        manageStoresPage.createWebsite();
+        Assert.assertTrue(manageStoresPage.verifyCreateWebsite());
     }
+    @Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"},enabled = false)
+    public void deleteWebsiteTest() {
+        manageStoresPage.deleteWebsite( );
+        Assert.assertTrue( manageStoresPage.verifyDeleteWebsite( ) );
+    }
+
+    @Test(description = "Mirehmidi",enabled = false)
+    public void deleteCatologTest(){
+        manageStoresPage.CatologPoductDeletetest ();
+        Assert.assertTrue(manageStoresPage.verifyCatologPoducDelettest());
+    }
+
+
+
+   // @AfterClass
+ //   public void tearDown(){
+    //    closeBrowser();
+  //  }
 }
+

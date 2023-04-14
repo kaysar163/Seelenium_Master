@@ -1,24 +1,64 @@
 package com.magentoapplication.ui.backend.storemodule;
 
 public class TestHelperClassStore {
-    public static String getCustomerName() {
-        return customerName;
+    private static String productName;
+    private static String storeName;
+    private static String firstname;
+
+    private static  String changedProductName;
+
+    public static String getChangedProductName() {
+        return changedProductName;
     }
 
-    public static void setCustomerName(String customerName) {
-        TestHelperClassStore.customerName = customerName;
+    public static String getFirstname() {
+        return firstname;
     }
 
-    private static String customerName;
+    public static void setFirstname(String firstname) {
+        TestHelperClassStore.firstname = firstname;
+    }
+
+    public static void setChangedProductName(String changedProductName) {
+        TestHelperClassStore.changedProductName = changedProductName;
+
+    }
+
+    public static String getCategoryProductName() {
+        return CategoryProductName;
+    }
+
+    public static void setCategoryProductName(String categoryProductName) {
+        CategoryProductName = categoryProductName;
+    }
+
+    private  static String CategoryProductName;
+
+    public static String getStoreName() {
+        return storeName;
+    }
+
+    public static void setStoreName(String storeName) {
+        TestHelperClassStore.storeName = storeName;
+    }
+
+    public static String getWebsiteName() {
+        return websiteName;
+    }
+
+    public static void setWebsiteName(String websiteName) {
+        TestHelperClassStore.websiteName = websiteName;
+    }
+
+    private static String websiteName;
 
 
 
+    public static String getProductName() {
+        return productName;
+    }
 
-
-
-
-
-
-
-
+    public static void setProductName(String productName) {
+        TestHelperClassStore.productName = productName;
+    }
 }

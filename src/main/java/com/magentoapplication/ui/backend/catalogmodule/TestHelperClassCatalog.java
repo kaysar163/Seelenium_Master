@@ -9,6 +9,10 @@ public class TestHelperClassCatalog {
     private static String productName;
     private static  String changedProductName;
 
+    private static String searchQuery;
+
+
+
     public static String getChangedProductName() {
         return changedProductName;
     }
@@ -23,6 +27,26 @@ public class TestHelperClassCatalog {
 
     public static void setProductName(String productName) {
         TestHelperClassCatalog.productName = productName;
+    }
+
+
+    private static String SynonymFor;
+
+
+    public static String getSynonymFor() {
+        return SynonymFor;
+    }
+
+    public static void setSynonymFor(String synonymFor) {
+        SynonymFor = synonymFor;
+    }
+
+    public static String getSearchQuery() {
+        return searchQuery;
+    }
+
+    public static void setSearchQuery(String searchQuery) {
+        TestHelperClassCatalog.searchQuery = searchQuery;
     }
 
     public static String getSubName() {
@@ -44,6 +68,14 @@ public class TestHelperClassCatalog {
     public static String getChangeRootName() {
         return changeRootName;
     }
+
+    public static String getsearchQuery() {
+        return searchQuery;
+    }
+
+    public static void setsearchQuery(String searchQuery) {
+        TestHelperClassCatalog.searchQuery = searchQuery;
+}
 
     public static void setChangeRootName(String changeRootName) {
         TestHelperClassCatalog.changeRootName = changeRootName;
