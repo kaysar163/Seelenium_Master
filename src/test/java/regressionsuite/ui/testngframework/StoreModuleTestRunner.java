@@ -38,6 +38,16 @@ public class StoreModuleTestRunner extends TestBase {
         orderViewPage = new OrderViewPage(driver);
         productInfoPage = new ProductInfoPage(driver);
     }
+    @Test(description = "meryem")
+    public void addNewOrderTest(){
+      ordersPage.addNewOrder();
+      Assert.assertTrue(ordersPage.verifyOrderCreated());
+    }
+    @Test(description = "meryem",dependsOnMethods ="addNewOrderTest")
+    public void editOrderTest(){
+        ordersPage.EditOrder();
+        Assert.assertTrue(ordersPage.verifyEditOrder());
+    }
     @Test(description = "kaysar")
     public void addProductTest(){
         manageProductsPage.addproductcategories ();
@@ -79,9 +89,9 @@ public class StoreModuleTestRunner extends TestBase {
 
 
 
-    @AfterClass
-    public void tearDown(){
-        closeBrowser();
-    }
+   // @AfterClass
+ //   public void tearDown(){
+    //    closeBrowser();
+  //  }
 }
 
