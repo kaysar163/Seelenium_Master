@@ -150,6 +150,11 @@ public class FunctionClass {
         return String.valueOf(sortOrder);
     }
 
+    public String generateViewCode() {
+        String telephoneNumber = Faker.instance().name().firstName().toLowerCase();
+        return telephoneNumber;
+    }
+
     public void waitForAlertPresent(){
         WebDriverWait wai=new WebDriverWait(driver,timeout);
         wai.until(ExpectedConditions.alertIsPresent());

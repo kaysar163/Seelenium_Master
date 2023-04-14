@@ -1,10 +1,12 @@
 package com.magentoapplication.ui.backend.storemodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class OrderViewPage {
 
@@ -43,12 +45,57 @@ public class OrderViewPage {
     @FindBy(xpath = "(//button[@title='Save Store View'])[1]")
     WebElement saveStoreViewButton;
 
-    @FindBy(id = "//span[text()='The store view has been saved']")
+    @FindBy(xpath = "//span[text()='The store view has been saved']")
     WebElement storeViewHasBeenSavedMessage;
 
 
 
+    public void addStoreView(){
+        storeModuleDashboardPage.clickOnManageStoresLink();
+        functionClass.waitUntilElementPresent(createStoreViewButton);
+        createStoreViewButton.click();
+        functionClass.waitUntilElementPresent(storeDropdown);
+        Select select=new Select(storeDropdown);
+        select.selectByValue("559");
+        functionClass.waitUntilElementPresent(storeNameField);
+        TestHelperClassStore.setStoreViewName(functionClass.generateFakeName());
+        storeNameField.sendKeys(TestHelperClassStore.getStoreViewName());
+        functionClass.waitUntilElementPresent(storeCodeField);
+        storeCodeField.sendKeys(functionClass.generateViewCode());
+        functionClass.waitUntilElementPresent(statusDropdown);
+        Select select1=new Select(statusDropdown);
+        select1.selectByValue("1");
+        functionClass.waitUntilElementPresent(sortOrderField);
+        sortOrderField.sendKeys(functionClass.generateSortOrder());
+        functionClass.waitUntilElementPresent(saveStoreViewButton);
+        saveStoreViewButton.click();
+    }
 
+    public boolean verifyNewStoreViewAdded(){
+        functionClass.waitUntilElementPresent(storeViewHasBeenSavedMessage);
+        if (storeViewHasBeenSavedMessage.isDisplayed())
+            return true;
+        else return false;
+    }
+
+    public void editStoreView(){
+        WebElement editStoreView=driver.findElement(By.xpath(
+                String.format("//a[contains(text(),' %s')]",TestHelperClassStore.getStoreViewName())));
+        functionClass.waitUntilElementPresent(editStoreView);
+        editStoreView.click();
+        functionClass.waitUntilElementPresent(storeNameField);
+        storeNameField.clear();
+        storeNameField.sendKeys(functionClass.generateWebsiteName());
+        functionClass.waitUntilElementPresent(saveStoreViewButton);
+        saveStoreViewButton.click();
+    }
+
+    public boolean verifyStoreViewEdited(){
+        functionClass.waitUntilElementPresent(storeViewHasBeenSavedMessage);
+        if (storeViewHasBeenSavedMessage.isDisplayed())
+            return true;
+        else return false;
+    }
 
 
 }
