@@ -55,8 +55,10 @@ public class OrdersPage {
 
    public void cancelOrders(){
        functionClass.waitUntilElementPresent(storeModuleDashboardPage.salesLink);
+       storeModuleDashboardPage.salesLink.click();
        functionClass.waitUntilElementPresent(storeModuleDashboardPage.orderLink);
        storeModuleDashboardPage.clickOnOrderLink();
+       
 //       functionClass.waitUntilElementPresent(ordersPage);
 //       ordersPage.isDisplayed();
        functionClass.waitUntilElementPresent(cusName);

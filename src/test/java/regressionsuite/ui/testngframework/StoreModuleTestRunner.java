@@ -46,8 +46,8 @@ public class StoreModuleTestRunner extends TestBase {
 
 
 
-    @AfterClass
-    public void tearDown(){
-        closeBrowser();
-    }
+//    @AfterClass
+//    public void tearDown(){
+//        closeBrowser();
+//    }
 }
