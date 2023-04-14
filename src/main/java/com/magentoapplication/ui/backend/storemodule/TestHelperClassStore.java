@@ -3,6 +3,7 @@ package com.magentoapplication.ui.backend.storemodule;
 public class TestHelperClassStore {
     private static String productName;
     private static String storeName;
+    private static String firstname;
 
     private static  String changedProductName;
 
@@ -10,8 +11,17 @@ public class TestHelperClassStore {
         return changedProductName;
     }
 
+    public static String getFirstname() {
+        return firstname;
+    }
+
+    public static void setFirstname(String firstname) {
+        TestHelperClassStore.firstname = firstname;
+    }
+
     public static void setChangedProductName(String changedProductName) {
         TestHelperClassStore.changedProductName = changedProductName;
+
     }
 
     public static String getCategoryProductName() {
