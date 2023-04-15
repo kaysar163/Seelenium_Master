@@ -7,6 +7,16 @@ public class TestHelperClassStore {
 
     private static  String changedProductName;
 
+    private static  String storeViewName;
+
+    public static String getStoreViewName() {
+        return storeViewName;
+    }
+
+    public static void setStoreViewName(String storeViewName) {
+        TestHelperClassStore.storeViewName = storeViewName;
+    }
+
     public static String getChangedProductName() {
         return changedProductName;
     }

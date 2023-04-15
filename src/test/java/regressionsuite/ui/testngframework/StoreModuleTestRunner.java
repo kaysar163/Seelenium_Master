@@ -6,10 +6,11 @@ import com.magentoapplication.utility.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
-import javax.security.auth.spi.LoginModule;
+
 
 public class StoreModuleTestRunner extends TestBase {
 
@@ -96,6 +97,19 @@ public class StoreModuleTestRunner extends TestBase {
         manageStoresPage.CatologPoductDeletetest ();
         Assert.assertTrue(manageStoresPage.verifyCatologPoducDelettest());
     }
+
+    @Test(description = "Abdusattar")
+    public void addStoreViewTest(){
+        orderViewPage.addStoreView();
+        Assert.assertTrue(orderViewPage.verifyNewStoreViewAdded());
+    }
+
+    @Test(description = "Abdusattar",dependsOnMethods = "addStoreViewTest")
+    public void editStoreViewTest(){
+        orderViewPage.editStoreView();
+        Assert.assertTrue(orderViewPage.verifyStoreViewEdited());
+    }
+
     @AfterClass
     public void tearDown(){
         closeBrowser();

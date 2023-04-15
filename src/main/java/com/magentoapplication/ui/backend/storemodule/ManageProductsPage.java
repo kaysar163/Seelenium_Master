@@ -1,6 +1,5 @@
 package com.magentoapplication.ui.backend.storemodule;
 
-import com.magentoapplication.ui.backend.catalogmodule.TestHelperClassCatalog;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
