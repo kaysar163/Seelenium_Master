@@ -64,12 +64,17 @@ public class StoreModuleTestRunner extends TestBase {
         manageCategoriesPage.addProductCategoriesFunction();
         Assert.assertTrue(manageCategoriesPage.verifyAddProductCategory());
     }
-    @Test(description = "Memet")
+    @Test(description = "Memet",dependsOnMethods = {"addProductCategoryTest","addProductTest"})
     public void updateProductCategoryTest(){
         productInfoPage.updateProductCategories();
         Assert.assertTrue(productInfoPage.productCategoryUpdatedSuccessfully());
     }
-    @Test(description = "Memet")
+    @Test(description = "Gulzar")
+    public void createStoreTest(){
+        manageStoresPage.createStore();
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
+    @Test(description = "Memet",dependsOnMethods = "createStoreTest")
     public void deleteStoreTest(){
         manageStoresPage.deleteStore();
         Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
