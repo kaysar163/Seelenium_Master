@@ -22,6 +22,7 @@ public class ManageProductsPage {
         storeModuleDashboardPage=new StoreModuleDashboardPage(driver);
     }
 
+
     @FindBy(xpath = "(//span[contains(text(),'Add Product')])[1]")
     WebElement AddProductButton;
     @FindBy(id ="attribute_set_id")
@@ -33,7 +34,7 @@ public class ManageProductsPage {
     @FindBy(name="product[name]")
     WebElement name;
     @FindBy(id="description")
-    WebElement description;
+    WebElement description1;
     @FindBy(id="short_description")
     WebElement short_description;
     @FindBy(id="sku")
@@ -73,7 +74,7 @@ public class ManageProductsPage {
 
     }
 
-    public void addproductcategories () {
+    public void addproduct () {
        storeModuleDashboardPage.clickOnCategoriesLink();
         storeModuleDashboardPage.clickOnManageProductsLink();
         functionClass.waitUntilElementPresent(AddProductButton);
@@ -89,8 +90,8 @@ public class ManageProductsPage {
         functionClass.waitUntilElementPresent(name);
         TestHelperClassStore.setCategoryProductName(functionClass.generateProductName());
         name.sendKeys(TestHelperClassStore.getCategoryProductName());
-        functionClass.waitUntilElementPresent(description);
-        description.sendKeys(functionClass.generateFakeLastName());
+        functionClass.waitUntilElementPresent(description1);
+        description1.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(short_description);
         short_description.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent(sku);
@@ -145,9 +146,9 @@ public class ManageProductsPage {
         name.clear();
         TestHelperClassStore.setChangedProductName(functionClass.generateFakeName());
         name.sendKeys(TestHelperClassStore.getChangedProductName());
-        functionClass.waitUntilElementPresent(description);
-        description.clear();
-        description.sendKeys(functionClass.generateProductDescription());
+        functionClass.waitUntilElementPresent(description1);
+        description1.clear();
+        description1.sendKeys(functionClass.generateProductDescription());
         functionClass.waitUntilElementPresent(short_description);
         short_description.clear();
         short_description.sendKeys(functionClass.generateProductDescription());
@@ -181,6 +182,9 @@ public class ManageProductsPage {
 
 
 }
+
+
+
 
 
 
