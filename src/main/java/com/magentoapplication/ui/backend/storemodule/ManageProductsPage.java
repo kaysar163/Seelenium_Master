@@ -65,7 +65,7 @@ public class ManageProductsPage {
       functionClass.waitUntilElementPresent(catalogLink);
         Actions actions=new Actions(driver);
         actions.moveToElement(catalogLink).click(manageProductsLink).build().perform();
-        nameField.sendKeys("LeyighanBulaq");
+        nameField.sendKeys(TestHelperClassStore.getChangedProductName());
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
