@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.storemodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,6 +67,29 @@ public class ManageProductsPage {
 
     @FindBy(id="ext-gen439")
     WebElement changedCategory;
+
+
+    @FindBy(xpath ="//span[text()='Catalog']" )
+    WebElement catalogLink;
+
+    @FindBy(xpath ="//span[text()='Manage Products']")
+    WebElement manageProductsLink;
+
+    @FindBy(id ="productGrid_product_filter_name" )
+    WebElement nameField;
+
+    @FindBy(xpath ="//span[text()='Search']")
+    WebElement searchButton;
+
+    @FindBy(xpath ="//a[text()=\"Edit\"][1]")
+    WebElement editIcon;
+
+    @FindBy(xpath ="//span[text()='Delete']" )
+    WebElement deleteButton;
+
+    @FindBy(xpath ="//span[text()='The product has been deleted.']")
+    WebElement deleteSuccessfulMessage;
+
 
     public void addProductsFunction(){
          storeModuleDashboardPage.catalogLink.click();
@@ -144,7 +168,7 @@ public class ManageProductsPage {
         editButton.click();
         functionClass.waitUntilElementPresent(name);
         name.clear();
-        TestHelperClassStore.setChangedProductName(functionClass.generateFakeName());
+        TestHelperClassStore.setChangedProductName(functionClass.generateProductName());
         name.sendKeys(TestHelperClassStore.getChangedProductName());
         functionClass.waitUntilElementPresent(description1);
         description1.clear();
@@ -180,6 +204,36 @@ public class ManageProductsPage {
         else return false;
     }
 
+
+    public void deleteProductTest(){
+        functionClass.waitUntilElementPresent(catalogLink);
+        Actions actions=new Actions(driver);
+        actions.moveToElement(catalogLink).click(manageProductsLink).build().perform();
+        nameField.sendKeys(TestHelperClassStore.getChangedProductName());
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(editIcon);
+        editIcon.click();
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(deleteButton);
+        deleteButton.click();
+        functionClass.waitForAlertPresent();
+        functionClass.sleep(2);
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
+
+
+    }
+
+
+    public boolean verifyDeletedProductTest(){
+        if (deleteSuccessfulMessage.getText().equals("The product has been deleted."))
+            return true;
+        else
+            return false;
+    }
 
 }
 

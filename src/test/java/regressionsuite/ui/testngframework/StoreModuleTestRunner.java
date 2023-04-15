@@ -59,6 +59,13 @@ public class StoreModuleTestRunner extends TestBase {
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
     }
+
+    @Test(description = "Fazilet",dependsOnMethods = "editProductTest")
+    public void deleteProductTest() {
+        manageProductsPage.deleteProductTest();
+        Assert.assertTrue(manageProductsPage.verifyDeletedProductTest());
+
+    }
     @Test(description = "Muyesser",dependsOnMethods = "addProductTest")
     public void addProductCategoryTest(){
         manageCategoriesPage.addProductCategoriesFunction();
