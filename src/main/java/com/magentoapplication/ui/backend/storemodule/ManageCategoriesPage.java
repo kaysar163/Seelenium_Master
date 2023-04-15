@@ -69,8 +69,8 @@ public class ManageCategoriesPage {
         manageCategoriesLink.click();
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(categoryNameField);
-        //TestHelperClassStore.setCategoryProductName(functionClass.generateProductName());
-        categoryNameField.sendKeys(functionClass.generateFakeName());
+        TestHelperClassStore.setCategoryName(functionClass.generateProductName());
+        categoryNameField.sendKeys(TestHelperClassStore.getCategoryName());
         functionClass.waitUntilElementPresent(isActive);
         Select select=new Select(isActive);
         select.selectByValue("1");

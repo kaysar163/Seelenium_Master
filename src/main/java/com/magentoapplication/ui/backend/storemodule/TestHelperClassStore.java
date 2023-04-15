@@ -6,6 +6,15 @@ public class TestHelperClassStore {
     private static String firstname;
 
     private static  String changedProductName;
+    private  static String categoryName;
+
+    public static String getCategoryName() {
+        return categoryName;
+    }
+
+    public static void setCategoryName(String categoryName) {
+        TestHelperClassStore.categoryName = categoryName;
+    }
 
     private static  String storeViewName;
 
