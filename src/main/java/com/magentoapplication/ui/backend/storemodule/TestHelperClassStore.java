@@ -8,6 +8,12 @@ public class TestHelperClassStore {
     private static  String changedProductName;
     private  static String categoryName;
 
+    private static String websiteName;
+
+    private  static String CategoryProductName;
+
+    private static  String storeViewName;
+
     public static String getCategoryName() {
         return categoryName;
     }
@@ -16,7 +22,7 @@ public class TestHelperClassStore {
         TestHelperClassStore.categoryName = categoryName;
     }
 
-    private static  String storeViewName;
+
 
     public static String getStoreViewName() {
         return storeViewName;
@@ -26,9 +32,6 @@ public class TestHelperClassStore {
         TestHelperClassStore.storeViewName = storeViewName;
     }
 
-    public static String getChangedProductName() {
-        return changedProductName;
-    }
 
     public static String getFirstname() {
         return firstname;
@@ -38,10 +41,6 @@ public class TestHelperClassStore {
         TestHelperClassStore.firstname = firstname;
     }
 
-    public static void setChangedProductName(String changedProductName) {
-        TestHelperClassStore.changedProductName = changedProductName;
-
-    }
 
     public static String getCategoryProductName() {
         return CategoryProductName;
@@ -51,7 +50,6 @@ public class TestHelperClassStore {
         CategoryProductName = categoryProductName;
     }
 
-    private  static String CategoryProductName;
 
     public static String getStoreName() {
         return storeName;
@@ -69,14 +67,6 @@ public class TestHelperClassStore {
         TestHelperClassStore.websiteName = websiteName;
     }
 
-    private static String websiteName;
-
-    private static String productName;
-    private static String storeName;
-    private static String firstname;
-
-    private static String changedProductName;
-    private static String categoryName;
 
 
     public static String getChangedProductName() {
@@ -87,8 +77,6 @@ public class TestHelperClassStore {
         TestHelperClassStore.changedProductName = changedProductName;
 
     }
-
-
 
 
 
