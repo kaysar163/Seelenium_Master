@@ -86,6 +86,13 @@ public class StoreModuleTestRunner extends TestBase {
         manageStoresPage.createWebsite();
         Assert.assertTrue(manageStoresPage.verifyCreateWebsite());
     }
+    
+    @Test(description = "Toghraq")
+    public void editWebsiteTest(){
+        manageStoresPage.editWebsite();
+        Assert.assertTrue(manageStoresPage.webSiteSavedMessage());
+    }
+    
     @Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"})
     public void deleteWebsiteTest() {
         manageStoresPage.deleteWebsite( );
