@@ -30,8 +30,8 @@ public class ManageStoresPage {
     }
     
     //Elements
-    @FindBy(xpath = "//*[contains(text(),'    Big Jewelry shop ')]")
-    WebElement storeName;
+//    @FindBy(xpath = "//*[contains(text(),'    Big Jewelry shop ')]")
+//    WebElement storeName;
     @FindBy(xpath = "(//button[@title='Delete Store']//span/span/span[1])[1]")
     WebElement deleteStore;
     @FindBy(css = "li.success-msg")
@@ -189,6 +189,7 @@ public class ManageStoresPage {
     
     public void deleteStore() {
         storeModuleDashboardPage.clickOnManageStoresLink();
+        WebElement storeName= driver.findElement(By.xpath(String.format("//*[contains(text(),'%s')]",TestHelperClassStore.getStoreName())));
         storeName.click();
         functionClass.waitUntilElementPresent(deleteStore);
         deleteStore.click();
@@ -220,14 +221,14 @@ public class ManageStoresPage {
         functionClass.waitUntilElementPresent(rootCategoryField);
         rootCategoryField.click();
         Select selectRootCategory = new Select(rootCategoryField);
-        selectRootCategory.selectByValue("357");
+        selectRootCategory.selectByValue("2");
         functionClass.waitUntilElementPresent(saveStoreButton);
         saveStoreButton.click();
         
         
     }
     
-    public boolean verifyCreatStore() {
+    public boolean verifyCreateStore() {
         if (createStoreSucMasaj.isDisplayed()) {
             return true;
             

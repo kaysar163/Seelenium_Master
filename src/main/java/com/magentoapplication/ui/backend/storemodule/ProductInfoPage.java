@@ -24,7 +24,7 @@ public class ProductInfoPage {
         storeModuleDashboardPage=new StoreModuleDashboardPage(driver);
     }
     //Elements
-    @FindBy(css = "ul#product_info_tabs>li:nth-child(11)")
+    @FindBy(css = "ul#product_info_tabs>li:nth-child(10)")
     WebElement categoriesLink;
     @FindBy(css = "button.scalable.save[title='Save']")
     WebElement saveButton;
@@ -36,21 +36,18 @@ public class ProductInfoPage {
     WebElement categoryUpdateSuccessMessage;
     public void updateProductCategories(){
         storeModuleDashboardPage.clickOnManageProductsLink();
-//        WebElement productEditButton= driver.findElement(By.xpath(String.format("//tbody/tr/td[3][contains(text(),'%')]/following::td[9]",TestHelperClassStore.getProductName())));
-//        productEditButton.click();
-//        WebElement editButton=driver.findElement(By.xpath("//tbody/tr/td[3][contains(text(),'East of Eden')]/following::td[9]"));
-//        functionClass.sleep(10);
-//        editButton.click();
-        WebElement editButton = driver.findElement(By.xpath("//tbody/tr/td[3][contains(text(),'East of Eden')]/following::td[9]/a"));
+        WebElement editButton = driver.findElement(By.xpath(String.format("//tbody/tr/td[3][contains(text(),'%s')]/following::td[9]/a",TestHelperClassStore.getCategoryProductName())));
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].click();", editButton);
-
         functionClass.sleep(10);
+        functionClass.waitUntilElementPresent(categoriesLink);
         categoriesLink.click();
-//        WebElement categoryCheckBox=driver.findElement(By.xpath("//*[text()='Sweden (4)']//../../input"));
-//        categoryCheckBox.click();
-        WebDriverWait wait = new WebDriverWait(driver, 10); // Wait for a maximum of 10 seconds
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Sweden (4)']//../../input"))).click();
+        functionClass.sleep(10);
+        WebElement categoryCheckBox=driver.findElement(By.xpath(String.format("//*[text()='%s (0)']//../../input",TestHelperClassStore.getCategoryName())));
+        functionClass.waitUntilElementPresent(categoryCheckBox);
+        categoryCheckBox.isSelected();
+//        WebDriverWait wait = new WebDriverWait(driver, 10); // Wait for a maximum of 10 seconds
+//        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format("//*[text()='%s' (0)]//../../input",TestHelperClassStore.getCategoryName())))).click();
 
         saveButton.click();
     }
