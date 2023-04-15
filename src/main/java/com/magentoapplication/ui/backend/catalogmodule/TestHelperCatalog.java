@@ -1,6 +1,6 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
-public class TestHelperClassCatalog {
+public class TestHelperCatalog {
 
     private static String subName;
     private static String rootName;
@@ -9,12 +9,16 @@ public class TestHelperClassCatalog {
     private static String productName;
     private static  String changedProductName;
 
+    private static String searchQuery;
+
+
+
     public static String getChangedProductName() {
         return changedProductName;
     }
 
     public static void setChangedProductName(String changedProductName) {
-        TestHelperClassCatalog.changedProductName = changedProductName;
+        TestHelperCatalog.changedProductName = changedProductName;
     }
 
     public static String getProductName() {
@@ -22,7 +26,27 @@ public class TestHelperClassCatalog {
     }
 
     public static void setProductName(String productName) {
-        TestHelperClassCatalog.productName = productName;
+        TestHelperCatalog.productName = productName;
+    }
+
+
+    private static String SynonymFor;
+
+
+    public static String getSynonymFor() {
+        return SynonymFor;
+    }
+
+    public static void setSynonymFor(String synonymFor) {
+        SynonymFor = synonymFor;
+    }
+
+    public static String getSearchQuery() {
+        return searchQuery;
+    }
+
+    public static void setSearchQuery(String searchQuery) {
+        TestHelperCatalog.searchQuery = searchQuery;
     }
 
     public static String getSubName() {
@@ -30,7 +54,7 @@ public class TestHelperClassCatalog {
     }
 
     public static void setSubName(String subName) {
-        TestHelperClassCatalog.subName = subName;
+        TestHelperCatalog.subName = subName;
     }
 
     public static String getRootName() {
@@ -38,14 +62,22 @@ public class TestHelperClassCatalog {
     }
 
     public static void setRootName(String rootName) {
-        TestHelperClassCatalog.rootName = rootName;
+        TestHelperCatalog.rootName = rootName;
     }
 
     public static String getChangeRootName() {
         return changeRootName;
     }
 
+    public static String getsearchQuery() {
+        return searchQuery;
+    }
+
+    public static void setsearchQuery(String searchQuery) {
+        TestHelperCatalog.searchQuery = searchQuery;
+}
+
     public static void setChangeRootName(String changeRootName) {
-        TestHelperClassCatalog.changeRootName = changeRootName;
+        TestHelperCatalog.changeRootName = changeRootName;
     }
 }
