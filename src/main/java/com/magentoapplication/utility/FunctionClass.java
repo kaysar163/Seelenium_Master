@@ -109,6 +109,12 @@ public class FunctionClass {
         String productDescription=Faker.instance().book().author();
         return productDescription;
     }
+    public  String generateCatalogDescription(){
+        Faker faker=new Faker();
+        String catalogDescription=Faker.instance().book().author();
+        return catalogDescription;
+
+    }
 
     public String generateProductShortDescription(){
         Faker faker=new Faker();
