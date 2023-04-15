@@ -129,6 +129,14 @@ public class StoreModuleTestRunner extends TestBase {
         Assert.assertTrue(orderViewPage.verifyStoreViewEdited());
     }
 
+
+    @Test(description = "Fazilet")
+    public void viewAllStoresTest(){
+        manageStoresPage.viewAllStores();
+        Assert.assertTrue(manageStoresPage.verifyViewedAllStores());
+    }
+
+
     @AfterClass
     public void tearDown(){
         closeBrowser();

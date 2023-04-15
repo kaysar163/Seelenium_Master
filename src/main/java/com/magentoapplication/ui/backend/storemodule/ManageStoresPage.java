@@ -8,9 +8,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class ManageStoresPage {
     
@@ -99,7 +102,14 @@ public class ManageStoresPage {
     WebElement websiteCode;
     @FindBy(xpath = "//span[contains(text(),'The website has been saved.')]")
     WebElement websiteSavedMessage;
-    
+
+
+    @FindAll(@FindBy(xpath = "//table[@class='data']//tbody//tr"))
+    List<WebElement> manageStoresTable;
+
+
+
+
     public void createWebsite() {
         functionClass.waitUntilElementPresent(systemLink);
         systemLink.click();
@@ -236,8 +246,30 @@ public class ManageStoresPage {
         } else return false;
         
     }
-    
-    
+
+
+    public void viewAllStores(){
+        functionClass.waitUntilElementPresent(systemLink);
+        Actions actions=new Actions(driver);
+        actions.moveToElement(systemLink).click(manageStoresLink).build().perform();
+        functionClass.sleep(2);
+    }
+
+    public boolean verifyViewedAllStores(){
+        if (manageStoresTable.size()>=1)
+            return true;
+        else
+            return false;
+
+    }
+
+
+
+
+
+
+
+
     public void CatologPoductDeletetest() {
     }
     
