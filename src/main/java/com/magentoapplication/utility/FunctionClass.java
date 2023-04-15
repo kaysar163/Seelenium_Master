@@ -109,6 +109,12 @@ public class FunctionClass {
         String productDescription=Faker.instance().book().author();
         return productDescription;
     }
+    public  String generateCatalogDescription(){
+        Faker faker=new Faker();
+        String catalogDescription=Faker.instance().book().author();
+        return catalogDescription;
+
+    }
 
     public String generateProductShortDescription(){
         Faker faker=new Faker();
@@ -132,6 +138,29 @@ public class FunctionClass {
         int productPrice = Faker.instance().number().randomDigitNotZero();
         return String.valueOf(productPrice);
     }
+
+    public String generateWebsiteName(){
+        Faker faker=new Faker();
+        String websiteName=Faker.instance().name().name();
+        return websiteName;
+    }
+    public String generateWebsiteCode() {
+        Faker faker = new Faker();
+        String websiteCode =Faker.instance().bothify("????_###");
+        return String.valueOf(websiteCode);
+    }
+
+    public String generateSortOrder() {
+        Faker faker = new Faker();
+        int sortOrder = Faker.instance().number().randomDigitNotZero();
+        return String.valueOf(sortOrder);
+    }
+
+    public String generateViewCode() {
+        String telephoneNumber = Faker.instance().name().firstName().toLowerCase();
+        return telephoneNumber;
+    }
+
     public void waitForAlertPresent(){
         WebDriverWait wai=new WebDriverWait(driver,timeout);
         wai.until(ExpectedConditions.alertIsPresent());

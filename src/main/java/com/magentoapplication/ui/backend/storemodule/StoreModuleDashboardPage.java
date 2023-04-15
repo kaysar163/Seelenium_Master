@@ -14,15 +14,18 @@ public class StoreModuleDashboardPage {
     FunctionClass functionClass;
 
     Actions actions;
+    private WebElement CatologPoductDeleteLink;
 
     public StoreModuleDashboardPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionClass=new FunctionClass(driver);
-        actions=new Actions(driver);
+        PageFactory.initElements(driver, this);
+        functionClass = new FunctionClass(driver);
+        actions = new Actions(driver);
     }
 
     //Elements
+    @FindBy(xpath = "//span[normalize-space()='Catalog']")
+    WebElement categoriesLink;
     @FindBy(xpath = "//span[text()='Sales']//parent::a")
     WebElement salesLink;
 
@@ -34,19 +37,40 @@ public class StoreModuleDashboardPage {
 
     @FindBy(xpath = "//span[text()='Manage Stores']//parent::a")
     WebElement manageStoresLink;
+    @FindBy(css = "ul#nav>li:nth-child(2)")
+    WebElement catalogLink;
+    @FindBy(xpath = "(//*[text()='Manage Products'])[1]")
+    WebElement manageProductsLink;
 
     //Methods
-    public void clickOnOrderLink(){
-        functionClass.waitUntilElementPresent(salesLink);
-        actions.moveToElement(salesLink).click(orderLink).build().perform();
-    }
-
-    public void clickOnManageStoresLink(){
-        functionClass.waitUntilElementPresent(systemLink);
-        actions.moveToElement(systemLink).click(manageStoresLink).build().perform();
+    public void clickOnCategoriesLink(){
+        functionClass.waitUntilElementPresent(categoriesLink);
+        actions.moveToElement( categoriesLink ).build( ).perform( );
     }
 
 
-    //span[text()='Sales']//parent::a
+    public void clickOnOrderLink() {
+        functionClass.waitUntilElementPresent( salesLink );
+        actions.moveToElement( salesLink ).click( orderLink ).build( ).perform( );
+    }
 
+    public void clickOnManageStoresLink() {
+        functionClass.waitUntilElementPresent( systemLink );
+        actions.moveToElement( systemLink ).click( manageStoresLink ).build( ).perform( );
+    }
+    public void clickOnManageProductsLink(){
+        functionClass.waitUntilElementPresent(catalogLink);
+        actions.moveToElement(catalogLink).moveToElement(manageProductsLink).click().build().perform();
+    }
+
+    public void clickOnManageDeleteProductLink() {
+        functionClass.waitUntilElementPresent( CatologPoductDeleteLink );
+        actions.moveToElement( CatologPoductDeleteLink ).moveToElement( CatologPoductDeleteLink ).click( ).build( ).perform( );
+
+    }
 }
+
+
+
+
+
