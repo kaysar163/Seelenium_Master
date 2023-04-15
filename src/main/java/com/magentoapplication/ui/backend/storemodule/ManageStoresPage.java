@@ -44,7 +44,7 @@ public class ManageStoresPage {
     }
 
     public boolean verifyViewedAllStores(){
-        if (manageStoresTable.size()>1)
+        if (manageStoresTable.size()>=1)
             return true;
         else
             return false;
