@@ -95,4 +95,8 @@
 
 
 
-      #Rizvangul : view newsletter subscribers
+      @viewNewsletterSubscribers   #Rizvangul
+  Scenario: Marketing Manager should be able to view Newsletter subscribers
+        Given Admin user is already on the dashboard page
+        When the user enter the Newsletter subscribers page
+        Then Newsletter subscribers should be viewed.
