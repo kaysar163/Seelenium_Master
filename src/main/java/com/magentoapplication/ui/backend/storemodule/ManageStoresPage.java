@@ -107,6 +107,23 @@ public class ManageStoresPage {
     @FindAll(@FindBy(xpath = "//table[@class='data']//tbody//tr"))
     List<WebElement> manageStoresTable;
 
+    @FindBy(xpath = "//span[text()='Manage Stores']")
+    WebElement ManageStore;
+
+    @FindBy(id = "group_name")
+    WebElement StoreName;
+
+    @FindBy(xpath = "//span[contains(text(),'Save Store')]")
+    WebElement editSaveButton;
+
+    @FindBy(xpath = "//span[text()='The store has been saved.']")
+    WebElement verifyEditStore;
+    String storename;
+
+    @FindBy (xpath = "(//*[contains(text(), 'System')])[2]")
+    WebElement SystemButton;
+
+
 
 
 
@@ -276,4 +293,34 @@ public class ManageStoresPage {
     public boolean verifyCatologPoducDelettest() {
         return false;
     }
-}
+    public void editStore() {
+        functionClass.waitUntilElementPresent(SystemButton);
+        systemButton.click();
+        functionClass.waitUntilElementPresent(ManageStore);
+        managerStoresButton.click();
+        WebElement editStories = driver.findElement(By.xpath(String.format("//a[contains(text(),'%s')]",TestHelperClassStore.getStoreName())));
+        functionClass.waitUntilElementPresent(editStories);
+
+        editStories.click();
+        functionClass.waitUntilElementPresent(StoreName);
+        StoreName.clear();
+        StoreName.sendKeys(functionClass.generateFakeName());
+        functionClass.waitUntilElementPresent(editSaveButton);
+        editSaveButton.click();
+
+    }
+
+    public boolean verifyeditstore(){
+        functionClass.waitUntilElementPresent(verifyEditStore);
+        if (verifyEditStore.isDisplayed())
+            return true;
+        else return false;
+
+    }
+
+
+
+
+    }
+
+
