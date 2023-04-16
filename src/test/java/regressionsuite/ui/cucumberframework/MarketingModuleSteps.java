@@ -35,4 +35,18 @@ public class MarketingModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
     }
+
+    @Given("Admin user is already in  the dashboard page")
+    public void adminUserIsAlreadyOnTheDashboardPage() {
+    }
+
+    @When("user update pending reivews")
+    public void userUpdatePendingReivews() {
+
+
+    }
+
+    @Then("pending reviews should be updated")
+    public void pendingReviewsShouldBeUpdated() {
+    }
 }
