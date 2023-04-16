@@ -216,10 +216,10 @@ public class ManageStoresPage {
         editStories.click();
         functionClass.waitUntilElementPresent(StoreName);
         StoreName.clear();
-        StoreName.sendKeys("AmsterdamTeam");
+        StoreName.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent(editSaveButton);
         editSaveButton.click();
-
+  
     }
 
     public boolean verifyeditstore(){
