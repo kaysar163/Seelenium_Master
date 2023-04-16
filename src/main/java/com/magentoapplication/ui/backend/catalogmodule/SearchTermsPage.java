@@ -25,31 +25,24 @@ public class SearchTermsPage {
 
     // Elements
     @FindBy(xpath = "(//span[contains(text(),'Add New Search Term')])[1]")
-
     WebElement AddNewSearchTerm;
     @FindBy( id= "query_text")
-
     WebElement SearchQuery;
     @FindBy(xpath = "//input[@name='search_query']")
     WebElement searchQuery1;
 
     @FindBy(id = "store_id")
-
     WebElement Store;
     @FindBy(id = "synonym_for")
-
-    WebElement SynonymFor;
+    WebElement synonymFor;
     @FindBy(id = "redirect")
 
-    WebElement RedirectURL;
+    WebElement redirectURL;
     @FindBy(id = "display_in_terms")
-
     WebElement DisplayinSuggestedTerms;
     @FindBy(xpath = "(//span[contains(text(),'Save Search')])[1]")
-
     WebElement SaveSearch;
     @FindBy(xpath = "(//span[normalize-space()='You saved the search term.'])[1]")
-
     WebElement SuccessfulSavesMessage;
 
     @FindBy(xpath = "//span[text()='Search']")
@@ -78,19 +71,19 @@ public class SearchTermsPage {
         functionClass.waitUntilElementPresent(AddNewSearchTerm);
         AddNewSearchTerm.click();
         functionClass.waitUntilElementPresent(SearchQuery);
-        TestHelperClassCatalog.setSearchQuery(functionClass.generateFakeName());
+        TestHelperCatalog.setSearchQuery(functionClass.generateFakeName());
         functionClass.sleep(3);
-        SearchQuery.sendKeys(TestHelperClassCatalog.getSearchQuery());
+        SearchQuery.sendKeys(TestHelperCatalog.getSearchQuery());
 
         functionClass.waitUntilElementPresent(Store);
         Select select=new Select(Store);
         select.selectByValue("28");
-        functionClass.waitUntilElementPresent(SynonymFor);
-        TestHelperClassCatalog.setSynonymFor(functionClass.generateFakeName());
+        functionClass.waitUntilElementPresent(synonymFor);
+        TestHelperCatalog.setSynonymFor(functionClass.generateFakeName());
         functionClass.sleep(2);
-        SynonymFor.sendKeys(TestHelperClassCatalog.getSynonymFor());
-        functionClass.waitUntilElementPresent( RedirectURL);
-        RedirectURL.sendKeys(functionClass.generateFakeRedirectURL());
+        synonymFor.sendKeys(TestHelperCatalog.getSynonymFor());
+        functionClass.waitUntilElementPresent(redirectURL);
+        redirectURL.sendKeys(functionClass.generateFakeRedirectURL());
         functionClass.waitUntilElementPresent(DisplayinSuggestedTerms);
         Select select1=new Select(DisplayinSuggestedTerms);
         select1.selectByValue("0");
@@ -105,19 +98,59 @@ public class SearchTermsPage {
         }else return false;
 
     }
-    public  void deleteExistingSearchTerm(){
+
+    public void searchEditTest(){
         catalogDashboardPage. clickOnCatalogLink();
         catalogDashboardPage.clickOnSearchTerms();
         //functionClass.sleep(2);
         functionClass.waitUntilElementPresent(searchQuery1);
         searchQuery1.click();
-       // functionClass.sleep(2);
-        searchQuery1.sendKeys(TestHelperClassCatalog.getSearchQuery());
+        // functionClass.sleep(2);
+        searchQuery1.sendKeys(TestHelperCatalog.getSearchQuery());
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
 
-        WebElement editButton1= driver.findElement(By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a",TestHelperClassCatalog.getSearchQuery())));
+        WebElement editButton1= driver.findElement(By.xpath(String.format
+                ("//tr//td[contains(text(),'%s')]//following-sibling::td//a", TestHelperCatalog.getSearchQuery())));
+        System.out.println(editButton1);
+        functionClass.waitUntilElementPresent(editButton1);
+        editButton1.click();
+        functionClass.waitUntilElementPresent(redirectURL);
+        redirectURL.sendKeys(functionClass.generateFakeRedirectURL());
+        functionClass.waitUntilElementPresent(DisplayinSuggestedTerms);
+        Select select1=new Select(DisplayinSuggestedTerms);
+        select1.selectByValue("1");
+        functionClass.waitUntilElementPresent(SaveSearch);
+        SaveSearch.click();
+    }
+
+
+    public boolean verifyEditNewSearch() {
+        functionClass.waitUntilElementPresent( SuccessfulSavesMessage );
+        if (SuccessfulSavesMessage.isDisplayed( )) {
+
+            return true;
+        } else
+            return false;
+
+    }
+
+
+    public  void deleteExistingSearchTerm(){
+        catalogDashboardPage. clickOnCatalogLink();
+        catalogDashboardPage.clickOnSearchTerms();
+        //functionClass.sleep(2);
+//        functionClass.waitUntilElementPresent(searchQuery1);
+//        searchQuery1.click();
+//       // functionClass.sleep(2);
+//        searchQuery1.sendKeys(TestHelperClassCatalog.getSearchQuery());
+//        functionClass.sleep(3);
+//        functionClass.waitUntilElementPresent(searchButton);
+//        searchButton.click();
+
+        WebElement editButton1= driver.findElement(By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a", TestHelperCatalog.getSearchQuery())));
+        System.out.println(editButton1);
 
         editButton1.click();
         functionClass.waitUntilElementPresent(deleteButton);
@@ -144,14 +177,14 @@ public class SearchTermsPage {
         functionClass.waitUntilElementPresent(searchQuery1);
         searchQuery1.click();
         // functionClass.sleep(2);
-        searchQuery1.sendKeys(TestHelperClassCatalog.getSearchQuery());
+        searchQuery1.sendKeys(TestHelperCatalog.getSearchQuery());
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
     }
 
     public boolean verifyFilterTermTest(){
-        if (driver.getPageSource().contains(TestHelperClassCatalog.getSearchQuery())) {
+        if (driver.getPageSource().contains(TestHelperCatalog.getSearchQuery())) {
             return true;
         } else
             return false;

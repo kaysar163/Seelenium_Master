@@ -3,6 +3,44 @@ package com.magentoapplication.ui.backend.storemodule;
 public class TestHelperClassStore {
     private static String productName;
     private static String storeName;
+    private static String firstname;
+
+    private static  String changedProductName;
+    private  static String categoryName;
+
+    private static String websiteName;
+
+    private  static String CategoryProductName;
+
+    private static  String storeViewName;
+
+    public static String getCategoryName() {
+        return categoryName;
+    }
+
+    public static void setCategoryName(String categoryName) {
+        TestHelperClassStore.categoryName = categoryName;
+    }
+
+
+
+    public static String getStoreViewName() {
+        return storeViewName;
+    }
+
+    public static void setStoreViewName(String storeViewName) {
+        TestHelperClassStore.storeViewName = storeViewName;
+    }
+
+
+    public static String getFirstname() {
+        return firstname;
+    }
+
+    public static void setFirstname(String firstname) {
+        TestHelperClassStore.firstname = firstname;
+    }
+
 
     public static String getCategoryProductName() {
         return CategoryProductName;
@@ -12,7 +50,6 @@ public class TestHelperClassStore {
         CategoryProductName = categoryProductName;
     }
 
-    private  static String CategoryProductName;
 
     public static String getStoreName() {
         return storeName;
@@ -30,7 +67,16 @@ public class TestHelperClassStore {
         TestHelperClassStore.websiteName = websiteName;
     }
 
-    private static String websiteName;
+
+
+    public static String getChangedProductName() {
+        return changedProductName;
+    }
+
+    public static void setChangedProductName(String changedProductName) {
+        TestHelperClassStore.changedProductName = changedProductName;
+
+    }
 
 
 

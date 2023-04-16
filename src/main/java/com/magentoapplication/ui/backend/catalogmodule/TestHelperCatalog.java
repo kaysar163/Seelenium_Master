@@ -1,6 +1,6 @@
 package com.magentoapplication.ui.backend.catalogmodule;
 
-public class TestHelperClassCatalog {
+public class TestHelperCatalog {
 
     private static String subName;
     private static String rootName;
@@ -18,7 +18,7 @@ public class TestHelperClassCatalog {
     }
 
     public static void setChangedProductName(String changedProductName) {
-        TestHelperClassCatalog.changedProductName = changedProductName;
+        TestHelperCatalog.changedProductName = changedProductName;
     }
 
     public static String getProductName() {
@@ -26,7 +26,7 @@ public class TestHelperClassCatalog {
     }
 
     public static void setProductName(String productName) {
-        TestHelperClassCatalog.productName = productName;
+        TestHelperCatalog.productName = productName;
     }
 
 
@@ -46,7 +46,7 @@ public class TestHelperClassCatalog {
     }
 
     public static void setSearchQuery(String searchQuery) {
-        TestHelperClassCatalog.searchQuery = searchQuery;
+        TestHelperCatalog.searchQuery = searchQuery;
     }
 
     public static String getSubName() {
@@ -54,7 +54,7 @@ public class TestHelperClassCatalog {
     }
 
     public static void setSubName(String subName) {
-        TestHelperClassCatalog.subName = subName;
+        TestHelperCatalog.subName = subName;
     }
 
     public static String getRootName() {
@@ -62,7 +62,7 @@ public class TestHelperClassCatalog {
     }
 
     public static void setRootName(String rootName) {
-        TestHelperClassCatalog.rootName = rootName;
+        TestHelperCatalog.rootName = rootName;
     }
 
     public static String getChangeRootName() {
@@ -74,10 +74,10 @@ public class TestHelperClassCatalog {
     }
 
     public static void setsearchQuery(String searchQuery) {
-        TestHelperClassCatalog.searchQuery = searchQuery;
+        TestHelperCatalog.searchQuery = searchQuery;
 }
 
     public static void setChangeRootName(String changeRootName) {
-        TestHelperClassCatalog.changeRootName = changeRootName;
+        TestHelperCatalog.changeRootName = changeRootName;
     }
 }

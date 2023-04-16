@@ -10,7 +10,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
-import javax.security.auth.spi.LoginModule;
+
 
 public class StoreModuleTestRunner extends TestBase {
 
@@ -39,53 +39,102 @@ public class StoreModuleTestRunner extends TestBase {
         orderViewPage = new OrderViewPage(driver);
         productInfoPage = new ProductInfoPage(driver);
     }
+    @Test(description = "meryem",priority = 1)
+    public void addNewOrderTest(){
+      ordersPage.addNewOrder();
+      Assert.assertTrue(ordersPage.verifyOrderCreated());
+    }
+    @Test(description = "meryem",dependsOnMethods ="addNewOrderTest",priority = 2)
+    public void editOrderTest(){
+        ordersPage.EditOrder();
+        Assert.assertTrue(ordersPage.verifyEditOrder());
+    }
     @Test(description = "kaysar")
-    @Ignore
     public void addProductTest(){
-        manageProductsPage.addproductcategories ();
+        manageProductsPage.addproduct();
         Assert.assertTrue( manageProductsPage.VerifySuccessmessage());
     }
-    @Test(description = "Memet")
-    @Ignore
+    @Test(description = "Muyesser",dependsOnMethods = "addProductTest")
+    public  void editProductTest(){
+        manageProductsPage.editProduct();
+        Assert.assertTrue(manageProductsPage.verifyEditProduct());
+    }
+
+    @Test(description = "Fazilet",dependsOnMethods = "editProductTest")
+    public void deleteProductTest() {
+        manageProductsPage.deleteProductTest();
+        Assert.assertTrue(manageProductsPage.verifyDeletedProductTest());
+
+    }
+    @Test(description = "Muyesser",dependsOnMethods = "addProductTest")
+    public void addProductCategoryTest(){
+        manageCategoriesPage.addProductCategoriesFunction();
+        Assert.assertTrue(manageCategoriesPage.verifyAddProductCategory());
+    }
+    @Test(description = "Memet",dependsOnMethods = {"addProductCategoryTest","addProductTest"})
     public void updateProductCategoryTest(){
         productInfoPage.updateProductCategories();
         Assert.assertTrue(productInfoPage.productCategoryUpdatedSuccessfully());
     }
-    @Test(description = "Memet")
-    @Ignore
+    @Test(description = "Gulzar")
+    public void createStoreTest(){
+        manageStoresPage.createStore();
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
+    @Test(description = "Memet",dependsOnMethods = "createStoreTest")
     public void deleteStoreTest(){
         manageStoresPage.deleteStore();
         Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
     }
+    @Test(description = "Omercan",dependsOnMethods = "addNewOrderTest",priority = 3)
+    public void cancelOrdersTest(){
+       ordersPage.cancelOrders();
+        Assert.assertTrue(ordersPage.cancelOrdersSuccessful());
+    }
 
     @Test(description = "Muradil")
-    @Ignore
 
     public void createWebsiteTest(){
         manageStoresPage.createWebsite();
         Assert.assertTrue(manageStoresPage.verifyCreateWebsite());
     }
+    
+    @Test(description = "Toghraq")
+    public void editWebsiteTest(){
+        manageStoresPage.editWebsite();
+        Assert.assertTrue(manageStoresPage.webSiteSavedMessage());
+    }
+    
     @Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"})
-    @Ignore
     public void deleteWebsiteTest() {
         manageStoresPage.deleteWebsite( );
         Assert.assertTrue( manageStoresPage.verifyDeleteWebsite( ) );
     }
 
     @Test(description = "Mirehmidi")
-    @Ignore
     public void deleteCatologTest(){
         manageStoresPage.CatologPoductDeletetest ();
         Assert.assertTrue(manageStoresPage.verifyCatologPoducDelettest());
     }
 
-
-    @Test(description = "rangul")
-    public void editstories(){
-        manageStoresPage.editStore();
-        Assert.assertTrue(manageStoresPage.verifyeditstore());
+    @Test(description = "Abdusattar")
+    public void addStoreViewTest(){
+        orderViewPage.addStoreView();
+        Assert.assertTrue(orderViewPage.verifyNewStoreViewAdded());
     }
 
+    @Test(description = "Abdusattar",dependsOnMethods = "addStoreViewTest")
+    public void editStoreViewTest(){
+        orderViewPage.editStoreView();
+        Assert.assertTrue(orderViewPage.verifyStoreViewEdited());
+    }
+
+
+    @Test(description = "Fazilet")
+    public void viewAllStoresTest(){
+        manageStoresPage.viewAllStores();
+        Assert.assertTrue(manageStoresPage.verifyViewedAllStores());
+    }
 
 
     @AfterClass

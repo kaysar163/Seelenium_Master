@@ -109,6 +109,12 @@ public class FunctionClass {
         String productDescription=Faker.instance().book().author();
         return productDescription;
     }
+    public  String generateCatalogDescription(){
+        Faker faker=new Faker();
+        String catalogDescription=Faker.instance().book().author();
+        return catalogDescription;
+
+    }
 
     public String generateProductShortDescription(){
         Faker faker=new Faker();
@@ -148,6 +154,11 @@ public class FunctionClass {
         Faker faker = new Faker();
         int sortOrder = Faker.instance().number().randomDigitNotZero();
         return String.valueOf(sortOrder);
+    }
+
+    public String generateViewCode() {
+        String telephoneNumber = Faker.instance().name().firstName().toLowerCase();
+        return telephoneNumber;
     }
 
     public void waitForAlertPresent(){
