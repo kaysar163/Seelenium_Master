@@ -69,8 +69,8 @@ public class ManageCategoriesPage {
         manageCategoriesLink.click();
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(categoryNameField);
-        TestHelperClassStore.setCategoryName(functionClass.generateProductName());
-        categoryNameField.sendKeys(TestHelperClassStore.getCategoryName());
+        TestHelperStore.setCategoryName(functionClass.generateProductName());
+        categoryNameField.sendKeys(TestHelperStore.getCategoryName());
         functionClass.waitUntilElementPresent(isActive);
         Select select=new Select(isActive);
         select.selectByValue("1");
@@ -94,12 +94,12 @@ public class ManageCategoriesPage {
         functionClass.waitUntilElementPresent(categoryProductsFilterNameField);
         //functionClass.sleep(3);
         //TestHelperClassStore.setCategoryProductName(functionClass.generateFakeName());
-        categoryProductsFilterNameField.sendKeys(TestHelperClassStore.getCategoryProductName());
+        categoryProductsFilterNameField.sendKeys(TestHelperStore.getCategoryProductName());
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
         WebElement checkBoxButton=driver.findElement(By.xpath(String.format("//tr//td[contains(text(),'%s')]//preceding-sibling::td/input[@type='checkbox']",
-                TestHelperClassStore.getCategoryProductName())));
+                TestHelperStore.getCategoryProductName())));
         checkBoxButton.isSelected();
         functionClass.waitUntilElementPresent(saveCategoryButton);
         saveCategoryButton.click();

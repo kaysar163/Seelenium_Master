@@ -71,13 +71,12 @@
 
 
 
+
     @addNewNewsletterTemplate     #Abdusattar
   Scenario: Marketing Manager should be able to add new Newsletter template
   Given Admin user is already in the dashboard page
   When the user fills out Newsletter template information
   Then A new template should be added
-
-
 
 
 
