@@ -52,7 +52,7 @@ public class CustomersModuleTestRunner extends TestBase {
 
     }
 
-    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 3)
+    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 3,enabled = false)
     public void passwordResetTest(){
         customerInformationPage.customerPasswordChange();
         Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());

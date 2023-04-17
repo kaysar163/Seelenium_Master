@@ -21,4 +21,11 @@
         </classes>
     </test>
 
+    <test name="Backend Store Module Test">
+        <classes>
+            <class name="regressionsuite.ui.testngframework.CatalogModuleTestRunner">
+            </class>
+        </classes>
+    </test>
+
 </suite>

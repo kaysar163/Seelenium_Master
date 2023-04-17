@@ -7,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import static java.awt.SystemColor.window;
-
 public class OrdersPage {
 
     WebDriver driver;
@@ -99,8 +97,8 @@ public class OrdersPage {
         functionClass.waitUntilElementPresent(addSelectedProductLink);
         addSelectedProductLink.click();
         functionClass.waitUntilElementPresent(firstNameField);
-        TestHelperClassStore.setFirstname(functionClass.generateFakeName());
-        firstNameField.sendKeys(TestHelperClassStore.getFirstname());
+        TestHelperStore.setFirstname(functionClass.generateFakeName());
+        firstNameField.sendKeys(TestHelperStore.getFirstname());
         functionClass.waitUntilElementPresent(lastNameField);
         lastNameField.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(addressField);
@@ -138,7 +136,7 @@ public class OrdersPage {
         storeModuleDashboardPage.clickOnOrderLink();
         WebElement viewButton = driver.findElement(By.xpath
                 (String.format("//td[contains(text(),'%s')]//following-sibling::td[5]//a",
-                        TestHelperClassStore.getFirstname())));
+                        TestHelperStore.getFirstname())));
         functionClass.waitUntilElementPresent(viewButton);
         functionClass.sleep(3);
         viewButton.click();
@@ -165,7 +163,7 @@ public class OrdersPage {
         storeModuleDashboardPage.clickOnOrderLink();
         WebElement viewButton = driver.findElement(By.xpath
                 (String.format("//td[contains(text(),'%s')]//following-sibling::td[5]//a",
-                        TestHelperClassStore.getFirstname())));
+                        TestHelperStore.getFirstname())));
         functionClass.waitUntilElementPresent(viewButton);
         functionClass.sleep(3);
         viewButton.click();

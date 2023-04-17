@@ -11,12 +11,13 @@ public class SalesModuleSteps extends TestBase {
 
     BackEndLogin backEndLogin;
 
-    @Before()
-    public void setUp(){
-        setupBrowserBackEnd();
-        backEndLogin.marketingModuleLogin();
-
-    }
+//    @Before()
+//    public void setUp(){
+//        setupBrowserBackEnd();
+//        backEndLogin=new BackEndLogin(driver);
+//        backEndLogin.marketingModuleLogin();
+//
+//    }
 
     @When("the user view shopping cart for customers")
     public void theUserViewShoppingCartForCustomers() {
@@ -27,8 +28,8 @@ public class SalesModuleSteps extends TestBase {
     public void shoppingListDisplay() {
     }
 
-    @After
-    public void tearDown(){
-        closeBrowser();
-    }
+//    @After
+//    public void tearDown(){
+//        closeBrowser();
+//    }
 }
