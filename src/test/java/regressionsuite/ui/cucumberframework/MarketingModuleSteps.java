@@ -2,6 +2,7 @@ package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.marketingmodule.NewsletterTemplatePage;
+import com.magentoapplication.ui.backend.marketingmodule.PendingReviewsPage;
 import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
@@ -16,6 +17,7 @@ public class MarketingModuleSteps extends TestBase {
 
     NewsletterTemplatePage newsletterTemplatePage;
     ShoppingCartPriceRulePage shoppingCartPriceRulePage;
+    PendingReviewsPage pendingReviewsPage;
 
 
     @Before()
@@ -30,6 +32,7 @@ public class MarketingModuleSteps extends TestBase {
     public void adminUserIsAlreadyInTheDashboardPage() {
         newsletterTemplatePage=new NewsletterTemplatePage(driver);
         shoppingCartPriceRulePage=new ShoppingCartPriceRulePage(driver);
+        pendingReviewsPage=new PendingReviewsPage(driver);
 
 
     }
@@ -53,6 +56,17 @@ public class MarketingModuleSteps extends TestBase {
     @Then("the newsletter template should be edited")
     public void theNewsletterTemplateShouldBeEdited() {
         newsletterTemplatePage.verifyTemplateEdited();
+    }
+
+    @When("user update pending reviews")
+    public void userUpdatePendingReviews() {
+        pendingReviewsPage.managerUpdatePendingReviews();
+
+    }
+
+    @Then("pending reviews should be updated")
+    public void pendingReviewsShouldBeUpdated() {
+        pendingReviewsPage.verifyUpdatePendingReviews();
     }
 
 
