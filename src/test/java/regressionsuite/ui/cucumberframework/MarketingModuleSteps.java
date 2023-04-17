@@ -20,6 +20,8 @@ public class MarketingModuleSteps extends TestBase {
     PendingReviewsPage pendingReviewsPage;
     NewsletterSubscriptionPage newsletterSubscriptionPage;
     MarketingDashboardPage marketingDashboardPage;
+    CatalogPriceRulePage catalogPriceRulePage;
+
 
 
     @Before()
@@ -37,6 +39,7 @@ public class MarketingModuleSteps extends TestBase {
         pendingReviewsPage=new PendingReviewsPage(driver);
         newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
         marketingDashboardPage=new MarketingDashboardPage(driver);
+        catalogPriceRulePage=new CatalogPriceRulePage(driver);
 
 
     }
@@ -96,14 +99,6 @@ public class MarketingModuleSteps extends TestBase {
         Assert.assertTrue(newsletterSubscriptionPage.verifyViewNewsletterSubscribers());
     }
 
-    @After()
-    public void tearDown(){
-        closeBrowser();
-    }
-
-
-
-
     @And("Marketing manager clicks on the filtered rule name and should be navigated to edit rule page")
     public void marketingManagerClicksOnTheFilteredRuleNameAndShouldBeNavigatedToEditRulePage() {
         shoppingCartPriceRulePage.selectExistingPriceRule();
@@ -123,5 +118,23 @@ public class MarketingModuleSteps extends TestBase {
     public void marketingManagerSearchesExistingPriceRuleNameInTheRuleNameFieldAndClickOnSearch() {
         shoppingCartPriceRulePage.clickOnCartPriceRule();
         shoppingCartPriceRulePage.searchExistingPriceRule();
+    }
+
+    @When("Marketing Manger add a new catalog price rule")
+    public void marketingMangerAddANewCatalogPriceRule() {
+       catalogPriceRulePage.addNewCatalogPriceRule();
+
+    }
+
+    @Then("The new catalog price rule should be added")
+    public void theNewCatalogPriceRuleShouldBeAdded() {
+
+        Assert.assertTrue(catalogPriceRulePage.VerifyAddCatalogPriceRule());
+        }
+
+
+    @After()
+    public void tearDown(){
+        closeBrowser();
     }
 }

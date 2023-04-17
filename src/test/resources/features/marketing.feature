@@ -1,9 +1,12 @@
 @RegressionSuite @MarketingModuleTest
   Feature: Marketing module manager should be able to manage marketing
 
-    #Kaysar : Add new catalog price rule
 
-
+    @AddNewCatalogPriceRule  #Kaysar : Add new catalog price rule
+    Scenario: Marketing manger can add catalog price rule
+      Given Admin user is already in the dashboard page
+      When  Marketing Manger add a new catalog price rule
+      Then  The new catalog price rule should be added
 
 
 
