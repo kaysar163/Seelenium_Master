@@ -58,32 +58,34 @@ public class MarketingDashboardPage {
 
     public void clickOnCatalogPriceRuleLink(){
         functionClass.waitUntilElementPresent(promotionsLink);
-        actions.moveToElement(promotionsLink).click(catalogPriceRuleLink);
+        actions.moveToElement(promotionsLink).click(catalogPriceRuleLink).build().perform();
     }
 
     public void clickOnShoppingCartPriceRuleLink(){
         functionClass.waitUntilElementPresent(promotionsLink);
-        actions.moveToElement(promotionsLink).click(shoppingCartPriceLink);
+        actions.moveToElement(promotionsLink).click(shoppingCartPriceLink).build().perform();
     }
 
     public void clickOnAllReviewsLink(){
         functionClass.waitUntilElementPresent(catalogLink);
-        actions.moveToElement(catalogLink).click(reviewsAndRatingLink).moveToElement(customerReviewsLink).click(allReviewsLink);
+        actions.moveToElement(catalogLink).click(reviewsAndRatingLink).moveToElement(customerReviewsLink).click(allReviewsLink).build().perform();
     }
 
     public void clickOnPendingReviewsLink(){
         functionClass.waitUntilElementPresent(catalogLink);
-        actions.moveToElement(catalogLink).click(reviewsAndRatingLink).moveToElement(customerReviewsLink).click(pendingReviewsLink);
+        actions.moveToElement(catalogLink).click(reviewsAndRatingLink).moveToElement(customerReviewsLink).click(pendingReviewsLink).build().perform();
     }
 
     public void clickOnNewsletterTemplateLink(){
         functionClass.waitUntilElementPresent(newsletterLink);
-        actions.moveToElement(newsletterLink).click(newsletterTemplateLink);
+        newsletterLink.click();
+        functionClass.waitUntilElementPresent(newsletterTemplateLink);
+        newsletterTemplateLink.click();
     }
 
     public void clickOnSubscriptionLink(){
         functionClass.waitUntilElementPresent(newsletterLink);
-        actions.moveToElement(newsletterLink).click(newsletterSubscriptionLink);
+        actions.moveToElement(newsletterLink).click(newsletterSubscriptionLink).build().perform();
     }
 
 }

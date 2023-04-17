@@ -11,10 +11,10 @@ public class SalesModuleSteps extends TestBase {
 
     BackEndLogin backEndLogin;
 
-    @Before()
+//    @Before()
 //    public void setUp(){
 //        setupBrowserBackEnd();
-//        backEndLogin =new BackEndLogin(driver);
+//        backEndLogin=new BackEndLogin(driver);
 //        backEndLogin.marketingModuleLogin();
 //
 //    }
