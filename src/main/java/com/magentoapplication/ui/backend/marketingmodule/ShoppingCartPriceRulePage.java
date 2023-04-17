@@ -1,5 +1,6 @@
 package com.magentoapplication.ui.backend.marketingmodule;
 
+import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -31,8 +32,7 @@ public class ShoppingCartPriceRulePage {
     WebElement ruleNameField;
     @FindBy(xpath = "//span[text()='Search']")
     WebElement searchBut;
-    @FindBy(xpath = "(//h3[contains(text(),'Shopping Cart Price Rules')])[1]")
-    WebElement succseesMessage;
+
 
 
     public void filterShoppingCartByIdAndRule(){
@@ -42,14 +42,14 @@ public class ShoppingCartPriceRulePage {
         functionClass.waitUntilElementPresent(shoppingCartPriceRulesBut);
         shoppingCartPriceRulesBut.click();
         functionClass.waitUntilElementPresent(ruleIdField);
-        ruleIdField.sendKeys();
+        ruleIdField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","shoppingCartId"));
         functionClass.waitUntilElementPresent(ruleNameField);
-        ruleIdField.sendKeys();
+        ruleNameField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","ruleName"));
         functionClass.waitUntilElementPresent(searchBut);
         searchBut.click();
     }
     public boolean verifyFilterShoppingCart(){
-        if (succseesMessage.isDisplayed())
+        if (driver.getPageSource().contains(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","shoppingCartId")))
             return true;
         else return false;
     }
