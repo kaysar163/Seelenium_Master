@@ -1,8 +1,10 @@
 package com.magentoapplication.ui.backend.storemodule;
 
-public class TestHelperClassStore {
+public class TestHelperStore {
     private static String productName;
     private static String storeName;
+
+    private static String changedStoreName;
     private static String firstname;
 
     private static  String changedProductName;
@@ -14,12 +16,20 @@ public class TestHelperClassStore {
 
     private static  String storeViewName;
 
+    public static String getChangedStoreName() {
+        return changedStoreName;
+    }
+
+    public static void setChangedStoreName(String changedStoreName) {
+        TestHelperStore.changedStoreName = changedStoreName;
+    }
+
     public static String getCategoryName() {
         return categoryName;
     }
 
     public static void setCategoryName(String categoryName) {
-        TestHelperClassStore.categoryName = categoryName;
+        TestHelperStore.categoryName = categoryName;
     }
 
 
@@ -29,7 +39,7 @@ public class TestHelperClassStore {
     }
 
     public static void setStoreViewName(String storeViewName) {
-        TestHelperClassStore.storeViewName = storeViewName;
+        TestHelperStore.storeViewName = storeViewName;
     }
 
 
@@ -38,7 +48,7 @@ public class TestHelperClassStore {
     }
 
     public static void setFirstname(String firstname) {
-        TestHelperClassStore.firstname = firstname;
+        TestHelperStore.firstname = firstname;
     }
 
 
@@ -56,7 +66,7 @@ public class TestHelperClassStore {
     }
 
     public static void setStoreName(String storeName) {
-        TestHelperClassStore.storeName = storeName;
+        TestHelperStore.storeName = storeName;
     }
 
     public static String getWebsiteName() {
@@ -64,7 +74,7 @@ public class TestHelperClassStore {
     }
 
     public static void setWebsiteName(String websiteName) {
-        TestHelperClassStore.websiteName = websiteName;
+        TestHelperStore.websiteName = websiteName;
     }
 
 
@@ -74,7 +84,7 @@ public class TestHelperClassStore {
     }
 
     public static void setChangedProductName(String changedProductName) {
-        TestHelperClassStore.changedProductName = changedProductName;
+        TestHelperStore.changedProductName = changedProductName;
 
     }
 
@@ -85,6 +95,6 @@ public class TestHelperClassStore {
     }
 
     public static void setProductName(String productName) {
-        TestHelperClassStore.productName = productName;
+        TestHelperStore.productName = productName;
     }
 }

@@ -11,12 +11,15 @@ public class ReportingModuleSteps extends TestBase {
 
     BackEndLogin backEndLogin;
 
-    @Before()
-    public void setUp(){
-        setupBrowserBackEnd();
-        backEndLogin.marketingModuleLogin();
 
-    }
+
+//    @Before()
+//    public void setUp(){
+//        setupBrowserBackEnd();
+//        backEndLogin=new BackEndLogin(driver);
+//        backEndLogin.marketingModuleLogin();
+//
+//    }
 
     @When("the user views")
     public void theUserViews() {
@@ -27,9 +30,9 @@ public class ReportingModuleSteps extends TestBase {
     public void theUserSeesCustomersTags() {
     }
 
-    @After
-    public void tearDown(){
-        closeBrowser();
-    }
+//    @After
+//    public void tearDown(){
+//        closeBrowser();
+//    }
 
 }

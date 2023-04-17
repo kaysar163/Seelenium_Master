@@ -58,8 +58,8 @@ public class OrderViewPage {
         Select select=new Select(storeDropdown);
         select.selectByValue("559");
         functionClass.waitUntilElementPresent(storeNameField);
-        TestHelperClassStore.setStoreViewName(functionClass.generateFakeName());
-        storeNameField.sendKeys(TestHelperClassStore.getStoreViewName());
+        TestHelperStore.setStoreViewName(functionClass.generateFakeName());
+        storeNameField.sendKeys(TestHelperStore.getStoreViewName());
         functionClass.waitUntilElementPresent(storeCodeField);
         storeCodeField.sendKeys(functionClass.generateViewCode());
         functionClass.waitUntilElementPresent(statusDropdown);
@@ -80,7 +80,7 @@ public class OrderViewPage {
 
     public void editStoreView(){
         WebElement editStoreView=driver.findElement(By.xpath(
-                String.format("//a[contains(text(),' %s')]",TestHelperClassStore.getStoreViewName())));
+                String.format("//a[contains(text(),' %s')]", TestHelperStore.getStoreViewName())));
         functionClass.waitUntilElementPresent(editStoreView);
         editStoreView.click();
         functionClass.waitUntilElementPresent(storeNameField);

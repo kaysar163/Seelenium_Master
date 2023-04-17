@@ -1,12 +1,10 @@
 package com.magentoapplication.ui.backend.storemodule;
 
-import com.github.javafaker.App;
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -107,6 +105,23 @@ public class ManageStoresPage {
     @FindAll(@FindBy(xpath = "//table[@class='data']//tbody//tr"))
     List<WebElement> manageStoresTable;
 
+    @FindBy(xpath = "//span[text()='Manage Stores']")
+    WebElement ManageStore;
+
+    @FindBy(id = "group_name")
+    WebElement StoreName;
+
+    @FindBy(xpath = "//span[contains(text(),'Save Store')]")
+    WebElement editSaveButton;
+
+    @FindBy(xpath = "//span[text()='The store has been saved.']")
+    WebElement verifyEditStore;
+    String storename;
+
+    @FindBy (xpath = "(//*[contains(text(), 'System')])[2]")
+    WebElement SystemButton;
+
+
 
 
 
@@ -119,8 +134,8 @@ public class ManageStoresPage {
         functionClass.waitUntilElementPresent(createWebsiteButton);
         createWebsiteButton.click();
         functionClass.waitUntilElementPresent(websiteNameField);
-        TestHelperClassStore.setWebsiteName(functionClass.generateWebsiteName());
-        websiteNameField.sendKeys(TestHelperClassStore.getWebsiteName());
+        TestHelperStore.setWebsiteName(functionClass.generateWebsiteName());
+        websiteNameField.sendKeys(TestHelperStore.getWebsiteName());
         functionClass.waitUntilElementPresent(websiteCodeField);
         websiteCodeField.sendKeys(functionClass.generateWebsiteCode());
         functionClass.waitUntilElementPresent(websiteSortOrderField);
@@ -181,7 +196,7 @@ public class ManageStoresPage {
         manageStoresLink.click();
         WebElement myWebsiteName = driver.findElement
           (By.xpath(String.format("//tr//td//a[contains(text(),'%s')]",
-            TestHelperClassStore.getWebsiteName())));
+            TestHelperStore.getWebsiteName())));
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(myWebsiteName);
         myWebsiteName.click();
@@ -199,7 +214,7 @@ public class ManageStoresPage {
     
     public void deleteStore() {
         storeModuleDashboardPage.clickOnManageStoresLink();
-        WebElement storeName= driver.findElement(By.xpath(String.format("//*[contains(text(),'%s')]",TestHelperClassStore.getStoreName())));
+        WebElement storeName= driver.findElement(By.xpath(String.format("//*[contains(text(),'%s')]", TestHelperStore.getChangedStoreName())));
         storeName.click();
         functionClass.waitUntilElementPresent(deleteStore);
         deleteStore.click();
@@ -225,9 +240,9 @@ public class ManageStoresPage {
         selectWebsite.selectByValue("314");
         functionClass.waitUntilElementPresent(storeName1);
         
-        TestHelperClassStore.setStoreName(functionClass.generateFakeName());
+        TestHelperStore.setStoreName(functionClass.generateFakeName());
         functionClass.sleep(3);
-        storeName1.sendKeys(TestHelperClassStore.getStoreName());
+        storeName1.sendKeys(TestHelperStore.getStoreName());
         functionClass.waitUntilElementPresent(rootCategoryField);
         rootCategoryField.click();
         Select selectRootCategory = new Select(rootCategoryField);
@@ -266,14 +281,35 @@ public class ManageStoresPage {
 
 
 
+    public void editStore() {
+        functionClass.waitUntilElementPresent(SystemButton);
+        systemButton.click();
+        functionClass.waitUntilElementPresent(ManageStore);
+        managerStoresButton.click();
+        WebElement editStories = driver.findElement(By.xpath(String.format("//a[contains(text(),'%s')]",TestHelperStore.getStoreName())));
+        functionClass.waitUntilElementPresent(editStories);
 
+        editStories.click();
+        functionClass.waitUntilElementPresent(StoreName);
+        StoreName.clear();
+        TestHelperStore.setChangedStoreName(functionClass.generateFakeName());
+        StoreName.sendKeys(TestHelperStore.getChangedStoreName());
+        functionClass.waitUntilElementPresent(editSaveButton);
+        editSaveButton.click();
 
-
-
-    public void CatologPoductDeletetest() {
     }
-    
-    public boolean verifyCatologPoducDelettest() {
-        return false;
+
+    public boolean verifyeditstore(){
+        functionClass.waitUntilElementPresent(verifyEditStore);
+        if (verifyEditStore.isDisplayed())
+            return true;
+        else return false;
+
     }
-}
+
+
+
+
+    }
+
+
