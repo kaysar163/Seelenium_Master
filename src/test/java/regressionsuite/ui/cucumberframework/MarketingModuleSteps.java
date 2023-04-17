@@ -25,6 +25,7 @@ public class MarketingModuleSteps extends TestBase {
 
     @Given("Admin user is already in the dashboard page")
     public void adminUserIsAlreadyInTheDashboardPage() {
+        marketingDashboardPage=new MarketingDashboardPage(driver);
     }
 
     @When("the user fills out Newsletter template information")
@@ -33,12 +34,6 @@ public class MarketingModuleSteps extends TestBase {
 
     @Then("A new template should be added")
     public void aNewTemplateShouldBeAdded() {
-    }
-
-    @Given("Admin user is already on the dashboard page")
-    public void adminUserIsAlreadyOnTheDashboardPage() {
-        marketingDashboardPage=new MarketingDashboardPage(driver);
-
     }
 
     @When("The user fills out shopping cart pricing rule id number and rule name")
