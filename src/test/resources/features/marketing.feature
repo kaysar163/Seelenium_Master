@@ -29,7 +29,11 @@
 
 
 
-      #Omercan : Filter shopping cart
+     @ filter Shopping Cart Pricing Rule by Id and Rule    #Omercan : Filter shopping cart
+       Scenario: Marketing manager should be able to filter shopping cart pricing rule by id and rule
+         Given Admin user is already on the dashboard page
+         When The user fills out shopping cart pricing rule id number and rule name
+         Then Filtered shopping cart pricing rule should be display
 
 
 
