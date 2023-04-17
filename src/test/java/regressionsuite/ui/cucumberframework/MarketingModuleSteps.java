@@ -131,8 +131,15 @@ public class MarketingModuleSteps extends TestBase {
 
         Assert.assertTrue(catalogPriceRulePage.VerifyAddCatalogPriceRule());
         }
+        @When("Marketing Manger update the existing  reviews")
+    public void marketingMangerUpdateTheExistingReviews() {
+            pendingReviewsPage.updateExistingReviewsTest();
+    }
 
-
+    @Then("The new reviews should be added")
+    public void theNewReviewsShouldBeAdded() {
+        Assert.assertTrue(pendingReviewsPage.VerifySuccessfulMessage());
+    }
     @After()
     public void tearDown(){
         closeBrowser();

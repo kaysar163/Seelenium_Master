@@ -10,13 +10,17 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class PendingReviewsPage {
-
     WebDriver driver;
-
     FunctionClass functionClass;
-
     MarketingDashboardPage marketingDashboardPage;
     Actions actions;
+    public PendingReviewsPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        functionClass = new FunctionClass(driver);
+        marketingDashboardPage = new MarketingDashboardPage(driver);
+    }
+
 
     @FindBy(xpath = "//span[text()='Catalog']")
     WebElement catalogLink;
@@ -50,14 +54,31 @@ public class PendingReviewsPage {
     @FindBy(xpath = "//span[contains(text(),\"The review has been saved.\")]")
     WebElement successMessage;
 
+    @FindBy(xpath= ("(//a[contains(text(),'Edit')])[1]"))
+    WebElement EditButton;
+    @FindBy(id= ("detail"))
+    WebElement ReviewFiel;
 
-    public PendingReviewsPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionClass=new FunctionClass(driver);
-        marketingDashboardPage=new MarketingDashboardPage(driver);
-
+    @FindBy(id="save_button")
+    WebElement SaveReviewButton;
+    @FindBy(xpath= ("//span[contains(text(),'The review has been saved.')]"))
+    WebElement SuccessfulMessage;
+    public  void updateExistingReviewsTest(){
+        marketingDashboardPage.clickOnAllReviewsLink();
+        functionClass.waitUntilElementPresent(EditButton);
+        EditButton.click();
+        functionClass.waitUntilElementPresent(ReviewFiel);
+        ReviewFiel.sendKeys(functionClass.generateFakeName());
+        functionClass.waitUntilElementPresent(SaveReviewButton);
+        SaveReviewButton.click();
     }
+    public boolean VerifySuccessfulMessage(){
+        functionClass.waitUntilElementPresent(SuccessfulMessage);
+        if (SuccessfulMessage.isDisplayed()) {
+            return true;
+        } else return false;
+    }
+
 
     public void  managerUpdatePendingReviews (){
         functionClass.waitUntilElementPresent(catalogLink);
@@ -68,9 +89,6 @@ public class PendingReviewsPage {
         customerReviewsLink.click();
         functionClass.waitUntilElementPresent(pendingReviewsLink);
         pendingReviewsLink.click();
-//        actions.moveToElement(catalogLink)
-//                .click(reviewsAndRatingLink).moveToElement(customerReviewsLink)
-//                .click(pendingReviewsLink).build().perform();
         WebElement  editButton= driver.findElement
                 (By.xpath("//div[@class=\"hor-scroll\"]/table/tbody/tr/td[contains(text(),'Serita')]/following-sibling::td/a[text()=\"Edit\"]"));
         editButton.click();
@@ -78,10 +96,7 @@ public class PendingReviewsPage {
         detailedRatingRadioButton.isSelected();
        functionClass.waitUntilElementPresent(visibleStore);
          Select select=new Select(visibleStore);
-//         functionClass.sleep(3);
-//        select.selectByVisibleText("www.gulzartrim.com.tr");
-//        functionClass.waitUntilElementPresent(nickName);
-        nickName.clear();
+         nickName.clear();
         nickName.sendKeys(functionClass.generateFakeName());
 
         functionClass.waitUntilElementPresent(summaryOfReviews);
@@ -93,8 +108,6 @@ public class PendingReviewsPage {
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(saveElementButton);
         saveElementButton.click();
-        //marketingDashboardPage.clickOnPendingReviewsLink();
-
     }
     public boolean verifyUpdatePendingReviews(){
         if(successMessage.isDisplayed()){
