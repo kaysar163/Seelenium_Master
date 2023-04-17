@@ -214,7 +214,7 @@ public class ManageStoresPage {
     
     public void deleteStore() {
         storeModuleDashboardPage.clickOnManageStoresLink();
-        WebElement storeName= driver.findElement(By.xpath(String.format("//*[contains(text(),'%s')]", TestHelperStore.getStoreName())));
+        WebElement storeName= driver.findElement(By.xpath(String.format("//*[contains(text(),'%s')]", TestHelperStore.getChangedStoreName())));
         storeName.click();
         functionClass.waitUntilElementPresent(deleteStore);
         deleteStore.click();
@@ -281,28 +281,19 @@ public class ManageStoresPage {
 
 
 
-
-
-
-
-    public void CatologPoductDeletetest() {
-    }
-    
-    public boolean verifyCatologPoducDelettest() {
-        return false;
-    }
     public void editStore() {
         functionClass.waitUntilElementPresent(SystemButton);
         systemButton.click();
         functionClass.waitUntilElementPresent(ManageStore);
         managerStoresButton.click();
-        WebElement editStories = driver.findElement(By.xpath(String.format("//a[contains(text(),'%s')]",TestHelperClassStore.getStoreName())));
+        WebElement editStories = driver.findElement(By.xpath(String.format("//a[contains(text(),'%s')]",TestHelperStore.getStoreName())));
         functionClass.waitUntilElementPresent(editStories);
 
         editStories.click();
         functionClass.waitUntilElementPresent(StoreName);
         StoreName.clear();
-        StoreName.sendKeys(functionClass.generateFakeName());
+        TestHelperStore.setChangedStoreName(functionClass.generateFakeName());
+        StoreName.sendKeys(TestHelperStore.getChangedStoreName());
         functionClass.waitUntilElementPresent(editSaveButton);
         editSaveButton.click();
 

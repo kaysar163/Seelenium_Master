@@ -58,13 +58,13 @@ public class StoreModuleTestRunner extends TestBase {
         manageProductsPage.addproduct();
         Assert.assertTrue( manageProductsPage.VerifySuccessmessage());
     }
-    @Test(description = "Muyesser",dependsOnMethods = "addProductTest")
+    @Test(description = "Muyesser",dependsOnMethods = "addProductTest",priority = 7)
     public  void editProductTest(){
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
     }
 
-    @Test(description = "Fazilet",dependsOnMethods = "editProductTest")
+    @Test(description = "Fazilet",dependsOnMethods = "editProductTest",priority = 8)
     public void deleteProductTest() {
         manageProductsPage.deleteProductTest();
         Assert.assertTrue(manageProductsPage.verifyDeletedProductTest());
@@ -80,71 +80,67 @@ public class StoreModuleTestRunner extends TestBase {
         productInfoPage.updateProductCategories();
         Assert.assertTrue(productInfoPage.productCategoryUpdatedSuccessfully());
     }
-    @Test(description = "Gulzar")
-    public void createStoreTest(){
-        manageStoresPage.createStore();
-        Assert.assertTrue(manageStoresPage.verifyCreateStore());
-    }
-    @Test(description = "Memet",dependsOnMethods = "createStoreTest")
-    public void deleteStoreTest(){
-        manageStoresPage.deleteStore();
-        Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
-    }
 
-    @Test(description = "Muradil")
+    @Test(description = "Muradil",priority = 9)
 
     public void createWebsiteTest(){
         manageStoresPage.createWebsite();
         Assert.assertTrue(manageStoresPage.verifyCreateWebsite());
     }
-    
-    @Test(description = "Toghraq")
+
+    @Test(description = "Toghraq",priority = 10)
     public void editWebsiteTest(){
         manageStoresPage.editWebsite();
         Assert.assertTrue(manageStoresPage.webSiteSavedMessage());
     }
-    
-    @Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"})
+
+    @Test(description = "rizvangul",dependsOnMethods = {"createWebsiteTest"},priority = 11)
     public void deleteWebsiteTest() {
         manageStoresPage.deleteWebsite( );
         Assert.assertTrue( manageStoresPage.verifyDeleteWebsite( ) );
     }
 
-    @Test(description = "Mirehmidi")
-    public void deleteCatologTest(){
-        manageStoresPage.CatologPoductDeletetest ();
-        Assert.assertTrue(manageStoresPage.verifyCatologPoducDelettest());
+    @Test(description = "Gulzar",priority = 12)
+    public void createStoreTest(){
+        manageStoresPage.createStore();
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
+    @Test(description = "ranagul",dependsOnMethods = "createStoreTest",priority = 13)
+    public void editStoreTest(){
+        manageStoresPage.editStore();
+        Assert.assertTrue(manageStoresPage.verifyeditstore());
+    }
+    @Test(description = "Memet",dependsOnMethods = "createStoreTest",priority = 14)
+    public void deleteStoreTest(){
+        manageStoresPage.deleteStore();
+        Assert.assertTrue(manageStoresPage.storeDeletedSuccessfully());
     }
 
-    @Test(description = "Abdusattar")
+
+    @Test(description = "Abdusattar",priority = 15)
     public void addStoreViewTest(){
         orderViewPage.addStoreView();
         Assert.assertTrue(orderViewPage.verifyNewStoreViewAdded());
     }
 
-    @Test(description = "Abdusattar",dependsOnMethods = "addStoreViewTest")
+    @Test(description = "Abdusattar",dependsOnMethods = "addStoreViewTest",priority = 16)
     public void editStoreViewTest(){
         orderViewPage.editStoreView();
         Assert.assertTrue(orderViewPage.verifyStoreViewEdited());
     }
 
 
-    @Test(description = "Fazilet")
+    @Test(description = "Fazilet",priority = 17)
     public void viewAllStoresTest(){
         manageStoresPage.viewAllStores();
         Assert.assertTrue(manageStoresPage.verifyViewedAllStores());
     }
 
-    @Test(description = "ranagul",dependsOnMethods = "createStoreTest")
-    public void editStoreTest(){
-        manageStoresPage.editStore();
-        Assert.assertTrue(manageStoresPage.verifyeditstore());
-    }
 
 
     @AfterClass
     public void tearDown(){
-        closeBrowser();
+        //closeBrowser();
     }
 }
 

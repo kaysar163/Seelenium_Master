@@ -2,6 +2,7 @@ package com.magentoapplication.ui.backend.storemodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,6 +16,8 @@ public class ManageCategoriesPage {
     FunctionClass functionClass;
     StoreModuleDashboardPage storeModuleDashboardPage;
     ManageProductsPage manageProductsPage;
+
+    Actions actions;
 
     @FindBy(css = "ul#nav>li:nth-child(2)")
     WebElement catalogLink;
@@ -60,6 +63,7 @@ public class ManageCategoriesPage {
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
         manageProductsPage=new ManageProductsPage(driver);
+        actions=new Actions(driver);
     }
     public void addProductCategoriesFunction(){
         // functionClass.waitUntilElementPresent(storeModuleDashboardPage.catalogLink);
@@ -98,11 +102,16 @@ public class ManageCategoriesPage {
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
+        functionClass.sleep(5);
         WebElement checkBoxButton=driver.findElement(By.xpath(String.format("//tr//td[contains(text(),'%s')]//preceding-sibling::td/input[@type='checkbox']",
                 TestHelperStore.getCategoryProductName())));
+        functionClass.waitUntilElementPresent(checkBoxButton);
+        functionClass.sleep(10);
         checkBoxButton.isSelected();
         functionClass.waitUntilElementPresent(saveCategoryButton);
-        saveCategoryButton.click();
+        functionClass.sleep(2);
+        actions.click(saveCategoryButton).build().perform();
+        //saveCategoryButton.click();
     }
     public boolean verifyAddProductCategory(){
         functionClass.waitUntilElementPresent(successMessage);

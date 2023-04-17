@@ -52,6 +52,11 @@ public class FunctionClass {
         return faker;
     }
 
+    public String generateTemplate() {
+        String faker = Faker.instance().backToTheFuture().character().toLowerCase();
+        return faker;
+    }
+
     public String generateFakeEmail() {
         String faker = Faker.instance().internet().emailAddress();
         return faker;

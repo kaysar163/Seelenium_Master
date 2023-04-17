@@ -56,5 +56,29 @@ public class ProductInfoPage {
         else return false;
         }
 
+//    public void deleteProductCategories(){
+//        storeModuleDashboardPage.clickOnManageProductsLink();
+//        WebElement editButton = driver.findElement(By.xpath(String.format("//tbody/tr/td[3][contains(text(),'%s')]/following::td[9]/a", TestHelperStore.getCategoryProductName())));
+//        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+//        jsExecutor.executeScript("arguments[0].click();", editButton);
+//        functionClass.sleep(10);
+//        functionClass.waitUntilElementPresent(categoriesLink);
+//        categoriesLink.click();
+//        functionClass.sleep(10);
+//        WebElement categoryCheckBox=driver.findElement(By.xpath(String.format("//*[text()='%s (0)']//../../input", TestHelperStore.getCategoryName())));
+//        functionClass.waitUntilElementPresent(categoryCheckBox);
+//        categoryCheckBox.isSelected();
+////        WebDriverWait wait = new WebDriverWait(driver, 10); // Wait for a maximum of 10 seconds
+////        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format("//*[text()='%s' (0)]//../../input",TestHelperClassStore.getCategoryName())))).click();
+//
+//        saveButton.click();
+//    }
+//    public boolean productCategoryUpdatedSuccessfully(){
+//        functionClass.waitUntilElementPresent(categoryUpdateSuccessMessage);
+//        if(categoryUpdateSuccessMessage.isDisplayed())
+//            return true;
+//        else return false;
+//    }
+
 
 }

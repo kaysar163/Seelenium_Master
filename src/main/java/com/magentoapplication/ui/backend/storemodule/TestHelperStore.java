@@ -3,6 +3,8 @@ package com.magentoapplication.ui.backend.storemodule;
 public class TestHelperStore {
     private static String productName;
     private static String storeName;
+
+    private static String changedStoreName;
     private static String firstname;
 
     private static  String changedProductName;
@@ -13,6 +15,14 @@ public class TestHelperStore {
     private  static String CategoryProductName;
 
     private static  String storeViewName;
+
+    public static String getChangedStoreName() {
+        return changedStoreName;
+    }
+
+    public static void setChangedStoreName(String changedStoreName) {
+        TestHelperStore.changedStoreName = changedStoreName;
+    }
 
     public static String getCategoryName() {
         return categoryName;
