@@ -1,6 +1,7 @@
 package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.marketingmodule.NewsletterSubscriptionPage;
 import com.magentoapplication.ui.backend.marketingmodule.NewsletterTemplatePage;
 import com.magentoapplication.ui.backend.marketingmodule.PendingReviewsPage;
 import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
@@ -10,6 +11,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 public class MarketingModuleSteps extends TestBase {
 
@@ -18,6 +20,7 @@ public class MarketingModuleSteps extends TestBase {
     NewsletterTemplatePage newsletterTemplatePage;
     ShoppingCartPriceRulePage shoppingCartPriceRulePage;
     PendingReviewsPage pendingReviewsPage;
+    NewsletterSubscriptionPage newsletterSubscriptionPage;
 
 
     @Before()
@@ -33,6 +36,7 @@ public class MarketingModuleSteps extends TestBase {
         newsletterTemplatePage=new NewsletterTemplatePage(driver);
         shoppingCartPriceRulePage=new ShoppingCartPriceRulePage(driver);
         pendingReviewsPage=new PendingReviewsPage(driver);
+        newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
 
 
     }
@@ -79,6 +83,17 @@ public class MarketingModuleSteps extends TestBase {
     @Then("Filtered shopping cart pricing rule should be display")
     public void filteredShoppingCartPricingRuleShouldBeDisplay() {
         shoppingCartPriceRulePage.verifyFilterShoppingCart();
+    }
+
+    @When("the user enter the Newsletter subscribers page")
+    public void theUserEnterTheNewsletterSubscribersPage() {
+        newsletterSubscriptionPage.viewNewsLetterSubscribers();
+    }
+
+    @Then("Newsletter subscribers should be viewed.")
+    public void newsletterSubscribersShouldBeViewed() {
+        // newsletterSubscriptionPage.verifyViewNewsletterSubscribers();
+        Assert.assertTrue(newsletterSubscriptionPage.verifyViewNewsletterSubscribers());
     }
     @After()
     public void tearDown(){
