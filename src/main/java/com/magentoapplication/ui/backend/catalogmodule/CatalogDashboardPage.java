@@ -32,15 +32,38 @@ public class CatalogDashboardPage {
 
     @FindBy(xpath = "//span[text()='Manage Categories']")
     WebElement manageCategoriesLink;
-
+    @FindBy(xpath = "//span[text()='Category Products']")
+    WebElement categoryProductsTab;
+    @FindBy(xpath = "//input[@id='catalog_category_products_filter_name']")
+    WebElement categoryProductsFilterNameField;
+    @FindBy(xpath = "//span[text()='Search']")
+    WebElement categoryProductsSearchButton;
     @FindBy(xpath = "//span[text()='Attributes']")
     WebElement attributesLink;
-
     @FindBy(xpath = "//span[text()='Manage Attributes']")
     WebElement manageAttributesLink;
-
     @FindBy(xpath = "//span[text()='Search Terms']")
     WebElement searchTerms;
+    public void filterProductsInTheCategoryProductsTab(){
+        functionClass.waitUntilElementPresent(catalogLink);
+        catalogLink.click();
+        functionClass.waitUntilElementPresent(manageCategoriesLink);
+        manageCategoriesLink.click();
+        functionClass.waitUntilElementPresent(categoryProductsTab);
+        categoryProductsTab.click();
+        functionClass.waitUntilElementPresent(categoryProductsFilterNameField);
+        categoryProductsFilterNameField.sendKeys("kaysar");
+        functionClass.waitUntilElementPresent(categoryProductsSearchButton);
+        categoryProductsSearchButton.click();
+    }
+
+    public boolean verifyFilterProductsInTheCategoryProductsTab(){
+            if (driver.getPageSource().contains("kaysar")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
 
 
