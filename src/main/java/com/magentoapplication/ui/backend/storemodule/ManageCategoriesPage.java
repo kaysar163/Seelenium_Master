@@ -101,6 +101,7 @@ public class ManageCategoriesPage {
         WebElement checkBoxButton=driver.findElement(By.xpath(String.format("//tr//td[contains(text(),'%s')]//preceding-sibling::td/input[@type='checkbox']",
                 TestHelperClassStore.getCategoryProductName())));
         checkBoxButton.isSelected();
+        functionClass.sleep(3);
         functionClass.waitUntilElementPresent(saveCategoryButton);
         saveCategoryButton.click();
     }

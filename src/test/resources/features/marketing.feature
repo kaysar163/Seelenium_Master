@@ -59,8 +59,8 @@
 
       @updtePendingReviews    #Muyesser : Update Pending reviews
    Scenario: Marketing manager should be able to update pending  reviews
-        Given Admin user is already on the dashboard page
-        When  user update pending reivews
+        Given Admin user is already in the dashboard page
+        When  user update pending reviews
         Then  pending reviews should be updated
 
 

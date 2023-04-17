@@ -44,6 +44,11 @@ public class PendingReviewsPage {
 
     @FindBy(xpath = "//textarea[@id=\"detail\"]")
     WebElement reviews;
+    @FindBy(xpath = "(//span[text()=\"Save Review\"])[1]")
+    WebElement saveElementButton;
+
+    @FindBy(xpath = "//span[contains(text(),\"The review has been saved.\")]")
+    WebElement successMessage;
 
 
     public PendingReviewsPage(WebDriver driver) {
@@ -56,8 +61,15 @@ public class PendingReviewsPage {
 
     public void  managerUpdatePendingReviews (){
         functionClass.waitUntilElementPresent(catalogLink);
-        actions.moveToElement(catalogLink).click(reviewsAndRatingLink).moveToElement(customerReviewsLink).click(pendingReviewsLink).build().perform();
-        WebElement  editButton= driver.findElement(By.xpath("//div[@class=\"hor-scroll\"]/table/tbody/tr/td[contains(text(),\"Rhona \")]/following-sibling::td/a[text()=\"Edit\"]"));
+        catalogLink.click();
+        reviewsAndRatingLink.click();
+        customerReviewsLink.click();
+        pendingReviewsLink.click();
+//        actions.moveToElement(catalogLink)
+//                .click(reviewsAndRatingLink).moveToElement(customerReviewsLink)
+//                .click(pendingReviewsLink).build().perform();
+        WebElement  editButton= driver.findElement
+                (By.xpath("//div[@class=\"hor-scroll\"]/table/tbody/tr/td[contains(text(),\"Rhona \")]/following-sibling::td/a[text()=\"Edit\"]"));
         editButton.click();
         functionClass.waitUntilElementPresent(detailedRatingRadioButton);
         detailedRatingRadioButton.isSelected();
@@ -67,20 +79,25 @@ public class PendingReviewsPage {
         functionClass.waitUntilElementPresent(nickName);
         nickName.clear();
         nickName.sendKeys(functionClass.generateFakeName());
+
         functionClass.waitUntilElementPresent(summaryOfReviews);
         summaryOfReviews.clear();
         summaryOfReviews.sendKeys(functionClass.generateProductDescription()+System.currentTimeMillis());
         functionClass.waitUntilElementPresent(reviews);
         reviews.clear();
         reviews.sendKeys(functionClass.generateProductDescription());
-
-
-
-
-
-
-
+        functionClass.waitUntilElementPresent(saveElementButton);
+        saveElementButton.click();
         //marketingDashboardPage.clickOnPendingReviewsLink();
 
     }
+    public boolean verifyUpdatePendingReviews(){
+        if(successMessage.isDisplayed()){
+            return true;
+        }
+        else return false;
+
+    }
+
+
 }
