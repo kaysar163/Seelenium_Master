@@ -61,17 +61,14 @@
 
 
 
+    @updateExistingReviews  #Kaysar : Update Existing reviews
+    Scenario: Marketing Manager can update existing reviews
+      Given Admin user is already in the dashboard page
+      When  Marketing Manger update the existing  reviews
+      Then  The new reviews should be added
 
 
-
-      #Halit : Update Existing reviews
-
-
-
-
-
-
-      @updtePendingReviews    #Muyesser : Update Pending reviews
+    @updtePendingReviews    #Muyesser : Update Pending reviews
    Scenario: Marketing manager should be able to update pending  reviews
         Given Admin user is already in the dashboard page
         When  user update pending reviews
