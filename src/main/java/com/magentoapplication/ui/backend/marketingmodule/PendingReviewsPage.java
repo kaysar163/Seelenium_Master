@@ -44,7 +44,7 @@ public class PendingReviewsPage {
 
     @FindBy(xpath = "//textarea[@id=\"detail\"]")
     WebElement reviews;
-    @FindBy(xpath = "(//span[text()=\"Save Review\"])[1]")
+    @FindBy(xpath = "//button[@id='save_button']")
     WebElement saveElementButton;
 
     @FindBy(xpath = "//span[contains(text(),\"The review has been saved.\")]")
@@ -62,8 +62,11 @@ public class PendingReviewsPage {
     public void  managerUpdatePendingReviews (){
         functionClass.waitUntilElementPresent(catalogLink);
         catalogLink.click();
+        functionClass.waitUntilElementPresent(reviewsAndRatingLink);
         reviewsAndRatingLink.click();
+        functionClass.waitUntilElementPresent(customerReviewsLink);
         customerReviewsLink.click();
+        functionClass.waitUntilElementPresent(pendingReviewsLink);
         pendingReviewsLink.click();
 //        actions.moveToElement(catalogLink)
 //                .click(reviewsAndRatingLink).moveToElement(customerReviewsLink)
@@ -73,10 +76,11 @@ public class PendingReviewsPage {
         editButton.click();
         functionClass.waitUntilElementPresent(detailedRatingRadioButton);
         detailedRatingRadioButton.isSelected();
-        functionClass.waitUntilElementPresent(visibleStore);
-        Select select=new Select(visibleStore);
-        select.selectByVisibleText("www.gulzartrim.com.tr");
-        functionClass.waitUntilElementPresent(nickName);
+       functionClass.waitUntilElementPresent(visibleStore);
+         Select select=new Select(visibleStore);
+//         functionClass.sleep(3);
+//        select.selectByVisibleText("www.gulzartrim.com.tr");
+//        functionClass.waitUntilElementPresent(nickName);
         nickName.clear();
         nickName.sendKeys(functionClass.generateFakeName());
 
@@ -86,6 +90,7 @@ public class PendingReviewsPage {
         functionClass.waitUntilElementPresent(reviews);
         reviews.clear();
         reviews.sendKeys(functionClass.generateProductDescription());
+        functionClass.sleep(3);
         functionClass.waitUntilElementPresent(saveElementButton);
         saveElementButton.click();
         //marketingDashboardPage.clickOnPendingReviewsLink();
