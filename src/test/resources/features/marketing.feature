@@ -48,6 +48,13 @@
 
 
       #Memet : Update Existing cart price rule
+    @updateExistingCartPriceRule
+      Scenario: marketing manager should be able to update existing cart price rule
+      Given Admin user is already in the dashboard page
+      When Marketing manager searches existing price rule name in the rule name field and click on search
+      And Marketing manager clicks on the filtered rule name and should be navigated to edit rule page
+      And Marketing manager changes the status and clicks on save
+      Then The rule should have successfully been saved
 
 
 

@@ -1,13 +1,11 @@
 package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
-import com.magentoapplication.ui.backend.marketingmodule.NewsletterSubscriptionPage;
-import com.magentoapplication.ui.backend.marketingmodule.NewsletterTemplatePage;
-import com.magentoapplication.ui.backend.marketingmodule.PendingReviewsPage;
-import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
+import com.magentoapplication.ui.backend.marketingmodule.*;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -21,6 +19,7 @@ public class MarketingModuleSteps extends TestBase {
     ShoppingCartPriceRulePage shoppingCartPriceRulePage;
     PendingReviewsPage pendingReviewsPage;
     NewsletterSubscriptionPage newsletterSubscriptionPage;
+    MarketingDashboardPage marketingDashboardPage;
 
 
     @Before()
@@ -37,6 +36,7 @@ public class MarketingModuleSteps extends TestBase {
         shoppingCartPriceRulePage=new ShoppingCartPriceRulePage(driver);
         pendingReviewsPage=new PendingReviewsPage(driver);
         newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
+        marketingDashboardPage=new MarketingDashboardPage(driver);
 
 
     }
@@ -95,8 +95,33 @@ public class MarketingModuleSteps extends TestBase {
         // newsletterSubscriptionPage.verifyViewNewsletterSubscribers();
         Assert.assertTrue(newsletterSubscriptionPage.verifyViewNewsletterSubscribers());
     }
+
     @After()
     public void tearDown(){
         closeBrowser();
+    }
+
+
+
+
+    @And("Marketing manager clicks on the filtered rule name and should be navigated to edit rule page")
+    public void marketingManagerClicksOnTheFilteredRuleNameAndShouldBeNavigatedToEditRulePage() {
+        shoppingCartPriceRulePage.selectExistingPriceRule();
+    }
+
+    @And("Marketing manager changes the status and clicks on save")
+    public void marketingManagerChangesTheStatusAndClicksOnSave() {
+        shoppingCartPriceRulePage.updateExistingPriceRule();
+    }
+
+    @Then("The rule should have successfully been saved")
+    public void theRuleShouldHaveSuccessfullyBeenSaved() {
+        shoppingCartPriceRulePage.VerifyPriceRuleUpdate();
+    }
+
+    @When("Marketing manager searches existing price rule name in the rule name field and click on search")
+    public void marketingManagerSearchesExistingPriceRuleNameInTheRuleNameFieldAndClickOnSearch() {
+        shoppingCartPriceRulePage.clickOnCartPriceRule();
+        shoppingCartPriceRulePage.searchExistingPriceRule();
     }
 }
