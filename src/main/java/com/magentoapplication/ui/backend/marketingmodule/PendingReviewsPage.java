@@ -72,7 +72,7 @@ public class PendingReviewsPage {
 //                .click(reviewsAndRatingLink).moveToElement(customerReviewsLink)
 //                .click(pendingReviewsLink).build().perform();
         WebElement  editButton= driver.findElement
-                (By.xpath("//div[@class=\"hor-scroll\"]/table/tbody/tr/td[contains(text(),\"Rhona \")]/following-sibling::td/a[text()=\"Edit\"]"));
+                (By.xpath("//div[@class=\"hor-scroll\"]/table/tbody/tr/td[contains(text(),'Serita')]/following-sibling::td/a[text()=\"Edit\"]"));
         editButton.click();
         functionClass.waitUntilElementPresent(detailedRatingRadioButton);
         detailedRatingRadioButton.isSelected();
