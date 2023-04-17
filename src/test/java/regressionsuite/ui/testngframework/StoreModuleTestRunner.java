@@ -135,6 +135,12 @@ public class StoreModuleTestRunner extends TestBase {
         Assert.assertTrue(manageStoresPage.verifyViewedAllStores());
     }
 
+    @Test(description = "ranagul",dependsOnMethods = "createStoreTest")
+    public void editStoreTest(){
+        manageStoresPage.editStore();
+        Assert.assertTrue(manageStoresPage.verifyeditstore());
+    }
+
 
     @AfterClass
     public void tearDown(){
