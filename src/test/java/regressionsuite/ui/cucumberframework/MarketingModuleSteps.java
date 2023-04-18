@@ -22,6 +22,8 @@ public class MarketingModuleSteps extends TestBase {
     MarketingDashboardPage marketingDashboardPage;
     CatalogPriceRulePage catalogPriceRulePage;
 
+    AllReviewsPage allReviewsPage;
+
 
 
     @Before()
@@ -40,6 +42,7 @@ public class MarketingModuleSteps extends TestBase {
         newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
         marketingDashboardPage=new MarketingDashboardPage(driver);
         catalogPriceRulePage=new CatalogPriceRulePage(driver);
+        allReviewsPage=new AllReviewsPage(driver);
 
 
     }
@@ -140,8 +143,26 @@ public class MarketingModuleSteps extends TestBase {
     public void theNewReviewsShouldBeAdded() {
         Assert.assertTrue(pendingReviewsPage.VerifySuccessfulMessage());
     }
+
+
+    @When("User view all reviews")
+    public void userViewAllReviews() {
+        allReviewsPage.viewAllReviewsFunction();
+    }
+
+    @Then("All reviews should be viewed")
+    public void allReviewsShouldBeViewed() {
+        allReviewsPage.verifyViewAllReviewsFunction();
+
+    }
+
+
+
     @After()
     public void tearDown(){
         closeBrowser();
     }
+
+
+
 }
