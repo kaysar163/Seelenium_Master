@@ -108,6 +108,7 @@ public class ManageCategoriesPage {
         functionClass.waitUntilElementPresent(checkBoxButton);
         functionClass.sleep(10);
         checkBoxButton.isSelected();
+        functionClass.sleep(3);
         functionClass.waitUntilElementPresent(saveCategoryButton);
         functionClass.sleep(2);
         actions.click(saveCategoryButton).build().perform();

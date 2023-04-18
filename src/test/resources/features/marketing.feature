@@ -1,9 +1,12 @@
 @RegressionSuite @MarketingModuleTest
   Feature: Marketing module manager should be able to manage marketing
 
-    #Kaysar : Add new catalog price rule
 
-
+    @AddNewCatalogPriceRule  #Kaysar : Add new catalog price rule
+    Scenario: Marketing manger can add catalog price rule
+      Given Admin user is already in the dashboard page
+      When  Marketing Manger add a new catalog price rule
+      Then  The new catalog price rule should be added
 
 
 
@@ -15,7 +18,13 @@
 
 
 
-    #Gulzar : View all reviews
+    @viewAllReviews  #Gülzar :vıew all revıews
+    Scenario: Marketing manager should be able to view all reviews
+      Given Admin user is already in the dashboard page
+      When User view all reviews
+      Then  All reviews should be viewed
+
+
 
 
 
@@ -48,20 +57,29 @@
 
 
       #Memet : Update Existing cart price rule
+    @updateExistingCartPriceRule
+      Scenario: marketing manager should be able to update existing cart price rule
+      Given Admin user is already in the dashboard page
+      When Marketing manager searches existing price rule name in the rule name field and click on search
+      And Marketing manager clicks on the filtered rule name and should be navigated to edit rule page
+      And Marketing manager changes the status and clicks on save
+      Then The rule should have successfully been saved
 
 
 
+    @updateExistingReviews  #Kaysar : Update Existing reviews
+    Scenario: Marketing Manager can update existing reviews
+      Given Admin user is already in the dashboard page
+      When  Marketing Manger update the existing  reviews
+      Then  The new reviews should be added
 
 
+    @updtePendingReviews    #Muyesser : Update Pending reviews
+   Scenario: Marketing manager should be able to update pending  reviews
+        Given Admin user is already in the dashboard page
+        When  user update pending reviews
+        Then  pending reviews should be updated
 
-      #Halit : Update Existing reviews
-
-
-
-
-
-
-      #Muyesser : Update Pending reviews
 
 
 
@@ -101,4 +119,8 @@
 
 
 
-      #Rizvangul : view newsletter subscribers
+      @viewNewsletterSubscribers   #Rizvangul
+  Scenario: Marketing Manager should be able to view Newsletter subscribers
+        Given Admin user is already in the dashboard page
+        When the user enter the Newsletter subscribers page
+        Then Newsletter subscribers should be viewed.
