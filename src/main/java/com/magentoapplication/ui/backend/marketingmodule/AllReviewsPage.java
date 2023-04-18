@@ -48,9 +48,13 @@ public class AllReviewsPage {
 
     public void viewAllReviewsFunction(){
         functionClass.waitUntilElementPresent(catalogLink);
-        actions.moveToElement(catalogLink).click(reviewsAndRatingLink)
-                .moveToElement(customerReviewsLink).click(allReviewsLink)
-                .build().perform();
+        catalogLink.click();
+        functionClass.waitUntilElementPresent(reviewsAndRatingLink);
+        reviewsAndRatingLink.click();
+        functionClass.waitUntilElementPresent(customerReviewsLink);
+        customerReviewsLink.click();
+        allReviewsLink.click();
+
     }
 
     public boolean verifyViewAllReviewsFunction(){
