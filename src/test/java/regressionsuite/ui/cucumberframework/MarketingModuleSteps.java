@@ -141,13 +141,18 @@ public class MarketingModuleSteps extends TestBase {
         Assert.assertTrue(pendingReviewsPage.VerifySuccessfulMessage());
     }
 
+
+
+
     @When("the user deletes newsletter template information")
     public void theUserDeletesNewsletterTemplateInformation() {
+        newsletterTemplatePage.deleteAnExistingNewsletterTemplate();
     }
-
 
     @Then("the newsletter template should be deleted")
     public void theNewsletterTemplateShouldBeDeleted() {
+        newsletterTemplatePage.verifyNewsletterTemplateDeleted();
+
     }
 
 
