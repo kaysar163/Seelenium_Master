@@ -124,6 +124,7 @@ public class NewsletterTemplatePage {
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
+        functionClass.sleep(2);
         functionClass.waitUntilElementPresent(newsLetterTemplateRow);
         newsLetterTemplateRow.click();
         functionClass.sleep(2);
