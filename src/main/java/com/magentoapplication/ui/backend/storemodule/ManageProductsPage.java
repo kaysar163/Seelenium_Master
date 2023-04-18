@@ -112,8 +112,8 @@ public class ManageProductsPage {
         functionClass.waitUntilElementPresent(ContinueButton);
         ContinueButton.click();
         functionClass.waitUntilElementPresent(name);
-        TestHelperClassStore.setCategoryProductName(functionClass.generateProductName());
-        name.sendKeys(TestHelperClassStore.getCategoryProductName());
+        TestHelperStore.setCategoryProductName(functionClass.generateProductName());
+        name.sendKeys(TestHelperStore.getCategoryProductName());
         functionClass.waitUntilElementPresent(description1);
         description1.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(short_description);
@@ -163,13 +163,13 @@ public class ManageProductsPage {
         storeModuleDashboardPage.clickOnCategoriesLink();
         storeModuleDashboardPage.clickOnManageProductsLink();
         WebElement editButton=driver.findElement (By.xpath(String.format("//tr//td[contains(text(),'%s')]//following-sibling::td//a",
-                TestHelperClassStore.getCategoryProductName())));
+                TestHelperStore.getCategoryProductName())));
         functionClass.waitUntilElementPresent(editButton);
         editButton.click();
         functionClass.waitUntilElementPresent(name);
         name.clear();
-        TestHelperClassStore.setChangedProductName(functionClass.generateProductName());
-        name.sendKeys(TestHelperClassStore.getChangedProductName());
+        TestHelperStore.setChangedProductName(functionClass.generateProductName());
+        name.sendKeys(TestHelperStore.getChangedProductName());
         functionClass.waitUntilElementPresent(description1);
         description1.clear();
         description1.sendKeys(functionClass.generateProductDescription());
@@ -209,7 +209,7 @@ public class ManageProductsPage {
         functionClass.waitUntilElementPresent(catalogLink);
         Actions actions=new Actions(driver);
         actions.moveToElement(catalogLink).click(manageProductsLink).build().perform();
-        nameField.sendKeys(TestHelperClassStore.getChangedProductName());
+        nameField.sendKeys(TestHelperStore.getChangedProductName());
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
