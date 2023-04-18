@@ -10,12 +10,11 @@ public class ShipmentsPage {
 
     FunctionClass functionClass;
 
-    SalesDashboardPage salesDashboardPage;
+
 
     public ShipmentsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
-        salesDashboardPage=new SalesDashboardPage(driver);
     }
 }
