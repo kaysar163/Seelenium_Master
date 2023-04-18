@@ -15,7 +15,12 @@
 
 
 
-    #Gulzar : View all reviews
+    @viewAllReviews  #Gulzar
+      Scenario: Marketing manager should be able to view all reviews
+      Given : Admin user is already in the dashboard page
+      When :User view all reviews
+      Then :All reviews should be viewed
+
 
 
 
