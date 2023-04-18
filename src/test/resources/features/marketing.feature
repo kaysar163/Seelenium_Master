@@ -45,10 +45,10 @@
 
   @UpdateExistingCatalogPriceRule #Meryem : Update Existing Catalog price rule
     Scenario: Marketing Manager can update existing Catalog Price Rule
-      Given   Marketing manager on the dashboard page
-      When    Catalog Price Rule Page Open
-      Then    update existing Catalog Price Rule
-      And     verify existing Catalog Price Rule updated
+      Given   Admin user is already in the dashboard page
+      When     update existing Catalog Price Rule
+      Then    verify existing Catalog Price Rule updated
+
 
 
 

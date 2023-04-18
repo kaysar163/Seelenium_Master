@@ -49,6 +49,28 @@ public class CatalogPriceRulePage {
     @FindBy(xpath="//span[contains(text(),'The rule has been saved.')]")
     WebElement SuccessMessage;
 
+    //meryem
+    @FindBy(css = "#promo_catalog_grid_filter_name")
+    WebElement ruleNameField;
+
+    @FindBy(xpath = "//td[contains(text(),\"team1\")]")
+    WebElement team1;
+
+    @FindBy(xpath = "//span[text()='Search']")
+    WebElement searchButton;
+
+    @FindBy(css = "#rule_description")
+    WebElement descriptionField;
+
+    @FindBy(css = "#rule_website_ids")
+    WebElement websites;
+
+    @FindBy(xpath = "//span[contains(text(),\"Save and Apply\")]")
+    WebElement saveAndApplyButton;
+
+    @FindBy(xpath = "//span[contains(text(),\"The rule has been saved.\")]")
+    WebElement successMassage;
+
     public void addNewCatalogPriceRule(){
 
         marketingDashboardPage.clickOnCatalogPriceRuleLink();
@@ -88,4 +110,26 @@ public class CatalogPriceRulePage {
         } else return false;
     }
 
+    public void update(){
+        marketingDashboardPage.clickOnCatalogPriceRuleLink();
+        functionClass.waitUntilElementPresent(ruleNameField);
+        ruleNameField.sendKeys("team1");
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+        team1.click();
+        descriptionField.clear();
+        descriptionField.sendKeys("write something about meryem;"+System.currentTimeMillis());
+        functionClass.waitUntilElementPresent(websites);
+        Select select=new Select(websites);
+        select.selectByValue("457");
+        functionClass.waitUntilElementPresent(saveAndApplyButton);
+        saveAndApplyButton.click();
+    }
+
+
+    public boolean verify(){
+        functionClass.waitUntilElementPresent(successMassage);
+        successMassage.isDisplayed();
+        return true;
+    }
 }

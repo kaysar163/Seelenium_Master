@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class MarketingDashboardPage {
 
@@ -56,24 +57,7 @@ public class MarketingDashboardPage {
     @FindBy(xpath = "//span[text()='Newsletter Subscribers']")
     WebElement newsletterSubscriptionLink;
 
-    //meryem
-    @FindBy(css = "#promo_catalog_grid_filter_name")
-    WebElement ruleNameField;
 
-    @FindBy(xpath = "//td[contains(text(),\"team1\")]")
-    WebElement team1;
-
-    @FindBy(css = "#rule_description")
-    WebElement descriptionField;
-
-    @FindBy(css = "#rule_website_ids")
-    WebElement websites;
-
-    @FindBy(xpath = "//span[contains(text(),\"Save and Apply\")]")
-    WebElement saveAndApplyButton;
-
-    @FindBy(xpath = "//span[contains(text(),\"The rule has been saved.\")]")
-    WebElement successMassage;
 
     public void clickOnCatalogPriceRuleLink(){
         functionClass.waitUntilElementPresent(promotionsLink);
@@ -107,21 +91,4 @@ public class MarketingDashboardPage {
         actions.moveToElement(newsletterLink).click(newsletterSubscriptionLink).build().perform();
     }
 
-    public void update(){
-        functionClass.waitUntilElementPresent(ruleNameField);
-        ruleNameField.clear();
-        descriptionField.sendKeys("write something about meryem;"+System.currentTimeMillis());
-        functionClass.waitUntilElementPresent(websites);
-        //select=new
-       // select.selectByValue("22");
-       functionClass.waitUntilElementPresent(saveAndApplyButton);
-        saveAndApplyButton.click();
-    }
-
-
-    public boolean verify(){
-        functionClass.waitUntilElementPresent(successMassage);
-        successMassage.isDisplayed();
-        return true;
-    }
 }

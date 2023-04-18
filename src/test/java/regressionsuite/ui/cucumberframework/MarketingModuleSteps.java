@@ -23,23 +23,22 @@ public class MarketingModuleSteps extends TestBase {
     CatalogPriceRulePage catalogPriceRulePage;
 
 
-
     @Before()
-    public void setUp(){
+    public void setUp() {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.marketingModuleLogin();
 
     }
 
     @Given("Admin user is already in the dashboard page")
     public void adminUserIsAlreadyInTheDashboardPage() {
-        newsletterTemplatePage=new NewsletterTemplatePage(driver);
-        shoppingCartPriceRulePage=new ShoppingCartPriceRulePage(driver);
-        pendingReviewsPage=new PendingReviewsPage(driver);
-        newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
-        marketingDashboardPage=new MarketingDashboardPage(driver);
-        catalogPriceRulePage=new CatalogPriceRulePage(driver);
+        newsletterTemplatePage = new NewsletterTemplatePage(driver);
+        shoppingCartPriceRulePage = new ShoppingCartPriceRulePage(driver);
+        pendingReviewsPage = new PendingReviewsPage(driver);
+        newsletterSubscriptionPage = new NewsletterSubscriptionPage(driver);
+        marketingDashboardPage = new MarketingDashboardPage(driver);
+        catalogPriceRulePage = new CatalogPriceRulePage(driver);
 
 
     }
@@ -75,7 +74,6 @@ public class MarketingModuleSteps extends TestBase {
     public void pendingReviewsShouldBeUpdated() {
         pendingReviewsPage.verifyUpdatePendingReviews();
     }
-
 
 
     @When("The user fills out shopping cart pricing rule id number and rule name")
@@ -122,7 +120,7 @@ public class MarketingModuleSteps extends TestBase {
 
     @When("Marketing Manger add a new catalog price rule")
     public void marketingMangerAddANewCatalogPriceRule() {
-       catalogPriceRulePage.addNewCatalogPriceRule();
+        catalogPriceRulePage.addNewCatalogPriceRule();
 
     }
 
@@ -130,37 +128,35 @@ public class MarketingModuleSteps extends TestBase {
     public void theNewCatalogPriceRuleShouldBeAdded() {
 
         Assert.assertTrue(catalogPriceRulePage.VerifyAddCatalogPriceRule());
-        }
-        @When("Marketing Manger update the existing  reviews")
+    }
+
+    @When("Marketing Manger update the existing  reviews")
     public void marketingMangerUpdateTheExistingReviews() {
-            pendingReviewsPage.updateExistingReviewsTest();
+        pendingReviewsPage.updateExistingReviewsTest();
     }
 
     @Then("The new reviews should be added")
     public void theNewReviewsShouldBeAdded() {
         Assert.assertTrue(pendingReviewsPage.VerifySuccessfulMessage());
     }
+
+
+
+    @When("update existing Catalog Price Rule")
+    public void updateExistingCatalogPriceRule() {
+   catalogPriceRulePage.update();
+
+    }
+
+    @Then("verify existing Catalog Price Rule updated")
+    public void verifyExistingCatalogPriceRuleUpdated() {
+        catalogPriceRulePage.verify();
+    }
+
     @After()
-    public void tearDown(){
+    public void tearDown() {
         closeBrowser();
     }
-
-    @Given("Marketing manager on the dashboard page")
-    public void marketingManagerOnTheDashboardPage() {
-       marketingDashboardPage.clickOnCatalogPriceRuleLink();
-    }
-
-    @When("Catalog Price Rule Page Open")
-    public void catalogPriceRulePageOpen() {
-
-    }
-
-    @Then("update existing Catalog Price Rule")
-    public void updateExistingCatalogPriceRule() {
-
-    }
-
-    @And("verify existing Catalog Price Rule updated")
-    public void verifyExistingCatalogPriceRuleUpdated() {
-    }
 }
+
+
