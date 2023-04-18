@@ -144,4 +144,23 @@ public class MarketingModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
     }
+
+    @Given("Marketing manager on the dashboard page")
+    public void marketingManagerOnTheDashboardPage() {
+       marketingDashboardPage.clickOnCatalogPriceRuleLink();
+    }
+
+    @When("Catalog Price Rule Page Open")
+    public void catalogPriceRulePageOpen() {
+
+    }
+
+    @Then("update existing Catalog Price Rule")
+    public void updateExistingCatalogPriceRule() {
+
+    }
+
+    @And("verify existing Catalog Price Rule updated")
+    public void verifyExistingCatalogPriceRuleUpdated() {
+    }
 }
