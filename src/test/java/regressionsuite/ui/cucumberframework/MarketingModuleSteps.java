@@ -156,6 +156,15 @@ public class MarketingModuleSteps extends TestBase {
 
     }
 
+    @When("marketing manager click the add new rule button and fill out rule name")
+    public void marketingManagerClickTheAddNewRuleButtonAndFillOutRuleName() {
+        shoppingCartPriceRulePage.marketingManagerClickTheAddNewRuleButtonAndFillOut();
+    }
+
+    @Then("verify new rule added successfully")
+    public void verifyNewRuleAddedSuccessfully() {
+        shoppingCartPriceRulePage.verifyNewRuleAddedSuccessfully();
+    }
 
 
     @After()

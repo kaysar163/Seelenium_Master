@@ -12,7 +12,11 @@
 
 
   #Mirehmidi : Add new cart price rule
-
+    @MarketingManagercanaddnewCartPriceRules
+    Scenario: Marketing manager can add new rule
+      Given Admin user is already in the dashboard page
+      When  marketing manager click the add new rule button and fill out rule name
+      Then  verify new rule added successfully
 
 
 
