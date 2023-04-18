@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.marketingmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,6 +44,15 @@ public class NewsletterTemplatePage {
 
     @FindBy(xpath = "//span[text()='Search']")
     WebElement searchButton;
+
+    @FindBy(xpath ="//tr[@class='even pointer'] ")
+    WebElement newsLetterTemplateRow;
+
+    @FindBy(xpath ="//td[@class='empty-text a-center']" )
+    WebElement searchResult;
+
+    @FindBy(xpath = "//span[text()='Delete Template']" )
+    WebElement deleteTemplateButton;
 
 
     public void addNewNewsletterTemplate(){
@@ -107,5 +117,31 @@ public class NewsletterTemplatePage {
     }
 
 
+    public void deleteAnExistingNewsletterTemplate(){
+        marketingDashboardPage.clickOnNewsletterTemplateLink();
+        templateNameField.clear();
+        templateNameField.sendKeys(TestHelperMarketing.getChangeTemplateName());
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+        functionClass.waitUntilElementPresent(newsLetterTemplateRow);
+        newsLetterTemplateRow.click();
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(deleteTemplateButton);
+        deleteTemplateButton.click();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
 
+    }
+
+   public boolean verifyNewsletterTemplateDeleted() {
+        functionClass.waitUntilElementPresent(templateNameField);
+        templateNameField.sendKeys(TestHelperMarketing.getChangeTemplateName());
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+       if (searchResult.getText().equals("No records found."))
+           return true;
+       else
+           return false;
+   }
 }
