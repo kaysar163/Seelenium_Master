@@ -81,6 +81,30 @@ public class ShoppingCartPriceRulePage {
             return true;
         else return false;
     }
+
+    public void marketingManagerClickTheAddNewRuleButtonAndFillOut() {
+        marketingDashboardPage.clickOnShoppingCartPriceRuleLink();
+        functionClass.waitUntilElementPresent(promotionLink);
+        promotionLink.click();
+        functionClass.waitUntilElementPresent(shoppingCartPriceRulesBut);
+        shoppingCartPriceRulesBut.click();
+        functionClass.waitUntilElementPresent(ruleIdField);
+        ruleIdField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","shoppingCartId"));
+        functionClass.waitUntilElementPresent(ruleNameField);
+        ruleNameField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","ruleName"));
+        functionClass.waitUntilElementPresent(searchBut);
+        searchBut.click();
+    }
+
+
+
+
+    public boolean verifyNewRuleAddedSuccessfully() {
+        if (driver.getPageSource().contains(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","shoppingCartId")))
+            return true;
+        else return false;
+    }
 }
+
 
 
