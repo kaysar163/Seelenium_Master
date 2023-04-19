@@ -114,9 +114,9 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Abdusattar :
+     @seeTagsForCustomersReport #Abdusattar :
   Scenario: Reporting Manager should be able to see Tags for Customers Report
-  Given Admin user is already in the dashboard page
+  Given Admin user is already in the dashboard page reporting
   When the user views
   Then the user sees customers tags
 
