@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class MarketingDashboardPage {
 
@@ -55,6 +56,8 @@ public class MarketingDashboardPage {
 
     @FindBy(xpath = "//span[text()='Newsletter Subscribers']")
     WebElement newsletterSubscriptionLink;
+
+
 
     public void clickOnCatalogPriceRuleLink(){
         functionClass.waitUntilElementPresent(promotionsLink);

@@ -167,11 +167,21 @@ public class MarketingModuleSteps extends TestBase {
     }
 
 
+
+
+
+    @When("update existing Catalog Price Rule")
+    public void updateExistingCatalogPriceRule() {
+        catalogPriceRulePage.update();
+    }
+
+    @Then("verify existing Catalog Price Rule updated")
+    public void verifyExistingCatalogPriceRuleUpdated() {
+        Assert.assertTrue(catalogPriceRulePage.verify());
+    }
+
     @After()
     public void tearDown(){
         closeBrowser();
     }
-
-
-
 }

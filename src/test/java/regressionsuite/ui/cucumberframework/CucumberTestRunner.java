@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty","html:target/cucumber-Marketing-Module-testReport.html","json:target/cucumber.json"},
         features = {"classpath:features"},
-        tags ="@AddNewCatalogPriceRule"
+        tags =" @AddNewCatalogPriceRule or @UpdateExistingCatalogPriceRule"
 )
 public class CucumberTestRunner {
 
