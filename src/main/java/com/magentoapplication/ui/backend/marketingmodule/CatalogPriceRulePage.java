@@ -76,8 +76,8 @@ public class CatalogPriceRulePage {
         marketingDashboardPage.clickOnCatalogPriceRuleLink();
         functionClass.waitUntilElementPresent(AddNewRuleButton);
         AddNewRuleButton.click();
-        functionClass.waitUntilElementPresent(RulleNameField);
-        RulleNameField.sendKeys(functionClass.generateFakeName());
+        TestHelperMarketing.setRuleName(functionClass.generateFakeName());
+        RulleNameField.sendKeys(TestHelperMarketing.getRuleName());
         functionClass.waitUntilElementPresent(DescriptionField);
         DescriptionField.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent(StatusDropDown);
