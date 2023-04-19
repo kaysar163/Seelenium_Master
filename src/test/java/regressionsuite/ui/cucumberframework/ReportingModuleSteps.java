@@ -13,7 +13,7 @@ public class ReportingModuleSteps extends TestBase {
 
 
 
-    @Before("@ReportingModuleTest")
+    @Before()
     public void setUp(){
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
@@ -30,7 +30,7 @@ public class ReportingModuleSteps extends TestBase {
     public void theUserSeesCustomersTags() {
     }
 
-    @After("@ReportingModuleTest")
+    @After
     public void tearDown(){
         closeBrowser();
     }

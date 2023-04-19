@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.marketingmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -49,6 +50,28 @@ public class CatalogPriceRulePage {
     @FindBy(xpath="//span[contains(text(),'The rule has been saved.')]")
     WebElement SuccessMessage;
 
+    //meryem
+    @FindBy(css = "#promo_catalog_grid_filter_name")
+    WebElement ruleNameField;
+
+    @FindBy(xpath = "//td[contains(text(),\"team1\")]")
+    WebElement team1;
+
+    @FindBy(xpath = "//span[text()='Search']")
+    WebElement searchButton;
+
+    @FindBy(css = "#rule_description")
+    WebElement descriptionField;
+
+    @FindBy(css = "#rule_website_ids")
+    WebElement websites;
+
+    @FindBy(xpath = "//span[contains(text(),\"Save and Apply\")]")
+    WebElement saveAndApplyButton;
+
+    @FindBy(xpath = "//span[contains(text(),\"The rule has been saved.\")]")
+    WebElement successMassage;
+
     public void addNewCatalogPriceRule(){
 
         marketingDashboardPage.clickOnCatalogPriceRuleLink();
@@ -88,4 +111,30 @@ public class CatalogPriceRulePage {
         } else return false;
     }
 
+    public void update(){
+        marketingDashboardPage.clickOnCatalogPriceRuleLink();
+        functionClass.waitUntilElementPresent(ruleNameField);
+        ruleNameField.sendKeys(TestHelperMarketing.getRuleName());
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+     //   team1.click();
+        WebElement editButton=driver.findElement
+                (By.xpath(String.format("//td[contains(text(),\"%s\")]",
+                        TestHelperMarketing.getRuleName())));
+        editButton.click();
+        descriptionField.clear();
+        descriptionField.sendKeys(functionClass.generateFakeName());
+        functionClass.waitUntilElementPresent(websites);
+        Select select=new Select(websites);
+        select.selectByValue("457");
+        functionClass.waitUntilElementPresent(saveAndApplyButton);
+        saveAndApplyButton.click();
+    }
+
+
+    public boolean verify(){
+        functionClass.waitUntilElementPresent(successMassage);
+        successMassage.isDisplayed();
+        return true;
+    }
 }
