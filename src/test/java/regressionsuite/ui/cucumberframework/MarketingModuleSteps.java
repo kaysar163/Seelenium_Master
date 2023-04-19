@@ -10,6 +10,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.interactions.Actions;
+
 
 public class MarketingModuleSteps extends TestBase {
 
@@ -26,23 +28,23 @@ public class MarketingModuleSteps extends TestBase {
 
 
 
-    @Before()
+    @Before("@ReportingModuleTest")
     public void setUp(){
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
         backEndLogin.marketingModuleLogin();
-
-    }
-
-    @Given("Admin user is already in the dashboard page")
-    public void adminUserIsAlreadyInTheDashboardPage() {
-        newsletterTemplatePage=new NewsletterTemplatePage(driver);
         shoppingCartPriceRulePage=new ShoppingCartPriceRulePage(driver);
         pendingReviewsPage=new PendingReviewsPage(driver);
         newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
         marketingDashboardPage=new MarketingDashboardPage(driver);
         catalogPriceRulePage=new CatalogPriceRulePage(driver);
         allReviewsPage=new AllReviewsPage(driver);
+    }
+
+    @Given("Admin user is already in the dashboard page")
+    public void adminUserIsAlreadyInTheDashboardPage() {
+        newsletterTemplatePage=new NewsletterTemplatePage(driver);
+
 
 
     }
@@ -167,7 +169,7 @@ public class MarketingModuleSteps extends TestBase {
     }
 
 
-    @After()
+    @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
