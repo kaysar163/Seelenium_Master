@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.marketingmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -113,12 +114,16 @@ public class CatalogPriceRulePage {
     public void update(){
         marketingDashboardPage.clickOnCatalogPriceRuleLink();
         functionClass.waitUntilElementPresent(ruleNameField);
-        ruleNameField.sendKeys("team1");
+        ruleNameField.sendKeys(TestHelperMarketing.getRuleName());
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
-        team1.click();
+     //   team1.click();
+        WebElement editButton=driver.findElement
+                (By.xpath(String.format("//td[contains(text(),\"%s\")]",
+                        TestHelperMarketing.getRuleName())));
+        editButton.click();
         descriptionField.clear();
-        descriptionField.sendKeys("write something about meryem;"+System.currentTimeMillis());
+        descriptionField.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent(websites);
         Select select=new Select(websites);
         select.selectByValue("457");
