@@ -21,6 +21,7 @@ public class MarketingDashboardPage {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
+        actions=new Actions(driver);
     }
 
     @FindBy(xpath = "//span[text()='Promotions']")
@@ -82,7 +83,7 @@ public class MarketingDashboardPage {
         functionClass.waitUntilElementPresent(newsletterLink);
         newsletterLink.click();
         functionClass.waitUntilElementPresent(newsletterTemplateLink);
-        newsletterTemplateLink.click();
+        actions.click(newsletterTemplateLink).build().perform();
     }
 
     public void clickOnSubscriptionLink(){
