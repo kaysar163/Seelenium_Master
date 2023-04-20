@@ -21,6 +21,7 @@ public class MarketingDashboardPage {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
+        actions=new Actions(driver);
     }
 
     @FindBy(xpath = "//span[text()='Promotions']")

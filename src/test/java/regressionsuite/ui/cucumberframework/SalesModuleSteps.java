@@ -23,7 +23,7 @@ public class SalesModuleSteps extends TestBase {
     public void setUp(){
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
-        backEndLogin.marketingModuleLogin();
+        backEndLogin.salesModuleLogin();
         log4j.testStart("---Test Started---");
     }
 

@@ -50,6 +50,7 @@ public class CustomersPage {
     WebElement customerExist;
 
     public void viewCustomersByNumberOfReports(){
+        reportingDashboardPage.clickOnCustomersLink();
         functionClass.waitUntilElementPresent(fromDateIcon);
         fromDateIcon.click();
         functionClass.waitUntilElementPresent(backwardIcon);
