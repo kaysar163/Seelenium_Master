@@ -20,7 +20,7 @@ public class ReportingModuleSteps extends TestBase {
     public void setUp(){
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
-        backEndLogin.marketingModuleLogin();
+        backEndLogin.reportingModuleLogin();
         customersPage=new CustomersPage(driver);
 
     }
@@ -43,7 +43,7 @@ public class ReportingModuleSteps extends TestBase {
 
     @When("the user views the customers by number of orders report")
     public void theUserViewsTheCustomersByNumberOfOrdersReport() {
-        customersPage.verifyViewsCustomersReport();
+        customersPage.viewCustomersByNumberOfReports();
     }
 
     @Then("the user sees customers by number of orders report")
