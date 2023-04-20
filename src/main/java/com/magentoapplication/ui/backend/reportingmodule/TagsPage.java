@@ -33,6 +33,7 @@ public class TagsPage {
 
 
     public void viewTagsForCustomers(){
+        reportingDashboardPage.clickOnCustomers1Link();
         functionClass.waitUntilElementPresent(showTagsLink);
         showTagsLink.click();
     }
