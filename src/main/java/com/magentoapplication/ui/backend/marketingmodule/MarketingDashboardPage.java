@@ -83,7 +83,7 @@ public class MarketingDashboardPage {
         functionClass.waitUntilElementPresent(newsletterLink);
         newsletterLink.click();
         functionClass.waitUntilElementPresent(newsletterTemplateLink);
-        newsletterTemplateLink.click();
+        actions.click(newsletterTemplateLink).build().perform();
     }
 
     public void clickOnSubscriptionLink(){
