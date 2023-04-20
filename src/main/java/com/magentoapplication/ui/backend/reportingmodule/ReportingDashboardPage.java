@@ -119,42 +119,36 @@ public class ReportingDashboardPage {
 
     public void clickOnShoppingCartLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(ShoppingCartLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ShoppingCartLink).click(ProductsincartsLink).build().perform();
     }
 
     public void clickOnProductsincartsLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(ProductsincartsLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ShoppingCartLink).click(ProductsincartsLink).build().perform();
     }
 
     public void clickOnAbandonedcartsLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(AbandonedcartsLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ShoppingCartLink).click(AbandonedcartsLink).build().perform();
     }
-
-    public void clickOnProductsLink() {
-        functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(ProductsLink).build().perform();
-    }
-
     public void clickOnBestsellersLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(BestsellersLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ProductsLink).click(BestsellersLink).build().perform();
     }
 
     public void clickOnProductsOrderedLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(ProductsOrderedLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ProductsLink).click(ProductsOrderedLink).build().perform();
     }
 
     public void clickOnMostViewedLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(MostViewedLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ProductsLink).click(MostViewedLink).build().perform();
     }
 
     public void clickOnLowstockLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(LowstockLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ProductsLink).click(LowstockLink).build().perform();
     }
 
     public void clickOnDownloadsLink() {
@@ -162,19 +156,14 @@ public class ReportingDashboardPage {
         actions.moveToElement(ReportsLink).click(ProductsLink).click(DownloadsLink).build().perform();
     }
 
-    public void clickOnCustomersLink() {
-        functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(CustomersLink).build().perform();
-    }
-
     public void clickOnNewAccountsLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(NewAccountsLink).build().perform();
+        actions.moveToElement(ReportsLink).click(CustomersLink).click(NewAccountsLink).build().perform();
     }
 
     public void clickOnCustomersbyorderstotalsLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(CustomersbyorderstotalsLink).build().perform();
+        actions.moveToElement(ReportsLink).click(CustomersLink).click(CustomersbyorderstotalsLink).build().perform();
 
     }
 
@@ -183,36 +172,33 @@ public class ReportingDashboardPage {
         actions.moveToElement(ReportsLink).click(CustomersLink).click(CustomersbynumberofordersLink).build().perform();
     }
 
-    public void clickOnTagsLink() {
-        functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(TagsLink).build().perform();
-    }
+
 
     public void clickOnCustomers1Link() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(Customers1Link).build().perform();
+        actions.moveToElement(ReportsLink).click(TagsLink).click(Customers1Link).build().perform();
     }
 
     public void clickOnProducts1link() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(Products1link).build().perform();
+        actions.moveToElement(ReportsLink).click(TagsLink).click(Products1link).build().perform();
 
     }
 
     public void clickOnPopulars1link() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(Populars1link).build().perform();
+        actions.moveToElement(ReportsLink).click(TagsLink).click(Populars1link).build().perform();
 
     }
 
     public void clickOnReviewsLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(ReviewsLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ReviewsLink).click(ReviewsLink).build().perform();
     }
 
     public void clickProductsReviewsLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(ProductsReviewsLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ReviewsLink).click(ProductsReviewsLink).build().perform();
     }
 }
 
