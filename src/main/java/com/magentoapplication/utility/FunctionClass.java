@@ -37,6 +37,13 @@ public class FunctionClass {
         return timeStamp;
     }
 
+    public String date() {
+        DateTime time = new DateTime();
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd/yyyy");
+        String timeStamp = time.toString(formatter);
+        return timeStamp;
+    }
+
     public void waitUntilElementPresent(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(ExpectedConditions.visibilityOf(element));
