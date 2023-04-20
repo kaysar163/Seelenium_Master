@@ -180,7 +180,7 @@ public class ReportingDashboardPage {
 
     public void clickOnCustomersbynumberofordersLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(CustomersbynumberofordersLink).build().perform();
+        actions.moveToElement(ReportsLink).click(CustomersLink).click(CustomersbynumberofordersLink).build().perform();
     }
 
     public void clickOnTagsLink() {
