@@ -156,11 +156,11 @@ public class MarketingModuleSteps extends TestBase {
     }
 
 
-    @After()
-    public void tearDown(){
-        closeBrowser();
+   // @After()
+   // public void tearDown(){
+       // closeBrowser();
     }
 
 
 
-}
+

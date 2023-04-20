@@ -119,14 +119,15 @@ public class NewsletterTemplatePage {
 
     public void deleteAnExistingNewsletterTemplate(){
         marketingDashboardPage.clickOnNewsletterTemplateLink();
-        templateNameField.clear();
-        templateNameField.sendKeys(TestHelperMarketing.getChangeTemplateName());
+        templateSearchField.sendKeys(TestHelperMarketing.getChangeTemplateName());
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
         functionClass.sleep(2);
-        functionClass.waitUntilElementPresent(newsLetterTemplateRow);
-        newsLetterTemplateRow.click();
+        WebElement editButton=driver.findElement(By.xpath(String.format
+                ("//td[contains(text(),' %s ')]",TestHelperMarketing.getChangeTemplateName())));
+        functionClass.waitUntilElementPresent(editButton);
+        editButton.click();
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(deleteTemplateButton);
         deleteTemplateButton.click();
@@ -136,8 +137,8 @@ public class NewsletterTemplatePage {
     }
 
    public boolean verifyNewsletterTemplateDeleted() {
-        functionClass.waitUntilElementPresent(templateNameField);
-        templateNameField.sendKeys(TestHelperMarketing.getChangeTemplateName());
+        functionClass.waitUntilElementPresent(templateSearchField);
+        templateSearchField.sendKeys(TestHelperMarketing.getChangeTemplateName());
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
        if (searchResult.getText().equals("No records found."))
