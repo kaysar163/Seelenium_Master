@@ -26,7 +26,7 @@ public class MarketingModuleSteps extends TestBase {
 
 
 
-    @Before()
+    @Before("@MarketingModuleTest")
     public void setUp(){
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
@@ -180,7 +180,7 @@ public class MarketingModuleSteps extends TestBase {
         Assert.assertTrue(catalogPriceRulePage.verify());
     }
 
-    @After()
+    @After("@MarketingModuleTest")
     public void tearDown(){
         closeBrowser();
     }

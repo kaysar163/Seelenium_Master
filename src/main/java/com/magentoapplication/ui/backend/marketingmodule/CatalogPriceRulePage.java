@@ -4,6 +4,7 @@ import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -16,11 +17,14 @@ public class CatalogPriceRulePage {
 
     MarketingDashboardPage marketingDashboardPage;
 
+    Actions actions;
+
     public CatalogPriceRulePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
         marketingDashboardPage=new MarketingDashboardPage(driver);
+        actions=new Actions(driver);
     }
 
     @FindBy(xpath ="(//button[@title='Add New Rule'])[1]")
@@ -98,7 +102,8 @@ public class CatalogPriceRulePage {
         functionClass.waitUntilElementPresent(Priority);
         Priority.sendKeys(functionClass.generateFakeName());
         functionClass.waitUntilElementPresent( ActionsButton);
-        ActionsButton.click();
+        functionClass.sleep(2);
+        actions.click(ActionsButton).build().perform();
         functionClass.waitUntilElementPresent( DiscountAmount);
         DiscountAmount.sendKeys(functionClass.generateZipCode());
         functionClass.waitUntilElementPresent(saveButton);

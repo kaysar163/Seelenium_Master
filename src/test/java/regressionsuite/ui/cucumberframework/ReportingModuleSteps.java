@@ -16,7 +16,7 @@ public class ReportingModuleSteps extends TestBase {
 
     CustomersPage customersPage;
 
-    @Before("@SalesModuleTest")
+    @Before("@ReportingModuleTest")
     public void setUp(){
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
@@ -30,19 +30,29 @@ public class ReportingModuleSteps extends TestBase {
         customersPage=new CustomersPage(driver);
     }
 
-    @When("the user views")
+    @When("the user views tags for customers report")
     public void theUserViews() {
-        customersPage.verifyViewsCustomersReport();
+
     }
 
     @Then("the user sees customers tags")
     public void theUserSeesCustomersTags() {
+
+    }
+
+
+    @When("the user views the customers by number of orders report")
+    public void theUserViewsTheCustomersByNumberOfOrdersReport() {
+        customersPage.verifyViewsCustomersReport();
+    }
+
+    @Then("the user sees customers by number of orders report")
+    public void theUserSeesCustomersByNumberOfOrdersReport() {
         Assert.assertTrue(customersPage.verifyViewsCustomersReport());
     }
 
-    @After("@SalesModuleTest")
+    @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
-
 }

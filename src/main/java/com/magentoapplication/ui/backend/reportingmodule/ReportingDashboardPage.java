@@ -159,7 +159,7 @@ public class ReportingDashboardPage {
 
     public void clickOnDownloadsLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(SalesLink).click(DownloadsLink).build().perform();
+        actions.moveToElement(ReportsLink).click(ProductsLink).click(DownloadsLink).build().perform();
     }
 
     public void clickOnCustomersLink() {

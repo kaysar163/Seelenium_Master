@@ -111,7 +111,7 @@
 
 
      @editNewNewsletterTemplate #Abdusattar
-  Scenario: Marketing Manager should be able to add new Newsletter template
+  Scenario: Marketing Manager can Update an existing Newsletter template.
   Given Admin user is already in the dashboard page
   When the user edits newsletter template information
   Then the newsletter template should be edited
