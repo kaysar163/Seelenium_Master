@@ -2,6 +2,7 @@ package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.reportingmodule.CustomersPage;
+import com.magentoapplication.ui.backend.reportingmodule.ReviewsPage;
 import com.magentoapplication.ui.backend.reportingmodule.TagsPage;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
@@ -18,6 +19,7 @@ public class ReportingModuleSteps extends TestBase {
     CustomersPage customersPage;
 
     TagsPage tagsPage;
+    ReviewsPage reviewsPage;
 
     @Before("@ReportingModuleTest")
     public void setUp(){
@@ -31,6 +33,7 @@ public class ReportingModuleSteps extends TestBase {
     public void adminUserIsAlreadyInTheDashboardPageReporting() {
         customersPage=new CustomersPage(driver);
         tagsPage=new TagsPage(driver);
+        reviewsPage=new ReviewsPage(driver);
     }
 
     @When("the user views tags for customers report")
@@ -62,10 +65,18 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldViewPopularTagsOnPopularTagsPage() {
         Assert.assertTrue(tagsPage.verifyThatPopularTagsDisplayed());
     }
+    @When("Reporting manager click on show reviews button on product reviews page")
+    public void reportingManagerClickOnShowReviewsButtonOnProductReviewsPage() {
+        reviewsPage.clickProductReviews();
+    }
+
+    @Then("reporting manager should be able to view all product reviews")
+    public void reportingManagerShouldBeAbleToViewAllProductReviews() {
+        Assert.assertTrue(reviewsPage.verifyThatAllReviewsShown());
+    }
 
     @After("@ReportingModuleTest")
     public void tearDown(){
-        //closeBrowser();
+        closeBrowser();
     }
-
 }

@@ -193,7 +193,7 @@ public class ReportingDashboardPage {
 
     public void clickOnReviewsLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(ReviewsLink).click(ReviewsLink).build().perform();
+        actions.moveToElement(ReportsLink).moveToElement(ReviewsLink).build().perform();
     }
 
     public void clickProductsReviewsLink() {
