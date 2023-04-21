@@ -53,6 +53,15 @@ public class ReportingModuleSteps extends TestBase {
     public void theUserSeesCustomersByNumberOfOrdersReport() {
         Assert.assertTrue(customersPage.verifyViewsCustomersReport());
     }
+    @When("Reporting manager clicks on popular button under tags button")
+    public void reportingManagerClicksOnPopularButtonUnderTagsButton() {
+        tagsPage.clickOnPopularTags();
+    }
+
+    @Then("Reporting manager should view popular tags on popular tags page")
+    public void reportingManagerShouldViewPopularTagsOnPopularTagsPage() {
+        Assert.assertTrue(tagsPage.verifyThatPopularTagsDisplayed());
+    }
 
     @After("@ReportingModuleTest")
     public void tearDown(){
