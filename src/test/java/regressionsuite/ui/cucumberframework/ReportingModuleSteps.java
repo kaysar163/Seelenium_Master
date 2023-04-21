@@ -2,7 +2,6 @@ package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.reportingmodule.CustomersPage;
-import com.magentoapplication.ui.backend.reportingmodule.ReportingDashboardPage;
 import com.magentoapplication.ui.backend.reportingmodule.TagsPage;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
@@ -17,16 +16,14 @@ public class ReportingModuleSteps extends TestBase {
     BackEndLogin backEndLogin;
 
     CustomersPage customersPage;
-    TagsPage tagsPage;
 
+    TagsPage tagsPage;
 
     @Before("@ReportingModuleTest")
     public void setUp(){
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
         backEndLogin.reportingModuleLogin();
-        customersPage=new CustomersPage(driver);
-        tagsPage=new TagsPage(driver);
 
     }
 
@@ -34,18 +31,16 @@ public class ReportingModuleSteps extends TestBase {
     public void adminUserIsAlreadyInTheDashboardPageReporting() {
         customersPage=new CustomersPage(driver);
         tagsPage=new TagsPage(driver);
-
-
     }
 
     @When("the user views tags for customers report")
-    public void theUserViews() {
-
+    public void theUserViewsTagsForCustomersReport() {
+        tagsPage.viewTagsForCustomers();
     }
 
     @Then("the user sees customers tags")
     public void theUserSeesCustomersTags() {
-
+        Assert.assertTrue(tagsPage.verifyTagsViewedForCustomers());
     }
 
 
@@ -59,20 +54,9 @@ public class ReportingModuleSteps extends TestBase {
         Assert.assertTrue(customersPage.verifyViewsCustomersReport());
     }
 
-
-    @When("Reporting manager clicks on popular button under tags button")
-    public void reportingManagerClicksOnPopularButtonUnderTagsButton() {
-        tagsPage.clickOnPopularTags();
-
-    }
-
-    @Then("Reporting manager should view popular tags on popular tags page")
-    public void reportingManagerShouldViewPopularTagsOnPopularTagsPage() {
-        Assert.assertTrue(tagsPage.verifyThatPopularTagsDisplayed());
-    }
-
     @After("@ReportingModuleTest")
     public void tearDown(){
-        closeBrowser();
+        //closeBrowser();
     }
+
 }

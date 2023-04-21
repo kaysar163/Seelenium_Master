@@ -25,19 +25,19 @@ public class CustomersPage {
     @FindBy(id = "period_date_from_trig")
     WebElement fromDateIcon;
 
-    @FindBy(css = ".hilite.nav.button.hilite")
+    @FindBy(xpath = "//tr[@class='headrow']//td[1]")
     WebElement backwardIcon;
 
     @FindBy(id = "period_date_to_trig")
     WebElement toDateIcon;
 
-    @FindBy(xpath = "(//div[text()='today'])[7]")
-    WebElement todayLink;
+    @FindBy(id = "period_date_to")
+    WebElement dateField;
 
     @FindBy(xpath = "//span[text()='Refresh']")
     WebElement refreshButton;
 
-    @FindBy(xpath = "(//td[@class='button'])[17]")
+    @FindBy(xpath = "(//td[@class='button' and @colspan='1'])[2]")
     WebElement closeButton;
 
 
@@ -59,10 +59,8 @@ public class CustomersPage {
         }
         functionClass.waitUntilElementPresent(closeButton);
         closeButton.click();
-        functionClass.waitUntilElementPresent(toDateIcon);
-        toDateIcon.click();
-        functionClass.waitUntilElementPresent(todayLink);
-        todayLink.click();
+        functionClass.waitUntilElementPresent(dateField);
+        dateField.sendKeys(functionClass.date());
         functionClass.waitUntilElementPresent(refreshButton);
         refreshButton.click();
     }
