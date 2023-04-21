@@ -130,6 +130,11 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
       #Memet :
+  @ViewPopularTags
+  Scenario: Reporting manager should be able to view popular tags
+  Given Admin user is already in the dashboard page reporting
+  When Reporting manager clicks on popular button under tags button
+  Then Reporting manager should view popular tags on popular tags page
 
 
 

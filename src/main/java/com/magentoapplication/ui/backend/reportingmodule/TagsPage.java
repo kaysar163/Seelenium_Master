@@ -30,6 +30,11 @@ public class TagsPage {
 
     @FindBy(xpath = "//a[text()='Show Tags']")
     WebElement showTagsLink;
+    @FindBy(xpath = "//*[text()='Popular']")
+    WebElement popularButton;
+    @FindAll({@FindBy(xpath = "//div[@class=\"grid\"]//tbody/tr")})
+    List<WebElement> popularTags;
+
 
 
     public void viewTagsForCustomers(){
@@ -40,6 +45,16 @@ public class TagsPage {
 
     public boolean verifyTagsViewedForCustomers(){
         return verifyTagsViewedForCustomers.size()>=1;
+    }
+    public void clickOnPopularTags(){
+        reportingDashboardPage.clickOnPopularLink();
+        functionClass.waitUntilElementPresent(popularButton);
+        popularButton.click();
+    }
+    public boolean verifyThatPopularTagsDisplayed(){
+        if(popularTags.size()>=1)
+            return true;
+        else return false;
     }
 
 }
