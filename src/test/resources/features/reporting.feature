@@ -142,6 +142,11 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
       #Memet :
+  @ViewProductReviews
+  Scenario: Reporting manager should be able to see product reviews
+    Given Admin user is already in the dashboard page reporting
+    When Reporting manager click on show reviews button on product reviews page
+    Then reporting manager should be able to view all product reviews
 
 
 
