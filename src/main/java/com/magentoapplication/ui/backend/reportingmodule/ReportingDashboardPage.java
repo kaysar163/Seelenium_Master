@@ -80,7 +80,7 @@ public class ReportingDashboardPage {
     @FindBy(xpath = "(//span[contains(text(),'Products')])[4]")
     WebElement Products1link;
     @FindBy(xpath = "(//span[text()='Popular']")
-    WebElement Populars1link;
+    WebElement popularLink;
     @FindBy(xpath = "//span[normalize-space()='Reviews']")
     WebElement ReviewsLink;
     @FindBy(xpath = "(//span[normalize-space()='Products Reviews'])[1]")
@@ -185,9 +185,9 @@ public class ReportingDashboardPage {
 
     }
 
-    public void clickOnPopulars1link() {
+    public void clickOnPopularLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(TagsLink).click(Populars1link).build().perform();
+        actions.moveToElement(ReportsLink).moveToElement(TagsLink).build().perform();
 
     }
 
