@@ -3,6 +3,7 @@ package regressionsuite.ui.cucumberframework;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.reportingmodule.CustomersPage;
 import com.magentoapplication.ui.backend.reportingmodule.ReviewsPage;
+import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TagsPage;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
@@ -15,6 +16,7 @@ import org.junit.Assert;
 public class ReportingModuleSteps extends TestBase {
 
     BackEndLogin backEndLogin;
+    SalesPage salesPage;
 
     CustomersPage customersPage;
 
@@ -31,6 +33,7 @@ public class ReportingModuleSteps extends TestBase {
 
     @Given("Admin user is already in the dashboard page reporting")
     public void adminUserIsAlreadyInTheDashboardPageReporting() {
+        salesPage=new SalesPage(driver);
         customersPage=new CustomersPage(driver);
         tagsPage=new TagsPage(driver);
         reviewsPage=new ReviewsPage(driver);
@@ -75,6 +78,14 @@ public class ReportingModuleSteps extends TestBase {
         Assert.assertTrue(reviewsPage.verifyThatAllReviewsShown());
     }
 
+    @When("Reporting manager clicks on orders button under sales button")
+    public void reportingManagerClicksOnOrdersButtonUnderSalesButton() {
+
+    }
+
+    @Then("Reporting manager should view total ordered report on total ordered report page")
+    public void reportingManagerShouldViewTotalOrderedReportOnTotalOrderedReportPage() {
+    }
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();

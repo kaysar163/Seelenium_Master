@@ -2,7 +2,11 @@
 Feature: Reporting module manager should be able to manage reporting module
 
 
-    #Omercan :
+    @VeiwTotalOrderedReport#Omercan :
+      Scenario: Reporting Manager should be able to see Sales - Total Ordered Report
+        Given Admin user is already in the dashboard page reporting
+        When Reporting manager clicks on orders button under sales button
+        Then Reporting manager should view total ordered report on total ordered report page
 
 
 
