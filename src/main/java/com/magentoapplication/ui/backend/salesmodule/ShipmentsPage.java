@@ -57,8 +57,8 @@ public class ShipmentsPage {
         functionClass.waitUntilElementPresent(submitCommentButton);
         submitCommentButton.click();
     }
-
-    public boolean verifyShipmentPage(){
-
-    }
 }
+//    public boolean verifyShipmentPage() {
+//
+//    }
+//}
