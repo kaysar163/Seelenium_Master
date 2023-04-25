@@ -1,8 +1,10 @@
 package com.magentoapplication.ui.backend.salesmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -12,13 +14,14 @@ public class ShipmentsPage {
 
     FunctionClass functionClass;
     SalesDashboardPage salesDashboardPage;
-
+    Actions  actions;
 
     public ShipmentsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         functionClass = new FunctionClass(driver);
         salesDashboardPage = new SalesDashboardPage(driver);
+        actions=new Actions(driver);
     }
 
     @FindBy(xpath = " (//a[text()='View'])[1]")
@@ -31,17 +34,17 @@ public class ShipmentsPage {
     WebElement addButton;
     @FindBy(xpath = "//*[@id='history_comment']")
     WebElement textLabel;
-    @FindBy(xpath = "//*[@id='submit_comment_button']/span/span/span")
+    @FindBy(xpath = "//span[text()='Submit Comment']")
     WebElement submitCommentButton;
-    @FindBy(xpath = "//*[@id='comments_block']/ul/li")
-    WebElement shipmentComment;
-    @FindBy(xpath = "//span[text()='Send Tracking Information'][1]")
+//    @FindBy(xpath = "//*[@id='comments_block']/ul/li")
+//    WebElement shipmentComment;
+    @FindBy(xpath = "(//span[text()='Send Tracking Information'])[1]")
     WebElement sendTrackingInformationButton;
     @FindBy(xpath = "//span[text()='The shipment has been sent.']")
     WebElement verifyShipmentHasBeenSent;
 
     public void updateShipmentHistory() {
-        salesDashboardPage.clickOnManageCustomersLink();
+        salesDashboardPage.clickOnShipmentsLink();
         functionClass.waitUntilElementPresent(viewOption);
         viewOption.click();
         functionClass.waitUntilElementPresent(dhlOption);
@@ -55,10 +58,18 @@ public class ShipmentsPage {
         textLabel.clear();
         textLabel.sendKeys("very good");
         functionClass.waitUntilElementPresent(submitCommentButton);
-        submitCommentButton.click();
+        functionClass.sleep(2);
+       actions.click(submitCommentButton).build().perform();
+        functionClass.waitUntilElementPresent(sendTrackingInformationButton);
+        functionClass.sleep(2);
+        actions.click(sendTrackingInformationButton).build().perform();
+        functionClass.alertAccept();
+    }
+
+    public boolean verifyShipmentPage() {
+        functionClass.waitUntilElementPresent(verifyShipmentHasBeenSent);
+        if (verifyShipmentHasBeenSent.isDisplayed()) {
+            return true;
+        } else return false;
     }
 }
-//    public boolean verifyShipmentPage() {
-//
-//    }
-//}

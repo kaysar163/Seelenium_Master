@@ -28,12 +28,14 @@ public class SalesModuleSteps extends TestBase {
         backEndLogin.salesModuleLogin();
         log4j.testStart("---Test Started---");
 
+
     }
 
 
     @Given("Admin user is already in the dashboard page sales")
     public void adminUserIsAlreadyInTheDashboardPageSales() {
         manageCustomersPage=new ManageCustomersPage(driver);
+        shipmentsPage=new ShipmentsPage(driver);
     }
 
     @When("the user view shopping cart for customers")
@@ -46,13 +48,6 @@ public class SalesModuleSteps extends TestBase {
         Assert.assertTrue(manageCustomersPage.
                 verifyViewShoppingCartViewed());
     }
-
-
-    @After("@SalesModuleTest")
-    public void tearDown(){
-        closeBrowser();
-        log4j.testStart("---Test Ended---");
-    }
     //meryem
     @When("sales manager can update tracking and history information shipments")
     public void salesManagerCanUpdateTrackingAndHistoryInformationShipments() {
@@ -61,7 +56,12 @@ public class SalesModuleSteps extends TestBase {
 
     @Then("sales manager should be able to comments to shipments")
     public void salesManagerShouldBeAbleToCommentsToShipments() {
-      //  Assert.assertTrue(shipmentsPage.verifyShipmentPage());
+        Assert.assertTrue(shipmentsPage.verifyShipmentPage());
 
+    }
+    @After("@SalesModuleTest")
+    public void tearDown(){
+        closeBrowser();
+        log4j.testStart("---Test Ended---");
     }
 }
