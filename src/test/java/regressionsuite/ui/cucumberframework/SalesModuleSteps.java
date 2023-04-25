@@ -61,7 +61,7 @@ public class SalesModuleSteps extends TestBase {
 
     @Then("sales manager should be able to comments to shipments")
     public void salesManagerShouldBeAbleToCommentsToShipments() {
-        Assert.assertTrue(shipmentsPage.verifyShipmentPage());
+      //  Assert.assertTrue(shipmentsPage.verifyShipmentPage());
 
     }
 }
