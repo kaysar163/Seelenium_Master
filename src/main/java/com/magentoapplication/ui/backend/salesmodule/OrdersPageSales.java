@@ -49,19 +49,19 @@ public class OrdersPageSales {
     WebElement cityField;
     @FindBy(id = "order-billing_address_country_id")
     WebElement countryField;
-    @FindBy(id = "order-billing_address_region_id")
-    WebElement stateField;
+//    @FindBy(css = "select[id='order-billing_address_region_id']")
+//    WebElement stateField;
     @FindBy(id = "order-billing_address_postcode")
     WebElement zipCodeField;
     @FindBy(id = "order-billing_address_telephone")
     WebElement telephoneField;
-    @FindBy(id = "//input[@id='p_method_cashondelivery']")
+    @FindBy(xpath = "//input[@id='p_method_cashondelivery']")
     WebElement paymentMethodBut;
     @FindBy(xpath = "//a[normalize-space()='Get shipping methods and rates']")
     WebElement shippingMethodBut;
     @FindBy(xpath = "//input[@id='s_method_freeshipping_freeshipping']")
     WebElement freeShippingBut;
-    @FindBy(xpath = "(//span[text()='Submit Order'])[1]")
+    @FindBy(xpath = "(//span[text()='Submit Order'])[2]")
     WebElement submitOrderBut;
     @FindBy(xpath = "//span[text()='The order has been created.']")
     WebElement successMessage;
@@ -90,26 +90,30 @@ public class OrdersPageSales {
         cityField.sendKeys(functionClass.generateCityName());
         functionClass.waitUntilElementPresent(countryField);
         countryField.sendKeys(functionClass.generateCountryName());
-        functionClass.waitUntilElementPresent(stateField);
-        functionClass.sleep(10);
-        Select select=new Select(stateField);
-        select.selectByValue("13");
+//        functionClass.waitUntilElementPresent(stateField);
+//        //functionClass.sleep(10);
+//        Select select=new Select(stateField);
+//        select.selectByIndex(13);
         functionClass.waitUntilElementPresent(zipCodeField);
         zipCodeField.sendKeys(functionClass.generateZipCode());
         functionClass.waitUntilElementPresent(telephoneField);
         telephoneField.sendKeys(functionClass.generateTelephoneNumber());
         functionClass.waitUntilElementPresent(paymentMethodBut);
         paymentMethodBut.click();
+        functionClass.sleep(3);
         functionClass.waitUntilElementPresent(shippingMethodBut);
         shippingMethodBut.click();
         functionClass.waitUntilElementPresent(freeShippingBut);
         freeShippingBut.click();
+        functionClass.sleep(5);
         functionClass.waitUntilElementPresent(submitOrderBut);
+        submitOrderBut.click();
+        functionClass.sleep(2);
 
     }
     public boolean verifyCreateOrder() {
         functionClass.waitUntilElementPresent(successMessage);
-        if (driver.getPageSource().contains(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "firstName")))
+        if (successMessage.isDisplayed())
             return true;
         else return false;
     }
