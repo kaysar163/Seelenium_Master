@@ -69,7 +69,7 @@ public class OrdersPageSales {
 
     @FindBy(xpath = "//a[normalize-space()='View']")
     WebElement ViewButton;
-    @FindBy(css ="(//a[contains(text(),'Edit')])[1]")
+    @FindBy(xpath="(//a[contains(text(),'Edit')])[1]")
     WebElement EditButton;
     @FindBy(id = "prefix")
     WebElement PrefixField;
