@@ -3,6 +3,7 @@ package regressionsuite.ui.cucumberframework;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
 import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
+import com.magentoapplication.ui.backend.storemodule.OrdersPage;
 import com.magentoapplication.utility.Log4j;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
@@ -20,6 +21,7 @@ public class SalesModuleSteps extends TestBase {
     Log4j log4j=new Log4j();
 
   ShipmentsPage shipmentsPage;
+  OrdersPage ordersPage;
 
     @Before("@SalesModuleTest")
     public void setUp(){
@@ -36,6 +38,7 @@ public class SalesModuleSteps extends TestBase {
     public void adminUserIsAlreadyInTheDashboardPageSales() {
         manageCustomersPage=new ManageCustomersPage(driver);
         shipmentsPage=new ShipmentsPage(driver);
+        ordersPage=new OrdersPage(driver);
     }
 
     @When("the user view shopping cart for customers")
@@ -58,6 +61,17 @@ public class SalesModuleSteps extends TestBase {
     public void salesManagerShouldBeAbleToCommentsToShipments() {
         Assert.assertTrue(shipmentsPage.verifyShipmentPage());
 
+    }
+
+    @When("the user create a new order")
+    public void theUserCreateANewOrder() {
+        ordersPage.addNewOrder();
+
+    }
+
+    @Then("the new order should be created")
+    public void theNewOrderShouldBeCreated() {
+        ordersPage.verifyOrderCreated();
     }
     @After("@SalesModuleTest")
     public void tearDown(){

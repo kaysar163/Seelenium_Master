@@ -63,7 +63,11 @@ public class SalesDashboardPage {
 
    public void clickOnOrdersLink(){
        functionClass.waitUntilElementPresent(salesLink);
-       actions.moveToElement(salesLink).click(ordersLink).build().perform();
+       salesLink.click();
+       functionClass.waitUntilElementPresent(ordersLink);
+       ordersLink.click();
+
+      // actions.moveToElement(salesLink).click(ordersLink).build().perform();
    }
     public void clickOnInvoiceLink(){
         functionClass.waitUntilElementPresent(salesLink);

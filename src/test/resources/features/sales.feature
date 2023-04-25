@@ -2,7 +2,11 @@
   Feature: Sales Module Manager should be able to manage sales module
 
 
-    #Omercan :
+    @createNewOrder #Omercan :
+    Scenario: Sales Manager should be able to create a new order
+      Given Admin user is already in the dashboard page sales
+      When the user create a new order
+      Then the new order should be created
 
 
 
