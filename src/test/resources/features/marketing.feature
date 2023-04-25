@@ -120,8 +120,11 @@
 
 
 
-      #Fazilat : delete an existing Newsletter template
-
+      @deleteAnExistingNewsletterTemplate #Fazilat
+  Scenario: Marketing Manager can delete an existing newsletter template
+    Given Admin user is already in the dashboard page
+    When the user deletes newsletter template information
+    Then the newsletter template should be deleted
 
 
 
