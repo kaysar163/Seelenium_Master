@@ -72,7 +72,10 @@ public class SalesDashboardPage {
 
     public void clickOnShipmentsLink(){
         functionClass.waitUntilElementPresent(salesLink);
-        actions.moveToElement(salesLink).click(shipmentsLink).build().perform();
+        salesLink.click();
+        functionClass.waitUntilElementPresent(shipmentsLink);
+        shipmentsLink.click();
+//        actions.moveToElement(salesLink).click(shipmentsLink).build().perform();
     }
 
     public void clickOnCreditMemosLink(){
