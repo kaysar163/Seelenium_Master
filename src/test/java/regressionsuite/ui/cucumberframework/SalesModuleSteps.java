@@ -70,11 +70,21 @@ public class SalesModuleSteps extends TestBase {
 
     @Then("the new order should be created")
     public void theNewOrderShouldBeCreated() {
+
         ordersPageSales.verifyCreateOrder();
+    }
+
+    @When("Sales Manager Update orders")
+    public void salesManagerUpdateOrders() {
+        ordersPageSales.UpdateOrderStorePicup();
+    }
+
+    @Then("Orders should be Updated")
+    public void ordersShouldBeUpdated() {
+        ordersPageSales.verifySuccessfulMessage();
     }
     @After("@SalesModuleTest")
     public void tearDown(){
         closeBrowser();
-
-    }
+}
 }

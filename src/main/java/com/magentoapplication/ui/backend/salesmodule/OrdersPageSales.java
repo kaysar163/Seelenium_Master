@@ -2,6 +2,7 @@ package com.magentoapplication.ui.backend.salesmodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -66,6 +67,18 @@ public class OrdersPageSales {
     @FindBy(xpath = "//span[text()='The order has been created.']")
     WebElement successMessage;
 
+    @FindBy(xpath = "//a[normalize-space()='View']")
+    WebElement ViewButton;
+    @FindBy(css ="(//a[contains(text(),'Edit')])[1]")
+    WebElement EditButton;
+    @FindBy(id = "prefix")
+    WebElement PrefixField;
+    @FindBy(xpath = "(//button[@class='scalable save'])[1]")
+    WebElement SaveOrderAdressButton;
+    @FindBy(xpath = "//span[contains(text(),'The order address has been updated.')]")
+    WebElement SuccessfulMessage;
+
+
     public void createNewOrder() {
         salesDashboardPage.clickOnOrdersLink();
         functionClass.waitUntilElementPresent(CreateNewOrderLink);
@@ -112,5 +125,28 @@ public class OrdersPageSales {
         if (successMessage.isDisplayed())
             return true;
         else return false;
+    }
+    public void UpdateOrderStorePicup() {
+        salesDashboardPage.clickOnOrdersLink();
+        WebElement ViewtButton=driver.findElement
+                (By.xpath(String.format("(//td[contains(@class,'')][contains(text(),' %s ')])//following-sibling::td[5]",
+                        ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","firstName"))));
+
+        functionClass.waitUntilElementPresent(ViewtButton);
+        ViewtButton.click();
+        functionClass.waitUntilElementPresent(EditButton);
+        EditButton.click();
+        functionClass.waitUntilElementPresent(PrefixField);
+        PrefixField.sendKeys(functionClass.generateFakeName());
+        functionClass.waitUntilElementPresent(SaveOrderAdressButton);
+        SaveOrderAdressButton.click();
+
+    }
+
+    public boolean verifySuccessfulMessage() {
+        functionClass.waitUntilElementPresent(SuccessfulMessage);
+        if (SuccessfulMessage.isDisplayed()) {
+            return true;
+        } else return false;
     }
 }
