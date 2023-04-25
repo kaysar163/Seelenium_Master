@@ -20,8 +20,11 @@
 
 
 
-    #Meryem :
-
+  @updateShipmentHistory #Meryem :
+    Scenario: Sales Manager should be able to update (add shipment history and tracking information) shipments
+      Given Admin user is already in the dashboard page sales
+      When sales manager can update tracking and history information shipments
+      Then sales manager should be able to comments to shipments
 
 
 
