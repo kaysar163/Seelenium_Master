@@ -1,5 +1,6 @@
 package com.magentoapplication.ui.backend.salesmodule;
 
+import com.magentoapplication.ui.backend.marketingmodule.TestHelperMarketing;
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.By;
@@ -68,7 +69,8 @@ public class OrdersPageSales {
     WebElement successMessage;
 
     @FindBy(xpath = "//a[normalize-space()='View']")
-    WebElement ViewButton;
+
+    WebElement viewButton;
     @FindBy(xpath="(//a[contains(text(),'Edit')])[1]")
     WebElement EditButton;
     @FindBy(id = "prefix")
@@ -93,8 +95,8 @@ public class OrdersPageSales {
         selectBox.click();
         functionClass.waitUntilElementPresent(addSelectedPrdcLink);
         addSelectedPrdcLink.click();
-        functionClass.waitUntilElementPresent(firstNameField);
-        firstNameField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "firstName"));
+        TestHelperSales.setFirstNameField(functionClass.generateFakeName());
+        firstNameField.sendKeys(TestHelperSales.getFirstNameField());
         functionClass.waitUntilElementPresent(lastNameField);
         lastNameField.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(streetAddressField);
@@ -128,12 +130,11 @@ public class OrdersPageSales {
     }
     public void UpdateOrderStorePicup() {
         salesDashboardPage.clickOnOrdersLink();
-        WebElement ViewtButton=driver.findElement
-                (By.xpath(String.format("(//td[contains(@class,'')][contains(text(),' %s ')])//following-sibling::td[5]",
-                        ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","firstName"))));
-
-        functionClass.waitUntilElementPresent(ViewtButton);
-        ViewtButton.click();
+        WebElement viewButton=driver.findElement
+                (By.xpath(String.format("(//td[contains(@class,'')][contains(text(),'%s')])//following-sibling::td[5]",
+                        TestHelperSales.getFirstNameField())));
+        //(//td[@class=' '][contains(text(),'Teri')])//following-sibling::td[5]
+        viewButton.click();
         functionClass.waitUntilElementPresent(EditButton);
         EditButton.click();
         functionClass.waitUntilElementPresent(PrefixField);
