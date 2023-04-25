@@ -1,21 +1,21 @@
-package com.magentoapplication.ui.backend.salesmodule;
+package com.magentoapplication.ui.backend.reportingmodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class OrdersPage {
-
+public class ProductsPage {
     WebDriver driver;
 
     FunctionClass functionClass;
 
-    SalesDashboardPage salesDashboardPage;
+    ReportingDashboardPage reportingDashboardPage;
 
-    public OrdersPage(WebDriver driver) {
+    public ProductsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
-        salesDashboardPage=new SalesDashboardPage(driver);
+        reportingDashboardPage =new  ReportingDashboardPage(driver);
     }
 }
+

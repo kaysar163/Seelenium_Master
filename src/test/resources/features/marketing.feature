@@ -12,13 +12,23 @@
 
 
   #Mirehmidi : Add new cart price rule
+    @MarketingManagercanaddnewCartPriceRules
+    Scenario: Marketing manager can add new rule
+      Given Admin user is already in the dashboard page
+      When  marketing manager click the add new rule button and fill out rule name
+      Then  verify new rule added successfully
 
 
 
 
 
+    @viewAllReviews  #Gülzar :vıew all revıews
+    Scenario: Marketing manager should be able to view all reviews
+      Given Admin user is already in the dashboard page
+      When User view all reviews
+      Then  All reviews should be viewed
 
-    #Gulzar : View all reviews
+
 
 
 
@@ -43,7 +53,11 @@
 
 
 
-      #Meryem : Update Existing Catalog price rule
+  @UpdateExistingCatalogPriceRule #Meryem : Update Existing Catalog price rule
+    Scenario: Marketing Manager can update existing Catalog Price Rule
+      Given   Admin user is already in the dashboard page
+      When     update existing Catalog Price Rule
+      Then    verify existing Catalog Price Rule updated
 
 
 
@@ -97,7 +111,7 @@
 
 
      @editNewNewsletterTemplate #Abdusattar
-  Scenario: Marketing Manager should be able to add new Newsletter template
+  Scenario: Marketing Manager can Update an existing Newsletter template.
   Given Admin user is already in the dashboard page
   When the user edits newsletter template information
   Then the newsletter template should be edited

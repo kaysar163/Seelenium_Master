@@ -22,9 +22,11 @@ public class MarketingModuleSteps extends TestBase {
     MarketingDashboardPage marketingDashboardPage;
     CatalogPriceRulePage catalogPriceRulePage;
 
+    AllReviewsPage allReviewsPage;
 
 
-    @Before()
+
+    @Before("@MarketingModuleTest")
     public void setUp(){
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
@@ -40,6 +42,7 @@ public class MarketingModuleSteps extends TestBase {
         newsletterSubscriptionPage=new NewsletterSubscriptionPage(driver);
         marketingDashboardPage=new MarketingDashboardPage(driver);
         catalogPriceRulePage=new CatalogPriceRulePage(driver);
+        allReviewsPage=new AllReviewsPage(driver);
 
 
     }
@@ -142,25 +145,43 @@ public class MarketingModuleSteps extends TestBase {
     }
 
 
-
-
-    @When("the user deletes newsletter template information")
-    public void theUserDeletesNewsletterTemplateInformation() {
-        newsletterTemplatePage.deleteAnExistingNewsletterTemplate();
+    @When("User view all reviews")
+    public void userViewAllReviews() {
+        allReviewsPage.viewAllReviewsFunction();
     }
 
-    @Then("the newsletter template should be deleted")
-    public void theNewsletterTemplateShouldBeDeleted() {
-        newsletterTemplatePage.verifyNewsletterTemplateDeleted();
+    @Then("All reviews should be viewed")
+    public void allReviewsShouldBeViewed() {
+        allReviewsPage.verifyViewAllReviewsFunction();
 
     }
 
+    @When("marketing manager click the add new rule button and fill out rule name")
+    public void marketingManagerClickTheAddNewRuleButtonAndFillOutRuleName() {
+        shoppingCartPriceRulePage.marketingManagerClickTheAddNewRuleButtonAndFillOut();
+    }
 
-   // @After()
-   // public void tearDown(){
-       // closeBrowser();
+    @Then("verify new rule added successfully")
+    public void verifyNewRuleAddedSuccessfully() {
+        shoppingCartPriceRulePage.verifyNewRuleAddedSuccessfully();
     }
 
 
 
 
+
+    @When("update existing Catalog Price Rule")
+    public void updateExistingCatalogPriceRule() {
+        catalogPriceRulePage.update();
+    }
+
+    @Then("verify existing Catalog Price Rule updated")
+    public void verifyExistingCatalogPriceRuleUpdated() {
+        Assert.assertTrue(catalogPriceRulePage.verify());
+    }
+
+    @After("@MarketingModuleTest")
+    public void tearDown(){
+        closeBrowser();
+    }
+}
