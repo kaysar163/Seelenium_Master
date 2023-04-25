@@ -2,6 +2,7 @@ package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
+import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
 import com.magentoapplication.utility.Log4j;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
@@ -16,8 +17,9 @@ public class SalesModuleSteps extends TestBase {
     BackEndLogin backEndLogin;
 
     ManageCustomersPage manageCustomersPage;
-
     Log4j log4j=new Log4j();
+
+  ShipmentsPage shipmentsPage;
 
     @Before("@SalesModuleTest")
     public void setUp(){
@@ -25,6 +27,7 @@ public class SalesModuleSteps extends TestBase {
         backEndLogin=new BackEndLogin(driver);
         backEndLogin.salesModuleLogin();
         log4j.testStart("---Test Started---");
+
     }
 
 
@@ -40,7 +43,8 @@ public class SalesModuleSteps extends TestBase {
 
     @Then("shopping list display")
     public void shoppingListDisplay() {
-        Assert.assertTrue(manageCustomersPage.verifyViewShoppingCartViewed());
+        Assert.assertTrue(manageCustomersPage.
+                verifyViewShoppingCartViewed());
     }
 
 
@@ -48,5 +52,16 @@ public class SalesModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
         log4j.testStart("---Test Ended---");
+    }
+    //meryem
+    @When("sales manager can update tracking and history information shipments")
+    public void salesManagerCanUpdateTrackingAndHistoryInformationShipments() {
+      shipmentsPage.updateShipmentHistory();
+    }
+
+    @Then("sales manager should be able to comments to shipments")
+    public void salesManagerShouldBeAbleToCommentsToShipments() {
+        Assert.assertTrue(shipmentsPage.verifyShipmentPage());
+
     }
 }
