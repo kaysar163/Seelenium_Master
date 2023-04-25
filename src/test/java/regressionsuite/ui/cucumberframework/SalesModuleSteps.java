@@ -2,6 +2,7 @@ package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
+import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
 import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
 import com.magentoapplication.ui.backend.storemodule.OrdersPage;
 import com.magentoapplication.utility.Log4j;
@@ -18,17 +19,15 @@ public class SalesModuleSteps extends TestBase {
     BackEndLogin backEndLogin;
 
     ManageCustomersPage manageCustomersPage;
-    Log4j log4j=new Log4j();
+    OrdersPageSales ordersPageSales;
+    ShipmentsPage shipmentsPage;
 
-  ShipmentsPage shipmentsPage;
-  OrdersPage ordersPage;
 
     @Before("@SalesModuleTest")
     public void setUp(){
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
         backEndLogin.salesModuleLogin();
-        log4j.testStart("---Test Started---");
 
 
     }
@@ -38,7 +37,7 @@ public class SalesModuleSteps extends TestBase {
     public void adminUserIsAlreadyInTheDashboardPageSales() {
         manageCustomersPage=new ManageCustomersPage(driver);
         shipmentsPage=new ShipmentsPage(driver);
-        ordersPage=new OrdersPage(driver);
+        ordersPageSales=new OrdersPageSales(driver);
     }
 
     @When("the user view shopping cart for customers")
@@ -65,17 +64,17 @@ public class SalesModuleSteps extends TestBase {
 
     @When("the user create a new order")
     public void theUserCreateANewOrder() {
-        ordersPage.addNewOrder();
+        ordersPageSales.createNewOrder();
 
     }
 
     @Then("the new order should be created")
     public void theNewOrderShouldBeCreated() {
-        ordersPage.verifyOrderCreated();
+        ordersPageSales.verifyCreateOrder();
     }
     @After("@SalesModuleTest")
     public void tearDown(){
         closeBrowser();
-        log4j.testStart("---Test Ended---");
+
     }
 }

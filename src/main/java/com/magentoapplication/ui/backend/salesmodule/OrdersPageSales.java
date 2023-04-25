@@ -90,10 +90,6 @@ public class OrdersPageSales {
         cityField.sendKeys(functionClass.generateCityName());
         functionClass.waitUntilElementPresent(countryField);
         countryField.sendKeys(functionClass.generateCountryName());
-//        functionClass.waitUntilElementPresent(stateField);
-//        //functionClass.sleep(10);
-//        Select select=new Select(stateField);
-//        select.selectByIndex(13);
         functionClass.waitUntilElementPresent(zipCodeField);
         zipCodeField.sendKeys(functionClass.generateZipCode());
         functionClass.waitUntilElementPresent(telephoneField);
