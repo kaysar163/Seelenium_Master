@@ -84,9 +84,9 @@ public class SalesModuleSteps extends TestBase {
     public void ordersShouldBeUpdated() {
         ordersPageSales.verifySuccessfulMessage();
     }
+
+    @After("@SalesModuleTest")
+    public void tearDown(){
+        closeBrowser();
 }
-//    @After("@SalesModuleTest")
-//    public void tearDown(){
-//        closeBrowser();
-//}
-//}
+}
