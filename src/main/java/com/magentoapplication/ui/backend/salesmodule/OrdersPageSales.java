@@ -131,10 +131,12 @@ public class OrdersPageSales {
     public void UpdateOrderStorePicup() {
         salesDashboardPage.clickOnOrdersLink();
         WebElement viewButton=driver.findElement
-                (By.xpath(String.format("(//td[contains(@class,'')][contains(text(),'%s')])//following-sibling::td[5]",
+                (By.xpath(String.format("(//td[contains(@class,'')][contains(text(),'Lawanna')])//following-sibling::td[5]",
                         TestHelperSales.getFirstNameField())));
-        //(//td[@class=' '][contains(text(),'Teri')])//following-sibling::td[5]
-        viewButton.click();
+
+        functionClass.sleep(1);
+        Actions actions=new Actions(driver);
+        actions.click(viewButton).build().perform();
         functionClass.waitUntilElementPresent(EditButton);
         EditButton.click();
         functionClass.waitUntilElementPresent(PrefixField);
