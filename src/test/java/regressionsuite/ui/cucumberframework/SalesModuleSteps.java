@@ -1,6 +1,7 @@
 package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.salesmodule.CreditMemosPage;
 import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
 import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
 import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
@@ -21,6 +22,7 @@ public class SalesModuleSteps extends TestBase {
     ManageCustomersPage manageCustomersPage;
     OrdersPageSales ordersPageSales;
     ShipmentsPage shipmentsPage;
+    CreditMemosPage creditMemosPage;
 
 
     @Before("@SalesModuleTest")
@@ -38,6 +40,7 @@ public class SalesModuleSteps extends TestBase {
         manageCustomersPage = new ManageCustomersPage(driver);
         shipmentsPage = new ShipmentsPage(driver);
         ordersPageSales = new OrdersPageSales(driver);
+        creditMemosPage=new CreditMemosPage(driver);
     }
 
     @When("the user view shopping cart for customers")
@@ -85,8 +88,24 @@ public class SalesModuleSteps extends TestBase {
         ordersPageSales.verifySuccessfulMessage();
     }
 
+
+
+    @When("Sales manager view credit memos by filters")
+    public void salesManagerViewCreditMemosByFilters() {
+        creditMemosPage.viewCreditMemosByFilters();
+
+    }
+
+    @Then("Filtered credit memos should display")
+    public void filteredCreditMemosShouldDisplay() {
+        creditMemosPage.verifyViewCreditMemosByFilters();
+
+    }
+
     @After("@SalesModuleTest")
     public void tearDown(){
         closeBrowser();
-}
+    }
+
+
 }
