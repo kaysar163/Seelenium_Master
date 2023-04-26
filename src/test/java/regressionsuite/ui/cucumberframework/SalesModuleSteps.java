@@ -2,6 +2,7 @@ package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
+import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
 import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
 import com.magentoapplication.ui.backend.storemodule.OrdersPage;
 import com.magentoapplication.utility.Log4j;
@@ -18,17 +19,15 @@ public class SalesModuleSteps extends TestBase {
     BackEndLogin backEndLogin;
 
     ManageCustomersPage manageCustomersPage;
-    Log4j log4j=new Log4j();
+    OrdersPageSales ordersPageSales;
+    ShipmentsPage shipmentsPage;
 
-  ShipmentsPage shipmentsPage;
-  OrdersPage ordersPage;
 
     @Before("@SalesModuleTest")
-    public void setUp(){
+    public void setUp() {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.salesModuleLogin();
-        log4j.testStart("---Test Started---");
 
 
     }
@@ -36,9 +35,9 @@ public class SalesModuleSteps extends TestBase {
 
     @Given("Admin user is already in the dashboard page sales")
     public void adminUserIsAlreadyInTheDashboardPageSales() {
-        manageCustomersPage=new ManageCustomersPage(driver);
-        shipmentsPage=new ShipmentsPage(driver);
-        ordersPage=new OrdersPage(driver);
+        manageCustomersPage = new ManageCustomersPage(driver);
+        shipmentsPage = new ShipmentsPage(driver);
+        ordersPageSales = new OrdersPageSales(driver);
     }
 
     @When("the user view shopping cart for customers")
@@ -51,10 +50,11 @@ public class SalesModuleSteps extends TestBase {
         Assert.assertTrue(manageCustomersPage.
                 verifyViewShoppingCartViewed());
     }
+
     //meryem
     @When("sales manager can update tracking and history information shipments")
     public void salesManagerCanUpdateTrackingAndHistoryInformationShipments() {
-      shipmentsPage.updateShipmentHistory();
+        shipmentsPage.updateShipmentHistory();
     }
 
     @Then("sales manager should be able to comments to shipments")
@@ -65,17 +65,28 @@ public class SalesModuleSteps extends TestBase {
 
     @When("the user create a new order")
     public void theUserCreateANewOrder() {
-        ordersPage.addNewOrder();
+        ordersPageSales.createNewOrder();
 
     }
 
     @Then("the new order should be created")
     public void theNewOrderShouldBeCreated() {
-        ordersPage.verifyOrderCreated();
+
+        ordersPageSales.verifyCreateOrder();
     }
+
+    @When("Sales Manager Update orders")
+    public void salesManagerUpdateOrders() {
+        ordersPageSales.UpdateOrderStorePicup();
+    }
+
+    @Then("Orders should be Updated")
+    public void ordersShouldBeUpdated() {
+        ordersPageSales.verifySuccessfulMessage();
+    }
+
     @After("@SalesModuleTest")
     public void tearDown(){
         closeBrowser();
-        log4j.testStart("---Test Ended---");
-    }
+}
 }
