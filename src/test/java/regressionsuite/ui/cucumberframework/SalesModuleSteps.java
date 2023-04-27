@@ -88,10 +88,7 @@ public class SalesModuleSteps extends TestBase {
         ordersPageSales.verifySuccessfulMessage();
     }
 
-    @After("@SalesModuleTest")
-    public void tearDown(){
-        closeBrowser();
-}
+
 
     @When("sales manager add and update tax rules")
     public void salesManagerAddAndUpdateTaxRules() {
@@ -102,5 +99,10 @@ public class SalesModuleSteps extends TestBase {
     @Then("new and updated tax rules should display")
     public void newAndUpdatedTaxRulesShouldDisplay() {
         manageTaxRulePage.verifyAddAndUpdateTaxRulesFunction();
+    }
+
+    @After("@SalesModuleTest")
+    public void tearDown(){
+        closeBrowser();
     }
 }
