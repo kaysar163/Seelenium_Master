@@ -7,19 +7,19 @@
 <!--            </class>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="Backend Customer Module Test">
-        <classes>
-            <class name="regressionsuite.ui.testngframework.CustomersModuleTestRunner">
-            </class>
-        </classes>
-    </test>
-
-<!--    <test name="Backend Catalog Module Test">-->
+<!--    <test name="Backend Customer Module Test">-->
 <!--        <classes>-->
-<!--            <class name="regressionsuite.ui.testngframework.CatalogModuleTestRunner">-->
+<!--            <class name="regressionsuite.ui.testngframework.CustomersModuleTestRunner">-->
 <!--            </class>-->
 <!--        </classes>-->
 <!--    </test>-->
+
+    <test name="Backend Catalog Module Test">
+        <classes>
+            <class name="regressionsuite.ui.testngframework.CatalogModuleTestRunner">
+            </class>
+        </classes>
+    </test>
 
 <!--    <test name="Backend Store Module Test">-->
 <!--        <classes>-->

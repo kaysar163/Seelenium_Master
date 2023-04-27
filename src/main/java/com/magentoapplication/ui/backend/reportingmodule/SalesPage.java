@@ -19,18 +19,35 @@ public class SalesPage {
         functionClass=new FunctionClass(driver);
         reportingDashboardPage =new  ReportingDashboardPage(driver);
     }
-    @FindBy(id = "sales_report_from_trig")
+    @FindBy(id = "//input[@id='sales_report_from']")
     WebElement fromDateIcon;
-  //  @FindBy(id = "sales_report_from_trig")
-//    WebElement fromDateIcon;
-//    @FindBy(id = "sales_report_from_trig")
-//    WebElement fromDateIcon;
-//    @FindBy(id = "sales_report_from_trig")
-//    WebElement fromDateIcon;
-//    @FindBy(id = "sales_report_from_trig")
-//    WebElement fromDateIcon;
-//    @FindBy(id = "sales_report_from_trig")
-//    WebElement fromDateIcon;
+    @FindBy(id = "//input[@id='sales_report_to']")
+    WebElement toDateIcon;
+    @FindBy(id = "(//span[text()='Show Report'])[1]")
+    WebElement showReportBut;
+    @FindBy(id = "//tr[@class='totals']")
+    WebElement totalOrder;
+
+    public void viewTotalOrderedReport(String dateFrom,String dateTo){
+       reportingDashboardPage.clickOnOrdersLink();
+       functionClass.waitUntilElementPresent(fromDateIcon);
+        functionClass.sleep(10);
+       fromDateIcon.sendKeys(dateFrom);
+       functionClass.waitUntilElementPresent(toDateIcon);
+        functionClass.sleep(5);
+       toDateIcon.sendKeys(dateTo);
+       functionClass.waitUntilElementPresent(showReportBut);
+       showReportBut.click();
+
+    }
+    public boolean verifyOrderedReport(){
+        functionClass.waitUntilElementPresent(totalOrder);
+        if (totalOrder.isDisplayed())
+            return true;
+        else return false;
+
+    }
+
 
 }
 

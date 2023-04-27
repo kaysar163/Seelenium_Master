@@ -77,14 +77,14 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldBeAbleToViewAllProductReviews() {
         Assert.assertTrue(reviewsPage.verifyThatAllReviewsShown());
     }
-
-    @When("Reporting manager clicks on orders button under sales button")
-    public void reportingManagerClicksOnOrdersButtonUnderSalesButton() {
+    @When("reporting manager fills out report date {string} and{string}")
+    public void reportingManagerFillsOutReportDateAnd(String arg0, String arg1) {
+        salesPage.viewTotalOrderedReport(arg0,arg1);
 
     }
-
-    @Then("Reporting manager should view total ordered report on total ordered report page")
-    public void reportingManagerShouldViewTotalOrderedReportOnTotalOrderedReportPage() {
+    @Then("total ordered report should display")
+    public void totalOrderedReportShouldDisplay() {
+        Assert.assertTrue(salesPage.verifyOrderedReport());
     }
     @After("@ReportingModuleTest")
     public void tearDown(){

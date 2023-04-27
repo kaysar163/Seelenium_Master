@@ -2,11 +2,14 @@
 Feature: Reporting module manager should be able to manage reporting module
 
 
-    @VeiwTotalOrderedReport#Omercan :
-      Scenario: Reporting Manager should be able to see Sales - Total Ordered Report
+    @VeiwTotalOrderedReport  #Omercan :
+      Scenario Outline: Reporting Manager should be able to see Sales - Total Ordered Report
         Given Admin user is already in the dashboard page reporting
-        When Reporting manager clicks on orders button under sales button
-        Then Reporting manager should view total ordered report on total ordered report page
+        When reporting manager fills out report date "<dateFrom>" and"<dateTo>"
+        Then total ordered report should display
+        Examples:
+          |dateFrom  |dateTo    |
+          |3/26/2023 |4/27/2023 |
 
 
 
