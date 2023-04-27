@@ -14,7 +14,11 @@
 
 
   #Mirehmidi :
-
+    @SalesManagerViewInvoicesAndCommentsToInvoices
+    Scenario: Sales Manager should be able to view invoices and add comments to invoice history
+      Given Admin user is already in the dashboard page sales
+      When  sales manager can view invoices on the invoices page
+      Then sales manager should be able to view invoices
 
 
 
@@ -30,7 +34,11 @@
 
 
 
-    #Kaysar :
+    @updateorderswithnstorpickup  #Kaysar :
+    Scenario: Sales Manager should be able to update orders with in store pickup
+      Given Admin user is already in the dashboard page sales
+      When Sales Manager Update orders
+      Then Orders should be Updated
 
 
 

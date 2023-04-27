@@ -1,8 +1,9 @@
 package com.magentoapplication.ui.backend.salesmodule;
 
+import com.magentoapplication.ui.backend.marketingmodule.TestHelperMarketing;
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -58,7 +59,7 @@ public class OrdersPageSales {
     WebElement telephoneField;
     @FindBy(xpath = "//input[@id='p_method_cashondelivery']")
     WebElement paymentMethodBut;
-    @FindBy(xpath = "//a[contains(text(),'Get shipping methods and rates ')]")
+    @FindBy(xpath = "//a[normalize-space()='Get shipping methods and rates']")
     WebElement shippingMethodBut;
     @FindBy(xpath = "//input[@id='s_method_freeshipping_freeshipping']")
     WebElement freeShippingBut;
@@ -66,6 +67,19 @@ public class OrdersPageSales {
     WebElement submitOrderBut;
     @FindBy(xpath = "//span[text()='The order has been created.']")
     WebElement successMessage;
+
+    @FindBy(xpath = "//a[normalize-space()='View']")
+
+    WebElement viewButton;
+    @FindBy(xpath="(//a[contains(text(),'Edit')])[1]")
+    WebElement EditButton;
+    @FindBy(id = "prefix")
+    WebElement PrefixField;
+    @FindBy(xpath = "(//button[@class='scalable save'])[1]")
+    WebElement SaveOrderAdressButton;
+    @FindBy(xpath = "//span[contains(text(),'The order address has been updated.')]")
+    WebElement SuccessfulMessage;
+
 
     public void createNewOrder() {
         salesDashboardPage.clickOnOrdersLink();
@@ -76,17 +90,13 @@ public class OrdersPageSales {
         functionClass.waitUntilElementPresent(storeName);
         storeName.click();
         functionClass.waitUntilElementPresent(AddProductsLink);
-        functionClass.sleep(3);
-//        JavascriptExecutor jse = (JavascriptExecutor) driver;
-//        jse.executeScript("arguments[0].scrollIntoView()", AddProductsLink);
-        //AddProductsLink.click();
-        actions.click(AddProductsLink).build().perform();
+        AddProductsLink.click();
         functionClass.waitUntilElementPresent(selectBox);
         selectBox.click();
         functionClass.waitUntilElementPresent(addSelectedPrdcLink);
         addSelectedPrdcLink.click();
-        functionClass.waitUntilElementPresent(firstNameField);
-        firstNameField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "firstName"));
+        TestHelperSales.setFirstNameField(functionClass.generateFakeName());
+        firstNameField.sendKeys(TestHelperSales.getFirstNameField());
         functionClass.waitUntilElementPresent(lastNameField);
         lastNameField.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(streetAddressField);
@@ -95,10 +105,6 @@ public class OrdersPageSales {
         cityField.sendKeys(functionClass.generateCityName());
         functionClass.waitUntilElementPresent(countryField);
         countryField.sendKeys(functionClass.generateCountryName());
-//        functionClass.waitUntilElementPresent(stateField);
-//        //functionClass.sleep(10);
-//        Select select=new Select(stateField);
-//        select.selectByIndex(13);
         functionClass.waitUntilElementPresent(zipCodeField);
         zipCodeField.sendKeys(functionClass.generateZipCode());
         functionClass.waitUntilElementPresent(telephoneField);
@@ -121,5 +127,28 @@ public class OrdersPageSales {
         if (successMessage.isDisplayed())
             return true;
         else return false;
+    }
+    public void UpdateOrderStorePicup() {
+        salesDashboardPage.clickOnOrdersLink();
+
+        WebElement viewButton=driver.findElement
+                (By.xpath(String.format("(//td[contains(@class,'')][contains(text(),'%s')])//following-sibling::td//a",
+                        TestHelperSales.getFirstNameField())));
+        functionClass.waitUntilElementPresent(viewButton);
+        viewButton.click();
+        functionClass.waitUntilElementPresent(EditButton);
+        EditButton.click();
+        functionClass.waitUntilElementPresent(PrefixField);
+        PrefixField.sendKeys(functionClass.generateFakeName());
+        functionClass.waitUntilElementPresent(SaveOrderAdressButton);
+        SaveOrderAdressButton.click();
+
+    }
+
+    public boolean verifySuccessfulMessage() {
+        functionClass.waitUntilElementPresent(SuccessfulMessage);
+        if (SuccessfulMessage.isDisplayed()) {
+            return true;
+        } else return false;
     }
 }
