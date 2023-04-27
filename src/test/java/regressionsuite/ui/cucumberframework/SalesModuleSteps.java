@@ -2,6 +2,7 @@ package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
+import com.magentoapplication.ui.backend.salesmodule.ManageTaxRulePage;
 import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
 import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
 import com.magentoapplication.ui.backend.storemodule.OrdersPage;
@@ -21,6 +22,7 @@ public class SalesModuleSteps extends TestBase {
     ManageCustomersPage manageCustomersPage;
     OrdersPageSales ordersPageSales;
     ShipmentsPage shipmentsPage;
+    ManageTaxRulePage manageTaxRulePage;
 
 
     @Before("@SalesModuleTest")
@@ -38,6 +40,7 @@ public class SalesModuleSteps extends TestBase {
         manageCustomersPage = new ManageCustomersPage(driver);
         shipmentsPage = new ShipmentsPage(driver);
         ordersPageSales = new OrdersPageSales(driver);
+        manageTaxRulePage=new ManageTaxRulePage(driver);
     }
 
     @When("the user view shopping cart for customers")
@@ -89,4 +92,15 @@ public class SalesModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
 }
+
+    @When("sales manager add and update tax rules")
+    public void salesManagerAddAndUpdateTaxRules() {
+        manageTaxRulePage.addAndUpdateTaxRulesFunction();
+
+    }
+
+    @Then("new and updated tax rules should display")
+    public void newAndUpdatedTaxRulesShouldDisplay() {
+        manageTaxRulePage.verifyAddAndUpdateTaxRulesFunction();
+    }
 }

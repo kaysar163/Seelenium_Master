@@ -17,7 +17,7 @@ public class ManageTaxRulePage {
 
     SalesDashboardPage salesDashboardPage;
 
-    TestHelperSales testHelperSales;
+
 
 
     public ManageTaxRulePage(WebDriver driver) {
@@ -63,8 +63,8 @@ public class ManageTaxRulePage {
         functionClass.waitUntilElementPresent(addNewTaxRuleButton);
         addNewTaxRuleButton.click();
         functionClass.waitUntilElementPresent(taxRulenameField);
-        testHelperSales.setTaxRuleName(functionClass.generateFakeName());
-        taxRulenameField.sendKeys(testHelperSales.getTaxRuleName());
+        TestHelperSales.setTaxRuleName(functionClass.generateFakeName());
+        taxRulenameField.sendKeys(TestHelperSales.getTaxRuleName());
 
         functionClass.waitUntilElementPresent(customerTaxClassField);
         Select select=new Select(customerTaxClassField);
@@ -90,9 +90,9 @@ public class ManageTaxRulePage {
 
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(taxRuleNameSearchField);
-        taxRuleNameSearchField.sendKeys(testHelperSales.getTaxRuleName());
+        taxRuleNameSearchField.sendKeys(TestHelperSales.getTaxRuleName());
         searchButton.click();
-        WebElement productNameClick= driver.findElement(By.xpath(String.format("//div/table/tbody/tr/td[contains(text(),'%s')]", testHelperSales.getTaxRuleName())));
+        WebElement productNameClick= driver.findElement(By.xpath(String.format("//div/table/tbody/tr/td[contains(text(),'%s')]", TestHelperSales.getTaxRuleName())));
         productNameClick.click();
         functionClass.sleep(3);
         taxRulenameField.clear();

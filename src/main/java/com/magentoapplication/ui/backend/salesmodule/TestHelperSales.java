@@ -2,13 +2,13 @@ package com.magentoapplication.ui.backend.salesmodule;
 
 public class TestHelperSales {
 
-    private  String taxRuleName;
+    private  static String taxRuleName;
 
-    public String getTaxRuleName() {
+    public static String getTaxRuleName() {
         return taxRuleName;
     }
 
-    public void setTaxRuleName(String taxRuleName) {
-        this.taxRuleName = taxRuleName;
+    public static void setTaxRuleName(String taxRuleName) {
+        TestHelperSales.taxRuleName = taxRuleName;
     }
 }
