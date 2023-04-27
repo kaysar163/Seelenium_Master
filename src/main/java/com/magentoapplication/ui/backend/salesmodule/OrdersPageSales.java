@@ -90,7 +90,11 @@ public class OrdersPageSales {
         functionClass.waitUntilElementPresent(storeName);
         storeName.click();
         functionClass.waitUntilElementPresent(AddProductsLink);
-        AddProductsLink.click();
+        functionClass.sleep(3);
+//        JavascriptExecutor jse = (JavascriptExecutor) driver;
+//        jse.executeScript("arguments[0].scrollIntoView()", AddProductsLink);
+        //AddProductsLink.click();
+        actions.click(AddProductsLink).build().perform();
         functionClass.waitUntilElementPresent(selectBox);
         selectBox.click();
         functionClass.waitUntilElementPresent(addSelectedPrdcLink);
@@ -120,6 +124,7 @@ public class OrdersPageSales {
         functionClass.waitUntilElementPresent(submitOrderBut);
         submitOrderBut.click();
         functionClass.sleep(2);
+
 
     }
     public boolean verifyCreateOrder() {
