@@ -46,6 +46,11 @@
 
 
       #Memet :
+    @DeleteOrder
+    Scenario: Sales manager should able to delete orders with in-store pickup
+      Given Admin user is already in the dashboard page sales
+      When Sales manager deletes order with in-store pickup
+      Then Order should be successfully deleted
 
 
 
