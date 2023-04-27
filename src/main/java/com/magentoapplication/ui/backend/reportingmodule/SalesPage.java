@@ -22,13 +22,13 @@ public class SalesPage {
         reportingDashboardPage =new  ReportingDashboardPage(driver);
         actions=new Actions(driver);
     }
-    @FindBy(id = "//input[@id='sales_report_from']")
+    @FindBy(xpath = "//input[@id='sales_report_from']")
     WebElement fromDateIcon;
-    @FindBy(id = "//input[@id='sales_report_to']")
+    @FindBy(xpath = "//input[@id='sales_report_to']")
     WebElement toDateIcon;
-    @FindBy(id = "(//span[text()='Show Report'])[1]")
+    @FindBy(xpath = "(//span[text()='Show Report'])[1]")
     WebElement showReportBut;
-    @FindBy(id = "//tr[@class='totals']")
+    @FindBy(xpath = "//tr[@class='totals']")
     WebElement totalOrder;
 
     public void viewTotalOrderedReport(String dateFrom,String dateTo){
