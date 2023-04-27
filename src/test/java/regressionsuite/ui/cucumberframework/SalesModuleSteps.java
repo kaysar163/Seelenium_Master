@@ -104,4 +104,16 @@ public class SalesModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
     }
+
+    @When("Sales manager deletes order with in-store pickup")
+    public void salesManagerDeletesOrderWithInStorePickup() {
+        String orderNumber=ordersPageSales.createNewOrder();
+        ordersPageSales.deleteOrder(orderNumber);
+
+    }
+
+    @Then("Order should be successfully deleted")
+    public void orderShouldBeSuccessfullyDeleted() {
+        Assert.assertTrue(ordersPageSales.deleteOrderSuccessful());
+    }
 }
