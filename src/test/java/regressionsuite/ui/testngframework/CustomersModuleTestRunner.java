@@ -45,67 +45,67 @@ public class CustomersModuleTestRunner extends TestBase {
 
     }
 
-    @Test(description = "murdail",priority = 2)
+    @Test(description = "murdail",priority = 12)
     public void addNewAddressTest(){
         customerInformationPage.customerManagerCanAddANewAddressForACustomer();
         Assert.assertTrue(customerInformationPage.verifyAddNewAddress());
 
     }
 
-    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 3,enabled = false)
+    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 13)
     public void passwordResetTest(){
         customerInformationPage.customerPasswordChange();
         Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());
     }
 
-    @Test(description= "omercan", priority = 4)
+    @Test(description= "omercan", priority = 3)
     public void emailFilterTest() {
         customersManagerPage.FilterCustomersByEmail();
     }
 
-    @Test(priority = 5)
+    @Test(priority = 9)
     public void assignACustomerToCustomerGroupTest() {
         customersManagerPage.assignGroupToCustomer();
         Assert.assertTrue(customersManagerPage.verifyUpdate());
     }
 
-    @Test(description = "Irshad",dependsOnMethods = {"managerAddNewCustomerTest"}, priority = 6)
+    @Test(description = "Irshad",dependsOnMethods = {"managerAddNewCustomerTest"}, priority =11)
     public void deleteCustomerTest(){
         customersManagerPage.deleteCustomer();
         Assert.assertTrue(customersManagerPage.verifyDeleteCustomer());
     }
 
-    @Test(description = "manager can export customers-muyesser",priority = 7)
+    @Test(description = "manager can export customers-muyesser",priority = 2)
     public void managerExportCustomerTest(){
         customersManagerPage.exportCustomers();
         Assert.assertTrue(customersManagerPage.verifyExportCustomer());
 
     }
 
-    @Test(description = "renagul",priority = 8)
+    @Test(description = "renagul",priority = 4)
     public void FilterCustomerBySate() {
         customersManagerPage.filterCustomerBySate();
         Assert.assertTrue(customersManagerPage.verifyCustomerFilterByState());
     }
 
-    @Test(description= "Fazilet", priority = 9)
+    @Test(description= "Fazilet", priority = 6)
     public void filterCustomerByCountry(){
         customersManagerPage.filterCustomerByCountry();
         Assert.assertTrue(customersManagerPage.verifyCustomerFilteredByCountry());
     }
 
-    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 10)
+    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 8)
     public void filterTheCustomerByGroupTest(){
         customersManagerPage.filterTheCustomerByGroup();
         Assert.assertTrue(customersManagerPage.verifyFilterTheCustomerByGroup());
     }
-    @Test(description = "gulzar",priority = 7,enabled = false)
+    @Test(description = "gulzar",priority = 7,dependsOnMethods = {"addNewCustomerGroup"})
     public void updateExistingGroupTest(){
         customerGroupPage.updateExistingCustomerGroups();
         Assert.assertTrue(customerGroupPage.verifyUpdateExistingCustomerGroups());
     }
 
-    @Test(description= "Mirehmidi",priority = 11)
+    @Test(description= "Mirehmidi",priority = 5)
     public void FilterCustomersBywebsite() {
         customersManagerPage.filterCustomersBywebsite();
         Assert.assertTrue(customersManagerPage.verifyWebsite());
@@ -114,20 +114,20 @@ public class CustomersModuleTestRunner extends TestBase {
 
 
 
-    @Test(description = "Fazilet", priority = 12)
+    @Test(description = "Fazilet", priority = 10)
     public void addNewCustomerGroup(){
         customerGroupPage.addNewCustomerGroup();
         Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
     }
 
 
-    @Test(description = "meryem",dependsOnMethods = {"addNewCustomerGroup"}, priority = 13)
+    @Test(description = "meryem",dependsOnMethods = {"addNewCustomerGroup"}, priority = 14)
     public void editCustomerGroup() {
         editCustomerGroupPage.editCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupEditedTest());
 
     }
-    @Test(description = "meryem",dependsOnMethods = {"addNewCustomerGroup"}, priority = 14)
+    @Test(description = "meryem",dependsOnMethods = {"addNewCustomerGroup"}, priority = 15)
     public void deleteCustomerGroup() {
         editCustomerGroupPage.deleteCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupDeletedTest1());
