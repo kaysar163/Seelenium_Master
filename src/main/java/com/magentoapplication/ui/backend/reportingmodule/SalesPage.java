@@ -3,6 +3,7 @@ package com.magentoapplication.ui.backend.reportingmodule;
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -12,12 +13,14 @@ public class SalesPage {
     FunctionClass functionClass;
 
     ReportingDashboardPage reportingDashboardPage;
+    Actions actions;
 
     public SalesPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
         functionClass=new FunctionClass(driver);
         reportingDashboardPage =new  ReportingDashboardPage(driver);
+        actions=new Actions(driver);
     }
     @FindBy(id = "//input[@id='sales_report_from']")
     WebElement fromDateIcon;
@@ -31,7 +34,6 @@ public class SalesPage {
     public void viewTotalOrderedReport(String dateFrom,String dateTo){
        reportingDashboardPage.clickOnOrdersLink();
        functionClass.waitUntilElementPresent(fromDateIcon);
-        functionClass.sleep(10);
        fromDateIcon.sendKeys(dateFrom);
        functionClass.waitUntilElementPresent(toDateIcon);
         functionClass.sleep(5);

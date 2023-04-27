@@ -12,6 +12,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.interactions.Actions;
 
 public class ReportingModuleSteps extends TestBase {
 
@@ -22,6 +23,7 @@ public class ReportingModuleSteps extends TestBase {
 
     TagsPage tagsPage;
     ReviewsPage reviewsPage;
+    Actions actions;
 
     @Before("@ReportingModuleTest")
     public void setUp(){
@@ -37,6 +39,7 @@ public class ReportingModuleSteps extends TestBase {
         customersPage=new CustomersPage(driver);
         tagsPage=new TagsPage(driver);
         reviewsPage=new ReviewsPage(driver);
+        actions=new Actions(driver);
     }
 
     @When("the user views tags for customers report")

@@ -2,6 +2,7 @@ package com.magentoapplication.ui.backend.salesmodule;
 
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -57,7 +58,7 @@ public class OrdersPageSales {
     WebElement telephoneField;
     @FindBy(xpath = "//input[@id='p_method_cashondelivery']")
     WebElement paymentMethodBut;
-    @FindBy(xpath = "//a[normalize-space()='Get shipping methods and rates']")
+    @FindBy(xpath = "//a[contains(text(),'Get shipping methods and rates ')]")
     WebElement shippingMethodBut;
     @FindBy(xpath = "//input[@id='s_method_freeshipping_freeshipping']")
     WebElement freeShippingBut;
@@ -75,7 +76,11 @@ public class OrdersPageSales {
         functionClass.waitUntilElementPresent(storeName);
         storeName.click();
         functionClass.waitUntilElementPresent(AddProductsLink);
-        AddProductsLink.click();
+        functionClass.sleep(3);
+//        JavascriptExecutor jse = (JavascriptExecutor) driver;
+//        jse.executeScript("arguments[0].scrollIntoView()", AddProductsLink);
+        //AddProductsLink.click();
+        actions.click(AddProductsLink).build().perform();
         functionClass.waitUntilElementPresent(selectBox);
         selectBox.click();
         functionClass.waitUntilElementPresent(addSelectedPrdcLink);
