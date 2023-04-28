@@ -111,6 +111,17 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldSeeDownloadedReports() {
         productsPage.verifySeeProductsDownloadReport();
     }
+
+    @When("Reporting manager views low stock page")
+    public void reportingManagerViewsLowStockPage() {
+        productsPage.seeLowStockReport();
+
+    }
+
+    @Then("Reporting manager should see low stock reports")
+    public void reportingManagerShouldSeeLowStockReports() {
+        productsPage.verifySeeLowStockReport();
+    }
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();

@@ -94,7 +94,12 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-    #Muyesser :
+    @writer:Muyesser
+      @seeLowStockReport
+      Scenario: Reporting manager should be able to see low stock report
+      Given Admin user is already in the dashboard page reporting
+      When Reporting manager views low stock page
+      Then Reporting manager should see low stock reports
 
 
 

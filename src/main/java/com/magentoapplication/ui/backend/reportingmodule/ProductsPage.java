@@ -18,25 +18,35 @@ public class ProductsPage {
     @FindAll(@FindBy(xpath = "//div[@class='hor-scroll']/table/tbody/tr"))
     List<WebElement> productsDownloadsReportList;
 
-
+    @FindAll(@FindBy(xpath = "//div[@class='hor-scroll']/table/tbody/tr"))
+    List<WebElement> lowStockReportList;
 
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionClass=new FunctionClass(driver);
-        reportingDashboardPage =new  ReportingDashboardPage(driver);
+        PageFactory.initElements(driver, this);
+        functionClass = new FunctionClass(driver);
+        reportingDashboardPage = new ReportingDashboardPage(driver);
     }
 
-public void seeProductsDownloadReport(){
+    public void seeProductsDownloadReport() {
         reportingDashboardPage.clickOnDownloadsLink();
-}
+    }
 
-public boolean verifySeeProductsDownloadReport(){
-if (productsDownloadsReportList.size()>=1){
-    return true;
-}else return false;
-}
+    public boolean verifySeeProductsDownloadReport() {
+        if (productsDownloadsReportList.size() >= 1) {
+            return true;
+        } else return false;
+    }
 
+    public void seeLowStockReport() {
+        reportingDashboardPage.clickOnLowstockLink();
+    }
+
+    public boolean verifySeeLowStockReport() {
+        if (lowStockReportList.size()>=1){
+            return true;
+        }else return false;
+    }
 }
 
