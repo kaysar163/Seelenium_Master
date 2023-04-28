@@ -19,6 +19,8 @@ public class ManageTaxRulePage {
 
     SalesDashboardPage salesDashboardPage;
 
+    Random random=new Random();
+
 
     public ManageTaxRulePage(WebDriver driver) {
         this.driver = driver;
@@ -70,28 +72,25 @@ public class ManageTaxRulePage {
         taxRulenameField.sendKeys(TestHelperSales.getTaxRuleName());
 
         functionClass.waitUntilElementPresent(customerTaxClassField);
-        //Random select of class customer field
         Select select = new Select(driver.findElement(By.id("tax_customer_class")));
         List<WebElement> customerTax=select.getOptions();
         int customerTaxDropdown=customerTax.size();
-        Random random3=new Random();
-        int index3= random3.nextInt(customerTaxDropdown);
+        int index3= random.nextInt(customerTaxDropdown);
         select.selectByIndex(index3);
 
         functionClass.waitUntilElementPresent(productTaxClassField);
         Select select1 = new Select(productTaxClassField);
-        select1.selectByValue("15");
-        functionClass.waitUntilElementPresent(taxRate);
-        //Select select2=new Select(taxRate);
-        Select se = new Select(driver.findElement(By.id("tax_rate")));
+        int index2= random.nextInt(11);
+        select1.selectByIndex(index2);
 
+        functionClass.waitUntilElementPresent(taxRate);
+
+        Select se = new Select(driver.findElement(By.id("tax_rate")));
         List<WebElement> l = se.getOptions();
         int droDownValueCount = l.size();
-        Random random = new Random();
         int index = random.nextInt(droDownValueCount);
         se.selectByIndex(index);
 
-        //select2.selectByValue("45");
         functionClass.waitUntilElementPresent(priority);
         priority.clear();
         priority.sendKeys("1");
@@ -105,6 +104,7 @@ public class ManageTaxRulePage {
 
         // update tax Rules
 
+
         functionClass.sleep(3);
 
         functionClass.waitUntilElementPresent(taxRuleNameSearchField);
@@ -113,32 +113,18 @@ public class ManageTaxRulePage {
         WebElement productNameClick = driver.findElement(By.xpath(String.format("//div/table/tbody/tr/td[contains(text(),'%s')]", TestHelperSales.getTaxRuleName())));
         productNameClick.click();
         functionClass.sleep(3);
+        driver.navigate().refresh();
         functionClass.waitUntilElementPresent(resetButton);
         resetButton.click();
         functionClass.sleep(2);
-        taxRulenameField.clear();
-        taxRulenameField.sendKeys(functionClass.generateFakeName());
-
-        functionClass.waitUntilElementPresent(customerTaxClassField);
-//        customerTaxClassField.clear();
-        //Random select of class customer field
-        Select select4 = new Select(driver.findElement(By.id("tax_customer_class")));
-        List<WebElement> customerTax1=select4.getOptions();
-        int customerTaxDropdown1=customerTax1.size();
-        Random random4=new Random();
-        int index4= random4.nextInt(customerTaxDropdown1);
-        select4.selectByIndex(index4);
-
 
 
         functionClass.waitUntilElementPresent(taxRate);
-        //Select select2=new Select(taxRate);
         Select se1 = new Select(driver.findElement(By.id("tax_rate")));
 
         List<WebElement> l1 = se1.getOptions();
         int droDownValueCount1 = l1.size();
-        Random random1 = new Random();
-        int index1 = random1.nextInt(droDownValueCount1);
+        int index1 = random.nextInt(droDownValueCount1);
         se1.selectByIndex(index1);
         functionClass.waitUntilElementPresent(saveRuleButton);
         functionClass.sleep(3);
