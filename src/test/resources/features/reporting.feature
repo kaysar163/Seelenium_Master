@@ -92,7 +92,16 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Muyesser :
+   #Muyesser :
+  @seeMostViewedReport
+  Scenario Outline: Reporting manager should be able to see products most viewed report
+    Given Admin user is already in the dashboard page reporting
+    When Reporting Manager view most viewed page
+    Then Reporting Manager should see most viewed report
+    Examples:
+      | dateFrom  | dateTo    |
+      | 4/25/2023 | 4/28/2023 |
+
 
 
 

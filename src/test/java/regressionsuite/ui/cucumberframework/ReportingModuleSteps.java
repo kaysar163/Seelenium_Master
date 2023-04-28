@@ -136,4 +136,13 @@ public class ReportingModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
     }
+
+    @When("Reporting Manager view most viewed page")
+    public void reportingManagerViewMostViewedPage() {
+        
+    }
+
+    @Then("Reporting Manager should see most viewed report")
+    public void reportingManagerShouldSeeMostViewedReport() {
+    }
 }
