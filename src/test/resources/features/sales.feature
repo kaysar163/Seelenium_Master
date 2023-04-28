@@ -94,6 +94,12 @@
   When Sales manager view credit memos by filters
   Then Filtered credit memos should display
 
+  @addandapdatetaxrules #Muyesser:
+  Scenario: Sales Manager should be able to manage (add and update) tax rules ;
+  Given Admin user is already in the dashboard page sales
+  When sales manager add and update tax rules
+  Then new and updated tax rules should display
+
 
 
 
