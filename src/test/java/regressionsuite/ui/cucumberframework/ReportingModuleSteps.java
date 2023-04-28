@@ -1,9 +1,7 @@
 package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
-import com.magentoapplication.ui.backend.reportingmodule.CustomersPage;
-import com.magentoapplication.ui.backend.reportingmodule.ReviewsPage;
-import com.magentoapplication.ui.backend.reportingmodule.TagsPage;
+import com.magentoapplication.ui.backend.reportingmodule.*;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -11,15 +9,19 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.interactions.Actions;
 
 public class ReportingModuleSteps extends TestBase {
 
     BackEndLogin backEndLogin;
+    SalesPage salesPage;
 
     CustomersPage customersPage;
 
     TagsPage tagsPage;
     ReviewsPage reviewsPage;
+    Actions actions;
+    ProductsPage productsPage;
 
     @Before("@ReportingModuleTest")
     public void setUp(){
@@ -31,9 +33,12 @@ public class ReportingModuleSteps extends TestBase {
 
     @Given("Admin user is already in the dashboard page reporting")
     public void adminUserIsAlreadyInTheDashboardPageReporting() {
+        salesPage=new SalesPage(driver);
         customersPage=new CustomersPage(driver);
         tagsPage=new TagsPage(driver);
         reviewsPage=new ReviewsPage(driver);
+        actions=new Actions(driver);
+        productsPage=new ProductsPage(driver);
     }
 
     @When("the user views tags for customers report")
@@ -74,9 +79,77 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldBeAbleToViewAllProductReviews() {
         Assert.assertTrue(reviewsPage.verifyThatAllReviewsShown());
     }
+    @When("reporting manager fills out report date {string} and{string}")
+    public void reportingManagerFillsOutReportDateAnd(String arg0, String arg1) {
+        salesPage.viewTotalOrderedReport(arg0,arg1);
 
+    }
+    @Then("total ordered report should display")
+    public void totalOrderedReportShouldDisplay() {
+        Assert.assertTrue(salesPage.verifyOrderedReport());
+    }
+
+    @When("reporting manager opens the Sales Total Refunded Report and fills out report data {string} and{string}")
+    public void reportingManagerOpensTheSalesTotalRefundedReportAndFillsOutReportDataAnd(String arg0, String arg1) {
+        salesPage.salesTotalRefundedReport(arg0,arg1);
+    }
+
+    @Then("Total Refunded should be displayed")
+    public void totalRefundedShouldBeDisplayed() {
+        Assert.assertTrue(salesPage.verifyRefundedReport());
+    }
+
+
+    @When("Reporting manager views downloads page")
+    public void reportingManagerViewsDownloadsPage() {
+        productsPage.seeProductsDownloadReport();
+
+
+    }
+
+    @Then("Reporting manager should see downloaded reports")
+    public void reportingManagerShouldSeeDownloadedReports() {
+        productsPage.verifySeeProductsDownloadReport();
+    }
+
+    @When("Reporting manager views low stock page")
+    public void reportingManagerViewsLowStockPage() {
+        productsPage.seeLowStockReport();
+
+    }
+
+    @Then("Reporting manager should see low stock reports")
+    public void reportingManagerShouldSeeLowStockReports() {
+        productsPage.verifySeeLowStockReport();
+    }
+
+    @When("reporting manager opens the Sales Coupons Report")
+    public void reportingManagerOpensTheSalesCouponsReport() {
+        salesPage.salesCouponsUsageReport();
+    }
+
+    @Then("Coupons Usage should be displayed")
+    public void couponsUsageShouldBeDisplayed() {
+        Assert.assertTrue(salesPage.verifyCouponsUsageReport());
+    }
+
+
+
+    @When("Reporting Manager view most viewed page between time period {string} and{string}")
+    public void reportingManagerViewMostViewedPageBetweenTimePeriodAnd(String arg0, String arg1) {
+        productsPage.seeMostViewedReport(arg0,arg1);
+
+
+    }
+    @Then("Reporting Manager should see most viewed report")
+    public void reportingManagerShouldSeeMostViewedReport() {
+        productsPage.verifyMostViewedReport();
+
+    }
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
+
+
 }

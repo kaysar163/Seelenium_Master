@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.customersmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -89,11 +90,11 @@ public class CustomerGroupPage {
         Actions actions=new Actions(driver);
         actions.moveToElement(customersManagerPage.customerLink).moveToElement(customerGroupsLink).click().build().perform();
         functionClass.waitUntilElementPresent(groupFilterField);
-        groupFilterField.click();
+       // groupFilterField.click();
         groupFilterField.sendKeys(TestHelperClass.getGroupName());
         functionClass.waitUntilElementPresent(groupSearchButton);
         groupSearchButton.click();
-
+        WebElement existingGroupName=driver.findElement(By.xpath(String.format("//tbody/tr/td[2][contains(text(),'%s')]",TestHelperClass.getGroupName())));
         functionClass.waitUntilElementPresent(existingGroupName);
         existingGroupName.click();
         //existingGroupName.sendKeys(functionClass.generateFakeName());

@@ -14,7 +14,11 @@
 
 
   #Mirehmidi :
-
+    @SalesManagerViewInvoicesAndCommentsToInvoices
+    Scenario: Sales Manager should be able to view invoices and add comments to invoice history
+      Given Admin user is already in the dashboard page sales
+      When  sales manager can view invoices on the invoices page
+      Then sales manager should be able to view invoices
 
 
 
@@ -42,6 +46,11 @@
 
 
       #Memet :
+    @DeleteOrder
+    Scenario: Sales manager should able to delete orders with in-store pickup
+      Given Admin user is already in the dashboard page sales
+      When Sales manager deletes order with in-store pickup
+      Then Order should be successfully deleted
 
 
 
@@ -86,7 +95,17 @@
 
 
 
-      #Rizvangul :
+     @ViewCreditMemosByFilters  #Rizvangul :
+  Scenario: Sales Manager should be able to view credit memos by filters
+  Given Admin user is already in the dashboard page sales
+  When Sales manager view credit memos by filters
+  Then Filtered credit memos should display
+
+  @addandapdatetaxrules #Muyesser:
+  Scenario: Sales Manager should be able to manage (add and update) tax rules ;
+  Given Admin user is already in the dashboard page sales
+  When sales manager add and update tax rules
+  Then new and updated tax rules should display
 
 
 
