@@ -68,7 +68,14 @@
 
 
 
-      #Gulzar :
+      @viewCouponsInTheReports  #Gulzar
+      Scenario Outline: Sales Manager should be able to view coupons in the Reports.
+        Given Admin user is already in the dashboard page sales
+        When manager view coupons reports between time period "<dateFrom>" and"<dateTo>"
+        Then coupons reports should display
+        Examples:
+          | dateFrom  | dateTo    |
+          | 3/22/2023 | 4/22/2023 |
 
 
 
@@ -97,6 +104,12 @@
   Given Admin user is already in the dashboard page sales
   When Sales manager view credit memos by filters
   Then Filtered credit memos should display
+
+  @addandapdatetaxrules #Muyesser:
+  Scenario: Sales Manager should be able to manage (add and update) tax rules ;
+  Given Admin user is already in the dashboard page sales
+  When sales manager add and update tax rules
+  Then new and updated tax rules should display
 
 
 

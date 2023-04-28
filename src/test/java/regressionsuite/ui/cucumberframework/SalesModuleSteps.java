@@ -19,7 +19,8 @@ public class SalesModuleSteps extends TestBase {
     InvoicePage invoicePage;
     ShipmentsPage shipmentsPage;
     CreditMemosPage creditMemosPage;
-    ManageTaxRulePage manageTaxRulePage;
+
+    CouponsReportPage couponsReportPage;
 
 
     @Before("@SalesModuleTest")
@@ -39,7 +40,7 @@ public class SalesModuleSteps extends TestBase {
         invoicePage = new InvoicePage( driver );
         ordersPageSales = new OrdersPageSales(driver);
         creditMemosPage=new CreditMemosPage(driver);
-        manageTaxRulePage=new ManageTaxRulePage(driver);
+        couponsReportPage=new CouponsReportPage(driver);
 
     }
 
@@ -100,13 +101,8 @@ public class SalesModuleSteps extends TestBase {
         Assert.assertTrue( invoicePage.verifyViewInvoices( ) );
     }
 
-   
 
 
-    @After("@SalesModuleTest")
-    public void tearDown(){
-        closeBrowser();
-    }
 
     @When("Sales manager deletes order with in-store pickup")
     public void salesManagerDeletesOrderWithInStorePickup() {
@@ -131,16 +127,18 @@ public class SalesModuleSteps extends TestBase {
 
     }
 
-    @When("sales manager add and update tax rules")
-    public void salesManagerAddAndUpdateTaxRules() {
-        manageTaxRulePage.addAndUpdateTaxRulesFunction();
+    @When("manager view coupons reports between time period {string} and{string}")
+    public void managerViewCouponsReportsBetweenTimePeriodAnd(String arg0, String arg1) {
 
-
-
+        couponsReportPage.viewCouponsReportFunction(arg0,arg1);
     }
 
-    @Then("new and updated tax rules should display")
-    public void newAndUpdatedTaxRulesShouldDisplay() {
-        manageTaxRulePage.verifyAddAndUpdateTaxRulesFunction();
+    @Then("coupons reports should display")
+    public void couponsReportsShouldDisplay() {
+        couponsReportPage.verifyViewCouponsReport();
+    }
+    @After("@SalesModuleTest")
+    public void tearDown(){
+        closeBrowser();
     }
 }
