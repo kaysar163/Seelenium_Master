@@ -2,7 +2,12 @@ package com.magentoapplication.ui.backend.reportingmodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class ProductsPage {
     WebDriver driver;
@@ -10,12 +15,38 @@ public class ProductsPage {
     FunctionClass functionClass;
 
     ReportingDashboardPage reportingDashboardPage;
+    @FindAll(@FindBy(xpath = "//div[@class='hor-scroll']/table/tbody/tr"))
+    List<WebElement> productsDownloadsReportList;
+
+    @FindAll(@FindBy(xpath = "//div[@class='hor-scroll']/table/tbody/tr"))
+    List<WebElement> lowStockReportList;
+
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionClass=new FunctionClass(driver);
-        reportingDashboardPage =new  ReportingDashboardPage(driver);
+        PageFactory.initElements(driver, this);
+        functionClass = new FunctionClass(driver);
+        reportingDashboardPage = new ReportingDashboardPage(driver);
+    }
+
+    public void seeProductsDownloadReport() {
+        reportingDashboardPage.clickOnDownloadsLink();
+    }
+
+    public boolean verifySeeProductsDownloadReport() {
+        if (productsDownloadsReportList.size() >= 1) {
+            return true;
+        } else return false;
+    }
+
+    public void seeLowStockReport() {
+        reportingDashboardPage.clickOnLowstockLink();
+    }
+
+    public boolean verifySeeLowStockReport() {
+        if (lowStockReportList.size()>=1){
+            return true;
+        }else return false;
     }
 }
 

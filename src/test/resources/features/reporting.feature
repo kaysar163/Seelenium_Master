@@ -37,7 +37,15 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Kaysar :
+
+  @SeeSalesTotalRefundedReport   #Kaysar :
+  Scenario Outline: Reporting Manage Should be able to see sales Total Refunded Report
+    Given Admin user is already in the dashboard page reporting
+    When reporting manager opens the Sales Total Refunded Report and fills out report data "<dateFrom>" and"<dateTo>"
+    Then  Total Refunded should be displayed
+    Examples:
+      | dateFrom  | dateTo    |
+      | 4/25/2023 | 4/28/2023 |
 
 
 
@@ -86,14 +94,24 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-    #Muyesser :
+    @writer:Muyesser
+      @seeLowStockReport
+      Scenario: Reporting manager should be able to see low stock report
+      Given Admin user is already in the dashboard page reporting
+      When Reporting manager views low stock page
+      Then Reporting manager should see low stock reports
 
 
 
 
 
 
-     #Rizvangul :
+     @writer:Rizvangul
+       @seeProductsDownloadsReport
+       Scenario: Reporting manager should be able to see products-products downloads report
+       Given Admin user is already in the dashboard page reporting
+       When Reporting manager views downloads page
+       Then Reporting manager should see downloaded reports
 
 
 

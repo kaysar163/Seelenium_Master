@@ -1,10 +1,7 @@
 package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
-import com.magentoapplication.ui.backend.reportingmodule.CustomersPage;
-import com.magentoapplication.ui.backend.reportingmodule.ReviewsPage;
-import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
-import com.magentoapplication.ui.backend.reportingmodule.TagsPage;
+import com.magentoapplication.ui.backend.reportingmodule.*;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -24,6 +21,7 @@ public class ReportingModuleSteps extends TestBase {
     TagsPage tagsPage;
     ReviewsPage reviewsPage;
     Actions actions;
+    ProductsPage productsPage;
 
     @Before("@ReportingModuleTest")
     public void setUp(){
@@ -40,6 +38,7 @@ public class ReportingModuleSteps extends TestBase {
         tagsPage=new TagsPage(driver);
         reviewsPage=new ReviewsPage(driver);
         actions=new Actions(driver);
+        productsPage=new ProductsPage(driver);
     }
 
     @When("the user views tags for customers report")
@@ -88,6 +87,40 @@ public class ReportingModuleSteps extends TestBase {
     @Then("total ordered report should display")
     public void totalOrderedReportShouldDisplay() {
         Assert.assertTrue(salesPage.verifyOrderedReport());
+    }
+
+    @When("reporting manager opens the Sales Total Refunded Report and fills out report data {string} and{string}")
+    public void reportingManagerOpensTheSalesTotalRefundedReportAndFillsOutReportDataAnd(String arg0, String arg1) {
+        salesPage.salesTotalRefundedReport(arg0,arg1);
+    }
+
+    @Then("Total Refunded should be displayed")
+    public void totalRefundedShouldBeDisplayed() {
+        Assert.assertTrue(salesPage.verifyRefundedReport());
+    }
+
+
+    @When("Reporting manager views downloads page")
+    public void reportingManagerViewsDownloadsPage() {
+        productsPage.seeProductsDownloadReport();
+
+
+    }
+
+    @Then("Reporting manager should see downloaded reports")
+    public void reportingManagerShouldSeeDownloadedReports() {
+        productsPage.verifySeeProductsDownloadReport();
+    }
+
+    @When("Reporting manager views low stock page")
+    public void reportingManagerViewsLowStockPage() {
+        productsPage.seeLowStockReport();
+
+    }
+
+    @Then("Reporting manager should see low stock reports")
+    public void reportingManagerShouldSeeLowStockReports() {
+        productsPage.verifySeeLowStockReport();
     }
     @After("@ReportingModuleTest")
     public void tearDown(){
