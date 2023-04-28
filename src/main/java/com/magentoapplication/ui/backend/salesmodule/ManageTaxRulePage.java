@@ -57,6 +57,8 @@ public class ManageTaxRulePage {
     WebElement taxRuleNameSearchField;
     @FindBy(xpath = "//button[@title=\"Search\"]")
     WebElement searchButton;
+    @FindBy(xpath = "(//button[@title=\"Reset\"])[1]")
+    WebElement resetButton;
 
 
     public void addAndUpdateTaxRulesFunction() {
@@ -104,6 +106,7 @@ public class ManageTaxRulePage {
         // update tax Rules
 
         functionClass.sleep(3);
+        resetButton.click();
         functionClass.waitUntilElementPresent(taxRuleNameSearchField);
         taxRuleNameSearchField.sendKeys(TestHelperSales.getTaxRuleName());
         searchButton.click();
