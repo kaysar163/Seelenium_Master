@@ -88,7 +88,11 @@
 
 
 
-      #Rizvangul :
+     @ViewCreditMemosByFilters  #Rizvangul :
+  Scenario: Sales Manager should be able to view credit memos by filters
+  Given Admin user is already in the dashboard page sales
+  When Sales manager view credit memos by filters
+  Then Filtered credit memos should display
 
 
 
