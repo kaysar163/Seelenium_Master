@@ -106,13 +106,16 @@ public class ManageTaxRulePage {
         // update tax Rules
 
         functionClass.sleep(3);
-        resetButton.click();
+
         functionClass.waitUntilElementPresent(taxRuleNameSearchField);
         taxRuleNameSearchField.sendKeys(TestHelperSales.getTaxRuleName());
         searchButton.click();
         WebElement productNameClick = driver.findElement(By.xpath(String.format("//div/table/tbody/tr/td[contains(text(),'%s')]", TestHelperSales.getTaxRuleName())));
         productNameClick.click();
         functionClass.sleep(3);
+        functionClass.waitUntilElementPresent(resetButton);
+        resetButton.click();
+        functionClass.sleep(2);
         taxRulenameField.clear();
         taxRulenameField.sendKeys(functionClass.generateFakeName());
 
