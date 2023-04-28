@@ -20,6 +20,8 @@ public class SalesModuleSteps extends TestBase {
     ShipmentsPage shipmentsPage;
     CreditMemosPage creditMemosPage;
 
+    CouponsReportPage couponsReportPage;
+
 
     @Before("@SalesModuleTest")
     public void setUp() {
@@ -38,6 +40,7 @@ public class SalesModuleSteps extends TestBase {
         invoicePage = new InvoicePage( driver );
         ordersPageSales = new OrdersPageSales(driver);
         creditMemosPage=new CreditMemosPage(driver);
+        couponsReportPage=new CouponsReportPage(driver);
 
     }
 
@@ -99,10 +102,7 @@ public class SalesModuleSteps extends TestBase {
     }
 
 
-    @After("@SalesModuleTest")
-    public void tearDown(){
-        closeBrowser();
-    }
+
 
     @When("Sales manager deletes order with in-store pickup")
     public void salesManagerDeletesOrderWithInStorePickup() {
@@ -125,5 +125,20 @@ public class SalesModuleSteps extends TestBase {
     public void filteredCreditMemosShouldDisplay() {
         creditMemosPage.verifyViewCreditMemosByFilters();
 
+    }
+
+    @When("manager view coupons reports between time period {string} and{string}")
+    public void managerViewCouponsReportsBetweenTimePeriodAnd(String arg0, String arg1) {
+
+        couponsReportPage.viewCouponsReportFunction(arg0,arg1);
+    }
+
+    @Then("coupons reports should display")
+    public void couponsReportsShouldDisplay() {
+        couponsReportPage.verifyViewCouponsReport();
+    }
+    @After("@SalesModuleTest")
+    public void tearDown(){
+        closeBrowser();
     }
 }
