@@ -89,6 +89,16 @@ public class ReportingModuleSteps extends TestBase {
     public void totalOrderedReportShouldDisplay() {
         Assert.assertTrue(salesPage.verifyOrderedReport());
     }
+
+    @When("reporting manager opens the Sales Total Refunded Report and fills out report data {string} and{string}")
+    public void reportingManagerOpensTheSalesTotalRefundedReportAndFillsOutReportDataAnd(String arg0, String arg1) {
+        salesPage.salesTotalRefundedReport(arg0,arg1);
+    }
+
+    @Then("Total Refunded should be displayed")
+    public void totalRefundedShouldBeDisplayed() {
+        Assert.assertTrue(salesPage.verifyRefundedReport());
+    }
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
