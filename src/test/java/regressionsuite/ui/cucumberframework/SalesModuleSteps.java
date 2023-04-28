@@ -1,10 +1,7 @@
 package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
-import com.magentoapplication.ui.backend.salesmodule.InvoicePage;
-import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
-import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
-import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
+import com.magentoapplication.ui.backend.salesmodule.*;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -21,6 +18,7 @@ public class SalesModuleSteps extends TestBase {
     OrdersPageSales ordersPageSales;
     InvoicePage invoicePage;
     ShipmentsPage shipmentsPage;
+    CreditMemosPage creditMemosPage;
 
 
     @Before("@SalesModuleTest")
@@ -39,6 +37,7 @@ public class SalesModuleSteps extends TestBase {
         shipmentsPage = new ShipmentsPage(driver);
         invoicePage = new InvoicePage( driver );
         ordersPageSales = new OrdersPageSales(driver);
+        creditMemosPage=new CreditMemosPage(driver);
 
     }
 
@@ -115,5 +114,16 @@ public class SalesModuleSteps extends TestBase {
     @Then("Order should be successfully deleted")
     public void orderShouldBeSuccessfullyDeleted() {
         Assert.assertTrue(ordersPageSales.deleteOrderSuccessful());
+    }
+
+    @When("Sales manager view credit memos by filters")
+    public void salesManagerViewCreditMemosByFilters() {
+        creditMemosPage.viewCreditMemosByFilters();
+    }
+
+    @Then("Filtered credit memos should display")
+    public void filteredCreditMemosShouldDisplay() {
+        creditMemosPage.verifyViewCreditMemosByFilters();
+
     }
 }
