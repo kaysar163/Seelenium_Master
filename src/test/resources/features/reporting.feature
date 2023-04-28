@@ -96,7 +96,7 @@ Feature: Reporting module manager should be able to manage reporting module
   @seeMostViewedReport
   Scenario Outline: Reporting manager should be able to see products most viewed report
     Given Admin user is already in the dashboard page reporting
-    When Reporting Manager view most viewed page
+    When Reporting Manager view most viewed page between time period "<dateFrom>" and"<dateTo>"
     Then Reporting Manager should see most viewed report
     Examples:
       | dateFrom  | dateTo    |

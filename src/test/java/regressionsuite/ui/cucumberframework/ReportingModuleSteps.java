@@ -132,17 +132,24 @@ public class ReportingModuleSteps extends TestBase {
     public void couponsUsageShouldBeDisplayed() {
         Assert.assertTrue(salesPage.verifyCouponsUsageReport());
     }
+
+
+
+    @When("Reporting Manager view most viewed page between time period {string} and{string}")
+    public void reportingManagerViewMostViewedPageBetweenTimePeriodAnd(String arg0, String arg1) {
+        productsPage.seeMostViewedReport(arg0,arg1);
+
+
+    }
+    @Then("Reporting Manager should see most viewed report")
+    public void reportingManagerShouldSeeMostViewedReport() {
+        productsPage.verifyMostViewedReport();
+
+    }
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
 
-    @When("Reporting Manager view most viewed page")
-    public void reportingManagerViewMostViewedPage() {
-        
-    }
 
-    @Then("Reporting Manager should see most viewed report")
-    public void reportingManagerShouldSeeMostViewedReport() {
-    }
 }
