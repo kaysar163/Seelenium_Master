@@ -51,7 +51,7 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
 
-    @FindBy(xpath = "//body//tr//td[contains(text(),'Admin')]")
+    @FindBy(id= "customerGrid_filter_website_id")
     WebElement verifyFilterByWebsite;
 
     @FindBy(id = "customerGrid_filter_email")

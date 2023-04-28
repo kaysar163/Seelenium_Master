@@ -2,7 +2,14 @@
 Feature: Reporting module manager should be able to manage reporting module
 
 
-    #Omercan :
+    @ViewTotalOrderedReport  #Omercan :
+      Scenario Outline: Reporting Manager should be able to see Sales - Total Ordered Report
+        Given Admin user is already in the dashboard page reporting
+        When reporting manager fills out report date "<dateFrom>" and"<dateTo>"
+        Then total ordered report should display
+        Examples:
+          |dateFrom  |dateTo    |
+          |3/26/2023 |4/27/2023 |
 
 
 
@@ -30,7 +37,15 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Kaysar :
+
+  @SeeSalesTotalRefundedReport   #Kaysar :
+  Scenario Outline: Reporting Manage Should be able to see sales Total Refunded Report
+    Given Admin user is already in the dashboard page reporting
+    When reporting manager opens the Sales Total Refunded Report and fills out report data "<dateFrom>" and"<dateTo>"
+    Then  Total Refunded should be displayed
+    Examples:
+      | dateFrom  | dateTo    |
+      | 4/25/2023 | 4/28/2023 |
 
 
 

@@ -80,8 +80,22 @@ public class OrdersPageSales {
     @FindBy(xpath = "//span[contains(text(),'The order address has been updated.')]")
     WebElement SuccessfulMessage;
 
+    @FindBy(xpath = "(//h3[contains(text(),'Order #')])[1]")
+    WebElement orderNumberElement;
+    @FindBy(css = "input#sales_order_grid_filter_real_order_id")
+    WebElement orderIdField;
+    @FindBy(xpath = "//*[text()='Search']")
+    WebElement searchButton;
+    @FindBy(xpath = "//*[text()='View']")
+    WebElement viewButtonDelete;
+    @FindBy(xpath = "(//button[@title='Cancel' and @class='scalable '])[1]")
+    WebElement cancelButton;
+    @FindBy(xpath = "//*[text()='The order has been cancelled.']")
+    WebElement orderDeleteSuccessMessage;
 
-    public void createNewOrder() {
+
+
+    public String createNewOrder() {
         salesDashboardPage.clickOnOrdersLink();
         functionClass.waitUntilElementPresent(CreateNewOrderLink);
         CreateNewOrderLink.click();
@@ -89,8 +103,13 @@ public class OrdersPageSales {
         CreateNewCustomerLink.click();
         functionClass.waitUntilElementPresent(storeName);
         storeName.click();
+        driver.navigate().refresh();
         functionClass.waitUntilElementPresent(AddProductsLink);
-        AddProductsLink.click();
+        functionClass.sleep(3);
+//        JavascriptExecutor jse = (JavascriptExecutor) driver;
+//        jse.executeScript("arguments[0].scrollIntoView()", AddProductsLink);
+        //AddProductsLink.click();
+        actions.click(AddProductsLink).build().perform();
         functionClass.waitUntilElementPresent(selectBox);
         selectBox.click();
         functionClass.waitUntilElementPresent(addSelectedPrdcLink);
@@ -120,6 +139,11 @@ public class OrdersPageSales {
         functionClass.waitUntilElementPresent(submitOrderBut);
         submitOrderBut.click();
         functionClass.sleep(2);
+        String orderNumberText = orderNumberElement.getText();
+        String orderNumber = orderNumberText.substring(orderNumberText.indexOf("#") + 1, orderNumberText.indexOf("|")).trim();
+        System.out.println("Order number: " + orderNumber);
+        return orderNumber;
+
 
     }
     public boolean verifyCreateOrder() {
@@ -151,4 +175,26 @@ public class OrdersPageSales {
             return true;
         } else return false;
     }
+    public void deleteOrder(String orderNumber) {
+        salesDashboardPage.clickOnOrdersLink();
+        functionClass.waitUntilElementPresent(orderIdField);
+        orderIdField.sendKeys(orderNumber);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+        functionClass.waitUntilElementPresent(viewButtonDelete);
+        functionClass.sleep(3);
+        viewButtonDelete.click();
+        functionClass.waitUntilElementPresent(cancelButton);
+        cancelButton.click();
+        functionClass.alertAccept();
+    }
+
+    public boolean deleteOrderSuccessful() {
+        functionClass.waitUntilElementPresent(orderDeleteSuccessMessage);
+        if (orderDeleteSuccessMessage.isDisplayed())
+            return true;
+        else return false;
+
+    }
+
 }
