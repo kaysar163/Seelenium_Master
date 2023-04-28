@@ -52,9 +52,14 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Kaysar :
 
 
+
+  @SeeSalesCouponsUsageReport   #Kaysar :
+  Scenario: Reporting Manage Should be able to see sales Coupons Usage Report
+    Given Admin user is already in the dashboard page reporting
+    When  reporting manager opens the Sales Coupons Report
+    Then  Coupons Usage should be displayed
 
 
 
