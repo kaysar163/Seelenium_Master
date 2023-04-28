@@ -122,6 +122,16 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldSeeLowStockReports() {
         productsPage.verifySeeLowStockReport();
     }
+
+    @When("reporting manager opens the Sales Coupons Report")
+    public void reportingManagerOpensTheSalesCouponsReport() {
+        salesPage.salesCouponsUsageReport();
+    }
+
+    @Then("Coupons Usage should be displayed")
+    public void couponsUsageShouldBeDisplayed() {
+        Assert.assertTrue(salesPage.verifyCouponsUsageReport());
+    }
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();

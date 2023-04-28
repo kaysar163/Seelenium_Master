@@ -50,6 +50,30 @@ public class SalesPage {
     WebElement ShowReportButton;
     @FindBy(xpath ="//tfoot//th[2]")
     WebElement SuccessMessage;
+//*****************************************
+    @FindBy(id = "store_switcher")
+    WebElement ShowReportFor1DropDown;
+    @FindBy(id ="sales_report_report_type")
+    WebElement Match_PeriodToDropDown;
+    @FindBy(id = "sales_report_period_type")
+    WebElement Period1;
+    @FindBy(xpath = "(//img[@id='sales_report_from_trig'])[1]")
+    WebElement SelecDateIcon;
+    @FindBy(xpath = "//tr[@class='headrow']//td[1]")
+    WebElement ForwardIcon;
+    @FindBy(xpath = "(//td[@class='button' and @colspan='1'])[2]")
+    WebElement CloseButton;
+
+    @FindBy(id = "sales_report_to")
+    WebElement To2Field;
+    @FindBy(id = "sales_report_show_order_statuses")
+    WebElement OrderStatus1DropDown;
+    @FindBy(id = "sales_report_show_empty_rows")
+    WebElement empty_rowsDropDown;
+    @FindBy(name="price_rule_type")
+    WebElement ShoppingCartPriceRuleDropDown;
+    @FindBy(xpath ="//tfoot//th[1]")
+    WebElement Success1Message;
 
     public void viewTotalOrderedReport(String dateFrom,String dateTo){
        reportingDashboardPage.clickOnOrdersLink();
@@ -100,10 +124,53 @@ public class SalesPage {
             return true;
         } else return false;
     }
+    public  void salesCouponsUsageReport (){
+        reportingDashboardPage.clickOnCouponsLink();
+        functionClass.waitUntilElementPresent(ShowReportFor1DropDown);
+        Select select=new Select(ShowReportFor1DropDown);
+        select.selectByValue("341");
+        functionClass.waitUntilElementPresent(Match_PeriodToDropDown);
+        Select select2=new Select(Match_PeriodToDropDown);
+        select2.selectByValue("updated_at_order");
+        functionClass.waitUntilElementPresent(Period1);
+        Select select3=new Select(Period1);
+        select3.selectByValue("year");
+        functionClass.waitUntilElementPresent(SelecDateIcon);
+        SelecDateIcon.click();
+        functionClass.waitUntilElementPresent(ForwardIcon);
+        for (int i=0;i<=3;i++){
+            ForwardIcon.click();
+        }
+        functionClass.waitUntilElementPresent(CloseButton);
+        CloseButton.click();
+        functionClass.waitUntilElementPresent(To2Field);
+        To2Field.sendKeys(functionClass.currentDate());
+
+        functionClass.waitUntilElementPresent(OrderStatus1DropDown);
+        Select select4=new Select(OrderStatus1DropDown);
+        select4.selectByValue("1");
+        functionClass.waitUntilElementPresent(EmptyRowsDropDown);
+        Select select6=new Select(EmptyRowsDropDown);
+        select6.selectByValue("0");
+        functionClass.waitUntilElementPresent(ShoppingCartPriceRuleDropDown);
+        Select select0=new Select(ShoppingCartPriceRuleDropDown);
+        select0.selectByValue("1");
+        functionClass.waitUntilElementPresent(ShowReportButton);
+        ShowReportButton.click();
+    }
+    public boolean  verifyCouponsUsageReport(){
+        functionClass.waitUntilElementPresent(SuccessMessage);
+        if (Success1Message.isDisplayed()) {
+            return true;
+        } else return false;
+    }
 
 
 
 }
+
+
+
 
 
 
