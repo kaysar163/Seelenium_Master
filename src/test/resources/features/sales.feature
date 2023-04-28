@@ -62,7 +62,7 @@
         Then coupons reports should display
         Examples:
           | dateFrom  | dateTo    |
-          | 4/25/2023 | 4/28/2023 |
+          | 3/22/2023 | 4/22/2023 |
 
 
 
