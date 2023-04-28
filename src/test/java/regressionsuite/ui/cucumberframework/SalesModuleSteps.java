@@ -19,6 +19,7 @@ public class SalesModuleSteps extends TestBase {
     InvoicePage invoicePage;
     ShipmentsPage shipmentsPage;
     CreditMemosPage creditMemosPage;
+    ManageTaxRulePage manageTaxRulePage;
 
 
     @Before("@SalesModuleTest")
@@ -38,6 +39,7 @@ public class SalesModuleSteps extends TestBase {
         invoicePage = new InvoicePage( driver );
         ordersPageSales = new OrdersPageSales(driver);
         creditMemosPage=new CreditMemosPage(driver);
+        manageTaxRulePage=new ManageTaxRulePage(driver);
 
     }
 
@@ -98,6 +100,8 @@ public class SalesModuleSteps extends TestBase {
         Assert.assertTrue( invoicePage.verifyViewInvoices( ) );
     }
 
+   
+
 
     @After("@SalesModuleTest")
     public void tearDown(){
@@ -125,5 +129,18 @@ public class SalesModuleSteps extends TestBase {
     public void filteredCreditMemosShouldDisplay() {
         creditMemosPage.verifyViewCreditMemosByFilters();
 
+    }
+
+    @When("sales manager add and update tax rules")
+    public void salesManagerAddAndUpdateTaxRules() {
+        manageTaxRulePage.addAndUpdateTaxRulesFunction();
+
+
+
+    }
+
+    @Then("new and updated tax rules should display")
+    public void newAndUpdatedTaxRulesShouldDisplay() {
+        manageTaxRulePage.verifyAddAndUpdateTaxRulesFunction();
     }
 }
