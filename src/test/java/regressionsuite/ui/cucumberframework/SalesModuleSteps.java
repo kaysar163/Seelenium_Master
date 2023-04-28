@@ -1,6 +1,7 @@
 package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.salesmodule.CouponsReportPage;
 import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
 import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
 import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
@@ -21,6 +22,8 @@ public class SalesModuleSteps extends TestBase {
     ManageCustomersPage manageCustomersPage;
     OrdersPageSales ordersPageSales;
     ShipmentsPage shipmentsPage;
+    CouponsReportPage couponsReportPage;
+
 
 
     @Before("@SalesModuleTest")
@@ -38,6 +41,7 @@ public class SalesModuleSteps extends TestBase {
         manageCustomersPage = new ManageCustomersPage(driver);
         shipmentsPage = new ShipmentsPage(driver);
         ordersPageSales = new OrdersPageSales(driver);
+        couponsReportPage=new CouponsReportPage(driver);
     }
 
     @When("the user view shopping cart for customers")
@@ -85,8 +89,38 @@ public class SalesModuleSteps extends TestBase {
         ordersPageSales.verifySuccessfulMessage();
     }
 
+
+
+
+
+
+
+
+
+
+    @When("manager view coupons reports between time period {string} and{string}")
+    public void managerViewCouponsReportsBetweenTimePeriodAnd(String arg0, String arg1) {
+        couponsReportPage.viewCouponsReportFunction(arg0,arg1);
+    }
+
+
+
+    @Then("coupons reports should display")
+    public void couponsReportsShouldDisplay() {
+        couponsReportPage.verifyViewCouponsReport();
+    }
+
+
+
+
+
+
     @After("@SalesModuleTest")
     public void tearDown(){
-        closeBrowser();
+        //closeBrowser();
+    }
+
+
+
 }
-}
+
