@@ -101,7 +101,12 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-     #Rizvangul :
+     @writer:Rizvangul
+       @seeProductsDownloadsReport
+       Scenario: Reporting manager should be able to see products-products downloads report
+       Given Admin user is already in the dashboard page reporting
+       When Reporting manager views downloads page
+       Then Reporting manager should see downloaded reports
 
 
 
