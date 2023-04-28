@@ -58,7 +58,7 @@ public class RefundReportPage {
     public void viewRefundsInTheReports(){
         salesDashboardPage.clickOnRefundsLink();;
         Select select=new Select(storeField);
-        select.selectByValue("All Websites");
+        select.selectByValue("443");
         functionClass.waitUntilElementPresent(reportTypeField);
         Select select1=new Select(reportTypeField);
         select.selectByValue("created_at_refunded");

@@ -3,6 +3,7 @@ package regressionsuite.ui.cucumberframework;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
 import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
+import com.magentoapplication.ui.backend.salesmodule.RefundReportPage;
 import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
 import com.magentoapplication.ui.backend.storemodule.OrdersPage;
 import com.magentoapplication.utility.Log4j;
@@ -21,6 +22,7 @@ public class SalesModuleSteps extends TestBase {
     ManageCustomersPage manageCustomersPage;
     OrdersPageSales ordersPageSales;
     ShipmentsPage shipmentsPage;
+    RefundReportPage refundReportPage;
 
 
     @Before("@SalesModuleTest")
@@ -38,6 +40,7 @@ public class SalesModuleSteps extends TestBase {
         manageCustomersPage = new ManageCustomersPage(driver);
         shipmentsPage = new ShipmentsPage(driver);
         ordersPageSales = new OrdersPageSales(driver);
+        refundReportPage=new RefundReportPage(driver);
     }
 
     @When("the user view shopping cart for customers")
@@ -85,8 +88,22 @@ public class SalesModuleSteps extends TestBase {
         ordersPageSales.verifySuccessfulMessage();
     }
 
+
+
+    @When("Sales Manager view refunds")
+    public void salesManagerViewRefunds() { refundReportPage.viewRefundsInTheReports();}
+
+
+    @Then("Total Refunds Report table should display")
+    public void totalRefundsReportTableShouldDisplay() { refundReportPage.verifyRefundsInTheReportsViewed();
+    }
+
+
     @After("@SalesModuleTest")
     public void tearDown(){
         closeBrowser();
+    }
 }
-}
+
+
+

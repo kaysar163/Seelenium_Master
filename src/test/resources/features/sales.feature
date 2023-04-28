@@ -48,7 +48,11 @@
 
 
 
-      @#Halit :
+      @viewRefundsInTheReports #Fazilet :
+    Scenario: Sales Manager Should be able to view refunds in the reports
+        Given Admin user is already in the dashboard page sales
+        When Sales Manager view refunds
+        Then Total Refunds Report table should display
 
 
 
