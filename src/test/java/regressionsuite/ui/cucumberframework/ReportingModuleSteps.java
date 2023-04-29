@@ -152,4 +152,12 @@ public class ReportingModuleSteps extends TestBase {
     }
 
 
+
+    @When("see Shopping Cart - Abandoned carts Report")
+    public void seeShoppingCartAbandonedCartsReport() {
+    }
+
+    @Then("verify see Shopping Cart - Abandoned carts Report")
+    public void verifySeeShoppingCartAbandonedCartsReport() {
+    }
 }
