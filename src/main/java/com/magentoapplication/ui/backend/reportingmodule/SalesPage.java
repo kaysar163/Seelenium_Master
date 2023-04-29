@@ -47,7 +47,7 @@ public class SalesPage {
     WebElement OrderStatusDropDown;
     @FindBy(id = "sales_report_show_empty_rows")
     WebElement EmptyRowsDropDown;
-    @FindBy(xpath = "(//span[contains(text(),'Show Report')])[1]")
+    @FindBy(xpath = "(//span[text()='Show Report'])[1]")
     WebElement ShowReportButton;
     @FindBy(xpath = "//tfoot//th[2]")
     WebElement SuccessMessage;
@@ -136,8 +136,8 @@ public class SalesPage {
         Select select4 = new Select(EmptyRowsDropDown);
         select4.selectByValue("1");
         functionClass.waitUntilElementPresent(ShowReportButton);
-        ShowReportButton.click();
-
+        functionClass.sleep(3);
+        actions.click(ShowReportButton).build().perform();
     }
 
     public boolean verifyRefundedReport() {
@@ -179,7 +179,8 @@ public class SalesPage {
         Select select0 = new Select(ShoppingCartPriceRuleDropDown);
         select0.selectByValue("1");
         functionClass.waitUntilElementPresent(ShowReportButton);
-        ShowReportButton.click();
+        functionClass.sleep(3);
+        actions.click(ShowReportButton).build().perform();
     }
 
     public boolean verifyCouponsUsageReport() {
