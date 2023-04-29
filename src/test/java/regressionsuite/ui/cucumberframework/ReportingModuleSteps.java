@@ -144,12 +144,21 @@ public class ReportingModuleSteps extends TestBase {
     @Then("Reporting Manager should see most viewed report")
     public void reportingManagerShouldSeeMostViewedReport() {
         productsPage.verifyMostViewedReport();
+    }
+
+    @When("Reporting Manager view products {string} and {string}")
+    public void reportingManagerViewProductsAnd(String arg0, String arg1) {
+        productsPage.viewProductsOrderedReport(arg0,arg1);
 
     }
+
+    @Then("Reporting Manager should see Ordered Report")
+    public void reportingManagerShouldSeeOrderedReport() {
+        Assert.assertTrue(productsPage.verifyProductsOrderedReport());
+    }
+
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
-
-
 }
