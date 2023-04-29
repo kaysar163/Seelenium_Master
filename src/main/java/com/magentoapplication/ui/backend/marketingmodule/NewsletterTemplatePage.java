@@ -126,6 +126,7 @@ public class NewsletterTemplatePage {
 
     public void deleteAnExistingNewsletterTemplate(){
         marketingDashboardPage.clickOnNewsletterTemplateLink();
+        functionClass.waitUntilElementPresent(templateSearchField);
         templateSearchField.sendKeys(TestHelperMarketing.getChangeTemplateName());
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(searchButton);
