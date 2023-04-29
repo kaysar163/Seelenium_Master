@@ -17,4 +17,5 @@ public class ShoppingCartPage {
         functionClass=new FunctionClass(driver);
         reportingDashboardPage =new  ReportingDashboardPage(driver);
     }
+
 }

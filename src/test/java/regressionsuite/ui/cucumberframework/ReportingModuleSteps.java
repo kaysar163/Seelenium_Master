@@ -15,13 +15,12 @@ public class ReportingModuleSteps extends TestBase {
 
     BackEndLogin backEndLogin;
     SalesPage salesPage;
-
     CustomersPage customersPage;
-
     TagsPage tagsPage;
     ReviewsPage reviewsPage;
     Actions actions;
     ProductsPage productsPage;
+    ShoppingCartPage shoppingCartPage;
 
     @Before("@ReportingModuleTest")
     public void setUp(){
@@ -39,6 +38,8 @@ public class ReportingModuleSteps extends TestBase {
         reviewsPage=new ReviewsPage(driver);
         actions=new Actions(driver);
         productsPage=new ProductsPage(driver);
+        shoppingCartPage=new ShoppingCartPage(driver);
+
     }
 
     @When("the user views tags for customers report")
@@ -96,6 +97,7 @@ public class ReportingModuleSteps extends TestBase {
 
     @Then("Total Refunded should be displayed")
     public void totalRefundedShouldBeDisplayed() {
+
         Assert.assertTrue(salesPage.verifyRefundedReport());
     }
 
@@ -146,10 +148,31 @@ public class ReportingModuleSteps extends TestBase {
         productsPage.verifyMostViewedReport();
 
     }
+
+
+    @When("Reporting Manager Navigate to Total Invoiced vs Paid Report page and select period and date {string} {string} and click show Report button")
+    public void reportingManagerNavigateToTotalInvoicedVsPaidReportPageAndSelectPeriodAndDateAndClickShowReportButton(String arg0, String arg1) {
+        salesPage.TotalInvoicedVsPaidReport(arg0,arg1);
+    }
+
+    @Then("Total Invoiced Vs Paid report view successfully")
+    public void totalInvoicedVsPaidReportViewSuccessfully() {
+        salesPage.verifyTotalInvoicedVsPaidReport();
+    }
+
+    @When("reporting manager fills out report date for the shipped  {string} and{string}")
+    public void reportingManagerFillsOutReportDateForTheShippedAnd(String arg0, String arg1) {
+        salesPage.salesTotalShippedReport(arg0,arg1);
+    }
+
+    @Then("Total Shipped Report view successfully")
+    public void totalShippedReportViewSuccessfully() {
+        salesPage.verifyTotalShippedReport();
+    }
+
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
-
 
 }
