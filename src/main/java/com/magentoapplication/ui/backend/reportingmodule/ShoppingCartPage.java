@@ -37,13 +37,8 @@ public class ShoppingCartPage {
     @FindAll(@FindBy(css = ".data>tbody>tr"))
     List<WebElement> shippedReportTable;
 
-    public void viewSalesShippedReport(String fromDate, String toDate){
-
-        Select select = new Select( periodDropDown );
-        select.selectByValue("Total 23 records found");
-        fromDateField.sendKeys(fromDate);
-        toDateField.sendKeys(toDate);
-        showReportButton.click();
+    public void viewSalesShippedReport(){
+        reportingDashboardPage.clickOnProductsincartsLink();
     }
 
     public boolean verifyViewSalesShippedReportSuccessfully() {
