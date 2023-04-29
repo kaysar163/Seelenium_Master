@@ -11,11 +11,27 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 
 public class ProductsPage {
+
+
     WebDriver driver;
 
     FunctionClass functionClass;
 
     ReportingDashboardPage reportingDashboardPage;
+    public ProductsPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        functionClass = new FunctionClass(driver);
+        reportingDashboardPage = new ReportingDashboardPage(driver);
+    }
+
+//   public ProductsPage(WebDriver driver){
+//        this.driver=driver;
+//        PageFactory.initElements(driver,this);
+//        functionClass=new FunctionClass(driver);
+//        reportingDashboardPage=new ReportingDashboardPage(driver);
+//
+//    }
     @FindAll(@FindBy(xpath = "//div[@class='hor-scroll']/table/tbody/tr"))
     List<WebElement> productsDownloadsReportList;
 
@@ -39,15 +55,37 @@ public class ProductsPage {
     @FindAll(@FindBy(xpath = "//div[@class='hor-scroll']/table/tbody/tr"))
     List<WebElement> mostViewedReportList;
 
+    //For Prodoct order report
+    @FindBy(xpath = "//input[@id='period_date_from']")
+    WebElement fromDate;
+    @FindBy(xpath = "//input[@id='period_date_to']")
+    WebElement toDate;
+    @FindBy(xpath = "//span[text()=\"Refresh\"]")
+    WebElement refreshButton;
+    @FindBy(xpath = "//th[text()=\"Total\"]")
+    WebElement totalProdocts;
 
-
-
-    public ProductsPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        functionClass = new FunctionClass(driver);
-        reportingDashboardPage = new ReportingDashboardPage(driver);
+    public void viewProductsOrderedReport(String dateFrom,String dateTo){
+        reportingDashboardPage.clickOnProductsOrderedLink();
+        fromDate.sendKeys(dateFrom);
+        functionClass.waitUntilElementPresent(toDate);
+        toDate.sendKeys(dateTo);
+        functionClass.waitUntilElementPresent(refreshButton);
+        refreshButton.click();
     }
+    public boolean verifyProductsOrderedReport(){
+        functionClass.waitUntilElementPresent(totalProdocts);
+        if (totalProdocts.isDisplayed())
+            return true;
+        else return false;
+    }
+
+
+
+
+
+
+
 
     public void seeProductsDownloadReport() {
         reportingDashboardPage.clickOnDownloadsLink();
