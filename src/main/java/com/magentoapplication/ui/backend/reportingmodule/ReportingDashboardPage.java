@@ -54,7 +54,7 @@ public class ReportingDashboardPage {
     @FindBy(xpath = "(//span[contains(text(),'Bestsellers')])[1]")
     WebElement BestsellersLink;
 
-    @FindBy(xpath = "(//span[contains(text(),'Products Ordered')]")
+    @FindBy(xpath = "//span[contains(text(),'Products Ordered')]")
     WebElement ProductsOrderedLink;
 
     @FindBy(xpath = "(//span[contains(text(),'Most Viewed')])[1]")
@@ -138,7 +138,12 @@ public class ReportingDashboardPage {
 
     public void clickOnProductsOrderedLink() {
         functionClass.waitUntilElementPresent(ReportsLink);
-        actions.moveToElement(ReportsLink).click(ProductsLink).click(ProductsOrderedLink).build().perform();
+        //actions.moveToElement(ReportsLink).click(ProductsLink).click(ProductsOrderedLink).build().perform();
+        ReportsLink.click();
+        functionClass.waitUntilElementPresent(ProductsLink);
+        ProductsLink.click();
+        functionClass.waitUntilElementPresent(ProductsOrderedLink);
+        ProductsOrderedLink.click();
     }
 
     public void clickOnMostViewedLink() {
