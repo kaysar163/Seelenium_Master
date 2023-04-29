@@ -15,7 +15,9 @@ public class ReportingModuleSteps extends TestBase {
 
     BackEndLogin backEndLogin;
     SalesPage salesPage;
+
     CustomersPage customersPage;
+
     TagsPage tagsPage;
     ReviewsPage reviewsPage;
     Actions actions;
@@ -38,8 +40,7 @@ public class ReportingModuleSteps extends TestBase {
         reviewsPage=new ReviewsPage(driver);
         actions=new Actions(driver);
         productsPage=new ProductsPage(driver);
-        shoppingCartPage=new ShoppingCartPage(driver);
-
+        shoppingCartPage= new ShoppingCartPage(driver);
     }
 
     @When("the user views tags for customers report")
@@ -97,7 +98,6 @@ public class ReportingModuleSteps extends TestBase {
 
     @Then("Total Refunded should be displayed")
     public void totalRefundedShouldBeDisplayed() {
-
         Assert.assertTrue(salesPage.verifyRefundedReport());
     }
 
@@ -146,33 +146,36 @@ public class ReportingModuleSteps extends TestBase {
     @Then("Reporting Manager should see most viewed report")
     public void reportingManagerShouldSeeMostViewedReport() {
         productsPage.verifyMostViewedReport();
+    }
+
+    @When("Reporting Manager view products {string} and {string}")
+    public void reportingManagerViewProductsAnd(String arg0, String arg1) {
+        productsPage.viewProductsOrderedReport(arg0,arg1);
 
     }
 
-
-    @When("Reporting Manager Navigate to Total Invoiced vs Paid Report page and select period and date {string} {string} and click show Report button")
-    public void reportingManagerNavigateToTotalInvoicedVsPaidReportPageAndSelectPeriodAndDateAndClickShowReportButton(String arg0, String arg1) {
-        salesPage.TotalInvoicedVsPaidReport(arg0,arg1);
+    @Then("Reporting Manager should see Ordered Report")
+    public void reportingManagerShouldSeeOrderedReport() {
+        Assert.assertTrue(productsPage.verifyProductsOrderedReport());
     }
 
-    @Then("Total Invoiced Vs Paid report view successfully")
-    public void totalInvoicedVsPaidReportViewSuccessfully() {
-        salesPage.verifyTotalInvoicedVsPaidReport();
+
+
+    @When("see Shopping Cart - Abandoned carts Report")
+    public void seeShoppingCartAbandonedCartsReport() {
+        shoppingCartPage.viewSalesShippedReport();
+
+        
     }
 
-    @When("reporting manager fills out report date for the shipped  {string} and{string}")
-    public void reportingManagerFillsOutReportDateForTheShippedAnd(String arg0, String arg1) {
-        salesPage.salesTotalShippedReport(arg0,arg1);
-    }
+    @Then("verify see Shopping Cart - Abandoned carts Report")
+    public void verifySeeShoppingCartAbandonedCartsReport() {
+        Assert.assertTrue(shoppingCartPage.verifyViewSalesShippedReportSuccessfully());
 
-    @Then("Total Shipped Report view successfully")
-    public void totalShippedReportViewSuccessfully() {
-        salesPage.verifyTotalShippedReport();
     }
-
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
-
 }
+
