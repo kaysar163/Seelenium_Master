@@ -92,7 +92,14 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Omercan :
+  @ViewProductBestsellerReport  #Omercan :
+  Scenario Outline: Reporting Manager should be able to see Products - Products Bestsellers Report
+    Given Admin user is already in the dashboard page reporting
+    When Reporting Manager view bestsellers page between time period "<dateFrom>" and"<dateTo>"
+    Then Reporting manager should see bestsellers report
+    Examples:
+      | dateFrom  | dateTo    |
+      | 4/11/2023 | 4/29/2023 |
 
 
 

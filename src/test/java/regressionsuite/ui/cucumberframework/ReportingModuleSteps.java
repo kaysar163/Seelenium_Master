@@ -173,10 +173,6 @@ public class ReportingModuleSteps extends TestBase {
         Assert.assertTrue(shoppingCartPage.verifyViewSalesShippedReportSuccessfully());
 
     }
-    @After("@ReportingModuleTest")
-    public void tearDown(){
-        closeBrowser();
-    }
 
     @When("Reporting Manager Navigate to Total Invoiced vs Paid Report page and select period and date {string} {string} and click show Report button")
     public void reportingManagerNavigateToTotalInvoicedVsPaidReportPageAndSelectPeriodAndDateAndClickShowReportButton(String arg0, String arg1) {
@@ -196,6 +192,21 @@ public class ReportingModuleSteps extends TestBase {
     @Then("Total Shipped Report view successfully")
     public void totalShippedReportViewSuccessfully() {
         salesPage.verifyTotalShippedReport();
+    }
+
+    @When("Reporting Manager view bestsellers page between time period {string} and{string}")
+    public void reportingManagerViewBestsellersPageBetweenTimePeriodAnd(String arg0, String arg1) {
+        productsPage.viewProductBestsellerReport(arg0,arg1);
+
+    }
+
+    @Then("Reporting manager should see bestsellers report")
+    public void reportingManagerShouldSeeBestsellersReport() {
+        productsPage.verifyProductBestsellerReport();
+    }
+    @After("@ReportingModuleTest")
+    public void tearDown(){
+        closeBrowser();
     }
 }
 

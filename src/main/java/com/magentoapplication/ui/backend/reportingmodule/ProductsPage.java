@@ -25,13 +25,6 @@ public class ProductsPage {
         reportingDashboardPage = new ReportingDashboardPage(driver);
     }
 
-//   public ProductsPage(WebDriver driver){
-//        this.driver=driver;
-//        PageFactory.initElements(driver,this);
-//        functionClass=new FunctionClass(driver);
-//        reportingDashboardPage=new ReportingDashboardPage(driver);
-//
-//    }
     @FindAll(@FindBy(xpath = "//div[@class='hor-scroll']/table/tbody/tr"))
     List<WebElement> productsDownloadsReportList;
 
@@ -65,6 +58,30 @@ public class ProductsPage {
     @FindBy(xpath = "//th[text()=\"Total\"]")
     WebElement totalProdocts;
 
+    //For product bestsellers report
+    @FindBy(xpath = "//input[@id='sales_report_from']")
+    WebElement fromField;
+    @FindBy(xpath = "//input[@id='sales_report_to']")
+    WebElement toField;
+    @FindBy(xpath = "(//span[text()='Show Report'])[1]")
+    WebElement showReportBut;
+    @FindBy(xpath = "//tfoot//th[1]")
+    WebElement totalReport;
+
+    public void viewProductBestsellerReport(String dateFrom,String dateTo){
+        reportingDashboardPage.clickOnBestsellersLink();
+        fromField.sendKeys(dateFrom);
+        functionClass.waitUntilElementPresent(toField);
+        toField.sendKeys(dateTo);
+        functionClass.waitUntilElementPresent(showReportBut);
+        showReportBut.click();
+    }
+    public boolean verifyProductBestsellerReport(){
+        functionClass.waitUntilElementPresent(totalReport);
+        if (totalReport.isDisplayed())
+            return true;
+        else return false;
+    }
     public void viewProductsOrderedReport(String dateFrom,String dateTo){
         reportingDashboardPage.clickOnProductsOrderedLink();
         fromDate.sendKeys(dateFrom);
@@ -79,14 +96,6 @@ public class ProductsPage {
             return true;
         else return false;
     }
-
-
-
-
-
-
-
-
     public void seeProductsDownloadReport() {
         reportingDashboardPage.clickOnDownloadsLink();
     }
@@ -122,10 +131,6 @@ public class ProductsPage {
         select1.selectByValue("1");
         functionClass.waitUntilElementPresent(showReportButton);
         showReportButton.click();
-
-
-
-
     }
     public  boolean verifyMostViewedReport(){
         if(mostViewedReportList.size()>=1){
