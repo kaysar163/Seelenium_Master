@@ -22,6 +22,7 @@ public class ReportingModuleSteps extends TestBase {
     ReviewsPage reviewsPage;
     Actions actions;
     ProductsPage productsPage;
+    ShoppingCartPage shoppingCartPage;
 
     @Before("@ReportingModuleTest")
     public void setUp(){
@@ -39,6 +40,7 @@ public class ReportingModuleSteps extends TestBase {
         reviewsPage=new ReviewsPage(driver);
         actions=new Actions(driver);
         productsPage=new ProductsPage(driver);
+        shoppingCartPage= new ShoppingCartPage(driver);
     }
 
     @When("the user views tags for customers report")
@@ -157,8 +159,23 @@ public class ReportingModuleSteps extends TestBase {
         Assert.assertTrue(productsPage.verifyProductsOrderedReport());
     }
 
+
+
+    @When("see Shopping Cart - Abandoned carts Report")
+    public void seeShoppingCartAbandonedCartsReport() {
+        shoppingCartPage.viewSalesShippedReport();
+
+        
+    }
+
+    @Then("verify see Shopping Cart - Abandoned carts Report")
+    public void verifySeeShoppingCartAbandonedCartsReport() {
+        Assert.assertTrue(shoppingCartPage.verifyViewSalesShippedReportSuccessfully());
+
+    }
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
 }
+

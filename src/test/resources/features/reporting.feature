@@ -65,7 +65,11 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
       #Mirehmidi :
-
+  @SeeAbandonedCartsReport
+  Scenario: Reporting Manager should be able to see Shopping Cart Abandoned carts Report
+    Given Admin user is already in the dashboard page reporting
+    When  see Shopping Cart - Abandoned carts Report
+    Then  verify see Shopping Cart - Abandoned carts Report
 
 
 
