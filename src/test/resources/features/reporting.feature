@@ -23,15 +23,25 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-    #Meryem :
+   @TotalInvoicedVsPaidReport  #Meryem :
+  Scenario Outline: Reporting Manager should be able to see Sales - Total Invoiced vs Paid Report
+    Given Admin user is already in the dashboard page reporting
+    When Reporting Manager Navigate to Total Invoiced vs Paid Report page and select period and date "<dateFrom>" "<dateTo>" and click show Report button
+    Then  Total Invoiced Vs Paid report view successfully
+    Examples:
+      | dateFrom |   dateTo|
+      | 4/20/2023 | 4/25/2023 |
 
 
 
-
-
-
-    #Meryem :
-
+  @salesTotalShippedReport #Meryem :
+  Scenario Outline: Reporting Manager should be able to see Sales - Total Shipped Report
+    Given Admin user is already in the dashboard page reporting
+    When reporting manager fills out report date for the shipped  "<dateFrom>" and"<dateTo>"
+    Then   Total Shipped Report view successfully
+    Examples:
+      | dateFrom  | dateTo    |
+      | 4/22/2023 | 4/28/2023 |
 
 
 

@@ -177,5 +177,25 @@ public class ReportingModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
     }
+
+    @When("Reporting Manager Navigate to Total Invoiced vs Paid Report page and select period and date {string} {string} and click show Report button")
+    public void reportingManagerNavigateToTotalInvoicedVsPaidReportPageAndSelectPeriodAndDateAndClickShowReportButton(String arg0, String arg1) {
+        salesPage.TotalInvoicedVsPaidReport(arg0,arg1);
+    }
+
+    @Then("Total Invoiced Vs Paid report view successfully")
+    public void totalInvoicedVsPaidReportViewSuccessfully() {
+        salesPage.verifyTotalInvoicedVsPaidReport();
+    }
+
+    @When("reporting manager fills out report date for the shipped  {string} and{string}")
+    public void reportingManagerFillsOutReportDateForTheShippedAnd(String arg0, String arg1) {
+        salesPage.salesTotalShippedReport(arg0,arg1);
+    }
+
+    @Then("Total Shipped Report view successfully")
+    public void totalShippedReportViewSuccessfully() {
+        salesPage.verifyTotalShippedReport();
+    }
 }
 
