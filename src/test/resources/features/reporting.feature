@@ -11,11 +11,6 @@ Feature: Reporting module manager should be able to manage reporting module
           |dateFrom  |dateTo    |
           |3/26/2023 |4/27/2023 |
 
-
-
-
-
-
     #Gulzar :
 
 
@@ -32,8 +27,6 @@ Feature: Reporting module manager should be able to manage reporting module
       | dateFrom |   dateTo|
       | 4/20/2023 | 4/25/2023 |
 
-
-
   @salesTotalShippedReport #Meryem :
   Scenario Outline: Reporting Manager should be able to see Sales - Total Shipped Report
     Given Admin user is already in the dashboard page reporting
@@ -42,10 +35,6 @@ Feature: Reporting module manager should be able to manage reporting module
     Examples:
       | dateFrom  | dateTo    |
       | 4/22/2023 | 4/28/2023 |
-
-
-
-
 
 
   @SeeSalesTotalRefundedReport   #Kaysar :
@@ -57,22 +46,11 @@ Feature: Reporting module manager should be able to manage reporting module
       | dateFrom  | dateTo    |
       | 4/25/2023 | 4/28/2023 |
 
-
-
-
-
-
-
-
-
   @SeeSalesCouponsUsageReport   #Kaysar :
   Scenario: Reporting Manage Should be able to see sales Coupons Usage Report
     Given Admin user is already in the dashboard page reporting
     When  reporting manager opens the Sales Coupons Report
     Then  Coupons Usage should be displayed
-
-
-
 
       #Mirehmidi :
   @SeeAbandonedCartsReport
@@ -81,10 +59,6 @@ Feature: Reporting module manager should be able to manage reporting module
     When  see Shopping Cart - Abandoned carts Report
     Then  verify see Shopping Cart - Abandoned carts Report
 
-
-
-
-
       #Fazilat :
 
 
@@ -92,11 +66,14 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Halit :
-
-
-
-
+      @ViewProductBestsellerReport  #Omercan :
+        Scenario Outline: Reporting Manager should be able to see Products - Products Bestsellers Report
+        Given Admin user is already in the dashboard page reporting
+        When Reporting Manager view bestsellers page between time period "<dateFrom>" and"<dateTo>"
+        Then Reporting manager should see bestsellers report
+        Examples:
+          | dateFrom  | dateTo    |
+          | 4/11/2023 | 4/29/2023 |
 
 
       @ViewProductsOrderedReport  #Muradil :
@@ -109,12 +86,6 @@ Feature: Reporting module manager should be able to manage reporting module
         | 4/28/2023 | 4/29/2023 |
 
 
-
-
-
-
-
-
    #Muyesser :
   @seeMostViewedReport
   Scenario Outline: Reporting manager should be able to see products most viewed report
@@ -124,10 +95,6 @@ Feature: Reporting module manager should be able to manage reporting module
     Examples:
       | dateFrom  | dateTo    |
       | 4/25/2023 | 4/28/2023 |
-
-
-
-
 
 
 
