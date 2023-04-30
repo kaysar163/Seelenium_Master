@@ -7,6 +7,29 @@ public class TestHelperMarketing {
 
     private static String changeTemplateName;
 
+
+
+    private static String nickName;
+    private static String changedNickName;
+    public static String getChangedNickName() {
+        return changedNickName;
+    }
+
+    public static void setChangedNickName(String changedNickName) {
+        TestHelperMarketing.changedNickName = changedNickName;
+    }
+
+
+
+    public static String getNickName() {
+        return nickName;
+    }
+
+    public static void setNickName(String nickName) {
+        TestHelperMarketing.nickName = nickName;
+    }
+
+
     public static String getTemplateName() {
         return templateName;
     }
@@ -31,3 +54,5 @@ public class TestHelperMarketing {
         RuleName = ruleName;
     }
 }
+
+
