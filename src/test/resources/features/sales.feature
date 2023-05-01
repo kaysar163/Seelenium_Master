@@ -116,4 +116,8 @@
 
 
 
-      #Renagul :
+      @updateExistingShoppingCart #Renagul :
+  Scenario: Sales manager should be able to update an existing cart for customer
+        Given Admin user is already in the dashboard page sales
+        When sales manager shoul be able to update shopping cart
+        Then update shopping cart should be display

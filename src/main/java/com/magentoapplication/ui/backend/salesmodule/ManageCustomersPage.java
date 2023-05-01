@@ -17,15 +17,14 @@ public class ManageCustomersPage {
 
     SalesDashboardPage salesDashboardPage;
 
-    Log4j log4j=new Log4j();
-
+    Log4j log4j = new Log4j();
 
 
     public ManageCustomersPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        functionClass=new FunctionClass(driver);
-        salesDashboardPage=new SalesDashboardPage(driver);
+        PageFactory.initElements(driver, this);
+        functionClass = new FunctionClass(driver);
+        salesDashboardPage = new SalesDashboardPage(driver);
     }
 
     @FindBy(id = "customerGrid_filter_email")
@@ -37,7 +36,7 @@ public class ManageCustomersPage {
     @FindBy(xpath = "//a[text()='Edit']")
     WebElement editButton;
 
-    @FindBy(xpath= "(//span[text()='Shopping Cart'])[1]")
+    @FindBy(xpath = "(//span[text()='Shopping Cart'])[1]")
     WebElement shoppingCartLink;
 
     @FindAll(
@@ -48,10 +47,19 @@ public class ManageCustomersPage {
     @FindBy(id = "//table[@id='customer_cart_grid1_table']//tbody//tr//td")
     WebElement customerExist;
 
-    public void viewShoppingCartForCustomers(){
+    @FindBy(xpath = "//strong[text()='Chelsea Tee']//following::td[5]//a[text()='Configure']")
+    WebElement updateshoppingcart;
+
+    @FindBy(id="product_composite_configure_input_qty")
+    WebElement quantity;
+
+    @FindBy(xpath = "//span[text()='OK']")
+    WebElement OK;
+
+    public void viewShoppingCartForCustomers() {
         salesDashboardPage.clickOnManageCustomersLink();
         functionClass.waitUntilElementPresent(customerEmailField);
-        customerEmailField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","loginEmail"));
+        customerEmailField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "loginEmail"));
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
         functionClass.waitUntilElementPresent(editButton);
@@ -62,12 +70,12 @@ public class ManageCustomersPage {
 
     }
 
-    public boolean verifyViewShoppingCartViewed(){
+    public boolean verifyViewShoppingCartViewed() {
         functionClass.waitUntilElementPresent(verifyShoppingCartViewed);
-        if (verifyShoppingCartViewed.isDisplayed()){
-            if (driver.getPageSource().contains("No records found.")){
+        if (verifyShoppingCartViewed.isDisplayed()) {
+            if (driver.getPageSource().contains("No records found.")) {
                 System.out.println("shopping cart is empty");
-            } else if (customerExist.isDisplayed()){
+            } else if (customerExist.isDisplayed()) {
                 System.out.println("shopping cart is not empty");
             }
             log4j.info("---Test Passed---");
@@ -77,9 +85,41 @@ public class ManageCustomersPage {
             return false;
         }
 
+
+
+        public void updateExistingShoppingCartForCustomers () {
+            salesDashboardPage.clickOnManageCustomersLink();
+            functionClass.waitUntilElementPresent(customerEmailField);
+            customerEmailField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "loginEmail"));
+            functionClass.waitUntilElementPresent(searchButton);
+            searchButton.click();
+            functionClass.waitUntilElementPresent(editButton);
+            functionClass.sleep(2);
+            editButton.click();
+            functionClass.waitUntilElementPresent(shoppingCartLink);
+            shoppingCartLink.click();
+            functionClass.waitUntilElementPresent(updateshoppingcart);
+            updateshoppingcart.click();
+            functionClass.waitUntilElementPresent(quantity);
+            quantity.sendKeys("1");
+            functionClass.waitUntilElementPresent(OK);
+            OK.click();
+
+        }
+    }
+    public boolean verifyUpdateShoppingCart(){
+
     }
 
 
-
-
 }
+
+
+
+
+
+
+
+
+
+
