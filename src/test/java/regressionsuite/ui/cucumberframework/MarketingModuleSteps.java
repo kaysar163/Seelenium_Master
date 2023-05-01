@@ -180,8 +180,34 @@ public class MarketingModuleSteps extends TestBase {
         Assert.assertTrue(catalogPriceRulePage.verify());
     }
 
+
+    @When("the user deletes newsletter template information")
+    public void theUserDeletesNewsletterTemplateInformation() {
+        newsletterTemplatePage.deleteAnExistingNewsletterTemplate();
+    }
+
+    @Then("the newsletter template should be deleted")
+    public void theNewsletterTemplateShouldBeDeleted() {
+        Assert.assertTrue(newsletterTemplatePage.verifyNewsletterTemplateDeleted());
+    }
+    @When("move to catolog and reviews and ratings and customer review and panding reviews")
+    public void moveToCatologAndReviewsAndRatingsAndCustomerReviewAndPandingReviews() {
+        pendingReviewsPage.viewPandingReviews();
+    }
+
+    @When("move to catolog and reviews and ratings and customer review and pending reviews")
+    public void moveToCatologAndReviewsAndRatingsAndCustomerReviewAndPendingReviews() {
+    pendingReviewsPage.viewPandingReviews();
+    }
+    @Then("nickname should be display")
+    public void nicknameShouldBeDisplay() {
+        pendingReviewsPage.verifyPendingReviews();
+    }
     @After("@MarketingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
+
+
+
 }

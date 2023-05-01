@@ -79,6 +79,20 @@ public class ManageCustomersPage {
 
     }
 
+    public void updateExistingShoppingCart(){
+        salesDashboardPage.clickOnManageCustomersLink();
+        functionClass.waitUntilElementPresent(customerEmailField);
+        customerEmailField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","loginEmail"));
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+        functionClass.waitUntilElementPresent(editButton);
+        functionClass.sleep(2);
+        editButton.click();
+        functionClass.waitUntilElementPresent(shoppingCartLink);
+        shoppingCartLink.click();
+
+    }
+
 
 
 

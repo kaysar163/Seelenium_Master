@@ -138,15 +138,9 @@ public class PendingReviewsPage {
         functionClass.waitUntilElementPresent(customerReviewsLink);
         customerReviewsLink.click();
         marketingDashboardPage.clickOnPendingReviewsLink();
-        functionClass.waitUntilElementPresent(nickName);
-        nickName.clear();
-        TestHelperMarketing.setChangedNickName(functionClass.generateFakeName());
-        nickName.sendKeys(TestHelperMarketing.getChangedNickName());
-        functionClass.waitUntilElementPresent(SearchButton);
-        SearchButton.click();
     }
 
-    public boolean verifyPandingReviews() {
+    public boolean verifyPendingReviews() {
         if (pendingReviewsList.size() >= 1)
             return true;
         else return false;

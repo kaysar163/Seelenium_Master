@@ -78,6 +78,17 @@ public class CustomersPage {
        else return false;
     }
 
+    public void seeNewAccounts(){
+        reportingDashboardPage.clickOnNewAccountsLink();
+        functionClass.waitUntilElementPresent(fromDateIcon);
+        fromDateIcon.click();
+        functionClass.waitUntilElementPresent(toDateIcon);
+        toDateIcon.click();
+        functionClass.waitUntilElementPresent(refreshButton);
+        refreshButton.click();
+
+    }
+
 
 
 

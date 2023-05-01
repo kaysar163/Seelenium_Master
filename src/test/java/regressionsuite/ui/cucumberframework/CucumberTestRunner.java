@@ -8,7 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty","html:target/cucumber-Reporting-Module-testReport.html","json:target/cucumber.json"},
         features = {"classpath:features"},
-        tags ="@SeeSalesCouponsUsageReport or @SeeSalesTotalRefundedReport"
+        //tags ="@ReportingModuleTest"
+        tags = "@pendingReviews"
 )
 public class CucumberTestRunner {
 
