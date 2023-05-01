@@ -140,7 +140,7 @@ public class StoreModuleTestRunner extends TestBase {
 
     @AfterClass
     public void tearDown(){
-        //closeBrowser();
+        closeBrowser();
     }
 }
 
