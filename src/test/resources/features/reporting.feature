@@ -23,15 +23,25 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-    #Meryem :
+   @TotalInvoicedVsPaidReport  #Meryem :
+  Scenario Outline: Reporting Manager should be able to see Sales - Total Invoiced vs Paid Report
+    Given Admin user is already in the dashboard page reporting
+    When Reporting Manager Navigate to Total Invoiced vs Paid Report page and select period and date "<dateFrom>" "<dateTo>" and click show Report button
+    Then  Total Invoiced Vs Paid report view successfully
+    Examples:
+      | dateFrom |   dateTo|
+      | 4/20/2023 | 4/25/2023 |
 
 
 
-
-
-
-    #Meryem :
-
+  @salesTotalShippedReport #Meryem :
+  Scenario Outline: Reporting Manager should be able to see Sales - Total Shipped Report
+    Given Admin user is already in the dashboard page reporting
+    When reporting manager fills out report date for the shipped  "<dateFrom>" and"<dateTo>"
+    Then   Total Shipped Report view successfully
+    Examples:
+      | dateFrom  | dateTo    |
+      | 4/22/2023 | 4/28/2023 |
 
 
 
@@ -65,7 +75,11 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
       #Mirehmidi :
-
+  @SeeAbandonedCartsReport
+  Scenario: Reporting Manager should be able to see Shopping Cart Abandoned carts Report
+    Given Admin user is already in the dashboard page reporting
+    When  see Shopping Cart - Abandoned carts Report
+    Then  verify see Shopping Cart - Abandoned carts Report
 
 
 
@@ -78,21 +92,46 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Halit :
+  @ViewProductBestsellerReport  #Omercan :
+  Scenario Outline: Reporting Manager should be able to see Products - Products Bestsellers Report
+    Given Admin user is already in the dashboard page reporting
+    When Reporting Manager view bestsellers page between time period "<dateFrom>" and"<dateTo>"
+    Then Reporting manager should see bestsellers report
+    Examples:
+      | dateFrom  | dateTo    |
+      | 4/11/2023 | 4/29/2023 |
 
 
 
 
 
 
-      #Muradil :
+      @ViewProductsOrderedReport  #Muradil :
+    Scenario Outline: Reporting Manager should be able to see Products - Products Ordered Report
+      Given Admin user is already in the dashboard page reporting
+      When Reporting Manager view products "<dateFrom>" and "<dateTo>"
+      Then Reporting Manager should see Ordered Report
+      Examples:
+        | dateFrom  | dateTo    |
+        | 4/28/2023 | 4/29/2023 |
 
 
 
 
 
 
-      #Muyesser :
+
+
+   #Muyesser :
+  @seeMostViewedReport
+  Scenario Outline: Reporting manager should be able to see products most viewed report
+    Given Admin user is already in the dashboard page reporting
+    When Reporting Manager view most viewed page between time period "<dateFrom>" and"<dateTo>"
+    Then Reporting Manager should see most viewed report
+    Examples:
+      | dateFrom  | dateTo    |
+      | 4/25/2023 | 4/28/2023 |
+
 
 
 

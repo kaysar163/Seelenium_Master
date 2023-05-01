@@ -114,8 +114,8 @@ public class OrdersPageSales {
         selectBox.click();
         functionClass.waitUntilElementPresent(addSelectedPrdcLink);
         addSelectedPrdcLink.click();
-        TestHelperSales.setFirstNameField(functionClass.generateFakeName());
-        firstNameField.sendKeys(TestHelperSales.getFirstNameField());
+       // TestHelperSales.setFirstNameField(functionClass.generateFakeName());
+       // firstNameField.sendKeys(TestHelperSales.getFirstNameField());
         functionClass.waitUntilElementPresent(lastNameField);
         lastNameField.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(streetAddressField);
@@ -155,12 +155,12 @@ public class OrdersPageSales {
     public void UpdateOrderStorePicup() {
         salesDashboardPage.clickOnOrdersLink();
 
-        WebElement viewButton=driver.findElement
-                (By.xpath(String.format("(//td[contains(@class,'')][contains(text(),'%s')])//following-sibling::td//a",
-                        TestHelperSales.getFirstNameField())));
-        functionClass.waitUntilElementPresent(viewButton);
-        viewButton.click();
-        functionClass.waitUntilElementPresent(EditButton);
+        //WebElement viewButton=driver.findElement
+                //(By.xpath(String.format("(//td[contains(@class,'')][contains(text(),'%s')])//following-sibling::td//a",
+                        //TestHelperSales.getFirstNameField())));
+      //  functionClass.waitUntilElementPresent(viewButton);
+        //viewButton.click();
+        //functionClass.waitUntilElementPresent(EditButton);
         EditButton.click();
         functionClass.waitUntilElementPresent(PrefixField);
         PrefixField.sendKeys(functionClass.generateFakeName());

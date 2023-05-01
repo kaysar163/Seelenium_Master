@@ -22,6 +22,7 @@ public class ReportingModuleSteps extends TestBase {
     ReviewsPage reviewsPage;
     Actions actions;
     ProductsPage productsPage;
+    ShoppingCartPage shoppingCartPage;
 
     @Before("@ReportingModuleTest")
     public void setUp(){
@@ -39,6 +40,7 @@ public class ReportingModuleSteps extends TestBase {
         reviewsPage=new ReviewsPage(driver);
         actions=new Actions(driver);
         productsPage=new ProductsPage(driver);
+        shoppingCartPage= new ShoppingCartPage(driver);
     }
 
     @When("the user views tags for customers report")
@@ -132,8 +134,79 @@ public class ReportingModuleSteps extends TestBase {
     public void couponsUsageShouldBeDisplayed() {
         Assert.assertTrue(salesPage.verifyCouponsUsageReport());
     }
+
+
+
+    @When("Reporting Manager view most viewed page between time period {string} and{string}")
+    public void reportingManagerViewMostViewedPageBetweenTimePeriodAnd(String arg0, String arg1) {
+        productsPage.seeMostViewedReport(arg0,arg1);
+
+
+    }
+    @Then("Reporting Manager should see most viewed report")
+    public void reportingManagerShouldSeeMostViewedReport() {
+        productsPage.verifyMostViewedReport();
+    }
+
+    @When("Reporting Manager view products {string} and {string}")
+    public void reportingManagerViewProductsAnd(String arg0, String arg1) {
+        productsPage.viewProductsOrderedReport(arg0,arg1);
+
+    }
+
+    @Then("Reporting Manager should see Ordered Report")
+    public void reportingManagerShouldSeeOrderedReport() {
+        Assert.assertTrue(productsPage.verifyProductsOrderedReport());
+    }
+
+
+
+    @When("see Shopping Cart - Abandoned carts Report")
+    public void seeShoppingCartAbandonedCartsReport() {
+        shoppingCartPage.viewSalesShippedReport();
+
+        
+    }
+
+    @Then("verify see Shopping Cart - Abandoned carts Report")
+    public void verifySeeShoppingCartAbandonedCartsReport() {
+        Assert.assertTrue(shoppingCartPage.verifyViewSalesShippedReportSuccessfully());
+
+    }
+
+    @When("Reporting Manager Navigate to Total Invoiced vs Paid Report page and select period and date {string} {string} and click show Report button")
+    public void reportingManagerNavigateToTotalInvoicedVsPaidReportPageAndSelectPeriodAndDateAndClickShowReportButton(String arg0, String arg1) {
+        salesPage.TotalInvoicedVsPaidReport(arg0,arg1);
+    }
+
+    @Then("Total Invoiced Vs Paid report view successfully")
+    public void totalInvoicedVsPaidReportViewSuccessfully() {
+        salesPage.verifyTotalInvoicedVsPaidReport();
+    }
+
+    @When("reporting manager fills out report date for the shipped  {string} and{string}")
+    public void reportingManagerFillsOutReportDateForTheShippedAnd(String arg0, String arg1) {
+        salesPage.salesTotalShippedReport(arg0,arg1);
+    }
+
+    @Then("Total Shipped Report view successfully")
+    public void totalShippedReportViewSuccessfully() {
+        salesPage.verifyTotalShippedReport();
+    }
+
+    @When("Reporting Manager view bestsellers page between time period {string} and{string}")
+    public void reportingManagerViewBestsellersPageBetweenTimePeriodAnd(String arg0, String arg1) {
+        productsPage.viewProductBestsellerReport(arg0,arg1);
+
+    }
+
+    @Then("Reporting manager should see bestsellers report")
+    public void reportingManagerShouldSeeBestsellersReport() {
+        productsPage.verifyProductBestsellerReport();
+    }
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
 }
+
