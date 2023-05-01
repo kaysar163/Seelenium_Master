@@ -33,7 +33,7 @@ public class OrdersPage {
     WebElement selectedStore;
     @FindBy(xpath = "//span[text()='Add Products']")
     WebElement addProductsButton;
-    @FindBy(xpath = "//td[contains(text(),' kiwi ')]//following-sibling::td[2]")
+    @FindBy(xpath = "//td[contains(text(),' naike-Black-13 ')]//following-sibling::td[2]")
     WebElement selectedProduct;
     @FindBy(xpath = "(//span[text()='Add Selected Product(s) to Order'])[1]")
     WebElement addSelectedProductLink;
@@ -59,6 +59,12 @@ public class OrdersPage {
     WebElement submitOrderButton;
     @FindBy(xpath = "//span[text()='The order has been created.']")
     WebElement successfulMessage;
+
+    @FindBy(xpath = "//a[contains(text(),' Get shipping methods and rates')]")
+    WebElement getShippingMethodLink;
+
+    @FindBy(id = "s_method_flatrate_flatrate")
+    WebElement fixedLink;
 
     //Elements Meryem edit orders
 
@@ -116,6 +122,10 @@ public class OrdersPage {
         telephoneField.sendKeys(functionClass.generateTelephoneNumber());
         functionClass.waitUntilElementPresent(selectedCheckMoney);
         selectedCheckMoney.click();
+        functionClass.waitUntilElementPresent(getShippingMethodLink);
+        getShippingMethodLink.click();
+        functionClass.waitUntilElementPresent(fixedLink);
+        fixedLink.click();
         functionClass.waitUntilElementPresent(submitOrderButton);
         functionClass.sleep(5);
         submitOrderButton.click();
