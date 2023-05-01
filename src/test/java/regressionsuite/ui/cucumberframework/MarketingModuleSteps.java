@@ -196,4 +196,13 @@ public class MarketingModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
     }
+
+    @When("move to catolog and reviews and ratings and customer review and pending reviews")
+    public void moveToCatologAndReviewsAndRatingsAndCustomerReviewAndPendingReviews() {
+    pendingReviewsPage.viewPandingReviews();
+    }
+
+    @Then("nickname should be display")
+    public void nicknameShouldBeDisplay() {Assert.assertTrue(pendingReviewsPage.verifyPendingReviews());
+    }
 }
