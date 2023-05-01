@@ -53,32 +53,46 @@ public class RefundReportPage {
     @FindBy(xpath ="//div[@class='grid']//tbody")
     WebElement totalRefundedTable;
 
+    @FindBy(xpath = "//input[@id='sales_report_from']")
+    WebElement dateFrom;
+
+    @FindBy(xpath = "//input[@id='sales_report_to']")
+    WebElement dateto;
 
 
     public void viewRefundsInTheReports(){
-        salesDashboardPage.clickOnRefundsLink();;
+        salesDashboardPage.clickOnRefundsLink();
+        functionClass.waitUntilElementPresent(storeField);
+        storeField.click();
         Select select=new Select(storeField);
         select.selectByValue("443");
         functionClass.waitUntilElementPresent(reportTypeField);
-        Select select1=new Select(reportTypeField);
-        select.selectByValue("created_at_refunded");
+        reportTypeField.click();
+        //Select select1=new Select(reportTypeField);
+        //select.selectByValue("created_at_order");
+        functionClass.sleep(2);
         functionClass.waitUntilElementPresent(periodTypeField);
-        Select select2=new Select(periodTypeField);
-        select.selectByValue("day");
-        functionClass.waitUntilElementPresent(timeBoxFrom);
-        //timeBoxFrom.click();
+        periodTypeField.click();
+        //Select select2=new Select(periodTypeField);
+        //select.selectByValue("day");
+        functionClass.waitUntilElementPresent(dateFrom);
+        dateFrom.clear();
         functionClass.sleep(2);
-        String fromDate=functionClass.date();
-        functionClass.waitUntilElementPresent(timeBoxTo);
-        //timeBoxTo.click();
+        //String fromDate=functionClass.date();
+        dateFrom.sendKeys("23/03/2023");
+        functionClass.waitUntilElementPresent(dateto);
+        dateto.clear();
         functionClass.sleep(2);
-        String toDate=functionClass.date();
+        //String toDate=functionClass.date();
+        dateto.sendKeys("27/04/2023");
         functionClass.waitUntilElementPresent(orderStatusField);
-        Select select3=new Select(orderStatusField);
-        select.selectByValue("0");
+        orderStatusField.click();
+        //Select select3=new Select(orderStatusField);
+        //select.selectByValue("0");
         functionClass.waitUntilElementPresent(emptyRows);
-        Select select4=new Select(emptyRows);
-        select.selectByValue("1");
+        emptyRows.click();
+        //Select select4=new Select(emptyRows);
+        //select.selectByValue("1");
         functionClass.waitUntilElementPresent(showReportButton);
         showReportButton.click();
     }
