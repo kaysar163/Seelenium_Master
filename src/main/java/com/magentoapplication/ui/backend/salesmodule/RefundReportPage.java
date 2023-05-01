@@ -35,11 +35,11 @@ public class RefundReportPage {
     @FindBy(xpath ="//select[@name='period_type']")
     WebElement periodTypeField;
 
-    @FindBy(xpath =" //img[@id='sales_report_from_trig']")
-    WebElement timeBoxFrom;
+    @FindBy(xpath = "//input[@id='sales_report_to']")
+    WebElement dateTo;
 
-    @FindBy(xpath ="//img[@id='sales_report_to_trig']")
-    WebElement timeBoxTo;
+    @FindBy(xpath = "//input[@id='sales_report_from']")
+    WebElement dateFrom;
 
     @FindBy(xpath ="//select[@name='show_order_statuses']")
     WebElement orderStatusField;
@@ -53,11 +53,7 @@ public class RefundReportPage {
     @FindBy(xpath ="//div[@class='grid']//tbody")
     WebElement totalRefundedTable;
 
-    @FindBy(xpath = "//input[@id='sales_report_from']")
-    WebElement dateFrom;
 
-    @FindBy(xpath = "//input[@id='sales_report_to']")
-    WebElement dateto;
 
 
     public void viewRefundsInTheReports(){
@@ -79,12 +75,12 @@ public class RefundReportPage {
         dateFrom.clear();
         functionClass.sleep(2);
         //String fromDate=functionClass.date();
-        dateFrom.sendKeys("23/03/2023");
-        functionClass.waitUntilElementPresent(dateto);
-        dateto.clear();
+        dateFrom.sendKeys(functionClass.date());
+        functionClass.waitUntilElementPresent(dateTo);
+        dateTo.clear();
         functionClass.sleep(2);
         //String toDate=functionClass.date();
-        dateto.sendKeys("27/04/2023");
+        dateTo.sendKeys(functionClass.date());
         functionClass.waitUntilElementPresent(orderStatusField);
         orderStatusField.click();
         //Select select3=new Select(orderStatusField);
