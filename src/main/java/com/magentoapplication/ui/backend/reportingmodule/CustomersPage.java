@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class CustomersPage {
     WebDriver driver;
@@ -48,6 +49,68 @@ public class CustomersPage {
 
     @FindBy(xpath = "//table[@id='gridOrdersCustomer_table']//tbody//tr//td[5]")
     WebElement customerExist;
+
+
+    @FindBy(xpath ="//select[@id='store_switcher']")
+    WebElement storeField;
+
+    @FindBy(xpath = "//input[@id='period_date_from']")
+    WebElement dateFromField;
+
+    @FindBy(xpath = "//input[@id='period_date_to']")
+    WebElement dateToField;
+
+    @FindBy(xpath ="//button[@title='Refresh']")
+    WebElement RefreshButton;
+
+    @FindAll(
+            @FindBy(xpath = "//table[@id='gridOrdersCustomer_table']")
+    )
+    WebElement ViewsCustomersByTotalOrderReportElement;
+
+
+    @FindBy(xpath = "//div[@class='grid']")
+    WebElement noRecordReportTable;
+
+
+
+
+    public void viewCustomersByTotalOrdersReport(String dateFrom ,String dateTo){
+        reportingDashboardPage.clickOnCustomersbyorderstotalsLink();
+        functionClass.waitUntilElementPresent(storeField);
+        storeField.click();
+        Select select=new Select(storeField);
+        select.selectByValue("436");
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(dateFromField);
+        dateFromField.clear();
+        dateFromField.sendKeys(dateFrom);
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(dateToField);
+        dateToField.clear();
+        dateToField.sendKeys(dateTo);
+        functionClass.waitUntilElementPresent(RefreshButton);
+        RefreshButton.click();
+
+    }
+
+    public boolean verifyViewCustomersByTotalOrdersReport()
+      { functionClass.waitUntilElementPresent(noRecordReportTable);
+        if (noRecordReportTable.isDisplayed()){
+            if (driver.getPageSource().contains("No records found for this period.")){
+                System.out.println("There is no customer order record");
+            } else if (ViewsCustomersByTotalOrderReportElement.isDisplayed()){
+                System.out.println("Customer Order record Exist");
+            }
+            return true;
+        }
+        else return false;
+    }
+
+
+
+
+
 
     public void viewCustomersByNumberOfReports(){
         reportingDashboardPage.clickOnCustomersbynumberofordersLink();
