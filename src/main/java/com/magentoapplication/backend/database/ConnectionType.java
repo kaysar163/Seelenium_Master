@@ -1,5 +1,5 @@
 package com.magentoapplication.backend.database;
 
-public class ConnectionType {
-
+public enum ConnectionType {
+    MSSQL,MYSQL
 }
