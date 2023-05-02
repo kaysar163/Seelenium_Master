@@ -169,7 +169,11 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Fazilat :
+  @viewAbandonedShoppingCartsReport #Fazilat :
+  Scenario: Reporting Manager should be able to see shopping cart - Abandoned Carts Report
+    Given Admin user is already in the dashboard page reporting
+    When the users sees abandoned shopping cart by different store
+    Then the users views abandoned carts report table
 
 
 
