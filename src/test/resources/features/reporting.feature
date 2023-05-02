@@ -85,8 +85,14 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Fazilat :
-
+  @viewCustomersByOrdersTotalReport  #Fazilat:
+  Scenario Outline: Reporting manager should be able to see customers by orders total report
+    Given Admin user is already in the dashboard page reporting
+    When Reporting Manager view customers by orders total Report with time period between "<dateFrom>" and"<dateTo>"
+    Then Reporting manager should see total orders table report
+    Examples:
+      | dateFrom  | dateTo    |
+      | 3/21/2023 | 4/30/2023 |
 
 
 
