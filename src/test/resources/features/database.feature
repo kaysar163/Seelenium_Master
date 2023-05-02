@@ -17,7 +17,12 @@
 
 
 
-    #Omercan :
+    @Writer:Omercan :
+      @verifyNewlyAddedProductRootCategoryInTheDatabase
+      Scenario: Verify that newly added product root category should be in the database
+        Given connection is already established
+        When a new user add product root category
+        Then added new product root category should be in the database
 
 
 

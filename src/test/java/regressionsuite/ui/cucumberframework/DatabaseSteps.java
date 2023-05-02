@@ -51,4 +51,12 @@ public class DatabaseSteps {
     public void theUserShouldBeInTheDatabase() {
     }
 
+    @When("a new user add product root category")
+    public void aNewUserAddProductRootCategory() {
+        
+    }
+
+    @Then("added new product root category should be in the database")
+    public void addedNewProductRootCategoryShouldBeInTheDatabase() {
+    }
 }
