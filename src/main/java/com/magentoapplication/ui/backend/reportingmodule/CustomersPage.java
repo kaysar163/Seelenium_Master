@@ -79,8 +79,8 @@ public class CustomersPage {
         reportingDashboardPage.clickOnCustomersbyorderstotalsLink();
         functionClass.waitUntilElementPresent(storeField);
         storeField.click();
-        Select select=new Select(storeField);
-        select.selectByValue("436");
+        //Select select=new Select(storeField);
+        //select.selectByValue("436");
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(dateFromField);
         dateFromField.clear();
