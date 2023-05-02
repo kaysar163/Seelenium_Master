@@ -25,22 +25,22 @@ public class ReportingModuleSteps extends TestBase {
     ShoppingCartPage shoppingCartPage;
 
     @Before("@ReportingModuleTest")
-    public void setUp(){
+    public void setUp() {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.reportingModuleLogin();
 
     }
 
     @Given("Admin user is already in the dashboard page reporting")
     public void adminUserIsAlreadyInTheDashboardPageReporting() {
-        salesPage=new SalesPage(driver);
-        customersPage=new CustomersPage(driver);
-        tagsPage=new TagsPage(driver);
-        reviewsPage=new ReviewsPage(driver);
-        actions=new Actions(driver);
-        productsPage=new ProductsPage(driver);
-        shoppingCartPage= new ShoppingCartPage(driver);
+        salesPage = new SalesPage(driver);
+        customersPage = new CustomersPage(driver);
+        tagsPage = new TagsPage(driver);
+        reviewsPage = new ReviewsPage(driver);
+        actions = new Actions(driver);
+        productsPage = new ProductsPage(driver);
+        shoppingCartPage = new ShoppingCartPage(driver);
     }
 
     @When("the user views tags for customers report")
@@ -63,6 +63,7 @@ public class ReportingModuleSteps extends TestBase {
     public void theUserSeesCustomersByNumberOfOrdersReport() {
         Assert.assertTrue(customersPage.verifyViewsCustomersReport());
     }
+
     @When("Reporting manager clicks on popular button under tags button")
     public void reportingManagerClicksOnPopularButtonUnderTagsButton() {
         tagsPage.clickOnPopularTags();
@@ -72,6 +73,7 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldViewPopularTagsOnPopularTagsPage() {
         Assert.assertTrue(tagsPage.verifyThatPopularTagsDisplayed());
     }
+
     @When("Reporting manager click on show reviews button on product reviews page")
     public void reportingManagerClickOnShowReviewsButtonOnProductReviewsPage() {
         reviewsPage.clickProductReviews();
@@ -81,11 +83,13 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldBeAbleToViewAllProductReviews() {
         Assert.assertTrue(reviewsPage.verifyThatAllReviewsShown());
     }
+
     @When("reporting manager fills out report date {string} and{string}")
     public void reportingManagerFillsOutReportDateAnd(String arg0, String arg1) {
-        salesPage.viewTotalOrderedReport(arg0,arg1);
+        salesPage.viewTotalOrderedReport(arg0, arg1);
 
     }
+
     @Then("total ordered report should display")
     public void totalOrderedReportShouldDisplay() {
         Assert.assertTrue(salesPage.verifyOrderedReport());
@@ -93,7 +97,7 @@ public class ReportingModuleSteps extends TestBase {
 
     @When("reporting manager opens the Sales Total Refunded Report and fills out report data {string} and{string}")
     public void reportingManagerOpensTheSalesTotalRefundedReportAndFillsOutReportDataAnd(String arg0, String arg1) {
-        salesPage.salesTotalRefundedReport(arg0,arg1);
+        salesPage.salesTotalRefundedReport(arg0, arg1);
     }
 
     @Then("Total Refunded should be displayed")
@@ -136,13 +140,13 @@ public class ReportingModuleSteps extends TestBase {
     }
 
 
-
     @When("Reporting Manager view most viewed page between time period {string} and{string}")
     public void reportingManagerViewMostViewedPageBetweenTimePeriodAnd(String arg0, String arg1) {
-        productsPage.seeMostViewedReport(arg0,arg1);
+        productsPage.seeMostViewedReport(arg0, arg1);
 
 
     }
+
     @Then("Reporting Manager should see most viewed report")
     public void reportingManagerShouldSeeMostViewedReport() {
         productsPage.verifyMostViewedReport();
@@ -150,7 +154,7 @@ public class ReportingModuleSteps extends TestBase {
 
     @When("Reporting Manager view products {string} and {string}")
     public void reportingManagerViewProductsAnd(String arg0, String arg1) {
-        productsPage.viewProductsOrderedReport(arg0,arg1);
+        productsPage.viewProductsOrderedReport(arg0, arg1);
 
     }
 
@@ -160,12 +164,11 @@ public class ReportingModuleSteps extends TestBase {
     }
 
 
-
     @When("see Shopping Cart - Abandoned carts Report")
     public void seeShoppingCartAbandonedCartsReport() {
         shoppingCartPage.viewSalesShippedReport();
 
-        
+
     }
 
     @Then("verify see Shopping Cart - Abandoned carts Report")
@@ -176,7 +179,7 @@ public class ReportingModuleSteps extends TestBase {
 
     @When("Reporting Manager Navigate to Total Invoiced vs Paid Report page and select period and date {string} {string} and click show Report button")
     public void reportingManagerNavigateToTotalInvoicedVsPaidReportPageAndSelectPeriodAndDateAndClickShowReportButton(String arg0, String arg1) {
-        salesPage.TotalInvoicedVsPaidReport(arg0,arg1);
+        salesPage.TotalInvoicedVsPaidReport(arg0, arg1);
     }
 
     @Then("Total Invoiced Vs Paid report view successfully")
@@ -186,7 +189,7 @@ public class ReportingModuleSteps extends TestBase {
 
     @When("reporting manager fills out report date for the shipped  {string} and{string}")
     public void reportingManagerFillsOutReportDateForTheShippedAnd(String arg0, String arg1) {
-        salesPage.salesTotalShippedReport(arg0,arg1);
+        salesPage.salesTotalShippedReport(arg0, arg1);
     }
 
     @Then("Total Shipped Report view successfully")
@@ -196,7 +199,7 @@ public class ReportingModuleSteps extends TestBase {
 
     @When("Reporting Manager view bestsellers page between time period {string} and{string}")
     public void reportingManagerViewBestsellersPageBetweenTimePeriodAnd(String arg0, String arg1) {
-        productsPage.viewProductBestsellerReport(arg0,arg1);
+        productsPage.viewProductBestsellerReport(arg0, arg1);
 
     }
 
@@ -204,9 +207,19 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldSeeBestsellersReport() {
         productsPage.verifyProductBestsellerReport();
     }
+
+
+    @When("Reporting Manager view customers by orders total Report with time period between {string} and{string}")
+    public void reportingManagerViewCustomersByOrdersTotalReportWithTimePeriodBetweenAnd(String arg0, String arg1) {
+        customersPage.viewCustomersByTotalOrdersReport(arg0, arg1);
+    }
+
+    @Then("Reporting manager should see total orders table report")
+    public void reportingManagerShouldSeeTotalOrdersTableReport(){customersPage.verifyViewCustomersByTotalOrdersReport();
+    }
+
     @After("@ReportingModuleTest")
-    public void tearDown(){
+    public void tearDown() {
         closeBrowser();
     }
 }
-
