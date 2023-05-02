@@ -37,6 +37,48 @@ public class ShoppingCartPage {
     @FindAll(@FindBy(css = ".data>tbody>tr"))
     List<WebElement> shippedReportTable;
 
+
+    //Fazilet
+    @FindBy(xpath ="//select[@id='store_switcher']")
+    WebElement storeField;
+
+    @FindBy(xpath = "//button[@title='Search']")
+    WebElement searchButton;
+
+    @FindBy(xpath ="//div[@class='grid']")
+    WebElement abandonedCartsTable;
+
+    @FindBy(xpath = "//table[@id='gridAbandoned_table']")
+    WebElement unexistAbandonedCartsTable;
+
+
+    public void viewAbandonedShoppingCartsReport(){
+        reportingDashboardPage.clickOnAbandonedcartsLink();
+        functionClass.waitUntilElementPresent(storeField);
+        storeField.click();
+        Select select=new Select(storeField);
+        select.selectByValue("439");
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+    }
+
+
+    public boolean verifyViewAbandonedShoppingCartsReport(){
+        functionClass.waitUntilElementPresent(unexistAbandonedCartsTable);
+        if (unexistAbandonedCartsTable.isDisplayed()){
+            if (driver.getPageSource().contains("No records found .")){
+                System.out.println("There is no abandoned cart record");
+            } else if (abandonedCartsTable.isDisplayed()){
+                System.out.println("Abandoned Carts Report Exist");
+            }
+            return true;
+        }
+        else return false;
+    }
+
+
+
     public void viewSalesShippedReport(){
         reportingDashboardPage.clickOnProductsincartsLink();
     }
