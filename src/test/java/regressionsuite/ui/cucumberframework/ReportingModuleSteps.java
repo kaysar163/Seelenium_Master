@@ -222,4 +222,12 @@ public class ReportingModuleSteps extends TestBase {
     public void tearDown() {
         closeBrowser();
     }
+
+    @When("the users sees abandoned shopping cart by different store")
+    public void theUsersSeesAbandonedShoppingCartByDifferentStore() {shoppingCartPage.viewAbandonedShoppingCartsReport();
+    }
+
+    @Then("the users views abandoned carts report table")
+    public void theUsersViewsAbandonedCartsReportTable() {shoppingCartPage.verifyViewAbandonedShoppingCartsReport();
+    }
 }
