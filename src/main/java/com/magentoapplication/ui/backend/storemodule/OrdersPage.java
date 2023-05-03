@@ -121,9 +121,11 @@ public class OrdersPage {
         functionClass.waitUntilElementPresent(telephoneField);
         telephoneField.sendKeys(functionClass.generateTelephoneNumber());
         functionClass.waitUntilElementPresent(selectedCheckMoney);
-        selectedCheckMoney.click();
+        functionClass.clickOnJavaScript(selectedCheckMoney);
+//        selectedCheckMoney.click();
         functionClass.waitUntilElementPresent(getShippingMethodLink);
-        getShippingMethodLink.click();
+        functionClass.clickOnJavaScript(getShippingMethodLink);
+//        getShippingMethodLink.click();
         functionClass.waitUntilElementPresent(fixedLink);
         fixedLink.click();
         functionClass.waitUntilElementPresent(submitOrderButton);
