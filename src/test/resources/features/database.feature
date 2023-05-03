@@ -24,8 +24,8 @@
 
 
 
-   @Writer:Abdusattar :
-     @verifyNewlyRegisteredUsersInTheDatabase
+   @Writer:Abdusattar
+   @verifyNewlyRegisteredUsersInTheDatabase
   Scenario: Verify that newly registered users should be in the database
   Given connection is already established
   When a new user registers to the system
