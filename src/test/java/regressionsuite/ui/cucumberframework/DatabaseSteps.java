@@ -8,6 +8,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 
 import java.sql.Connection;
 
@@ -51,4 +52,25 @@ public class DatabaseSteps {
     public void theUserShouldBeInTheDatabase() {
     }
 
+  
+
+    @Given("login sales module page")
+    public void loginSalesModulePage() {
+
+}
+
+
+    @When("show credit memos")
+    public void showCreditMemos() {
+
+
+    }
+        
+
+
+    @Then("Verify added memos in data base")
+    public boolean verifyAddedMemosInDataBase(Connection connection) {
+        Assert.assertTrue(verifyAddedMemosInDataBase( this.connection ));
+        return false;
+    }
 }

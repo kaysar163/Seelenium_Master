@@ -92,6 +92,12 @@
 
 
       #Mirehmidi :
+    @VerifyCreditMemos
+    Scenario: Add Credit Memos and Database UI Verification
+      Given  login sales module page
+      When   show credit memos
+      Then   Verify added memos in data base
+
 
 
 
