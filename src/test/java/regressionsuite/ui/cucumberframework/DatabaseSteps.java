@@ -2,6 +2,7 @@ package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.backend.database.ConnectionType;
 import com.magentoapplication.backend.database.DatabaseConnection;
+import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
 import com.magentoapplication.utility.ApplicationConfig;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -51,4 +52,14 @@ public class DatabaseSteps {
     public void theUserShouldBeInTheDatabase() {
     }
 
+    @When("a new store should be added on the store page")
+    public void aNewStoreShouldBeAddedOnTheStorePage() {
+
+
+
+    }
+
+    @Then("the added store should appear in the database")
+    public void theAddedStoreShouldAppearInTheDatabase() {
+    }
 }
