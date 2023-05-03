@@ -55,13 +55,14 @@ public class DatabaseSteps {
   
 
     @Given("login sales module page")
-    public void loginSalesModulePage() {
-
+    public void loginSalesModulePage(Object login) {
+        login.equals("store_module");
 }
 
 
     @When("show credit memos")
-    public void showCreditMemos() {
+    public void showCreditMemos(Object productsPage) {
+        productsPage.getClass();
 
 
     }
