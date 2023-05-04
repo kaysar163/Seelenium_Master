@@ -73,7 +73,7 @@ public class DatabaseSteps extends TestBase {
 
     @Then("the added store should appear in the database")
     public void theAddedStoreShouldAppearInTheDatabase() {
-        Assert.assertTrue(dataAccess.assertStoreExists(TestHelperStore.getStoreName()));
+        Assert.assertTrue(dataAccess.assertStoreExists(TestHelperStore.getStoreName(),connection));
 
 
 
@@ -81,6 +81,7 @@ public class DatabaseSteps extends TestBase {
 
     @When("a new store should be added on the store page")
     public void aNewStoreShouldBeAddedOnTheStorePage() {
+        setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
         backEndLogin.storeModuleLogin();
         ManageStoresPage manageStoresPage=new ManageStoresPage(driver);
