@@ -204,9 +204,20 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldSeeBestsellersReport() {
         productsPage.verifyProductBestsellerReport();
     }
+
+
+    @When("Reporting manager should be see customers")
+    public void reportingManagerShouldBeSeeCustomers() {customersPage.seeNewAccounts();
+    }
+
+    @Then("Reporting manager should be able to see new accounts")
+    public void reportingManagerShouldBeAbleToSeeNewAccounts() {customersPage.verifySeeNewCustomers();
+    }
     @After("@ReportingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
+
+
 }
 
