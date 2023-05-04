@@ -40,6 +40,9 @@ public class ManageCategoriesPage {
 
     @FindBy(id = "group_4name")
 
+    WebElement subCatName;
+
+    @FindBy(id="group_4name")
     WebElement rootName;
     @FindBy( id="group_4is_active")
 
@@ -127,13 +130,17 @@ public class ManageCategoriesPage {
         catalogDashboardPage.catalogLink.click();
         functionClass.waitUntilElementPresent(catalogDashboardPage.manageCategoriesLink);
         catalogDashboardPage.manageCategoriesLink.click();
+        functionClass.sleep(2);
+        WebElement findRootName=driver.findElement(By.xpath(String.format("//span[contains(text(),'%s')]//parent::a",TestHelperCatalog.getRootName())));
+        functionClass.sleep(2);
+        findRootName.click();
         functionClass.waitUntilElementPresent(addSubCategoryButton);
         functionClass.clickOnJavaScript(addSubCategoryButton);
         //addSubCategoryButton.click();
-        functionClass.waitUntilElementPresent(rootName);
+        functionClass.waitUntilElementPresent(subCatName);
         TestHelperCatalog.setSubName(functionClass.generateFakeName());
         functionClass.sleep(3);
-        rootName.sendKeys(TestHelperCatalog.getSubName());
+        subCatName.sendKeys(TestHelperCatalog.getSubName());
         functionClass.sleep(3);
         Select select=new Select(isActive);
         select.selectByValue("1");

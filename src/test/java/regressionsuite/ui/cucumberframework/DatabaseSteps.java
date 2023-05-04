@@ -36,6 +36,7 @@ public class DatabaseSteps extends TestBase {
     CustomerInformationPage customerInformationPage;
     ManageCategoriesPage manageCategoriesPage;
     CustomerGroupPage customerGroupPage;
+    //ManageCategoriesPage manageCategoriesPage;
     BackEndLogin backEndLogin;
 
     DataAccess dataAccess;
@@ -145,12 +146,31 @@ public class DatabaseSteps extends TestBase {
         boolean isEmailAdded=dataAccess.getCustomerEmail(TestHelperClass.getEmail(),connection);
         Assert.assertTrue(isEmailAdded);
     }
+
+
+
+    @When("a new sub category should be added to the category page under root category")
+    public void aNewSubCategoryShouldBeAddedToTheCategoryPageUnderRootCategory() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.catalogModuleLogin();
+        manageCategoriesPage=new ManageCategoriesPage(driver);
+        manageCategoriesPage.addSubCategory();
+        Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
+
+    }
+
+    @Then("the newly added sub category should be ın the data base")
+    public void theNewlyAddedSubCategoryShouldBeInTheDataBase() {
+
+
+    }
+
     @After("@DatabaseTest")
     public void tearDown(){
         DatabaseConnection.closeDataBaseConnection(connection);
         closeBrowser();
     }
-
 }
 
 

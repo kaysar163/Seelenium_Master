@@ -165,6 +165,20 @@ public class DataAccess {
         }
         return isCustomerEmailExist;
     }
+
+    public  boolean verifyNewlyAddedSubCategoriesInTheDatabase(int subCatId,Connection connection){
+        String addedSubCategory = String.format("select *from i5751295_mg2.mg_catalog_category_product  where category_id= %d",subCatId);
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(addedSubCategory);
+                ResultSet resultSet = preparedStatement.executeQuery();) {
+            boolean subCategoryExist = resultSet.next();
+
+            return subCategoryExist;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     }
 
 
