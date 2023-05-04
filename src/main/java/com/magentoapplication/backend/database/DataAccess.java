@@ -79,21 +79,30 @@ public class DataAccess {
     }
 
     public boolean theAddedRefundShouldBeInTheDatabase(String refundName, Connection connection) {
-        String addedStore = String.format("Select * from mg_sales_refunded_aggregated",refundName);
+        String addedStore = String.format("Select * from mg_sales_refunded_aggregated", refundName);
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(addedStore);
-                ResultSet resultSet = preparedStatement.executeQuery();)
-        { boolean storeExists = resultSet.next();
+                ResultSet resultSet = preparedStatement.executeQuery();) {
+            boolean storeExists = resultSet.next();
 
             return storeExists;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
-
     }
-}
+        public boolean verifyCustomerGroupName(String customerGroupName, Connection connection){
+            String selectCat = String.format("select * from mg_customer_group where customer_group_code='%s'", customerGroupName);
+            try (PreparedStatement preparedStatement= connection.prepareStatement(selectCat);
+                 ResultSet resultSet= preparedStatement.executeQuery();)
+            {boolean isCustomerGroupAdded= resultSet.next();
+                return  isCustomerGroupAdded;}
+            catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
+
+
