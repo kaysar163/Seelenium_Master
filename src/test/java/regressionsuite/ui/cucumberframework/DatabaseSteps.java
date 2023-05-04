@@ -4,6 +4,8 @@ import com.magentoapplication.backend.database.ConnectionType;
 import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
+import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
@@ -26,6 +28,7 @@ public class DatabaseSteps extends TestBase {
     String config="config.properties";
 
     CreateAnAccountPage createAnAccountPage;
+    ManageCategoriesPage manageCategoriesPage;
 
     BackEndLogin backEndLogin;
 
@@ -43,7 +46,7 @@ public class DatabaseSteps extends TestBase {
     @Before("@DatabaseTest")
     public void setUp(){
         connection= DatabaseConnection.connection(dbUrl,dbPort,dbDefault,dbUserName,dbPassword, ConnectionType.MYSQL);
-        //backEndLogin=new BackEndLogin(driver);
+        backEndLogin=new BackEndLogin(driver);
         dataAccess=new DataAccess();
     }
 
@@ -87,5 +90,20 @@ public class DatabaseSteps extends TestBase {
         ManageStoresPage manageStoresPage=new ManageStoresPage(driver);
         manageStoresPage.createStore();
         Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
+
+    @When("user can add root category")
+    public void userCanAddRootCategory() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.catalogModuleLogin();
+        manageCategoriesPage=new ManageCategoriesPage(driver);
+        manageCategoriesPage.fillCategoryInformationAndSave();
+        Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
+    }
+
+    @Then("the user should added new root category")
+    public void theUserShouldAddedNewRootCategory() {
+        Assert.assertTrue(dataAccess.verifyCatAdded(TestHelperCatalog.getRootName(),connection));
     }
 }
