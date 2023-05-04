@@ -56,6 +56,9 @@ public class ManageCustomersPage {
     @FindBy(xpath = "//span[text()='OK']")
     WebElement OK;
 
+    @FindBy(xpath = "//strong[text()='Chelsea Tee']//following::td[2][contains(text(),'2')]\n")
+    WebElement verifyUpdateExitingShoppingCart;
+
     public void viewShoppingCartForCustomers() {
         salesDashboardPage.clickOnManageCustomersLink();
         functionClass.waitUntilElementPresent(customerEmailField);
@@ -84,13 +87,13 @@ public class ManageCustomersPage {
             log4j.info("---Test Failed---");
             return false;
         }
-
+    }
 
 
         public void updateExistingShoppingCartForCustomers () {
             salesDashboardPage.clickOnManageCustomersLink();
             functionClass.waitUntilElementPresent(customerEmailField);
-            customerEmailField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "loginEmail"));
+            customerEmailField.sendKeys(ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "mEmail"));
             functionClass.waitUntilElementPresent(searchButton);
             searchButton.click();
             functionClass.waitUntilElementPresent(editButton);
@@ -101,13 +104,17 @@ public class ManageCustomersPage {
             functionClass.waitUntilElementPresent(updateshoppingcart);
             updateshoppingcart.click();
             functionClass.waitUntilElementPresent(quantity);
-            quantity.sendKeys("1");
+            quantity.sendKeys("5");
             functionClass.waitUntilElementPresent(OK);
             OK.click();
 
         }
-    }
+
     public boolean verifyUpdateShoppingCart(){
+        functionClass.waitUntilElementPresent(verifyUpdateExitingShoppingCart);
+        if (verifyUpdateExitingShoppingCart.isDisplayed())
+            return true;
+        else return false;
 
     }
 
