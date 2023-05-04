@@ -4,12 +4,15 @@ import com.magentoapplication.backend.database.ConnectionType;
 import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
-import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
-import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
+import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
+import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
+import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
+import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
+import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
+import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
 import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
 import com.magentoapplication.utility.ApplicationConfig;
-import com.magentoapplication.utility.FunctionClass;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -23,11 +26,16 @@ import java.sql.Connection;
 public class DatabaseSteps extends TestBase {
 
     Connection connection;
+
     String config="config.properties";
+
     CreateAnAccountPage createAnAccountPage;
-   CustomerGroupPage customerGroupPage;
+    ManageCategoriesPage manageCategoriesPage;
+
     BackEndLogin backEndLogin;
+
     DataAccess dataAccess;
+    SalesPage salesPage;
 
     String dbUrl= ApplicationConfig.readFromConfigProperties(config,"dbIp");
     String dbPort= (ApplicationConfig.readFromConfigProperties(config,"dbPort"));
@@ -41,6 +49,7 @@ public class DatabaseSteps extends TestBase {
     @Before("@DatabaseTest")
     public void setUp(){
         connection= DatabaseConnection.connection(dbUrl,dbPort,dbDefault,dbUserName,dbPassword, ConnectionType.MYSQL);
+        backEndLogin=new BackEndLogin(driver);
         dataAccess=new DataAccess();
     }
 
@@ -67,19 +76,44 @@ public class DatabaseSteps extends TestBase {
         boolean isCustomerAdded=dataAccess.getRegisteredCustomer(TestHelperFrontEnd.getEmail(),connection);
         Assert.assertTrue(isCustomerAdded);
     }
-    //meryem
-    @When("add new customer group")
-    public void addNewCustomerGroup() {
-        setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
-        backEndLogin.customersModuleLogin();
-        customerGroupPage=new CustomerGroupPage(driver);
-        customerGroupPage.addNewCustomerGroup();
-        Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
+
+    @Then("the added store should appear in the database")
+    public void theAddedStoreShouldAppearInTheDatabase() {
+        Assert.assertTrue(dataAccess.assertStoreExists(TestHelperStore.getStoreName(),connection));
+
+
+
     }
 
-    @Then("Verify new added customer groups in database")
-    public void verifyNewAddedCustomerGroupsInDatabase() {
-        Assert.assertTrue(dataAccess.verifyCustomerGroupName(TestHelperClass.getGroupName(),connection));
+    @When("a new store should be added on the store page")
+    public void aNewStoreShouldBeAddedOnTheStorePage() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.storeModuleLogin();
+        ManageStoresPage manageStoresPage=new ManageStoresPage(driver);
+        manageStoresPage.createStore();
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
+
+    @Then("the added refund should be in the database")
+    public void theAddedRefundShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.theAddedRefundShouldBeInTheDatabase( TestHelperReporting.getRefundName(),connection));
+
+
+
+    }
+
+    @When("view a new refund  from {string} and{string}")
+    public void viewANewRefundFromAnd(String arg0, String arg1) {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin( driver );
+        backEndLogin.reportingModuleLogin();
+         salesPage = new SalesPage( driver );
+        salesPage.salesTotalRefundedReport(arg0,arg1);
+        Assert.assertTrue(salesPage.verifyRefundedReport());
+
+
     }
 }
+
+

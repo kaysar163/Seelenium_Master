@@ -23,6 +23,11 @@
 
 
     #Omercan :
+    @verifyNewlyAddedProductRootCategoryInTheDatabase
+    Scenario: Verify that newly added product root category should be in the database
+      Given connection is already established
+      When user can add root category
+      Then the user should added new root category
 
 
 
@@ -62,6 +67,10 @@
 
 
       #Memet :
+    Scenario: verify that newly added stock should be present in the database
+      Given connection is already established
+      When a new store should be added on the store page
+      Then the added store should appear in the database
 
 
 
@@ -97,6 +106,15 @@
 
 
       #Mirehmidi :
+    @Verifynewlyaddedrefundshouldbeinthedatabase
+    Scenario Outline: Verify that newly added refund should be in the database
+      Given  connection is already established
+      When  view a new refund  from "<dateFrom>" and"<dateTo>"
+      Then   the added refund should be in the database
+      Examples:
+        | dateFrom  | dateTo    |
+        | 4/25/2023 | 4/28/2023 |
+
 
 
 
