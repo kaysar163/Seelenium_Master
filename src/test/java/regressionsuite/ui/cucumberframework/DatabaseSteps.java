@@ -30,7 +30,7 @@ public class DatabaseSteps extends TestBase {
 
     Connection connection;
 
-    String config="config.properties";
+    String config = "config.properties";
 
     CreateAnAccountPage createAnAccountPage;
     CustomerInformationPage customerInformationPage;
@@ -41,20 +41,18 @@ public class DatabaseSteps extends TestBase {
     DataAccess dataAccess;
     SalesPage salesPage;
 
-    String dbUrl= ApplicationConfig.readFromConfigProperties(config,"dbIp");
-    String dbPort= (ApplicationConfig.readFromConfigProperties(config,"dbPort"));
-    String dbUserName= ApplicationConfig.readFromConfigProperties(config,"dbUserName");
-    String dbPassword= ApplicationConfig.readFromConfigProperties(config,"dbPassword");
-    String dbDefault= ApplicationConfig.readFromConfigProperties(config,"dbDefault");
-
-
+    String dbUrl = ApplicationConfig.readFromConfigProperties(config, "dbIp");
+    String dbPort = (ApplicationConfig.readFromConfigProperties(config, "dbPort"));
+    String dbUserName = ApplicationConfig.readFromConfigProperties(config, "dbUserName");
+    String dbPassword = ApplicationConfig.readFromConfigProperties(config, "dbPassword");
+    String dbDefault = ApplicationConfig.readFromConfigProperties(config, "dbDefault");
 
 
     @Before("@DatabaseTest")
-    public void setUp(){
-        connection= DatabaseConnection.connection(dbUrl,dbPort,dbDefault,dbUserName,dbPassword, ConnectionType.MYSQL);
-        backEndLogin=new BackEndLogin(driver);
-        dataAccess=new DataAccess();
+    public void setUp() {
+        connection = DatabaseConnection.connection(dbUrl, dbPort, dbDefault, dbUserName, dbPassword, ConnectionType.MYSQL);
+        backEndLogin = new BackEndLogin(driver);
+        dataAccess = new DataAccess();
     }
 
 
@@ -65,21 +63,20 @@ public class DatabaseSteps extends TestBase {
     @When("a new user registers to the system")
     public void aNewUserRegistersToTheSystem() {
         setupBrowserFrontEnd();
-        createAnAccountPage=new CreateAnAccountPage(driver);
+        createAnAccountPage = new CreateAnAccountPage(driver);
         createAnAccountPage.fillAccountRegistrationForm();
         Assert.assertTrue(createAnAccountPage.verifyCreateAnAccountSuccessful());
     }
 
     @Then("the user should be in the database")
     public void theUserShouldBeInTheDatabase() {
-        boolean isCustomerAdded=dataAccess.getRegisteredCustomer(TestHelperFrontEnd.getEmail(),connection);
+        boolean isCustomerAdded = dataAccess.getRegisteredCustomer(TestHelperFrontEnd.getEmail(), connection);
         Assert.assertTrue(isCustomerAdded);
     }
 
     @Then("the added store should appear in the database")
     public void theAddedStoreShouldAppearInTheDatabase() {
-        Assert.assertTrue(dataAccess.assertStoreExists(TestHelperStore.getStoreName(),connection));
-
+        Assert.assertTrue(dataAccess.assertStoreExists(TestHelperStore.getStoreName(), connection));
 
 
     }
@@ -87,17 +84,16 @@ public class DatabaseSteps extends TestBase {
     @When("a new store should be added on the store page")
     public void aNewStoreShouldBeAddedOnTheStorePage() {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.storeModuleLogin();
-        ManageStoresPage manageStoresPage=new ManageStoresPage(driver);
+        ManageStoresPage manageStoresPage = new ManageStoresPage(driver);
         manageStoresPage.createStore();
         Assert.assertTrue(manageStoresPage.verifyCreateStore());
     }
 
     @Then("the added refund should be in the database")
     public void theAddedRefundShouldBeInTheDatabase() {
-        Assert.assertTrue(dataAccess.theAddedRefundShouldBeInTheDatabase( TestHelperReporting.getRefundName(),connection));
-
+        Assert.assertTrue(dataAccess.theAddedRefundShouldBeInTheDatabase(TestHelperReporting.getRefundName(), connection));
 
 
     }
@@ -105,10 +101,10 @@ public class DatabaseSteps extends TestBase {
     @When("view a new refund  from {string} and{string}")
     public void viewANewRefundFromAnd(String arg0, String arg1) {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin( driver );
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.reportingModuleLogin();
-         salesPage = new SalesPage( driver );
-        salesPage.salesTotalRefundedReport(arg0,arg1);
+        salesPage = new SalesPage(driver);
+        salesPage.salesTotalRefundedReport(arg0, arg1);
         Assert.assertTrue(salesPage.verifyRefundedReport());
 
 
@@ -117,16 +113,16 @@ public class DatabaseSteps extends TestBase {
     @When("add new customer group")
     public void addNewCustomerGroup() {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
+        backEndLogin = new BackEndLogin(driver);
         backEndLogin.customersModuleLogin();
-        customerGroupPage=new CustomerGroupPage(driver);
+        customerGroupPage = new CustomerGroupPage(driver);
         customerGroupPage.addNewCustomerGroup();
         Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
     }
 
     @Then("Verify new added customer groups in database")
     public void verifyNewAddedCustomerGroupsInDatabase() {
-        Assert.assertTrue(dataAccess.verifyCustomerGroupName(TestHelperClass.getGroupName(),connection));
+        Assert.assertTrue(dataAccess.verifyCustomerGroupName(TestHelperClass.getGroupName(), connection));
     }
 
 
@@ -135,24 +131,39 @@ public class DatabaseSteps extends TestBase {
         setupBrowserBackEnd();
         backEndLogin = new BackEndLogin(driver);
         backEndLogin.customersModuleLogin();
-        customerInformationPage=new CustomerInformationPage(driver);
+        customerInformationPage = new CustomerInformationPage(driver);
         customerInformationPage.addCustomerMethod();
         Assert.assertTrue(customerInformationPage.verifyCustomer());
 
     }
+
     @Then("customer manager should verify added customer  in the database")
     public void customerManagerShouldVerifyAddedCustomerInTheDatabase() {
-        boolean isEmailAdded=dataAccess.getCustomerEmail(TestHelperClass.getEmail(),connection);
+        boolean isEmailAdded = dataAccess.getCustomerEmail(TestHelperClass.getEmail(), connection);
         Assert.assertTrue(isEmailAdded);
     }
+
     @After("@DatabaseTest")
-    public void tearDown(){
+    public void tearDown() {
         DatabaseConnection.closeDataBaseConnection(connection);
         closeBrowser();
     }
 
-}
+    @When("user can add root category")
+    public void userCanAddRootCategory() {
+        setupBrowserBackEnd();
+        backEndLogin = new BackEndLogin(driver);
+        backEndLogin.catalogModuleLogin();
+        manageCategoriesPage = new ManageCategoriesPage(driver);
+        manageCategoriesPage.fillCategoryInformationAndSave();
+        Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
+    }
 
+    @Then("the user should added new root category")
+    public void theUserShouldAddedNewRootCategory() {
+        Assert.assertTrue(dataAccess.verifyCatAdded(TestHelperCatalog.getRootName(), connection));
+    }
+}
 
 
 
