@@ -4,9 +4,9 @@ import com.magentoapplication.backend.database.ConnectionType;
 import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
-import com.magentoapplication.ui.backend.catalogmodule.CatalogDashboardPage;
+import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
+import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
 import com.magentoapplication.utility.ApplicationConfig;
-import com.magentoapplication.utility.FunctionClass;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -20,43 +20,35 @@ import java.sql.Connection;
 public class DatabaseSteps extends TestBase {
 
     BackEndLogin backEndLogin;
-    FunctionClass functionClass;
-    CatalogDashboardPage catalogDashboardPage;
-    DatabaseConnection dataBaseConnection;
-    Connection connection=null;
+    ManageCategoriesPage manageCategoriesPage;
+    Connection connection = null;
     DataAccess dataAccess;
-    boolean isRootCategoryAdded=false;
+    boolean isRootCategoryAdded = false;
 
-     String config="config.properties";
-    String dbUrl=(ApplicationConfig.readFromConfigProperties(config,"dbIp"));
-    String dbPort= (ApplicationConfig.readFromConfigProperties(config,"dbPort"));
-    String dbUserName= ApplicationConfig.readFromConfigProperties(config,"dbUserName");
-    String dbPassword= ApplicationConfig.readFromConfigProperties(config,"dbPassword");
-    String dbDefault= ApplicationConfig.readFromConfigProperties(config,"dbDefault");
-
-
+    String config = "config.properties";
+    String dbUrl = (ApplicationConfig.readFromConfigProperties(config, "dbIp"));
+    String dbPort = (ApplicationConfig.readFromConfigProperties(config, "dbPort"));
+    String dbUserName = ApplicationConfig.readFromConfigProperties(config, "dbUserName");
+    String dbPassword = ApplicationConfig.readFromConfigProperties(config, "dbPassword");
+    String dbDefault = ApplicationConfig.readFromConfigProperties(config, "dbDefault");
 
 
     @Before("@DatabaseTest")
-    public void setUp(){
-        connection= DatabaseConnection.connection(dbUrl,dbPort,dbDefault,dbUserName,dbPassword, ConnectionType.MYSQL);
-        dataAccess =new DataAccess();
-        dataBaseConnection=new DatabaseConnection();
-        functionClass=new FunctionClass(driver);
-        backEndLogin =new BackEndLogin(driver);
-        catalogDashboardPage=new CatalogDashboardPage(driver);
-        dataAccess=new DataAccess();
+    public void setUp() {
+        connection = DatabaseConnection.connection(dbUrl, dbPort, dbDefault, dbUserName, dbPassword, ConnectionType.MYSQL);
+        dataAccess = new DataAccess();
 
 
     }
 
     @After("@DatabaseTest")
-    public void tearDown(){
+    public void tearDown() {
         DatabaseConnection.closeDataBaseConnection(connection);
     }
 
     @Given("connection is already established")
     public void connectionIsAlreadyEstablished() {
+
 
     }
 
@@ -69,14 +61,19 @@ public class DatabaseSteps extends TestBase {
     public void theUserShouldBeInTheDatabase() {
 
     }
-    @When("the user query the mg_catalog_category_entity_varchar table")
-    public void theUserQueryTheMg_catalog_category_entity_varcharTable() {
-        String isRootCategoryName="iphone15";
-        isRootCategoryAdded=dataAccess.addRottCategory(isRootCategoryName,connection);
+    @Then("the user should added new root category")
+    public void theUserShouldAddedNewRootCategory() {
+        Assert.assertTrue(dataAccess.verifyCatAdded(TestHelperCatalog.getRootName(),connection));
+
     }
 
-    @Then("the user should add new root category")
-    public void theUserShouldAddNewRootCategory() {
-        Assert.assertTrue(isRootCategoryAdded);
+    @When("user can add root category")
+    public void userCanAddRootCategory() {
+        setupBrowserBackEnd();
+        backEndLogin = new BackEndLogin(driver);
+        backEndLogin.catalogModuleLogin();
+        manageCategoriesPage = new ManageCategoriesPage(driver);
+        manageCategoriesPage.fillCategoryInformationAndSave();
+        Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
 }

@@ -17,19 +17,18 @@
 
 
 
-    @Writer:Omercan :
-      @verifyNewlyAddedProductRootCategoryInTheDatabase
+     @verifyNewlyAddedProductRootCategoryInTheDatabase
       Scenario: Verify that newly added product root category should be in the database
         Given connection is already established
-        When the user query the mg_catalog_category_entity_varchar table
-        Then the user should add new root category
+        When user can add root category
+        Then the user should added new root category
 
 
 
 
 
 
-   @Writer:Abdusattar :
+   @Writer:Abdusattar
      @verifyNewlyRegisteredUsersInTheDatabase
   Scenario: Verify that newly registered users should be in the database
   Given connection is already established
