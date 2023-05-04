@@ -8,36 +8,42 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataAccess {
-    public boolean verifyNewProductAddedSuccessfully(String email, Connection connection) {
-        boolean isProductAdded = false;
+    public boolean addRottCategory(String value, Connection connection) {
+        boolean isRootCategoryAdded = false;
         Statement statement = null;
         ResultSet resultSet = null;
         CachedRowSet cachedRowSet = null;
-
         try {
             cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
             statement = connection.createStatement();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        String selectCatalog = String.format("select * from mg_catalog_category_entity_int where email='%s';", email);
+
+
+        String selectProduct = String.format("select value from  mg_catalog_category_entity_varchar where value='%s'", value);
+
         try {
-            resultSet = statement.executeQuery(selectCatalog);
+            resultSet = statement.executeQuery(selectProduct);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         if (resultSet == null) {
-            System.out.println("No records found");
-            return isProductAdded;
+            System.out.println("No records found!!");
+            return isRootCategoryAdded;
         } else {
             try {
                 cachedRowSet.populate(resultSet);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+//            int count=0;
+            String value_name= null;
 
-            String emailAddress = null;
-            int count = 0;
             while (true) {
                 try {
                     if (!cachedRowSet.next()) {
@@ -46,21 +52,21 @@ public class DataAccess {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                int entity_id = 0;
+
                 try {
-                    entity_id = cachedRowSet.getInt("entity_id");
-                    emailAddress = cachedRowSet.getString("email");
-                    System.out.println(String.format("catalog id=%d email=%s", entity_id, emailAddress));
+                    String value_id = cachedRowSet.getString("value_id");
+                    value = cachedRowSet.getString("value");
+                    System.out.println(String.format("value=%s,value_id=%d", value,value_id));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
             }
-            if (count >= 1 & emailAddress.equalsIgnoreCase(email))
-                isProductAdded = true;
-            return isProductAdded;
+            if (value_name.equals(value))
+                isRootCategoryAdded = true;
+            return isRootCategoryAdded;
         }
+
+
     }
 }
-
-
 

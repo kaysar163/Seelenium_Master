@@ -21,8 +21,8 @@
       @verifyNewlyAddedProductRootCategoryInTheDatabase
       Scenario: Verify that newly added product root category should be in the database
         Given connection is already established
-        When a new user add product root category
-        Then added new product root category should be in the database
+        When the user query the mg_catalog_category_entity_varchar table
+        Then the user should add new root category
 
 
 

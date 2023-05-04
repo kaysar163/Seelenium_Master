@@ -13,20 +13,22 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 
 import java.sql.Connection;
 
 public class DatabaseSteps extends TestBase {
 
-    Connection connection;
-
-    String config="config.properties";
     BackEndLogin backEndLogin;
-    CatalogDashboardPage catalogDashboardPage;
     FunctionClass functionClass;
+    CatalogDashboardPage catalogDashboardPage;
+    DatabaseConnection dataBaseConnection;
+    Connection connection=null;
+    DataAccess dataAccess;
+    boolean isRootCategoryAdded=false;
 
-
-    String dbUrl= ApplicationConfig.readFromConfigProperties(config,"dbIp");
+     String config="config.properties";
+    String dbUrl=(ApplicationConfig.readFromConfigProperties(config,"dbIp"));
     String dbPort= (ApplicationConfig.readFromConfigProperties(config,"dbPort"));
     String dbUserName= ApplicationConfig.readFromConfigProperties(config,"dbUserName");
     String dbPassword= ApplicationConfig.readFromConfigProperties(config,"dbPassword");
@@ -38,6 +40,14 @@ public class DatabaseSteps extends TestBase {
     @Before("@DatabaseTest")
     public void setUp(){
         connection= DatabaseConnection.connection(dbUrl,dbPort,dbDefault,dbUserName,dbPassword, ConnectionType.MYSQL);
+        dataAccess =new DataAccess();
+        dataBaseConnection=new DatabaseConnection();
+        functionClass=new FunctionClass(driver);
+        backEndLogin =new BackEndLogin(driver);
+        catalogDashboardPage=new CatalogDashboardPage(driver);
+        dataAccess=new DataAccess();
+
+
     }
 
     @After("@DatabaseTest")
@@ -47,9 +57,6 @@ public class DatabaseSteps extends TestBase {
 
     @Given("connection is already established")
     public void connectionIsAlreadyEstablished() {
-      backEndLogin=new BackEndLogin(driver);
-      catalogDashboardPage=new CatalogDashboardPage(driver);
-      functionClass=new FunctionClass(driver);
 
     }
 
@@ -62,18 +69,14 @@ public class DatabaseSteps extends TestBase {
     public void theUserShouldBeInTheDatabase() {
 
     }
-
-    @When("a new user add product root category")
-    public void aNewUserAddProductRootCategory() {
-        backEndLogin.catalogModuleLogin();
-        catalogDashboardPage.clickOnManageCategoriesLink();
-
-
-        
+    @When("the user query the mg_catalog_category_entity_varchar table")
+    public void theUserQueryTheMg_catalog_category_entity_varcharTable() {
+        String isRootCategoryName="iphone15";
+        isRootCategoryAdded=dataAccess.addRottCategory(isRootCategoryName,connection);
     }
 
-    @Then("added new product root category should be in the database")
-    public void addedNewProductRootCategoryShouldBeInTheDatabase() {
-
+    @Then("the user should add new root category")
+    public void theUserShouldAddNewRootCategory() {
+        Assert.assertTrue(isRootCategoryAdded);
     }
 }
