@@ -1,75 +1,83 @@
 package com.magentoapplication.backend.database;
 
+import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
+
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetProvider;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DataAccess {
-    public boolean getRefundedReport(String period, Connection connection) {
-        boolean isCustomerExist = false;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        CachedRowSet cachedRowSet = null;
+    Connection connection;
 
+    public boolean getRegisteredCustomer(String customerEmail, Connection connection){
+        boolean isRegisteredCustomerExist=false;
+        Statement statement=null;
+        ResultSet resultSet=null;
+        CachedRowSet cachedRowSet=null;
         try {
-            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+            cachedRowSet= RowSetProvider.newFactory().createCachedRowSet();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         try {
-            statement = connection.createStatement();
+            statement=connection.createStatement();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        String refundedReportSQLScrip = String.format("select * from mg_sales_refunded_aggregated where period='%s'", period);
+        String selectRegisteredCustomer=String.format("select * from `i5751295_mg2`.`mg_customer_entity` where email='%s'",customerEmail);
         try {
-            assert statement != null;
-            resultSet = statement.executeQuery(refundedReportSQLScrip);
+            resultSet=statement.executeQuery(selectRegisteredCustomer);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        if (resultSet == null) {
-            System.out.println("No records Found");
-            return isCustomerExist;
+        if (resultSet==null){
+            System.out.println("no records found!!");
+            return isRegisteredCustomerExist;
         } else {
             try {
-                assert cachedRowSet != null;
                 cachedRowSet.populate(resultSet);
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
-            int count = 0, ordersCuntSum = 0;
-            double refundedSum = 0;
-            while (true) {
-                try {
-                    if (!cachedRowSet.next()) {
-                        break;
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+        }
+        int count=0;
+        while (true){
+            try {
+                if (!cachedRowSet.next()){
+                    break;
                 }
-                try {
-                    String refundDate = cachedRowSet.getString("period");
-                    int ordersCount = cachedRowSet.getInt("orders_count");
-                    double refunded = cachedRowSet.getDouble("refunded");
-                    System.out.printf("period=%s    orders_count=%d    refunded=%.2f%n", refundDate, ordersCount, refunded);
-                    count = cachedRowSet.getRow();
-                    ordersCuntSum = ordersCuntSum + ordersCount;
-                    refundedSum = refundedSum + refunded;
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                int entityId=cachedRowSet.getInt("entity_id");
+            String email=cachedRowSet.getString("email");
+            count=cachedRowSet.getRow();
+                System.out.println(String.format("entity_id=%d email=%s",entityId, email));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (count>=1)
+            isRegisteredCustomerExist=true;
 
-            }
-            System.out.printf("On day %s refunded orders total = %d    Refunded sum = %.2f%n", period, ordersCuntSum, refundedSum);
-            if (count >= 1)
-                isCustomerExist = true;
-            return isCustomerExist;
+            return isRegisteredCustomerExist;
+
+    }
+    public boolean assertStoreExists(String storeName) {
+        String addedStore = String.format("SELECT * FROM `i5751295_mg2`.`mg_core_store_group` WHERE store_name = %s",storeName);
+
+        try (
+            PreparedStatement preparedStatement = connection.prepareStatement(addedStore);
+        ResultSet resultSet = preparedStatement.executeQuery();)
+            { boolean storeExists = resultSet.next();
+
+        return storeExists;
+            }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
+
 
 
 }

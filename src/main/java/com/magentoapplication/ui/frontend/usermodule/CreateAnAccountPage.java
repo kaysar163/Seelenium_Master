@@ -13,7 +13,7 @@ public class CreateAnAccountPage {
     FrontEndDashboardPage frontEndDashboardPage;
     String config = "testdatafolder/testdata.properties";
 
-    String userEmail;
+
 
 
     public CreateAnAccountPage(WebDriver driver) {
@@ -73,7 +73,8 @@ public class CreateAnAccountPage {
         functionClass.waitUntilElementPresent(lastName);
         lastName.sendKeys(functionClass.generateFakeLastName());
         functionClass.waitUntilElementPresent(emailAddress);
-        emailAddress.sendKeys(userEmail=functionClass.generateFakeEmail());
+        TestHelperFrontEnd.setEmail(functionClass.generateFakeEmail());
+        emailAddress.sendKeys(TestHelperFrontEnd.getEmail());
         functionClass.waitUntilElementPresent(password);
         password.sendKeys(ApplicationConfig.readFromConfigProperties(config, "password"));
         functionClass.waitUntilElementPresent(confirmPassword);
