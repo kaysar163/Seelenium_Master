@@ -6,6 +6,8 @@ import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
 import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
+import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
+import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
@@ -33,6 +35,7 @@ public class DatabaseSteps extends TestBase {
     BackEndLogin backEndLogin;
 
     DataAccess dataAccess;
+    SalesPage salesPage;
 
     String dbUrl= ApplicationConfig.readFromConfigProperties(config,"dbIp");
     String dbPort= (ApplicationConfig.readFromConfigProperties(config,"dbPort"));
@@ -92,18 +95,25 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(manageStoresPage.verifyCreateStore());
     }
 
-    @When("user can add root category")
-    public void userCanAddRootCategory() {
-        setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
-        backEndLogin.catalogModuleLogin();
-        manageCategoriesPage=new ManageCategoriesPage(driver);
-        manageCategoriesPage.fillCategoryInformationAndSave();
-        Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
+    @Then("the added refund should be in the database")
+    public void theAddedRefundShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.theAddedRefundShouldBeInTheDatabase( TestHelperReporting.getRefundName(),connection));
+
+
+
     }
 
-    @Then("the user should added new root category")
-    public void theUserShouldAddedNewRootCategory() {
-        Assert.assertTrue(dataAccess.verifyCatAdded(TestHelperCatalog.getRootName(),connection));
+    @When("view a new refund  from {string} and{string}")
+    public void viewANewRefundFromAnd(String arg0, String arg1) {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin( driver );
+        backEndLogin.reportingModuleLogin();
+         salesPage = new SalesPage( driver );
+        salesPage.salesTotalRefundedReport(arg0,arg1);
+        Assert.assertTrue(salesPage.verifyRefundedReport());
+
+
     }
 }
+
+

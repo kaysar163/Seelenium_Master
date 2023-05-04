@@ -78,17 +78,22 @@ public class DataAccess {
         }
     }
 
-    public boolean verifyCatAdded(String catName, Connection connection) {
-        String selectCat = String.format("select * from mg_catalog_category_entity_varchar where value='%s'", catName);
-        try (PreparedStatement preparedStatement = connection.prepareStatement(selectCat);
+    public boolean theAddedRefundShouldBeInTheDatabase(String refundName, Connection connection) {
+        String addedStore = String.format("Select * from mg_sales_refunded_aggregated",refundName);
 
-             ResultSet resultSet = preparedStatement.executeQuery();) {
-            boolean isCatAdded = resultSet.next();
-            return isCatAdded;
-        } catch (SQLException e) {
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(addedStore);
+                ResultSet resultSet = preparedStatement.executeQuery();)
+        { boolean storeExists = resultSet.next();
+
+            return storeExists;
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+
+
+
+
     }
-
-
-        }
+}
