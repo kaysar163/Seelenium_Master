@@ -7,7 +7,6 @@ import javax.sql.rowset.RowSetProvider;
 import java.sql.*;
 
 public class DataAccess {
-    Connection connection;
 
     public boolean getRegisteredCustomer(String customerEmail, Connection connection){
         boolean isRegisteredCustomerExist=false;
@@ -64,7 +63,7 @@ public class DataAccess {
             return isRegisteredCustomerExist;
 
     }
-    public boolean assertStoreExists(String storeName) {
+    public boolean assertStoreExists(String storeName, Connection connection) {
         String addedStore = String.format("SELECT * FROM `i5751295_mg2`.`mg_core_store_group` WHERE store_name = %s",storeName);
 
         try (
@@ -78,6 +77,22 @@ public class DataAccess {
         }
     }
 
+      public boolean theAddedRefundShouldBeInTheDatabase(String refundName, Connection connection) {
+            String addedStore = String.format("Select * from mg_sales_refunded_aggregated",refundName);
+
+            try (
+                    PreparedStatement preparedStatement = connection.prepareStatement(addedStore);
+                    ResultSet resultSet = preparedStatement.executeQuery();)
+            { boolean storeExists = resultSet.next();
+
+                return storeExists;
+            }catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
 
+
+
+
+    }
 }

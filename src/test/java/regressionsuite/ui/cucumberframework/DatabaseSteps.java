@@ -4,6 +4,9 @@ import com.magentoapplication.backend.database.ConnectionType;
 import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
+import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
+import com.magentoapplication.ui.backend.salesmodule.TestHelperSales;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
@@ -30,6 +33,7 @@ public class DatabaseSteps extends TestBase {
     BackEndLogin backEndLogin;
 
     DataAccess dataAccess;
+    SalesPage salesPage;
 
     String dbUrl= ApplicationConfig.readFromConfigProperties(config,"dbIp");
     String dbPort= (ApplicationConfig.readFromConfigProperties(config,"dbPort"));
@@ -73,7 +77,7 @@ public class DatabaseSteps extends TestBase {
 
     @Then("the added store should appear in the database")
     public void theAddedStoreShouldAppearInTheDatabase() {
-        Assert.assertTrue(dataAccess.assertStoreExists(TestHelperStore.getStoreName()));
+        Assert.assertTrue(dataAccess.assertStoreExists(TestHelperStore.getStoreName(),connection));
 
 
 
@@ -81,10 +85,37 @@ public class DatabaseSteps extends TestBase {
 
     @When("a new store should be added on the store page")
     public void aNewStoreShouldBeAddedOnTheStorePage() {
+        setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
         backEndLogin.storeModuleLogin();
         ManageStoresPage manageStoresPage=new ManageStoresPage(driver);
         manageStoresPage.createStore();
         Assert.assertTrue(manageStoresPage.verifyCreateStore());
     }
-}
+
+
+
+    @Then("the added refund should be in the database")
+    public void theAddedRefundShouldBeInTheDatabase() {
+       Assert.assertTrue(dataAccess.theAddedRefundShouldBeInTheDatabase(TestHelperReporting.getRefundName(),connection));
+
+
+
+    }
+
+    @When("view a new refund  from {string} and{string}")
+    public void viewANewRefundFromAnd(String arg0, String arg1) {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin( driver );
+        backEndLogin.reportingModuleLogin();
+        salesPage=new SalesPage( driver );
+        salesPage.salesTotalRefundedReport(arg0,arg1);
+        Assert.assertTrue(salesPage.verifyRefundedReport());
+
+
+    }
+    }
+
+
+
+

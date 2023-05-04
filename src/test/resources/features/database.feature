@@ -97,10 +97,13 @@
 
       #Mirehmidi :
     @Verifynewlyaddedrefundshouldbeinthedatabase
-    Scenario: verify that newly added stock should be present in the database
+    Scenario Outline: Verify that newly added refund should be in the database
       Given  connection is already established
-      When   a new user registers to the system
-      Then   the user should be in the database
+      When  view a new refund  from "<dateFrom>" and"<dateTo>"
+      Then   the added refund should be in the database
+      Examples:
+        | dateFrom  | dateTo    |
+        | 4/25/2023 | 4/28/2023 |
 
 
 
