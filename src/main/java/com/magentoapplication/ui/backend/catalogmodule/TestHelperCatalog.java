@@ -13,6 +13,7 @@ public class TestHelperCatalog {
 
 
 
+
     public static String getChangedProductName() {
         return changedProductName;
     }

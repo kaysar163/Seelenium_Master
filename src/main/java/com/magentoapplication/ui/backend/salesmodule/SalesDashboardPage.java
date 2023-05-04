@@ -63,7 +63,11 @@ public class SalesDashboardPage {
 
    public void clickOnOrdersLink(){
        functionClass.waitUntilElementPresent(salesLink);
-       actions.moveToElement(salesLink).click(ordersLink).build().perform();
+       salesLink.click();
+       functionClass.waitUntilElementPresent(ordersLink);
+       ordersLink.click();
+
+      // actions.moveToElement(salesLink).click(ordersLink).build().perform();
    }
     public void clickOnInvoiceLink(){
         functionClass.waitUntilElementPresent(salesLink);
@@ -72,7 +76,10 @@ public class SalesDashboardPage {
 
     public void clickOnShipmentsLink(){
         functionClass.waitUntilElementPresent(salesLink);
-        actions.moveToElement(salesLink).click(shipmentsLink).build().perform();
+        salesLink.click();
+        functionClass.waitUntilElementPresent(shipmentsLink);
+        shipmentsLink.click();
+//        actions.moveToElement(salesLink).click(shipmentsLink).build().perform();
     }
 
     public void clickOnCreditMemosLink(){

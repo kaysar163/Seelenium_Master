@@ -35,7 +35,12 @@
 
 
 
-    #Renagul : View pending reviews
+    @pendingReviews #Renagul  View pending reviews
+
+      Scenario: Marketing manager can view pending reviews
+      Given Admin user is already in the dashboard page
+      When move to catolog and reviews and ratings and customer review and pending reviews
+      Then nickname should be display
 
 
 
@@ -110,8 +115,11 @@
 
 
 
-      #Fazilat : delete an existing Newsletter template
-
+      @deleteAnExistingNewsletterTemplate #Fazilat
+  Scenario: Marketing Manager can delete an existing newsletter template
+    Given Admin user is already in the dashboard page
+    When the user deletes newsletter template information
+    Then the newsletter template should be deleted
 
 
 

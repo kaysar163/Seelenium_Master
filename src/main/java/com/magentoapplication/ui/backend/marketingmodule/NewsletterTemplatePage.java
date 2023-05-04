@@ -1,12 +1,16 @@
 package com.magentoapplication.ui.backend.marketingmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class NewsletterTemplatePage {
 
@@ -43,6 +47,19 @@ public class NewsletterTemplatePage {
 
     @FindBy(xpath = "//span[text()='Search']")
     WebElement searchButton;
+
+    @FindBy(xpath ="//tr[@class='even pointer'] ")
+    WebElement newsLetterTemplateRow;
+
+    @FindBy(xpath ="//td[@class='empty-text a-center']" )
+    WebElement searchResult;
+
+    @FindBy(xpath = "//span[text()='Delete Template']" )
+    WebElement deleteTemplateButton;
+
+    @FindAll(@FindBy(xpath =  "//div[@class=\"grid\"]"))
+    List<WebElement> newsLetterTemplatesTable;
+
 
 
     public void addNewNewsletterTemplate(){
@@ -107,5 +124,34 @@ public class NewsletterTemplatePage {
     }
 
 
+    public void deleteAnExistingNewsletterTemplate(){
+        marketingDashboardPage.clickOnNewsletterTemplateLink();
+        functionClass.waitUntilElementPresent(templateSearchField);
+        templateSearchField.sendKeys(TestHelperMarketing.getChangeTemplateName());
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+        functionClass.sleep(2);
+        WebElement editButton=driver.findElement(By.xpath(String.format
+                ("//td[contains(text(),' %s ')]",TestHelperMarketing.getChangeTemplateName())));
+        functionClass.waitUntilElementPresent(editButton);
+        editButton.click();
+        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(deleteTemplateButton);
+        deleteTemplateButton.click();
+        Alert alert=driver.switchTo().alert();
+        alert.accept();
 
+    }
+
+   public boolean verifyNewsletterTemplateDeleted() {
+        functionClass.waitUntilElementPresent(templateSearchField);
+        templateSearchField.sendKeys(TestHelperMarketing.getChangeTemplateName());
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+       if (newsLetterTemplatesTable.size()>=1)
+           return true;
+       else
+           return false;
+   }
 }
