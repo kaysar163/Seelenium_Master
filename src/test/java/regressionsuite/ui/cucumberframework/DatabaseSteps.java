@@ -36,6 +36,8 @@ public class DatabaseSteps extends TestBase {
     CustomerInformationPage customerInformationPage;
     ManageCategoriesPage manageCategoriesPage;
     CustomerGroupPage customerGroupPage;
+
+    ManageStoresPage manageStoresPage;
     BackEndLogin backEndLogin;
 
     DataAccess dataAccess;
@@ -162,6 +164,21 @@ public class DatabaseSteps extends TestBase {
     @Then("the user should added new root category")
     public void theUserShouldAddedNewRootCategory() {
         Assert.assertTrue(dataAccess.verifyCatAdded(TestHelperCatalog.getRootName(), connection));
+    }
+
+    @When("a user can add new store in database")
+    public void aUserCanAddNewStoreInDatabase() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.storeModuleLogin();
+        manageStoresPage=new ManageStoresPage(driver);
+        manageStoresPage.createStore();
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
+
+    @Then("the user should added new store")
+    public void theUserShouldAddedNewStore() {
+        Assert.assertTrue(dataAccess.verifyStoreAdded(TestHelperStore.getStoreName(),connection));
     }
 }
 

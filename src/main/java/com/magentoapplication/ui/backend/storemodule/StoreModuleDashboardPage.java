@@ -56,6 +56,7 @@ public class StoreModuleDashboardPage {
 
     public void clickOnManageStoresLink() {
         functionClass.waitUntilElementPresent( systemLink );
+        functionClass.sleep(3);
         actions.moveToElement( systemLink ).click( manageStoresLink ).build( ).perform( );
     }
     public void clickOnManageProductsLink(){
