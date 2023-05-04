@@ -218,10 +218,7 @@ public class ReportingModuleSteps extends TestBase {
     public void reportingManagerShouldSeeTotalOrdersTableReport(){customersPage.verifyViewCustomersByTotalOrdersReport();
     }
 
-    @After("@ReportingModuleTest")
-    public void tearDown() {
-        closeBrowser();
-    }
+
 
     @When("the users sees abandoned shopping cart by different store")
     public void theUsersSeesAbandonedShoppingCartByDifferentStore() {shoppingCartPage.viewAbandonedShoppingCartsReport();
@@ -229,5 +226,20 @@ public class ReportingModuleSteps extends TestBase {
 
     @Then("the users views abandoned carts report table")
     public void theUsersViewsAbandonedCartsReportTable() {shoppingCartPage.verifyViewAbandonedShoppingCartsReport();
+    }
+
+    @When("reporting manager fills out the report period time {string} and {string}")
+    public void reportingManagerFillsOutTheReportPeriodTimeAnd(String arg0, String arg1) {
+        salesPage.salesTotalTaxReport(arg0, arg1);
+
+    }
+
+    @Then("total tax report should display")
+    public void totalTaxReportShouldDisplay( ) {
+        salesPage.verifySalesTotalTaxReport();
+    }
+    @After("@ReportingModuleTest")
+    public void tearDown() {
+        closeBrowser();
     }
 }
