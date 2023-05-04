@@ -3,7 +3,13 @@
 
 
 
-  #Kaysar :
+
+    @Writer:Kaysar
+    @VerifyNewAddedCustomer
+    Scenario: Verify that newly added customers should be in the database
+      Given connection is already established
+      When customer manager add a new customer
+      Then customer manager should verify added customer  in the database
 
 
 

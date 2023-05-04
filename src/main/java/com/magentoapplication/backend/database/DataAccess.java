@@ -101,6 +101,70 @@ public class DataAccess {
                 throw new RuntimeException(e);
             }
         }
+    //*********************************************************************
+    //Kaysar - Verify that newly added customers should be in the database
+    public boolean getCustomerEmail(String email,Connection connection){
+        boolean isCustomerEmailExist=false;
+        Statement statement=null;//to execute SQL Script S
+        ResultSet resultSet=null;
+        CachedRowSet cachedRowSet=null;
+        try {
+            cachedRowSet= RowSetProvider.newFactory().createCachedRowSet();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            statement=connection.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String emailSqlScript = String.format("select entity_id,email from mg_customer_entity where email='%s'",email);
+        try {
+            resultSet = statement.executeQuery(emailSqlScript);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //verify the result set
+        if (resultSet == null) {
+            System.out.println("No Customer Found");
+
+        } else {
+            try {
+                cachedRowSet.populate(resultSet);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+//count the record lines
+        int count = 0;
+        while (true) {
+            try {
+                if (!cachedRowSet.next()){
+                    break;}
+                try {
+                    //  int websiteId=cachedRowSet.getInt("website_id");
+                    int entityId=cachedRowSet.getInt("entity_id");
+                    String customerEmail=cachedRowSet.getString("email");
+                    System.out.println(String.format(" entity_id=%d email=%s",entityId,customerEmail ));
+                    count = cachedRowSet.getRow();
+                }catch (SQLException e){
+                    e.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (count >= 1)
+                isCustomerEmailExist = true;
+        }
+        return isCustomerEmailExist;
+    }
     }
 
 
