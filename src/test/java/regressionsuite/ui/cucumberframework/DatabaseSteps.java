@@ -4,6 +4,8 @@ import com.magentoapplication.backend.database.ConnectionType;
 import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
+import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
 import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
 import com.magentoapplication.utility.ApplicationConfig;
@@ -69,4 +71,20 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(isCustomerAdded);
     }
 
+    @Then("the added store should appear in the database")
+    public void theAddedStoreShouldAppearInTheDatabase() {
+        Assert.assertTrue(dataAccess.assertStoreExists(TestHelperStore.getStoreName()));
+
+
+
+    }
+
+    @When("a new store should be added on the store page")
+    public void aNewStoreShouldBeAddedOnTheStorePage() {
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.storeModuleLogin();
+        ManageStoresPage manageStoresPage=new ManageStoresPage(driver);
+        manageStoresPage.createStore();
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
 }

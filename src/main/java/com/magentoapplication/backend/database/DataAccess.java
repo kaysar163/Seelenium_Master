@@ -4,12 +4,10 @@ import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetProvider;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DataAccess {
+    Connection connection;
 
     public boolean getRegisteredCustomer(String customerEmail, Connection connection){
         boolean isRegisteredCustomerExist=false;
@@ -65,6 +63,19 @@ public class DataAccess {
 
             return isRegisteredCustomerExist;
 
+    }
+    public boolean assertStoreExists(String storeName) {
+        String addedStore = String.format("SELECT * FROM `i5751295_mg2`.`mg_core_store_group` WHERE store_name = %s",storeName);
+
+        try (
+            PreparedStatement preparedStatement = connection.prepareStatement(addedStore);
+        ResultSet resultSet = preparedStatement.executeQuery();)
+            { boolean storeExists = resultSet.next();
+
+        return storeExists;
+            }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
