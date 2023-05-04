@@ -91,35 +91,37 @@ public class DataAccess {
             throw new RuntimeException(e);
         }
     }
-        public boolean verifyCustomerGroupName(String customerGroupName, Connection connection){
-            String selectCat = String.format("select * from mg_customer_group where customer_group_code='%s'", customerGroupName);
-            try (PreparedStatement preparedStatement= connection.prepareStatement(selectCat);
-                 ResultSet resultSet= preparedStatement.executeQuery();)
-            {boolean isCustomerGroupAdded= resultSet.next();
-                return  isCustomerGroupAdded;}
-            catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+
+    public boolean verifyCustomerGroupName(String customerGroupName, Connection connection) {
+        String selectCat = String.format("select * from mg_customer_group where customer_group_code='%s'", customerGroupName);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(selectCat);
+             ResultSet resultSet = preparedStatement.executeQuery();) {
+            boolean isCustomerGroupAdded = resultSet.next();
+            return isCustomerGroupAdded;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+    }
+
     //*********************************************************************
     //Kaysar - Verify that newly added customers should be in the database
-    public boolean getCustomerEmail(String email,Connection connection){
-        boolean isCustomerEmailExist=false;
-        Statement statement=null;//to execute SQL Script S
-        ResultSet resultSet=null;
-        CachedRowSet cachedRowSet=null;
+    public boolean getCustomerEmail(String email, Connection connection) {
+        boolean isCustomerEmailExist = false;
+        Statement statement = null;//to execute SQL Script S
+        ResultSet resultSet = null;
+        CachedRowSet cachedRowSet = null;
         try {
-            cachedRowSet= RowSetProvider.newFactory().createCachedRowSet();
+            cachedRowSet = RowSetProvider.newFactory().createCachedRowSet();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         try {
-            statement=connection.createStatement();
+            statement = connection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        String emailSqlScript = String.format("select entity_id,email from mg_customer_entity where email='%s'",email);
+        String emailSqlScript = String.format("select entity_id,email from mg_customer_entity where email='%s'", email);
         try {
             resultSet = statement.executeQuery(emailSqlScript);
         } catch (SQLException e) {
@@ -146,15 +148,16 @@ public class DataAccess {
         int count = 0;
         while (true) {
             try {
-                if (!cachedRowSet.next()){
-                    break;}
+                if (!cachedRowSet.next()) {
+                    break;
+                }
                 try {
                     //  int websiteId=cachedRowSet.getInt("website_id");
-                    int entityId=cachedRowSet.getInt("entity_id");
-                    String customerEmail=cachedRowSet.getString("email");
-                    System.out.println(String.format(" entity_id=%d email=%s",entityId,customerEmail ));
+                    int entityId = cachedRowSet.getInt("entity_id");
+                    String customerEmail = cachedRowSet.getString("email");
+                    System.out.println(String.format(" entity_id=%d email=%s", entityId, customerEmail));
                     count = cachedRowSet.getRow();
-                }catch (SQLException e){
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             } catch (SQLException e) {
@@ -165,7 +168,19 @@ public class DataAccess {
         }
         return isCustomerEmailExist;
     }
+
+    public boolean verifyCatAdded(String catName, Connection connection) {
+        String selectCat = String.format("select * from mg_catalog_category_entity_varchar where value='%s'", catName);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(selectCat);
+
+             ResultSet resultSet = preparedStatement.executeQuery();) {
+            boolean isCatAdded = resultSet.next();
+            return isCatAdded;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+}
 
 
 
