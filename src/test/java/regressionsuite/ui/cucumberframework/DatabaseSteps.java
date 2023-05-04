@@ -6,6 +6,8 @@ import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
 import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
+import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
+import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
@@ -31,7 +33,7 @@ public class DatabaseSteps extends TestBase {
 
     CreateAnAccountPage createAnAccountPage;
     ManageCategoriesPage manageCategoriesPage;
-
+    CustomerGroupPage customerGroupPage;
     BackEndLogin backEndLogin;
 
     DataAccess dataAccess;
@@ -113,6 +115,31 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(salesPage.verifyRefundedReport());
 
 
+    }
+
+    @When("add new customer group")
+    public void addNewCustomerGroup() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.customersModuleLogin();
+        customerGroupPage=new CustomerGroupPage(driver);
+        customerGroupPage.addNewCustomerGroup();
+        Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
+    }
+
+    @Then("Verify new added customer groups in database")
+    public void verifyNewAddedCustomerGroupsInDatabase() {
+        Assert.assertTrue(dataAccess.verifyCustomerGroupName(TestHelperClass.getGroupName(),connection));
+    }
+
+
+
+    @When("user can add root category")
+    public void userCanAddRootCategory() {
+    }
+
+    @Then("the user should added new root category")
+    public void theUserShouldAddedNewRootCategory() {
     }
 }
 
