@@ -4,9 +4,12 @@ import com.magentoapplication.backend.database.ConnectionType;
 import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
+import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
 import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
 import com.magentoapplication.utility.ApplicationConfig;
+import com.magentoapplication.utility.FunctionClass;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -20,13 +23,10 @@ import java.sql.Connection;
 public class DatabaseSteps extends TestBase {
 
     Connection connection;
-
     String config="config.properties";
-
     CreateAnAccountPage createAnAccountPage;
-
+   CustomerGroupPage customerGroupPage;
     BackEndLogin backEndLogin;
-
     DataAccess dataAccess;
 
     String dbUrl= ApplicationConfig.readFromConfigProperties(config,"dbIp");
@@ -41,7 +41,6 @@ public class DatabaseSteps extends TestBase {
     @Before("@DatabaseTest")
     public void setUp(){
         connection= DatabaseConnection.connection(dbUrl,dbPort,dbDefault,dbUserName,dbPassword, ConnectionType.MYSQL);
-        //backEndLogin=new BackEndLogin(driver);
         dataAccess=new DataAccess();
     }
 
@@ -68,5 +67,19 @@ public class DatabaseSteps extends TestBase {
         boolean isCustomerAdded=dataAccess.getRegisteredCustomer(TestHelperFrontEnd.getEmail(),connection);
         Assert.assertTrue(isCustomerAdded);
     }
+    //meryem
+    @When("add new customer group")
+    public void addNewCustomerGroup() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.customersModuleLogin();
+        customerGroupPage=new CustomerGroupPage(driver);
+        customerGroupPage.addNewCustomerGroup();
+        Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());
+    }
 
+    @Then("Verify new added customer groups in database")
+    public void verifyNewAddedCustomerGroupsInDatabase() {
+        Assert.assertTrue(dataAccess.verifyCustomerGroupName(TestHelperClass.getGroupName(),connection));
+    }
 }

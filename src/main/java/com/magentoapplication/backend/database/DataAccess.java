@@ -1,13 +1,9 @@
 package com.magentoapplication.backend.database;
 
-import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetProvider;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DataAccess {
 
@@ -64,9 +60,19 @@ public class DataAccess {
             isRegisteredCustomerExist=true;
 
             return isRegisteredCustomerExist;
+    }
 
+        public boolean verifyCustomerGroupName(String customerGroupName, Connection connection){
+            String selectCat = String.format("select * from mg_customer_group where customer_group_code='%s'", customerGroupName);
+            try (PreparedStatement preparedStatement= connection.prepareStatement(selectCat);
+                 ResultSet resultSet= preparedStatement.executeQuery();)
+            {boolean isCustomerGroupAdded= resultSet.next();
+                return  isCustomerGroupAdded;}
+            catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 
 
-}

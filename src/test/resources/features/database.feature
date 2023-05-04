@@ -10,7 +10,12 @@
 
 
 
-  #Meryem :
+    @Writer:Meryem
+    @VerifyCustomerGroup
+    Scenario: Verify that new added customer groups should be in the database
+      Given connection is already established
+      When  add new customer group
+      Then  Verify new added customer groups in database
 
 
 
