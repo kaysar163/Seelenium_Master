@@ -7,6 +7,7 @@ import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
 import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
 import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
+import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
 import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
@@ -32,6 +33,7 @@ public class DatabaseSteps extends TestBase {
     String config="config.properties";
 
     CreateAnAccountPage createAnAccountPage;
+    CustomerInformationPage customerInformationPage;
     ManageCategoriesPage manageCategoriesPage;
     CustomerGroupPage customerGroupPage;
     BackEndLogin backEndLogin;
@@ -133,14 +135,24 @@ public class DatabaseSteps extends TestBase {
     }
 
 
+    @When("customer manager add a new customer")
+    public void customerManagerAddANewCustomer() {
+        setupBrowserBackEnd();
+        backEndLogin = new BackEndLogin(driver);
+        backEndLogin.customersModuleLogin();
+        customerInformationPage=new CustomerInformationPage(driver);
+        customerInformationPage.addCustomerMethod();
+        Assert.assertTrue(customerInformationPage.verifyCustomer());
 
-    @When("user can add root category")
-    public void userCanAddRootCategory() {
     }
-
-    @Then("the user should added new root category")
-    public void theUserShouldAddedNewRootCategory() {
+    @Then("customer manager should verify added customer  in the database")
+    public void customerManagerShouldVerifyAddedCustomerInTheDatabase() {
+        boolean isEmailAdded=dataAccess.getCustomerEmail(TestHelperClass.getEmail(),connection);
+        Assert.assertTrue(isEmailAdded);
     }
 }
+
+
+
 
 
