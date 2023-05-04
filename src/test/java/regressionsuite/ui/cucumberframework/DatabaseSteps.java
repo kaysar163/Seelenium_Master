@@ -4,9 +4,10 @@ import com.magentoapplication.backend.database.ConnectionType;
 import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
+import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
+import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
-import com.magentoapplication.ui.backend.salesmodule.TestHelperSales;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
@@ -29,6 +30,7 @@ public class DatabaseSteps extends TestBase {
     String config="config.properties";
 
     CreateAnAccountPage createAnAccountPage;
+    ManageCategoriesPage manageCategoriesPage;
 
     BackEndLogin backEndLogin;
 
@@ -47,7 +49,7 @@ public class DatabaseSteps extends TestBase {
     @Before("@DatabaseTest")
     public void setUp(){
         connection= DatabaseConnection.connection(dbUrl,dbPort,dbDefault,dbUserName,dbPassword, ConnectionType.MYSQL);
-        //backEndLogin=new BackEndLogin(driver);
+        backEndLogin=new BackEndLogin(driver);
         dataAccess=new DataAccess();
     }
 
@@ -93,11 +95,9 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(manageStoresPage.verifyCreateStore());
     }
 
-
-
     @Then("the added refund should be in the database")
     public void theAddedRefundShouldBeInTheDatabase() {
-       Assert.assertTrue(dataAccess.theAddedRefundShouldBeInTheDatabase(TestHelperReporting.getRefundName(),connection));
+        Assert.assertTrue(dataAccess.theAddedRefundShouldBeInTheDatabase( TestHelperReporting.getRefundName(),connection));
 
 
 
@@ -108,14 +108,12 @@ public class DatabaseSteps extends TestBase {
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin( driver );
         backEndLogin.reportingModuleLogin();
-        salesPage=new SalesPage( driver );
+         salesPage = new SalesPage( driver );
         salesPage.salesTotalRefundedReport(arg0,arg1);
         Assert.assertTrue(salesPage.verifyRefundedReport());
 
 
     }
-    }
-
-
+}
 
 
