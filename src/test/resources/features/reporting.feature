@@ -16,7 +16,14 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-    #Gulzar :
+   @ViewTaxReports   #Gulzar :
+     Scenario Outline: Reporting Manager should be able to see sales -Tax Report
+     Given Admin user is already in the dashboard page reporting
+     When reporting manager fills out the report period time "<dateFrom>" and "<dateTo>"
+     Then total tax report should display
+     Examples:
+     |dateFrom   |dateTo      |
+     | 3/26/2023 |4/27/2023   |
 
 
 
