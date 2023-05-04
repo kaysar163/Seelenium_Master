@@ -72,6 +72,9 @@ public class CustomersPage {
     @FindBy(xpath = "//div[@class='grid']")
     WebElement noRecordReportTable;
 
+    @FindAll(@FindBy(xpath ="//table[@id='gridAccounts_table']//tbody//tr" ))
+    WebElement verifyNewAccount;
+
 
 
 
@@ -145,12 +148,33 @@ public class CustomersPage {
         reportingDashboardPage.clickOnNewAccountsLink();
         functionClass.waitUntilElementPresent(fromDateIcon);
         fromDateIcon.click();
-        functionClass.waitUntilElementPresent(toDateIcon);
-        toDateIcon.click();
+        functionClass.waitUntilElementPresent(backwardIcon);
+        for (int i=0;i<=3;i++){
+            backwardIcon.click();
+        }
+        functionClass.waitUntilElementPresent(closeButton);
+        closeButton.click();
+        functionClass.waitUntilElementPresent(dateField);
+        dateField.sendKeys(functionClass.date());
         functionClass.waitUntilElementPresent(refreshButton);
         refreshButton.click();
-
     }
+
+
+
+    public boolean verifySeeNewCustomers(){
+        functionClass.waitUntilElementPresent(verifyNewAccount);
+        if (verifyNewAccount.isDisplayed()){
+            if (driver.getPageSource().contains("No records found for this period.")){
+                System.out.println("There is no customer record");
+            } else if (customerExist.isDisplayed()){
+                System.out.println("Customer Report Exist");
+            }
+            return true;
+        }
+        else return false;
+    }
+
 
 
 

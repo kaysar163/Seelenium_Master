@@ -175,7 +175,12 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-     #Renagul :
+
+     @seeNewAccounts #Renagul :
+       Scenario: Reporting manager should be able to see new accounts;
+       Given Admin user is already in the dashboard page reporting
+       When Reporting manager should be see customers
+       Then Reporting manager should be able to see new accounts
 
 
 
