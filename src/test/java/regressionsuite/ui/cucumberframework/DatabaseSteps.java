@@ -57,11 +57,6 @@ public class DatabaseSteps extends TestBase {
         dataAccess=new DataAccess();
     }
 
-    @After("@DatabaseTest")
-    public void tearDown(){
-        DatabaseConnection.closeDataBaseConnection(connection);
-        closeBrowser();
-    }
 
     @Given("connection is already established")
     public void connectionIsAlreadyEstablished() {
@@ -150,6 +145,12 @@ public class DatabaseSteps extends TestBase {
         boolean isEmailAdded=dataAccess.getCustomerEmail(TestHelperClass.getEmail(),connection);
         Assert.assertTrue(isEmailAdded);
     }
+    @After("@DatabaseTest")
+    public void tearDown(){
+        DatabaseConnection.closeDataBaseConnection(connection);
+        closeBrowser();
+    }
+
 }
 
 
