@@ -35,7 +35,12 @@
 
 
 
-    #Renagul : View pending reviews
+    @pendingReviews #Renagul  View pending reviews
+
+      Scenario: Marketing manager can view pending reviews
+      Given Admin user is already in the dashboard page
+      When move to catolog and reviews and ratings and customer review and pending reviews
+      Then nickname should be display
 
 
 

@@ -4,9 +4,12 @@ import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class SalesPage {
     WebDriver driver;
@@ -93,6 +96,32 @@ public class SalesPage {
     WebElement showReportButton1;
    // @FindBy(xpath = "//tr[@class='totals']")
    // WebElement totalShipped;
+    @FindBy(id="sales_report_report_type")
+    WebElement taxMatchFieldPeriodTime;
+
+    @FindBy(id="created_at_order")
+    WebElement taxPeriodTime;
+
+    @FindBy(id="sales_report_from")
+    WebElement taxFromField;
+
+    @FindBy(id="sales_report_to")
+    WebElement taxToField;
+
+    @FindBy(id="sales_report_show_order_statuses")
+    WebElement taxStatusField;
+
+    @FindBy(id="sales_report_show_empty_rows")
+    WebElement taxEmptyRows;
+
+    @FindBy(xpath = "(//button[@title=\"Show Report\"])[1]")
+    WebElement showReportButton;
+
+    @FindAll(@FindBy(xpath = "//div[@class='hor-scroll']/table/tbody/tr"))
+    List<WebElement> salesTaxReportList;
+
+
+
 
     public void viewTotalOrderedReport(String dateFrom, String dateTo) {
         reportingDashboardPage.clickOnOrdersLink();
@@ -226,7 +255,34 @@ public class SalesPage {
             return true;
         } else return false;
     }
-}
+
+    public void salesTotalTaxReport(String dateFrom, String dateTo){
+        reportingDashboardPage.clickOnTaxLink();
+        functionClass.waitUntilElementPresent(taxFromField);
+        taxFromField.sendKeys(dateFrom);
+        functionClass.waitUntilElementPresent(taxToField);
+        taxToField.sendKeys(dateTo);
+        functionClass.waitUntilElementPresent(taxStatusField);
+        Select select2=new Select(taxStatusField);
+        select2.selectByValue("1");
+        functionClass.waitUntilElementPresent(taxEmptyRows);
+        Select select3=new Select(taxEmptyRows);
+        select3.selectByValue("1");
+        functionClass.sleep(3);
+        functionClass.waitUntilElementPresent(showReportButton);
+        showReportButton.click();
+
+    }
+
+    public boolean verifySalesTotalTaxReport(){
+        if (salesTaxReportList.size() >= 1) {
+            return true;
+        } else return false;
+    }
+
+
+    }
+
 
 
 

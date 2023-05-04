@@ -1,18 +1,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Magento Application Test">
 
-<!--    <test name="Front End Test">-->
-<!--        <classes>-->
-<!--            <class name="regressionsuite.ui.testngframework.FrontEndTestRunner">-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test name="Backend Customer Module Test">-->
-<!--        <classes>-->
-<!--            <class name="regressionsuite.ui.testngframework.CustomersModuleTestRunner">-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="Front End Test">
+        <classes>
+            <class name="regressionsuite.ui.testngframework.FrontEndTestRunner">
+            </class>
+        </classes>
+    </test>
+    <test name="Backend Customer Module Test">
+        <classes>
+            <class name="regressionsuite.ui.testngframework.CustomersModuleTestRunner">
+            </class>
+        </classes>
+    </test>
 
     <test name="Backend Catalog Module Test">
         <classes>
@@ -21,11 +21,11 @@
         </classes>
     </test>
 
-<!--    <test name="Backend Store Module Test">-->
-<!--        <classes>-->
-<!--            <class name="regressionsuite.ui.testngframework.StoreModuleTestRunner">-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="Backend Store Module Test">
+        <classes>
+            <class name="regressionsuite.ui.testngframework.StoreModuleTestRunner">
+            </class>
+        </classes>
+    </test>
 
 </suite>
