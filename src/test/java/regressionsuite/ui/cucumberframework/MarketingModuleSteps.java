@@ -165,11 +165,7 @@ public class MarketingModuleSteps extends TestBase {
     public void verifyNewRuleAddedSuccessfully() {
         shoppingCartPriceRulePage.verifyNewRuleAddedSuccessfully();
     }
-
-
-
-
-
+    
     @When("update existing Catalog Price Rule")
     public void updateExistingCatalogPriceRule() {
         catalogPriceRulePage.update();
@@ -179,9 +175,20 @@ public class MarketingModuleSteps extends TestBase {
     public void verifyExistingCatalogPriceRuleUpdated() {
         Assert.assertTrue(catalogPriceRulePage.verify());
     }
-
+    
+    @When("the user fills out rule Id or rule name")
+    public void theUserFillsOutRuleIdOrRuleName() {
+         catalogPriceRulePage.searchCatalogPriceRule();
+    }
+    
+    @Then("the relative catalog rule will appear")
+    public void theRelativeCatalogRuleWillAppear() {
+        Assert.assertTrue(catalogPriceRulePage.searchedCatalogRuleAppeared());
+    }
+    
     @After("@MarketingModuleTest")
     public void tearDown(){
         closeBrowser();
     }
+
 }
