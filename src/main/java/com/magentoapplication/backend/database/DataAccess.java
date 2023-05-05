@@ -1,6 +1,7 @@
 package com.magentoapplication.backend.database;
 
 import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
+import com.magentoapplication.utility.ApplicationConfig;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetProvider;
@@ -179,6 +180,29 @@ public class DataAccess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean verifyCartPriceRuleAdded(String  ruleName, Connection connection){
+        String selectCartPriceRule=String.format("SELECT * FROM `i5751295_mg2`.`mg_salesrule`where name='%s';",
+                ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","ruleName"));
+
+        PreparedStatement preparedStatement= null;
+
+        try {
+            preparedStatement = connection.prepareStatement(selectCartPriceRule);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            {
+                boolean cartPriceRuleExist = resultSet.next();
+                return cartPriceRuleExist;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
     }
 }
 
