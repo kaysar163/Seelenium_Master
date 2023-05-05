@@ -167,12 +167,11 @@ public class DataAccess {
     }
 
     public  boolean verifyNewlyAddedSubCategoriesInTheDatabase(String subCatName,Connection connection){
-        String addedSubCategory = String.format("select value_id,entity_type_id,value  FROM mg_catalog_category_entity_varchar where value ='%s'",subCatName);
+        String addedSubCategory = String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'",subCatName);
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(addedSubCategory);
                 ResultSet resultSet = preparedStatement.executeQuery();) {
             boolean subCategoryExist = resultSet.next();
-
             return subCategoryExist;
         } catch (SQLException e) {
             throw new RuntimeException(e);
