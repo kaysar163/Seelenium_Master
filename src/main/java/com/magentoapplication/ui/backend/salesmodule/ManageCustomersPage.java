@@ -36,7 +36,7 @@ public class ManageCustomersPage {
     @FindBy(xpath = "//a[text()='Edit']")
     WebElement editButton;
 
-    @FindBy(xpath = "(//span[text()='Shopping Cart'])[1]")
+    @FindBy(xpath = "(//span[text()='Shopping Cart'])[2]")
     WebElement shoppingCartLink;
 
     @FindAll(
