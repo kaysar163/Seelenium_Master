@@ -182,8 +182,10 @@ public class DataAccess {
         }
     }
 
+
+
     public boolean verifyCartPriceRuleAdded(String  ruleName, Connection connection){
-        String selectCartPriceRule=String.format("SELECT * FROM `i5751295_mg2`.`mg_salesrule`where name='%s';",
+        String selectCartPriceRule=String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'",
                 ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","ruleName"));
 
         PreparedStatement preparedStatement= null;
@@ -204,6 +206,29 @@ public class DataAccess {
 
 
     }
+
+    public boolean verifyNewlyAddedSubCategoriesInTheDatabase(String subName, Connection connection){
+        String selectSubCat=String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'",subName);
+
+        PreparedStatement preparedStatement= null;
+
+        try {
+            preparedStatement = connection.prepareStatement(selectSubCat);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            {
+                boolean isSubCatAdded = resultSet.next();
+                return isSubCatAdded;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
+    }
+
 }
 
 

@@ -80,8 +80,9 @@ public class CatalogDashboardPage {
     }
 
     public void clickOnManageCategoriesLink(){
-        functionClass.waitUntilElementPresent(manageCategoriesLink);
-        manageCategoriesLink.click();
+        functionClass.waitUntilElementPresent(catalogLink);
+        actions.moveToElement(catalogLink).click(manageCategoriesLink).build().perform();
+
     }
 
     public void clickOnManageAttributesLink(){

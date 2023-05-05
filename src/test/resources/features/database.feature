@@ -73,7 +73,12 @@ Feature: Database and UI connection tests
 
 
 
-      #Muyesser :
+     @Writer:Muyesser   #Muyesser :
+     @VerifyNewlyAddedSubCategoriesInTheDatabase
+     Scenario: Verify that newly added sub categories should be in the database
+       Given connection is already established
+       When a new sub category should be added to the category page under root category
+       Then the newly added sub category should be ın the data base
 
 
 
