@@ -1,6 +1,7 @@
 package com.magentoapplication.backend.database;
 
 import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
+import com.magentoapplication.utility.ApplicationConfig;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetProvider;
@@ -180,6 +181,54 @@ public class DataAccess {
             throw new RuntimeException(e);
         }
     }
+
+
+
+    public boolean verifyCartPriceRuleAdded(String  ruleName, Connection connection){
+        String selectCartPriceRule=String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'",
+                ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties","ruleName"));
+
+        PreparedStatement preparedStatement= null;
+
+        try {
+            preparedStatement = connection.prepareStatement(selectCartPriceRule);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            {
+                boolean cartPriceRuleExist = resultSet.next();
+                return cartPriceRuleExist;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
+    }
+
+    public boolean verifyNewlyAddedSubCategoriesInTheDatabase(String subName, Connection connection){
+        String selectSubCat=String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'",subName);
+
+        PreparedStatement preparedStatement= null;
+
+        try {
+            preparedStatement = connection.prepareStatement(selectSubCat);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            {
+                boolean isSubCatAdded = resultSet.next();
+                return isSubCatAdded;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
+    }
+
 }
 
 
