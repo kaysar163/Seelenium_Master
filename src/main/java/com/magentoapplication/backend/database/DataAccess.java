@@ -166,8 +166,8 @@ public class DataAccess {
         return isCustomerEmailExist;
     }
 
-    public  boolean verifyNewlyAddedSubCategoriesInTheDatabase(int subCatId,Connection connection){
-        String addedSubCategory = String.format("select *from i5751295_mg2.mg_catalog_category_product  where category_id= %d",subCatId);
+    public  boolean verifyNewlyAddedSubCategoriesInTheDatabase(String subCatName,Connection connection){
+        String addedSubCategory = String.format("select value_id,entity_type_id,value  FROM mg_catalog_category_entity_varchar where value ='%s'",subCatName);
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(addedSubCategory);
                 ResultSet resultSet = preparedStatement.executeQuery();) {

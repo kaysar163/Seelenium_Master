@@ -155,6 +155,7 @@ public class DatabaseSteps extends TestBase {
         backEndLogin=new BackEndLogin(driver);
         backEndLogin.catalogModuleLogin();
         manageCategoriesPage=new ManageCategoriesPage(driver);
+        manageCategoriesPage.fillCategoryInformationAndSave();
         manageCategoriesPage.addSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
 
@@ -162,6 +163,7 @@ public class DatabaseSteps extends TestBase {
 
     @Then("the newly added sub category should be ın the data base")
     public void theNewlyAddedSubCategoryShouldBeInTheDataBase() {
+        Assert.assertTrue(dataAccess.verifyNewlyAddedSubCategoriesInTheDatabase(TestHelperCatalog.getSubName(),connection));
 
 
     }
