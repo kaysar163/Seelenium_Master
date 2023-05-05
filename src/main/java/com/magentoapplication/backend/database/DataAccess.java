@@ -207,7 +207,7 @@ public class DataAccess {
 
     }
 
-    public boolean verifyNewlyAddedSubCategoriesInTheDatabase(String  subName, Connection connection){
+    public boolean verifyNewlyAddedSubCategoriesInTheDatabase(String subName, Connection connection){
         String selectSubCat=String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s';",subName);
 
         PreparedStatement preparedStatement= null;
@@ -216,8 +216,8 @@ public class DataAccess {
             preparedStatement = connection.prepareStatement(selectSubCat);
             ResultSet resultSet=preparedStatement.executeQuery();
             {
-                boolean SubCatExist = resultSet.next();
-                return SubCatExist;
+                boolean isSubCatAdded = resultSet.next();
+                return isSubCatAdded;
             }
 
         } catch (SQLException e) {
