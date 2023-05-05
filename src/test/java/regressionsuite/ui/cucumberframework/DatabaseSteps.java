@@ -42,6 +42,7 @@ public class DatabaseSteps extends TestBase {
     DataAccess dataAccess;
     SalesPage salesPage;
 
+
     String dbUrl = ApplicationConfig.readFromConfigProperties(config, "dbIp");
     String dbPort = (ApplicationConfig.readFromConfigProperties(config, "dbPort"));
     String dbUserName = ApplicationConfig.readFromConfigProperties(config, "dbUserName");
@@ -177,6 +178,32 @@ public class DatabaseSteps extends TestBase {
                 ApplicationConfig.readFromConfigProperties
                         ("testdatafolder/testdata.properties","ruleName"),connection));
     }
+
+
+
+
+
+    @When("a new sub category should be added to the category page under root category")
+    public void aNewSubCategoryShouldBeAddedToTheCategoryPageUnderRootCategory() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.catalogModuleLogin();
+        manageCategoriesPage=new ManageCategoriesPage(driver);
+        manageCategoriesPage.fillCategoryInformationAndSave();
+        manageCategoriesPage.addSubCategory();
+        Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
+
+    }
+
+    @Then("the newly added sub category should be ın the data base")
+    public void theNewlyAddedSubCategoryShouldBeInTheDataBase() {
+        Assert.assertTrue(dataAccess.verifyNewlyAddedSubCategoriesInTheDatabase(TestHelperCatalog.getSubName(),connection));
+    }
+
+
+
+
+
 
     @After("@DatabaseTest")
     public void tearDown() {
