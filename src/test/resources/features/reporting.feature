@@ -16,7 +16,14 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-    #Gulzar :
+   @ViewTaxReports   #Gulzar :
+     Scenario Outline: Reporting Manager should be able to see sales -Tax Report
+     Given Admin user is already in the dashboard page reporting
+     When reporting manager fills out the report period time "<dateFrom>" and "<dateTo>"
+     Then total tax report should display
+     Examples:
+     |dateFrom   |dateTo      |
+     | 3/26/2023 |4/27/2023   |
 
 
 
@@ -85,8 +92,14 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-      #Fazilat :
-
+  @viewCustomersByOrdersTotalReport  #Fazilat:
+  Scenario Outline: Reporting manager should be able to see customers by orders total report
+    Given Admin user is already in the dashboard page reporting
+    When Reporting Manager view customers by orders total Report with time period between "<dateFrom>" and"<dateTo>"
+    Then Reporting manager should see total orders table report
+    Examples:
+      | dateFrom  | dateTo    |
+      | 3/21/2023 | 4/30/2023 |
 
 
 
@@ -162,14 +175,23 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
 
-     #Renagul :
+
+     @seeNewAccounts #Renagul :
+       Scenario: Reporting manager should be able to see new accounts;
+       Given Admin user is already in the dashboard page reporting
+       When Reporting manager should be see customers
+       Then Reporting manager should be able to see new accounts
 
 
 
 
 
 
-      #Fazilat :
+  @viewAbandonedShoppingCartsReport #Fazilat :
+  Scenario: Reporting Manager should be able to see shopping cart - Abandoned Carts Report
+    Given Admin user is already in the dashboard page reporting
+    When the users sees abandoned shopping cart by different store
+    Then the users views abandoned carts report table
 
 
 
