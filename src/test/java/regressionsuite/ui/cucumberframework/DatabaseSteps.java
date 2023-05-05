@@ -9,6 +9,7 @@ import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
 import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
 import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
+import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
@@ -37,7 +38,7 @@ public class DatabaseSteps extends TestBase {
     ManageCategoriesPage manageCategoriesPage;
     CustomerGroupPage customerGroupPage;
     BackEndLogin backEndLogin;
-
+    ShoppingCartPriceRulePage shoppingCartPriceRulePage;
     DataAccess dataAccess;
     SalesPage salesPage;
 
@@ -143,11 +144,6 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(isEmailAdded);
     }
 
-    @After("@DatabaseTest")
-    public void tearDown() {
-        DatabaseConnection.closeDataBaseConnection(connection);
-        closeBrowser();
-    }
 
     @When("user can add root category")
     public void userCanAddRootCategory() {
@@ -162,6 +158,30 @@ public class DatabaseSteps extends TestBase {
     @Then("the user should added new root category")
     public void theUserShouldAddedNewRootCategory() {
         Assert.assertTrue(dataAccess.verifyCatAdded(TestHelperCatalog.getRootName(), connection));
+    }
+
+    @When("a new cart price rule should be added on the shopping cart price rules page")
+    public void aNewCartPriceRuleShouldBeAddedOnTheShoppingCartPriceRulesPage() {
+        setupBrowserBackEnd();
+        backEndLogin = new BackEndLogin(driver);
+        backEndLogin.marketingModuleLogin();
+        shoppingCartPriceRulePage=new ShoppingCartPriceRulePage(driver);
+        shoppingCartPriceRulePage.marketingManagerClickTheAddNewRuleButtonAndFillOut();
+        shoppingCartPriceRulePage.verifyNewRuleAddedSuccessfully();
+
+    }
+
+    @Then("the newly added cart price rule should be in the database")
+    public void theNewlyAddedCartPriceRuleShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.verifyCartPriceRuleAdded(
+                ApplicationConfig.readFromConfigProperties
+                        ("testdatafolder/testdata.properties","ruleName"),connection));
+    }
+
+    @After("@DatabaseTest")
+    public void tearDown() {
+        DatabaseConnection.closeDataBaseConnection(connection);
+        closeBrowser();
     }
 }
 
