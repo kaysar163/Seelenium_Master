@@ -1,5 +1,6 @@
 package regressionsuite.ui.cucumberframework;
 
+import com.magentoapplication.backend.api.PayloadUtility;
 import com.magentoapplication.utility.ApplicationConfig;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -39,6 +40,20 @@ public class ApiSteps {
     @Then("the api should return all product with {int} response code")
     public void theApiShouldReturnAllProductWithResponseCode(int arg0) {
         arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
+
+
+    @When("an authorized user sends a request to the customer end point")
+    public void anAuthorizedUserSendsARequestToTheCustomerEndPoint() {
+        response=RestAssured.given().header("Content-Type","application/json").and()
+                .body(PayloadUtility.createCustomerPayload()).auth().basic(apiUsername,apiPassword).when().
+                post(apiBaseUrl+":"+apiPort+"/customer").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+    }
+
+    @Then("the api should return created customer with {int} response code")
+    public void theApiShouldReturnCreatedCustomerWithResponseCode(int arg0) {
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
 }

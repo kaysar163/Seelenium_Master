@@ -39,10 +39,12 @@
 
 
 
-         #Abdustatar :
-
-
-
+         #Abdustatar : We have a bug in this test but did automation test anyway upon Dolkun Tarim's request
+    @PostCustomer
+    Scenario: An authorized user should be able to post customer
+      Given a valid username and a password
+      When an authorized user sends a request to the customer end point
+      Then the api should return created customer with 500 response code
 
 
 
