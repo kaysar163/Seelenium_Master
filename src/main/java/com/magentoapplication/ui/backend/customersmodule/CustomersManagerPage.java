@@ -51,7 +51,7 @@ public class CustomersManagerPage {
     @FindBy(xpath = "//span[text()='Total of 1 record(s) were updated.']")
     WebElement verifyUpdateMessage;
 
-    @FindBy(xpath = "//body//tr//td[contains(text(),'Admin')]")
+    @FindBy(id= "customerGrid_filter_website_id")
     WebElement verifyFilterByWebsite;
 
     @FindBy(id = "customerGrid_filter_email")
@@ -139,12 +139,13 @@ public class CustomersManagerPage {
     }
 
         public void assignGroupToCustomer() {
-            functionClass.waitUntilElementPresent(resetFilterButton);
-            actions.click(resetFilterButton).build().perform();
-            functionClass.waitUntilElementPresent(customerLink);
-            customerLink.click();
-            functionClass.waitUntilElementPresent(manageCustomersLink);
-            manageCustomersLink.click();
+//            functionClass.waitUntilElementPresent(resetFilterButton);
+//            actions.click(resetFilterButton).build().perform();
+//            functionClass.waitUntilElementPresent(customerLink);
+//            functionClass.clickOnJavaScript(customerLink);
+////            customerLink.click();
+//            functionClass.waitUntilElementPresent(manageCustomersLink);
+//            manageCustomersLink.click();
             Select select = new Select(actionsDropdown);
             select.selectByValue("assign_group");
             functionClass.waitUntilElementPresent(groupsDropdown);
@@ -189,8 +190,8 @@ public class CustomersManagerPage {
     }
 
     public void exportCustomers() {
-        functionClass.waitUntilElementPresent(SelectAll);
-        SelectAll.click();
+//        functionClass.waitUntilElementPresent(SelectAll);
+//        SelectAll.click();
         functionClass.waitUntilElementPresent(exportButton);
         exportButton.click();
         functionClass.waitUntilElementPresent(resetFilterButton);

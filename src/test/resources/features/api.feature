@@ -81,11 +81,12 @@
 
 
 
-         #Abdustatar :
-
-
-
-
+         #Abdustatar
+    @GetAllProducts
+  Scenario: An authorized user should be able to get all products
+  Given a valid username and a password
+  When an authorized user sends a request to the product end point
+  Then the api should return all product with 200 response code
 
 
          #Gulzar :

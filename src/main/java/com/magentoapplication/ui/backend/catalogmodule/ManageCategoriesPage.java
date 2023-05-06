@@ -2,6 +2,7 @@ package com.magentoapplication.ui.backend.catalogmodule;
 
 import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -40,6 +41,9 @@ public class ManageCategoriesPage {
 
     @FindBy(id = "group_4name")
 
+    WebElement subCatName;
+
+    @FindBy(id="group_4name")
     WebElement rootName;
     @FindBy( id="group_4is_active")
 
@@ -123,17 +127,19 @@ public class ManageCategoriesPage {
 
 
     public void addSubCategory(){
-        functionClass.waitUntilElementPresent(catalogLink);
-        catalogDashboardPage.catalogLink.click();
-        functionClass.waitUntilElementPresent(catalogDashboardPage.manageCategoriesLink);
-        catalogDashboardPage.manageCategoriesLink.click();
+
+        functionClass.sleep(2);
+        WebElement findRootName=driver.findElement(By.xpath(String.format("//span[contains(text(),'%s')]//parent::a",TestHelperCatalog.getRootName())));
+        functionClass.sleep(2);
+        findRootName.click();
         functionClass.waitUntilElementPresent(addSubCategoryButton);
-        functionClass.sleep(1);
-        addSubCategoryButton.click();
-        functionClass.waitUntilElementPresent(rootName);
+        functionClass.clickOnJavaScript(addSubCategoryButton);
+        functionClass.waitUntilElementPresent(subCatName);
+
         TestHelperCatalog.setSubName(functionClass.generateFakeName());
         functionClass.sleep(3);
-        rootName.sendKeys(TestHelperCatalog.getSubName());
+        subCatName.clear();
+        subCatName.sendKeys(TestHelperCatalog.getSubName());
         functionClass.sleep(3);
         Select select=new Select(isActive);
         select.selectByValue("1");
@@ -159,10 +165,9 @@ public class ManageCategoriesPage {
         catalogLink.click();
         functionClass.waitUntilElementPresent(manageCategoriesLink);
         manageCategoriesLink.click();
-//        catalogDashboardPage. clickOnCatalogLink();
-//        catalogDashboardPage.clickOnManageCategoriesLink();
         functionClass.waitUntilElementPresent(addRootCategory);
-        addRootCategory.click();
+        functionClass.clickOnJavaScript(addRootCategory);
+        //addRootCategory.click();
         functionClass.waitUntilElementPresent(rootName);
         TestHelperCatalog.setRootName(functionClass.generateFakeName());
         functionClass.sleep(2);

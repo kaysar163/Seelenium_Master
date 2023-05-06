@@ -7,6 +7,8 @@ public class TestHelperMarketing {
 
     private static String changeTemplateName;
 
+
+
     public static String getTemplateName() {
         return templateName;
     }
@@ -31,3 +33,5 @@ public class TestHelperMarketing {
         RuleName = ruleName;
     }
 }
+
+

@@ -1,10 +1,7 @@
 package regressionsuite.ui.cucumberframework;
 
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
-import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
-import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
-import com.magentoapplication.ui.backend.salesmodule.RefundReportPage;
-import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
+import com.magentoapplication.ui.backend.salesmodule.*;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -19,8 +16,12 @@ public class SalesModuleSteps extends TestBase {
 
     ManageCustomersPage manageCustomersPage;
     OrdersPageSales ordersPageSales;
+    InvoicePage invoicePage;
     ShipmentsPage shipmentsPage;
-    RefundReportPage refundReportPage;
+    CreditMemosPage creditMemosPage;
+
+    CouponsReportPage couponsReportPage;
+    ManageTaxRulePage manageTaxRulePage;
 
 
     @Before("@SalesModuleTest")
@@ -37,8 +38,12 @@ public class SalesModuleSteps extends TestBase {
     public void adminUserIsAlreadyInTheDashboardPageSales() {
         manageCustomersPage = new ManageCustomersPage(driver);
         shipmentsPage = new ShipmentsPage(driver);
+        invoicePage = new InvoicePage( driver );
         ordersPageSales = new OrdersPageSales(driver);
-        refundReportPage=new RefundReportPage(driver);
+        creditMemosPage=new CreditMemosPage(driver);
+        couponsReportPage=new CouponsReportPage(driver);
+        manageTaxRulePage=new ManageTaxRulePage(driver);
+
     }
 
     @When("the user view shopping cart for customers")
@@ -87,24 +92,75 @@ public class SalesModuleSteps extends TestBase {
     }
 
 
+    @When("sales manager can view invoices on the invoices page")
+    public void salesManagerCanViewInvoicesOnTheInvoicesPage() {
+        invoicePage.viewInvoiceAndAddCommentTest();
 
-    @When("Sales Manager view refunds      {string}")
-    public void salesManagerViewRefunds(String arg0) {refundReportPage.viewRefundsInTheReports(arg0);
+    }
+
+    @Then("sales manager should be able to view invoices")
+    public void salesManagerShouldBeAbleToViewInvoices() {
+        Assert.assertTrue( invoicePage.verifyViewInvoices( ) );
     }
 
 
-    @Then("Total Refunds Report table should display")
-    public void totalRefundsReportTableShouldDisplay() { refundReportPage.verifyRefundsInTheReportsViewed();
+
+
+    @When("Sales manager deletes order with in-store pickup")
+    public void salesManagerDeletesOrderWithInStorePickup() {
+        String orderNumber=ordersPageSales.createNewOrder();
+        ordersPageSales.deleteOrder(orderNumber);
+
     }
 
+    @Then("Order should be successfully deleted")
+    public void orderShouldBeSuccessfullyDeleted() {
+        Assert.assertTrue(ordersPageSales.deleteOrderSuccessful());
+    }
 
+    @When("Sales manager view credit memos by filters")
+    public void salesManagerViewCreditMemosByFilters() {
+        creditMemosPage.viewCreditMemosByFilters();
+    }
+
+    @Then("Filtered credit memos should display")
+    public void filteredCreditMemosShouldDisplay() {
+        creditMemosPage.verifyViewCreditMemosByFilters();
+
+    }
+
+    @When("manager view coupons reports between time period {string} and{string}")
+    public void managerViewCouponsReportsBetweenTimePeriodAnd(String arg0, String arg1) {
+
+        couponsReportPage.viewCouponsReportFunction(arg0,arg1);
+    }
+
+    @Then("coupons reports should display")
+    public void couponsReportsShouldDisplay() {
+        couponsReportPage.verifyViewCouponsReport();
+    }
+
+    @When("sales manager add and update tax rules")
+    public void salesManagerAddAndUpdateTaxRules() {
+        manageTaxRulePage.addAndUpdateTaxRulesFunction();
+    }
+    @Then("new and updated tax rules should display")
+    public void newAndUpdatedTaxRulesShouldDisplay() {
+        manageTaxRulePage.verifyAddAndUpdateTaxRulesFunction();
+    }
+
+    @When("sales manager should be able to update existing shopping cart")
+    public void salesManagerShouldBeAbleToUpdateExistingshoppingCart() {manageCustomersPage.updateExistingShoppingCartForCustomers();
+    }
+
+    @Then("update shopping cart should be display")
+    public void updateShoppingCartShouldBeDisplay() {manageCustomersPage.verifyUpdateShoppingCart();
+    }
     @After("@SalesModuleTest")
     public void tearDown(){
-        closeBrowser();
+        //closeBrowser();
     }
+
 
 
 }
-
-
-

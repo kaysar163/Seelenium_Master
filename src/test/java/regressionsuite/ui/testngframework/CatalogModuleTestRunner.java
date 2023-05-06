@@ -64,7 +64,7 @@ public class CatalogModuleTestRunner extends TestBase {
         Assert.assertTrue(manageCategoriesPage.deleteCategorySuccessful());
     }
 
-    @Test(description = "abdusattar",priority = 4)
+    @Test(description = "abdusattar",dependsOnMethods ="addRootCategoriesTest",priority = 4)
     public void addSubCategory(){
         manageCategoriesPage.addSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
