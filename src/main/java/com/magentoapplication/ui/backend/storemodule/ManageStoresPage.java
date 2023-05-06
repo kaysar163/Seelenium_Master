@@ -228,7 +228,6 @@ public class ManageStoresPage {
     }
     
     public void createStore() {
-        storeModuleDashboardPage.clickOnManageStoresLink();
         systemButton.click();
         functionClass.waitUntilElementPresent(managerStoresButton);
         managerStoresButton.click();
