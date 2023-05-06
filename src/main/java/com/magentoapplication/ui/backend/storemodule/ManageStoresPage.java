@@ -242,6 +242,7 @@ public class ManageStoresPage {
         
         TestHelperStore.setStoreName(functionClass.generateFakeName());
         functionClass.sleep(3);
+        System.out.println(TestHelperStore.getStoreName());
         storeName1.sendKeys(TestHelperStore.getStoreName());
         functionClass.waitUntilElementPresent(rootCategoryField);
         rootCategoryField.click();

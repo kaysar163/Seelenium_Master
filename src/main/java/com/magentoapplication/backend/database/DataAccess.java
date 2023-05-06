@@ -181,7 +181,7 @@ public class DataAccess {
         }
     }
     public boolean verifyStoreAdded(String storeName, Connection connection) {
-        String selectStore = String.format("select * from `mg_core_store` where code='%s'", storeName);
+        String selectStore = String.format("select * from mg_core_store_group where name='%s'", storeName);
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectStore);
 
              ResultSet resultSet = preparedStatement.executeQuery();) {
