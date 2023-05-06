@@ -209,11 +209,11 @@ Feature: Reporting module manager should be able to manage reporting module
 
 
       #Irsahd :
-
-
-
-
-
+    @seeTagsForProductsReport
+    Scenario: Reporting Manager should be able to see Tags for Products Report
+      Given Admin user is already in the dashboard page reporting
+      When the user views tags for products report
+      Then the user sees products tags
 
       #Memet :
   @@writer:Memet

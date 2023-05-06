@@ -154,7 +154,17 @@ public class SalesModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
     }
-
-
-
+    
+    
+    @When("the user views complete order and add credit memo")
+    public void theUserViewsCompleteOrderAndAddCreditMemo() {
+        ordersPageSales.viewAndCreateCreditMemo();
+        
+    }
+    
+    @Then("the credit memo will appeared")
+    public void theCreditMemoWillAppeared() {
+        Assert.assertTrue(ordersPageSales.isCreditMemoCreated());
+        
+    }
 }

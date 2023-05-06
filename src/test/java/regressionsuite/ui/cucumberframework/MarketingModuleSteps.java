@@ -190,8 +190,19 @@ public class MarketingModuleSteps extends TestBase {
     public void theNewsletterTemplateShouldBeDeleted() {
         Assert.assertTrue(newsletterTemplatePage.verifyNewsletterTemplateDeleted());
     }
-
-
+    
+    //Toghraq
+    @When("the user fills out rule Id or rule name")
+    public void theUserFillsOutRuleIdOrRuleName() {
+        catalogPriceRulePage.searchCatalogPriceRule();
+    }
+    
+    @Then("the relative catalog rule will appear")
+    public void theRelativeCatalogRuleWillAppear() {
+        Assert.assertTrue(catalogPriceRulePage.searchedCatalogRuleAppeared());
+    }
+    
+    
     @After("@MarketingModuleTest")
     public void tearDown(){
         closeBrowser();
@@ -205,4 +216,6 @@ public class MarketingModuleSteps extends TestBase {
     @Then("nickname should be display")
     public void nicknameShouldBeDisplay() {Assert.assertTrue(pendingReviewsPage.verifyPendingReviews());
     }
+    
+    
 }

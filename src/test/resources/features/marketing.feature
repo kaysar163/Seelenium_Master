@@ -90,7 +90,7 @@
         Then  pending reviews should be updated
 
 
-     @catalog #Irshad : search Catalog Pricing Rule By Id and Rule
+    @catalogPriceRuleSearch #Irshad : search Catalog Pricing Rule By Id and Rule
     Scenario: Marketing Manager should be able to search catalog price rule by rule Id and Rule
       Given Admin user is already in the dashboard page
       When the user fills out rule Id or rule name

@@ -84,7 +84,7 @@ public class CatalogPriceRulePage {
     WebElement ctlgRuleId;
     @FindBy(xpath = "//input[@name='name']")
     WebElement cRuleName;
-    @FindBy(xpath ="//td[contains(text(),'298')]")
+    @FindBy(xpath ="//td[contains(text(),'333')]")
     WebElement catalogRuleIdAppeared;
 
     public void addNewCatalogPriceRule(){

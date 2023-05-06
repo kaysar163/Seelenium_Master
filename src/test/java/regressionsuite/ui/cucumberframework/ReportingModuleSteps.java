@@ -242,4 +242,15 @@ public class ReportingModuleSteps extends TestBase {
     public void tearDown() {
         closeBrowser();
     }
+    
+    @When("the user views tags for products report")
+    public void theUserViewsTagsForProductsReport() {
+        tagsPage.seeTagsForProductsReport();
+    }
+    
+    @Then("the user sees products tags")
+    public void theUserSeesProductsTags() {
+        Assert.assertTrue(tagsPage.isProductReportsWithTagsExist());
+    
+    }
 }
