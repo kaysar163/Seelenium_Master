@@ -42,6 +42,9 @@ public class DatabaseSteps extends TestBase {
     DataAccess dataAccess;
     SalesPage salesPage;
 
+    ManageStoresPage manageStoresPage;
+
+
 
     String dbUrl = ApplicationConfig.readFromConfigProperties(config, "dbIp");
     String dbPort = (ApplicationConfig.readFromConfigProperties(config, "dbPort"));
@@ -209,6 +212,20 @@ public class DatabaseSteps extends TestBase {
     public void tearDown() {
         DatabaseConnection.closeDataBaseConnection(connection);
         closeBrowser();
+    }
+    @When("a user can add new store in database")
+    public void aUserCanAddNewStoreInDatabase() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.storeModuleLogin();
+        manageStoresPage=new ManageStoresPage(driver);
+        manageStoresPage.createStore();
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
+
+    @Then("the user should added new store")
+    public void theUserShouldAddedNewStore() {
+        Assert.assertTrue(dataAccess.verifyStoreAdded(TestHelperStore.getStoreName(),connection));
     }
 }
 

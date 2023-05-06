@@ -55,7 +55,13 @@ Feature: Database and UI connection tests
 
 
 
-      #Muradil :
+      #Muradil:
+      @verifyNewlyAddedStoreInTheDatabase
+      Scenario: Verify that newly added store should be in the database
+        Given connection is already established
+        When a user can add new store in database
+        Then the user should added new store
+
 
 
 

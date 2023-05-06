@@ -228,7 +228,6 @@ public class ManageStoresPage {
     }
     
     public void createStore() {
-        storeModuleDashboardPage.clickOnManageStoresLink();
         systemButton.click();
         functionClass.waitUntilElementPresent(managerStoresButton);
         managerStoresButton.click();
@@ -242,6 +241,7 @@ public class ManageStoresPage {
         
         TestHelperStore.setStoreName(functionClass.generateFakeName());
         functionClass.sleep(3);
+        System.out.println(TestHelperStore.getStoreName());
         storeName1.sendKeys(TestHelperStore.getStoreName());
         functionClass.waitUntilElementPresent(rootCategoryField);
         rootCategoryField.click();
