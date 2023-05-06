@@ -149,10 +149,16 @@ public class SalesModuleSteps extends TestBase {
         manageTaxRulePage.verifyAddAndUpdateTaxRulesFunction();
     }
 
+    @When("sales manager should be able to update existing shopping cart")
+    public void salesManagerShouldBeAbleToUpdateExistingshoppingCart() {manageCustomersPage.updateExistingShoppingCartForCustomers();
+    }
 
+    @Then("update shopping cart should be display")
+    public void updateShoppingCartShouldBeDisplay() {manageCustomersPage.verifyUpdateShoppingCart();
+    }
     @After("@SalesModuleTest")
     public void tearDown(){
-        closeBrowser();
+        //closeBrowser();
     }
 
 

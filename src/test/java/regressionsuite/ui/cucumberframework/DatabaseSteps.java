@@ -9,6 +9,7 @@ import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
 import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
 import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
+import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
@@ -36,12 +37,11 @@ public class DatabaseSteps extends TestBase {
     CustomerInformationPage customerInformationPage;
     ManageCategoriesPage manageCategoriesPage;
     CustomerGroupPage customerGroupPage;
-
-    ManageStoresPage manageStoresPage;
     BackEndLogin backEndLogin;
-
+    ShoppingCartPriceRulePage shoppingCartPriceRulePage;
     DataAccess dataAccess;
     SalesPage salesPage;
+
 
     String dbUrl = ApplicationConfig.readFromConfigProperties(config, "dbIp");
     String dbPort = (ApplicationConfig.readFromConfigProperties(config, "dbPort"));
@@ -145,11 +145,6 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(isEmailAdded);
     }
 
-    @After("@DatabaseTest")
-    public void tearDown() {
-        DatabaseConnection.closeDataBaseConnection(connection);
-        closeBrowser();
-    }
 
     @When("user can add root category")
     public void userCanAddRootCategory() {
@@ -166,19 +161,54 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(dataAccess.verifyCatAdded(TestHelperCatalog.getRootName(), connection));
     }
 
-    @When("a user can add new store in database")
-    public void aUserCanAddNewStoreInDatabase() {
+    @When("a new cart price rule should be added on the shopping cart price rules page")
+    public void aNewCartPriceRuleShouldBeAddedOnTheShoppingCartPriceRulesPage() {
         setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
-        backEndLogin.storeModuleLogin();
-        manageStoresPage=new ManageStoresPage(driver);
-        manageStoresPage.createStore();
-        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+        backEndLogin = new BackEndLogin(driver);
+        backEndLogin.marketingModuleLogin();
+        shoppingCartPriceRulePage=new ShoppingCartPriceRulePage(driver);
+        shoppingCartPriceRulePage.marketingManagerClickTheAddNewRuleButtonAndFillOut();
+        shoppingCartPriceRulePage.verifyNewRuleAddedSuccessfully();
+
     }
 
-    @Then("the user should added new store")
-    public void theUserShouldAddedNewStore() {
-        Assert.assertTrue(dataAccess.verifyStoreAdded(TestHelperStore.getStoreName(),connection));
+    @Then("the newly added cart price rule should be in the database")
+    public void theNewlyAddedCartPriceRuleShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.verifyCartPriceRuleAdded(
+                ApplicationConfig.readFromConfigProperties
+                        ("testdatafolder/testdata.properties","ruleName"),connection));
+    }
+
+
+
+
+
+    @When("a new sub category should be added to the category page under root category")
+    public void aNewSubCategoryShouldBeAddedToTheCategoryPageUnderRootCategory() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.catalogModuleLogin();
+        manageCategoriesPage=new ManageCategoriesPage(driver);
+        manageCategoriesPage.fillCategoryInformationAndSave();
+        manageCategoriesPage.addSubCategory();
+        Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
+
+    }
+
+    @Then("the newly added sub category should be ın the data base")
+    public void theNewlyAddedSubCategoryShouldBeInTheDataBase() {
+        Assert.assertTrue(dataAccess.verifyNewlyAddedSubCategoriesInTheDatabase(TestHelperCatalog.getSubName(),connection));
+    }
+
+
+
+
+
+
+    @After("@DatabaseTest")
+    public void tearDown() {
+        DatabaseConnection.closeDataBaseConnection(connection);
+        closeBrowser();
     }
 }
 
