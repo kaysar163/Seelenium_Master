@@ -82,8 +82,11 @@
 
 
 
-      #Irsahd :
-
+    @viewAndAddCreditMemo #Irsahd :
+    Scenario: Sales Manager should be able to view and add credit memo
+      Given Admin user is already in the dashboard page sales
+      When the user views complete order and add credit memo
+      Then the credit memo will appeared
 
 
 
