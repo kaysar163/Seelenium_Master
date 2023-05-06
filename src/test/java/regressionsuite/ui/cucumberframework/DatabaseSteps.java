@@ -12,6 +12,7 @@ import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
 import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
+import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
@@ -41,7 +42,7 @@ public class DatabaseSteps extends TestBase {
     ShoppingCartPriceRulePage shoppingCartPriceRulePage;
     DataAccess dataAccess;
     SalesPage salesPage;
-
+    OrdersPageSales ordersPageSales;
 
     String dbUrl = ApplicationConfig.readFromConfigProperties(config, "dbIp");
     String dbPort = (ApplicationConfig.readFromConfigProperties(config, "dbPort"));
@@ -202,14 +203,29 @@ public class DatabaseSteps extends TestBase {
 
 
 
+    @When("the user add new order")
+    public void theUserAddNewOrder() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.salesModuleLogin();
+        ordersPageSales=new OrdersPageSales(driver);
+        ordersPageSales.createNewOrder();
+        ordersPageSales.verifyCreateOrder();
+        Assert.assertTrue(ordersPageSales.verifyCreateOrder());
+    }
 
-
+    @Then("Newly added orders should be in the database")
+    public void newlyAddedOrdersShouldBeInTheDatabase() {
+    }
 
     @After("@DatabaseTest")
     public void tearDown() {
         DatabaseConnection.closeDataBaseConnection(connection);
         closeBrowser();
     }
+
+
+
 }
 
 

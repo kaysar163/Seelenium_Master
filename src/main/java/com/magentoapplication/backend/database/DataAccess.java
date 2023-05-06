@@ -226,6 +226,17 @@ public class DataAccess {
 
 
 
+        public boolean verifyCustomerFirstName(String CustomerFirstName, Connection connection) {
+            String selectCat = String.format("select * from mg_customer_group where customer_group_code='%s'", customerGroupName);
+            try (PreparedStatement preparedStatement = connection.prepareStatement(selectCat);
+                 ResultSet resultSet = preparedStatement.executeQuery();) {
+                boolean isCustomerGroupAdded = resultSet.next();
+                return isCustomerGroupAdded;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
 
     }
 
