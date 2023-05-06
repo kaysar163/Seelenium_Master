@@ -5,8 +5,6 @@ import com.magentoapplication.ui.backend.salesmodule.ManageCustomersPage;
 import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
 import com.magentoapplication.ui.backend.salesmodule.RefundReportPage;
 import com.magentoapplication.ui.backend.salesmodule.ShipmentsPage;
-import com.magentoapplication.ui.backend.storemodule.OrdersPage;
-import com.magentoapplication.utility.Log4j;
 import com.magentoapplication.utility.TestBase;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -90,8 +88,9 @@ public class SalesModuleSteps extends TestBase {
 
 
 
-    @When("Sales Manager view refunds")
-    public void salesManagerViewRefunds() { refundReportPage.viewRefundsInTheReports();}
+    @When("Sales Manager view refunds      {string}")
+    public void salesManagerViewRefunds(String arg0) {refundReportPage.viewRefundsInTheReports(arg0);
+    }
 
 
     @Then("Total Refunds Report table should display")
@@ -103,6 +102,8 @@ public class SalesModuleSteps extends TestBase {
     public void tearDown(){
         closeBrowser();
     }
+
+
 }
 
 
