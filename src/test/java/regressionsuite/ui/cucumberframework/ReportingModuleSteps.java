@@ -237,20 +237,17 @@ public class ReportingModuleSteps extends TestBase {
     @Then("total tax report should display")
     public void totalTaxReportShouldDisplay( ) {
         salesPage.verifySalesTotalTaxReport();
+    }@When("Reporting manager should be see customers")
+    public void reportingManagerShouldBeSeeCustomers() {customersPage.seeNewAccounts();
+    }
+
+    @Then("Reporting manager should be able to see new accounts")
+    public void reportingManagerShouldBeAbleToSeeNewAccounts() {customersPage.verifySeeNewCustomers();
     }
     @After("@ReportingModuleTest")
     public void tearDown() {
         closeBrowser();
     }
-    
-    @When("the user views tags for products report")
-    public void theUserViewsTagsForProductsReport() {
-        tagsPage.seeTagsForProductsReport();
-    }
-    
-    @Then("the user sees products tags")
-    public void theUserSeesProductsTags() {
-        Assert.assertTrue(tagsPage.isProductReportsWithTagsExist());
-    
-    }
+
+
 }
