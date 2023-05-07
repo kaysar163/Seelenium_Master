@@ -60,7 +60,7 @@ public class ApiSteps {
     public void auAuthorizedUserSendsARequestToTheProductPutInPoint() {
         response=RestAssured.given().headers("Content-Type","application/json").and()
                 .body(PayloadUtility.createProductPayload()).auth().basic(apiUsername,apiPassword).when().
-                post(apiBaseUrl+":"+apiPort+"/product/234").then().extract().response();
+                put(apiBaseUrl+":"+apiPort+"/product/238").then().extract().response();
         System.out.println(response.getBody().prettyPrint());
     }
 

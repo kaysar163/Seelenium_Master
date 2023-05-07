@@ -110,4 +110,4 @@
     Scenario: An authorized user should be able to put product
       Given a valid username and a password
       When an authorized user sends a request to the product put in point
-      Then the api should return update product with 405 response code
+      Then the api should return update product with 204 response code
