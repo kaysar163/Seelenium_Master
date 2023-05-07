@@ -20,6 +20,10 @@ public class OrdersPageSales {
     SalesDashboardPage salesDashboardPage;
 
     Actions actions;
+    static final String config = "testdatafolder/testdata.properties";
+    String creditMemoNumber = ApplicationConfig.readFromConfigProperties(config,"creditMemoNo");
+    String orderNumber = ApplicationConfig.readFromConfigProperties(config, "orderNo");
+    String refundQuantity = ApplicationConfig.readFromConfigProperties(config, "quantityToRefund");
 
     public OrdersPageSales(WebDriver driver) {
         this.driver = driver;
@@ -114,16 +118,20 @@ public class OrdersPageSales {
         selectBox.click();
         functionClass.waitUntilElementPresent(addSelectedPrdcLink);
         addSelectedPrdcLink.click();
-       // TestHelperSales.setFirstNameField(functionClass.generateFakeName());
-       // firstNameField.sendKeys(TestHelperSales.getFirstNameField());
+        TestHelperSales.setFirstName(functionClass.generateFakeName());
+        firstNameField.sendKeys(TestHelperSales.getFirstName());
         functionClass.waitUntilElementPresent(lastNameField);
-        lastNameField.sendKeys(functionClass.generateFakeLastName());
+        //lastNameField.sendKeys(functionClass.generateFakeLastName());
+        TestHelperSales.setLastName(functionClass.generateFakeName());
+        lastNameField.sendKeys(TestHelperSales.getLastName());
         functionClass.waitUntilElementPresent(streetAddressField);
         streetAddressField.sendKeys(functionClass.generateStreetName());
         functionClass.waitUntilElementPresent(cityField);
         cityField.sendKeys(functionClass.generateCityName());
         functionClass.waitUntilElementPresent(countryField);
-        countryField.sendKeys(functionClass.generateCountryName());
+        //countryField.sendKeys(functionClass.generateCountryName());
+        Select select=new Select(countryField);
+        select.selectByValue("TR");
         functionClass.waitUntilElementPresent(zipCodeField);
         zipCodeField.sendKeys(functionClass.generateZipCode());
         functionClass.waitUntilElementPresent(telephoneField);
@@ -195,6 +203,96 @@ public class OrdersPageSales {
             return true;
         else return false;
 
+    }
+    
+    //Toghraq
+    @FindBy(xpath = "(//span[contains(text(),'Sales')])[1]")
+    WebElement salesTab;
+    @FindBy(xpath = "//input[@name='increment_id']")
+    WebElement creditMemoNoInputField;
+    @FindBy(xpath = "//li[@class='  level1']//a//span[contains(text(),'Orders')]")
+    WebElement ordersLink;
+    @FindBy(xpath = "//select[@name='status']")
+    WebElement statusDropdownMenu;
+//    @FindBy(xpath = "//button[@title='Search']")
+//    WebElement searchButton;
+    @FindBy(xpath = "//input[@name='real_order_id']")
+    WebElement orderNumberInputField;
+    @FindBy(xpath = "//tr//td[contains(text(),'otanBazar')]//following-sibling::td//a[contains(text(),'View')]")
+    WebElement viewLink;
+    @FindBy(xpath = "(//button[@title='Credit Memo'])[1]")
+    WebElement creditMemoButton;
+    @FindBy(xpath = "//table[@class='data order-tables']//tbody//tr//td//input[@type='checkbox']")
+    WebElement returnToStockCheckBox;
+    @FindBy(css = ".input-text.qty-input")
+    WebElement qtyToRefund;
+    @FindBy(xpath = "//button[@title=\"Update Qty's\"]")
+    WebElement updateQuantityButton;
+    @FindBy(xpath = "//*//input[@id='send_email']")
+    WebElement emailCopyOfCreditMemo;
+    @FindBy(xpath = "//button[@title='Refund Offline']")
+    WebElement refundOffLineButton;
+    @FindBy(xpath = "//li//span[contains(text(),'Credit Memos')]")
+    WebElement creditMemosLink;
+    @FindBy(xpath = "//span[contains(text(),'The credit memo has been created.')]")
+    WebElement creditMemoSuccessMessage;
+    @FindBy(xpath = "(//td[contains(text(),'Refunded')])[3]")
+    WebElement creditMemoRefunded;
+    
+    public void viewAndCreateCreditMemo() {
+        functionClass.waitUntilElementPresent(salesTab);
+        Actions action = new Actions(driver);
+        action.moveToElement(salesTab).perform();
+        functionClass.waitUntilElementPresent(creditMemosLink);
+        creditMemosLink.click();
+        functionClass.waitUntilElementPresent(creditMemoNoInputField);
+        creditMemoNoInputField.sendKeys(creditMemoNumber);
+        functionClass.waitUntilElementPresent(searchButton);
+        searchButton.click();
+        functionClass.sleep(5);
+        action.moveToElement(salesTab).perform();
+        functionClass.waitUntilElementPresent(ordersLink);
+        ordersLink.click();
+        functionClass.waitUntilElementPresent(statusDropdownMenu);
+        functionClass.sleep(2);
+        Select object = new Select(statusDropdownMenu);
+        object.selectByValue("complete");
+        functionClass.sleep(1);
+        searchButton.click();
+        functionClass.waitUntilElementPresent(orderNumberInputField);
+        functionClass.sleep(3);
+        orderNumberInputField.sendKeys(orderNumber);
+        functionClass.waitUntilElementPresent(searchButton);
+        functionClass.sleep(2);
+        searchButton.click();
+        functionClass.waitUntilElementPresent(viewLink);
+        functionClass.sleep(3);
+        viewLink.click();
+        functionClass.waitUntilElementPresent(creditMemoButton);
+        creditMemoButton.click();
+        functionClass.waitUntilElementPresent(returnToStockCheckBox);
+        functionClass.sleep(3);
+        returnToStockCheckBox.click();
+        functionClass.waitUntilElementPresent(qtyToRefund);
+        functionClass.sleep(2);
+        qtyToRefund.clear();
+        qtyToRefund.sendKeys(refundQuantity);
+        functionClass.waitUntilElementPresent(updateQuantityButton);
+        functionClass.sleep(2);
+        updateQuantityButton.click();
+        functionClass.waitUntilElementPresent(emailCopyOfCreditMemo);
+        functionClass.sleep(2);
+        emailCopyOfCreditMemo.click();
+        functionClass.waitUntilElementPresent(refundOffLineButton);
+        functionClass.sleep(1);
+        refundOffLineButton.click();
+    }
+    
+    public boolean isCreditMemoCreated() {
+        if (creditMemoSuccessMessage.isDisplayed())
+            return true;
+        else
+            return false;
     }
 
 }

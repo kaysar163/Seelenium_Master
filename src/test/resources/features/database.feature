@@ -41,7 +41,11 @@ Feature: Database and UI connection tests
 
 
 
-      #Fazilat :
+  @verifyNewlyAddedOrdersInTheDatabase    #Fazilet :
+  Scenario: Verify that newly added orders should be in the database
+    Given connection is already established
+    When the user add new order
+    Then Newly added order should be in the database
 
 
 

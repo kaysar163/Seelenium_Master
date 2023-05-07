@@ -207,14 +207,14 @@ public class DataAccess {
 
     }
 
-    public boolean verifyNewlyAddedSubCategoriesInTheDatabase(String subName, Connection connection){
-        String selectSubCat=String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'",subName);
+    public boolean verifyNewlyAddedSubCategoriesInTheDatabase(String subName, Connection connection) {
+        String selectSubCat = String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'", subName);
 
-        PreparedStatement preparedStatement= null;
+        PreparedStatement preparedStatement = null;
 
         try {
             preparedStatement = connection.prepareStatement(selectSubCat);
-            ResultSet resultSet=preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             {
                 boolean isSubCatAdded = resultSet.next();
                 return isSubCatAdded;
@@ -222,12 +222,30 @@ public class DataAccess {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }}
 
 
 
+        public boolean verifyNewlyAddedOrderInTheDatabase(String firstName, Connection connection)
+        {
+            String selectNewlyAddedOrder = String.format("select customer_firstname from mg_sales_flat_order where customer_firstname='%s'", firstName);
 
-    }
+            PreparedStatement preparedStatement= null;
+
+            try {
+                preparedStatement = connection.prepareStatement(selectNewlyAddedOrder);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                {
+                    boolean isOrderAdded = resultSet.next();
+                    return isOrderAdded;
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }}
+
+
+
     public boolean verifyStoreAdded(String storeName, Connection connection) {
         String selectStore = String.format("select * from mg_core_store_group where name='%s'", storeName);
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectStore);
@@ -238,10 +256,10 @@ public class DataAccess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }}
 
 
-}
+
 
 
 

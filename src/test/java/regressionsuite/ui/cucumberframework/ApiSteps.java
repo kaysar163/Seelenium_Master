@@ -1,5 +1,6 @@
 package regressionsuite.ui.cucumberframework;
 
+import com.magentoapplication.backend.api.CustomerPayload;
 import com.magentoapplication.backend.api.PayloadUtility;
 import com.magentoapplication.utility.ApplicationConfig;
 import io.cucumber.java.en.Given;
@@ -8,6 +9,8 @@ import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Assert;
+
+import static io.restassured.RestAssured.given;
 
 public class ApiSteps {
 
@@ -32,7 +35,7 @@ public class ApiSteps {
 
     @When("an authorized user sends a request to the product end point")
     public void anAuthorizedUserSendsARequestToTheProductEndPoint() {
-        response= RestAssured.given().auth().basic(apiUsername,apiPassword).when()
+        response= given().auth().basic(apiUsername,apiPassword).when()
                 .get(apiBaseUrl+":"+apiPort+"/products");
         System.out.println(response.getBody().prettyPrint());
     }
@@ -46,7 +49,7 @@ public class ApiSteps {
 
     @When("an authorized user sends a request to the customer end point")
     public void anAuthorizedUserSendsARequestToTheCustomerEndPoint() {
-        response=RestAssured.given().header("Content-Type","application/json").and()
+        response= given().header("Content-Type","application/json").and()
                 .body(PayloadUtility.createCustomerPayload()).auth().basic(apiUsername,apiPassword).when().
                 post(apiBaseUrl+":"+apiPort+"/customer").then().extract().response();
         System.out.println(response.getBody().prettyPrint());
@@ -56,16 +59,33 @@ public class ApiSteps {
     public void theApiShouldReturnCreatedCustomerWithResponseCode(int arg0) {
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
-    @When("an authorized user sends a request to the product put in point")
-    public void auAuthorizedUserSendsARequestToTheProductPutInPoint() {
-        response=RestAssured.given().headers("Content-Type","application/json").and()
-                .body(PayloadUtility.createProductPayload()).auth().basic(apiUsername,apiPassword).when().
-                put(apiBaseUrl+":"+apiPort+"/product/238").then().extract().response();
+
+    @When("user makes a request to update customer group info")
+    public void userMakesARequestToUpdateCustomerGroupInfo() {
+        String cusGroupPayload=PayloadUtility.putCustomerGroupPayload();
+        response=given().
+                header("Content-Type","application/json").and().body(cusGroupPayload)
+                .auth().basic(apiUsername,apiPassword)
+                .when().put(apiBaseUrl+":"+apiPort+"/customergroup"+"/600")
+                .then().extract().response();
+        System.out.println(response.getBody().asString());
+    }
+    @Then("user should have the status code {string} displayed")
+    public void userShouldHaveTheStatusCodeDisplayed(String arg0) {
+        Assert.assertEquals(Integer.parseInt(arg0),response.getStatusCode());
+    }
+
+    @When("user should be able to send Get request with customer group end point")
+    public void userShouldBeAbleToSendGetRequestWithCustomerGroupEndPoint() {
+        response= given().auth().basic(apiUsername,apiPassword).when().
+                get(apiBaseUrl+":"+apiPort+"/customergroup").then().extract().response();
         System.out.println(response.getBody().prettyPrint());
     }
 
-    @Then("the api should return update product with {int} response code")
-    public void theApiShouldReturnUpdateProductWithResponseCode(int arg0) {
-        Assert.assertTrue(response.getStatusCode()==arg0);
+
+
+    @Then("the api should return a response code of {int}")
+    public void theApiShouldReturnAResponseCodeOf(int arg0) {
+        Assert.assertEquals(response.getStatusCode(),arg0);
     }
 }
