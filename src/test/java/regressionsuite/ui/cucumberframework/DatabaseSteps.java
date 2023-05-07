@@ -13,6 +13,7 @@ import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePa
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
 import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
+import com.magentoapplication.ui.backend.salesmodule.TestHelperSales;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
@@ -214,9 +215,11 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(ordersPageSales.verifyCreateOrder());
     }
 
-    @Then("Newly added orders should be in the database")
-    public void newlyAddedOrdersShouldBeInTheDatabase() {
-    }
+        @Then("Newly added order should be in the database")
+        public void newlyAddedOrderShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.(.getLastName(),connection));
+        }
+
 
     @After("@DatabaseTest")
     public void tearDown() {

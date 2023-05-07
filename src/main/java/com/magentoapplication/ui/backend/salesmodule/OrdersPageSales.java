@@ -117,7 +117,9 @@ public class OrdersPageSales {
        // TestHelperSales.setFirstNameField(functionClass.generateFakeName());
        // firstNameField.sendKeys(TestHelperSales.getFirstNameField());
         functionClass.waitUntilElementPresent(lastNameField);
-        lastNameField.sendKeys(functionClass.generateFakeLastName());
+        //lastNameField.sendKeys(functionClass.generateFakeLastName());
+        TestHelperSales.setLastName(functionClass.generateFakeName());
+        lastNameField.sendKeys(TestHelperSales.getLastName());
         functionClass.waitUntilElementPresent(streetAddressField);
         streetAddressField.sendKeys(functionClass.generateStreetName());
         functionClass.waitUntilElementPresent(cityField);

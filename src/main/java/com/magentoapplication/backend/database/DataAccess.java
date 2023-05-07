@@ -226,12 +226,17 @@ public class DataAccess {
 
 
 
-        public boolean verifyCustomerFirstName(String CustomerFirstName, Connection connection) {
-            String selectCat = String.format("select * from mg_customer_group where customer_group_code='%s'", customerGroupName);
-            try (PreparedStatement preparedStatement = connection.prepareStatement(selectCat);
+        public boolean verifyNewlyAddedOrderInTheDatabase(String lastname, Connection connection)
+        {
+            String selectNewlyAddedOrder = String.format("SELECT * FROM `i5751295_mg2`.`mg_sales_flat_order where customer_lastname='%s'", lastName);
+
+            PreparedStatement preparedStatement= null;
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(selectNewlyAddedOrder);
+
                  ResultSet resultSet = preparedStatement.executeQuery();) {
-                boolean isCustomerGroupAdded = resultSet.next();
-                return isCustomerGroupAdded;
+                boolean isOrderAdded = resultSet.next();
+                return isOrderAdded;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
