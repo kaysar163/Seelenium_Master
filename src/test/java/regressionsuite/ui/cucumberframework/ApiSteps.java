@@ -74,4 +74,18 @@ public class ApiSteps {
     public void userShouldHaveTheStatusCodeDisplayed(String arg0) {
         Assert.assertEquals(Integer.parseInt(arg0),response.getStatusCode());
     }
+
+    @When("user should be able to send Get request with customer group end point")
+    public void userShouldBeAbleToSendGetRequestWithCustomerGroupEndPoint() {
+        response= given().auth().basic(apiUsername,apiPassword).when().
+                get(apiBaseUrl+":"+apiPort+"/customergroup").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+    }
+
+
+
+    @Then("the api should return a response code of {int}")
+    public void theApiShouldReturnAResponseCodeOf(int arg0) {
+        Assert.assertEquals(response.getStatusCode(),arg0);
+    }
 }

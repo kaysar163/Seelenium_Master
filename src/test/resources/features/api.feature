@@ -63,6 +63,11 @@
 
 
          #Mirehmidi :
+    @Getcustomergroups
+    Scenario: An authorized user should be able to post customer
+      Given a valid username and a password
+      When user should be able to send Get request with customer group end point
+      Then the api should return a response code of 200
 
 
 
