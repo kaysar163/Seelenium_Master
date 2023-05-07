@@ -65,10 +65,6 @@
       Then    verify existing Catalog Price Rule updated
 
 
-
-
-
-
       #Memet : Update Existing cart price rule
     @updateExistingCartPriceRule
       Scenario: marketing manager should be able to update existing cart price rule
@@ -94,17 +90,11 @@
         Then  pending reviews should be updated
 
 
-
-
-
-
-
-      #Irshad : search Catalog Pricing Rule By Id and Rule
-
-
-
-
-
+    @catalogPriceRuleSearch #Irshad : search Catalog Pricing Rule By Id and Rule
+    Scenario: Marketing Manager should be able to search catalog price rule by rule Id and Rule
+      Given Admin user is already in the dashboard page
+      When the user fills out rule Id or rule name
+      Then the relative catalog rule will appear
 
 
     @addNewNewsletterTemplate     #Abdusattar

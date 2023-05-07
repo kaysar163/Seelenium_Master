@@ -12,8 +12,6 @@ import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
 import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
-import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
-import com.magentoapplication.ui.backend.salesmodule.TestHelperSales;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
@@ -43,7 +41,10 @@ public class DatabaseSteps extends TestBase {
     ShoppingCartPriceRulePage shoppingCartPriceRulePage;
     DataAccess dataAccess;
     SalesPage salesPage;
-    OrdersPageSales ordersPageSales;
+
+    ManageStoresPage manageStoresPage;
+
+
 
     String dbUrl = ApplicationConfig.readFromConfigProperties(config, "dbIp");
     String dbPort = (ApplicationConfig.readFromConfigProperties(config, "dbPort"));
@@ -204,22 +205,7 @@ public class DatabaseSteps extends TestBase {
 
 
 
-    @When("the user add new order")
-    public void theUserAddNewOrder() {
-        setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
-        backEndLogin.salesModuleLogin();
-        ordersPageSales=new OrdersPageSales(driver);
-        ordersPageSales.createNewOrder();
-        ordersPageSales.verifyCreateOrder();
-        Assert.assertTrue(ordersPageSales.verifyCreateOrder());
-    }
 
-        @Then("Newly added order should be in the database")
-        public void newlyAddedOrderShouldBeInTheDatabase() {
-        Assert.assertTrue(dataAccess.verifyNewlyAddedOrderInTheDatabase(TestHelperSales.getFirstName(),connection));
-
-        }
 
 
     @After("@DatabaseTest")
@@ -227,9 +213,20 @@ public class DatabaseSteps extends TestBase {
         DatabaseConnection.closeDataBaseConnection(connection);
         closeBrowser();
     }
+    @When("a user can add new store in database")
+    public void aUserCanAddNewStoreInDatabase() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.storeModuleLogin();
+        manageStoresPage=new ManageStoresPage(driver);
+        manageStoresPage.createStore();
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
 
-
-
+    @Then("the user should added new store")
+    public void theUserShouldAddedNewStore() {
+        Assert.assertTrue(dataAccess.verifyStoreAdded(TestHelperStore.getStoreName(),connection));
+    }
 }
 
 

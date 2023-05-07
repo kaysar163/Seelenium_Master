@@ -63,6 +63,11 @@
 
 
          #Mirehmidi :
+    @Getcustomergroups
+    Scenario: An authorized user should be able to post customer
+      Given a valid username and a password
+      When user should be able to send Get request with customer group end point
+      Then the api should return a response code of 200
 
 
 
@@ -77,6 +82,11 @@
 
 
          #Memet :
+    @CustomerGroupUpdate
+      Scenario: It should be possible to Update a Customer Group
+      Given a valid username and a password
+      When user makes a request to update customer group info
+      Then user should have the status code "204" displayed
 
 
 
