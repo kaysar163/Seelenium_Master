@@ -88,4 +88,16 @@ public class ApiSteps {
     public void theApiShouldReturnAResponseCodeOf(int arg0) {
         Assert.assertEquals(response.getStatusCode(),arg0);
     }
+    @When("an authorized user sends a request to the product put in point")
+    public void auAuthorizedUserSendsARequestToTheProductPutInPoint() {
+        response=RestAssured.given().headers("Content-Type","application/json").and()
+                .body(PayloadUtility.createProductPayload()).auth().basic(apiUsername,apiPassword).when().
+                put(apiBaseUrl+":"+apiPort+"/product/238").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+    }
+
+    @Then("the api should return update product with {int} response code")
+    public void theApiShouldReturnUpdateProductWithResponseCode(int arg0) {
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
 }
