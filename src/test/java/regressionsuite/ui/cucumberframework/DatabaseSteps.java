@@ -217,7 +217,8 @@ public class DatabaseSteps extends TestBase {
 
         @Then("Newly added order should be in the database")
         public void newlyAddedOrderShouldBeInTheDatabase() {
-        Assert.assertTrue(dataAccess.(.getLastName(),connection));
+        Assert.assertTrue(dataAccess.verifyNewlyAddedOrderInTheDatabase(TestHelperSales.getFirstName(),connection));
+
         }
 
 

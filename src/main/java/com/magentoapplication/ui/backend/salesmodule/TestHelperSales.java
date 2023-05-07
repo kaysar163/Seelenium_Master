@@ -15,11 +15,21 @@ public class TestHelperSales {
 
 
     private static String lastName;
+    private static String firstName;
 
-    public static String getLastName(){ return lastName;}
-
+    public static String getLastName() {
+        return lastName;
+    }
 
     public static void setLastName(String lastName) {
-        TestHelperSales.lastName= lastName;    }
+        TestHelperSales.lastName = lastName;
+    }
 
+    public static String getFirstName() {
+        return firstName;
+    }
+
+    public static void setFirstName(String firstName) {
+        TestHelperSales.firstName = firstName;
+    }
 }

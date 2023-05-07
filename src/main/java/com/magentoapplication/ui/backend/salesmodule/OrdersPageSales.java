@@ -114,8 +114,8 @@ public class OrdersPageSales {
         selectBox.click();
         functionClass.waitUntilElementPresent(addSelectedPrdcLink);
         addSelectedPrdcLink.click();
-       // TestHelperSales.setFirstNameField(functionClass.generateFakeName());
-       // firstNameField.sendKeys(TestHelperSales.getFirstNameField());
+        TestHelperSales.setFirstName(functionClass.generateFakeName());
+        firstNameField.sendKeys(TestHelperSales.getFirstName());
         functionClass.waitUntilElementPresent(lastNameField);
         //lastNameField.sendKeys(functionClass.generateFakeLastName());
         TestHelperSales.setLastName(functionClass.generateFakeName());
@@ -125,7 +125,9 @@ public class OrdersPageSales {
         functionClass.waitUntilElementPresent(cityField);
         cityField.sendKeys(functionClass.generateCityName());
         functionClass.waitUntilElementPresent(countryField);
-        countryField.sendKeys(functionClass.generateCountryName());
+        //countryField.sendKeys(functionClass.generateCountryName());
+        Select select=new Select(countryField);
+        select.selectByValue("TR");
         functionClass.waitUntilElementPresent(zipCodeField);
         zipCodeField.sendKeys(functionClass.generateZipCode());
         functionClass.waitUntilElementPresent(telephoneField);
