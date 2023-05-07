@@ -32,5 +32,19 @@ public class PayloadUtility {
         }
         return cusGroupPayload;
     }
+    public static String createProductPayload(){
+        long timeStamp=System.currentTimeMillis();
+        String payload=null;
+        ProductPayload productPayload=new ProductPayload(3,13,"simpssxkscmle"+timeStamp,"run"+timeStamp,0,
+                0,"2024-03-04","2025-08-16");
+        ObjectMapper objectMapper=new ObjectMapper();
+        try {
+            payload=objectMapper.writeValueAsString(productPayload);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
+    }
+
 
 }
