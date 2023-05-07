@@ -77,6 +77,11 @@
 
 
          #Memet :
+    @CustomerGroupUpdate
+      Scenario: It should be possible to Update a Customer Group
+      Given a valid username and a password
+      When user makes a request to update customer group info
+      Then user should have the status code "204" displayed
 
 
 
