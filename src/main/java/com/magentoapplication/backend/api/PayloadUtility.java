@@ -62,11 +62,11 @@ public class PayloadUtility {
     public  static String categoryPayloadPut(){
         long timeStamp=System.currentTimeMillis();
         String payload=null;
-        CategoryPayload categoryPayload=new CategoryPayload(3,41,0,1,"IWqSUUU"+timeStamp);
+        CategoryPayload categoryPayload1=new CategoryPayload(3,41,0,1,"IWqSUUU"+timeStamp);
         ObjectMapper objectMapper=new ObjectMapper();
 
         try {
-            payload=objectMapper.writeValueAsString(categoryPayload());
+            payload=objectMapper.writeValueAsString(categoryPayload1);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
