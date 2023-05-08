@@ -113,4 +113,17 @@ public class ApiSteps {
         arg0=200;
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
+
+    @When("an authorized user sends a put request to the category end point")
+    public void anAuthorizedUserSendsAPutRequestToTheCategoryEndPoint() {
+        response=given().auth().basic(apiUsername,apiPassword).when().put(apiBaseUrl+":"+apiPort+"/category/1");
+        System.out.println(response.getBody().prettyPrint());
+
+    }
+
+    @Then("the api should retur")
+    public void theApiShouldRetur(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
 }

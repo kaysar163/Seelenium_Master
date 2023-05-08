@@ -5,6 +5,7 @@ import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
+import com.magentoapplication.ui.backend.catalogmodule.ManageProductsPage;
 import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
 import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
@@ -46,6 +47,8 @@ public class DatabaseSteps extends TestBase {
 
     ManageStoresPage manageStoresPage;
     OrdersPageSales ordersPageSales;
+
+    com.magentoapplication.ui.backend.catalogmodule.ManageProductsPage  manageProductsPage;
 
 
 
@@ -226,11 +229,7 @@ public class DatabaseSteps extends TestBase {
 
 
 
-    @After("@DatabaseTest")
-    public void tearDown() {
-        DatabaseConnection.closeDataBaseConnection(connection);
-        closeBrowser();
-    }
+
     @When("a user can add new store in database")
     public void aUserCanAddNewStoreInDatabase() {
         setupBrowserBackEnd();
@@ -244,6 +243,29 @@ public class DatabaseSteps extends TestBase {
     @Then("the user should added new store")
     public void theUserShouldAddedNewStore() {
         Assert.assertTrue(dataAccess.verifyStoreAdded(TestHelperStore.getStoreName(),connection));
+    }
+
+    @When("a user add new product to system")
+    public void aUserAddNewProductToSystem() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.catalogModuleLogin();
+        manageProductsPage=new ManageProductsPage(driver);
+        manageProductsPage.addProduct();
+        Assert.assertTrue(manageProductsPage.verifyAddProduct());
+
+    }
+
+    @Then("new added product should be in the database")
+    public void newAddedProductShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.verifyNewlyAddedProduct(TestHelperCatalog.getProductName(),connection));
+    }
+
+
+    @After("@DatabaseTest")
+    public void tearDown() {
+        DatabaseConnection.closeDataBaseConnection(connection);
+        closeBrowser();
     }
 }
 
