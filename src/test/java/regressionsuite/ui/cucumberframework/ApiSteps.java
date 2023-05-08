@@ -121,9 +121,12 @@ public class ApiSteps {
 
     }
 
-    @Then("the api should retur")
-    public void theApiShouldRetur(int arg0) {
+
+
+    @Then("the api should return a category with {int} response code")
+    public void theApiShouldReturnACategoryWithResponseCode(int arg0) {
         arg0=200;
         Assert.assertTrue(response.getStatusCode()==arg0);
+
     }
 }

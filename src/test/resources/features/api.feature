@@ -27,7 +27,7 @@
       Scenario:  An authorized user should be able to put category
       Given a valid username and a password
       When  an authorized user sends a put request to the category end point
-      Then  the api should retur
+      Then  the api should return a category with 200 response code
 
 
 
