@@ -91,4 +91,31 @@ public class PayloadUtility {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static String oneCategoryPayload(){
+        String payload=null;
+        CategoryPayload oneCategoryPayload1=new CategoryPayload(3,41,0,1,"dhKMb");
+        ObjectMapper objectMapper=new ObjectMapper();
+        try {
+            payload=objectMapper.writeValueAsString(oneCategoryPayload1);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
+    }
+
+
 }

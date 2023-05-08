@@ -134,16 +134,32 @@ public class ApiSteps {
 
     }
 
-    @When("an authorized user sends a request to get one product end point")
-    public void anAuthorizedUserSendsARequestToGetOneProductEndPoint() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @When("an authorized user sends get one category request to the category end point")
+    public void anAuthorizedUserSendsGetOneCategoryRequestToTheCategoryEndPoint() {
         response=RestAssured.given().headers("Content-Type","application/json").and()
-                .body(PayloadUtility.getoneproduct()).auth().basic(apiUsername,apiPassword).when().
-                get(apiBaseUrl+":"+apiPort+"/product"+"/235").then().extract().response();
+                .body(PayloadUtility.oneCategoryPayload()).auth().basic(apiUsername,apiPassword)
+                .when().get(apiBaseUrl+":"+apiPort+"/category/1").then().extract().response();
         System.out.println(response.getBody().prettyPrint());
+        
     }
 
-    @Then("the api should return one product with {int} response code")
-    public void theApiShouldReturnOneProductWithResponseCode(int arg0) {
+    @Then("the api should return one category with {int} response code")
+    public void theApiShouldReturnOneCategoryWithResponseCode(int arg0) {
         arg0=200;
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
