@@ -111,6 +111,11 @@
 
 
          #Gulzar :
+    @GetOneProduct
+      Scenario: An authorized user should be able to get one product
+      Given a valid username and a password
+      When an authorized user sends a request to get one product end point
+      Then  the api should return one product with 200 response code
 
 
 

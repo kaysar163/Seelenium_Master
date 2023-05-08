@@ -133,4 +133,18 @@ public class ApiSteps {
         Assert.assertTrue(response.getStatusCode()==arg0);
 
     }
+
+    @When("an authorized user sends a request to get one product end point")
+    public void anAuthorizedUserSendsARequestToGetOneProductEndPoint() {
+        response=RestAssured.given().headers("Content-Type","application/json").and()
+                .body(PayloadUtility.getoneproduct()).auth().basic(apiUsername,apiPassword).when().
+                get(apiBaseUrl+":"+apiPort+"/product"+"/235").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+    }
+
+    @Then("the api should return one product with {int} response code")
+    public void theApiShouldReturnOneProductWithResponseCode(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
 }

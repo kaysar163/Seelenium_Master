@@ -74,6 +74,21 @@ public class PayloadUtility {
 
 
     }
+    public  static String getoneproduct(){
+        long timeStamp=System.currentTimeMillis();
+        String payload=null;
+        ProductPayload productPayload1=new ProductPayload(4,13,"simple"+timeStamp,"msj004"+timeStamp,0,
+                0,"2023-03-04","2022-08-03");
+        ObjectMapper objectMapper=new ObjectMapper();
+
+        try {
+            payload=objectMapper.writeValueAsString(productPayload1);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
+    }
+
 
 
 }
