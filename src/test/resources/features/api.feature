@@ -16,7 +16,11 @@
 
 
          #Rizvangul :
-
+@GetOneCategory
+  Scenario: An authorized user should be able to get one category
+  Given a valid username and a password
+  When an authorized user sends get one category request to the category end point
+  Then the api should return one category with 200 response code
 
 
 
