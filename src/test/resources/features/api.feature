@@ -5,7 +5,11 @@
 
 
           #Muradil :
-
+    @GetAllCategories
+    Scenario: An authorized user should be able to get all categories
+      Given a valid username and a password
+      When an authorized user sends a request to the category end point
+      Then the api should return all categories with 200 response code
 
 
 
