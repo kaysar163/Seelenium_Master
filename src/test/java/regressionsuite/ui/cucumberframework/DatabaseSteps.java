@@ -5,7 +5,6 @@ import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
-import com.magentoapplication.ui.backend.catalogmodule.ManageProductsPage;
 import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
 import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
@@ -13,8 +12,6 @@ import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
 import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
-import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
-import com.magentoapplication.ui.backend.salesmodule.TestHelperSales;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
@@ -44,12 +41,6 @@ public class DatabaseSteps extends TestBase {
     ShoppingCartPriceRulePage shoppingCartPriceRulePage;
     DataAccess dataAccess;
     SalesPage salesPage;
-
-    ManageStoresPage manageStoresPage;
-    OrdersPageSales ordersPageSales;
-
-    com.magentoapplication.ui.backend.catalogmodule.ManageProductsPage  manageProductsPage;
-
 
 
     String dbUrl = ApplicationConfig.readFromConfigProperties(config, "dbIp");
@@ -210,56 +201,8 @@ public class DatabaseSteps extends TestBase {
     }
 
 
-    @When("the user add new order")
-    public void theUserAddNewOrder() {
-        setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
-        backEndLogin.salesModuleLogin();
-        ordersPageSales=new OrdersPageSales(driver);
-        ordersPageSales.createNewOrder();
-        ordersPageSales.verifyCreateOrder();
-        Assert.assertTrue(ordersPageSales.verifyCreateOrder());
-    }
-
-    @Then("Newly added order should be in the database")
-    public void newlyAddedOrderShouldBeInTheDatabase() {
-        Assert.assertTrue(dataAccess.verifyNewlyAddedOrderInTheDatabase(TestHelperSales.getFirstName(),connection));
-
-    }
 
 
-
-
-    @When("a user can add new store in database")
-    public void aUserCanAddNewStoreInDatabase() {
-        setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
-        backEndLogin.storeModuleLogin();
-        manageStoresPage=new ManageStoresPage(driver);
-        manageStoresPage.createStore();
-        Assert.assertTrue(manageStoresPage.verifyCreateStore());
-    }
-
-    @Then("the user should added new store")
-    public void theUserShouldAddedNewStore() {
-        Assert.assertTrue(dataAccess.verifyStoreAdded(TestHelperStore.getStoreName(),connection));
-    }
-
-    @When("a user add new product to system")
-    public void aUserAddNewProductToSystem() {
-        setupBrowserBackEnd();
-        backEndLogin=new BackEndLogin(driver);
-        backEndLogin.catalogModuleLogin();
-        manageProductsPage=new ManageProductsPage(driver);
-        manageProductsPage.addProduct();
-        Assert.assertTrue(manageProductsPage.verifyAddProduct());
-
-    }
-
-    @Then("new added product should be in the database")
-    public void newAddedProductShouldBeInTheDatabase() {
-        Assert.assertTrue(dataAccess.verifyNewlyAddedProduct(TestHelperCatalog.getProductName(),connection));
-    }
 
 
     @After("@DatabaseTest")
