@@ -100,4 +100,17 @@ public class ApiSteps {
     public void theApiShouldReturnUpdateProductWithResponseCode(int arg0) {
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
+
+    @When("an authorized user sends a request to the category end point")
+    public void anAuthorizedUserSendsARequestToTheCategoryEndPoint() {
+        response= given().auth().basic(apiUsername,apiPassword).when()
+                .get(apiBaseUrl+":"+apiPort+"/categories");
+        System.out.println(response.getBody().prettyPrint());
+    }
+
+    @Then("the api should return all categories with {int} response code")
+    public void theApiShouldReturnAllCategoriesWithResponseCode(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
 }
