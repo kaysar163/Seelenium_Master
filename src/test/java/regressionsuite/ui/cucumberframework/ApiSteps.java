@@ -113,4 +113,24 @@ public class ApiSteps {
         arg0=200;
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
+
+    @When("an authorized user sends a put request to the category end point")
+    public void anAuthorizedUserSendsAPutRequestToTheCategoryEndPoint() {
+
+        response=RestAssured.given().
+                headers("Content-Type","application/json").and().body(PayloadUtility.categoryPayloadPut()).
+                auth().basic(apiUsername,apiPassword).
+                when().put(apiBaseUrl+":"+apiPort+"/category/1").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+
+    }
+
+
+
+    @Then("the api should return a category with {int} response code")
+    public void theApiShouldReturnACategoryWithResponseCode(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+
+    }
 }
