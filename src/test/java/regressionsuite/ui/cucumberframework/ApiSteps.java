@@ -101,20 +101,20 @@ public class ApiSteps {
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
 
-    @When("an authorized user sends a putrequest to the customer end point")
-    public void anAuthorizedUserSendsAPutrequestToTheCustomerEndPoint() {
-        String putCustomerPaylad=PayloadUtility.putCustomerPaylad();
-        response=given().
-                header("Content-Type","application/json").and().body(putCustomerPaylad)
-                .auth().basic(apiUsername,apiPassword)
-                .when().put(apiBaseUrl+":"+apiPort+"/customer")
-                .then().extract().response();
-        System.out.println(response.getBody().prettyPrint());
-
+    @When("user should be able to send put request with customer group end point")
+    public void userShouldBeAbleToSendPutRequestWithCustomerGroupEndPoint() {
+          String putCustomerPaylad=PayloadUtility.putCustomerPaylad();
+            response=given().
+                    header("Content-Type","application/json").and().body(putCustomerPaylad)
+                    .auth().basic(apiUsername,apiPassword)
+                    .when().put(apiBaseUrl+":"+apiPort+"/customer"+"/3")
+                    .then().extract().response();
+            System.out.println(response.getBody().prettyPrint());
     }
 
-    @Then("the api should return update customer with {int} response code")
+    @Then("the api should return update customer {int} with response code")
     public void theApiShouldReturnUpdateCustomerWithResponseCode(int arg0) {
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
 }
+

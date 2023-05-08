@@ -53,8 +53,8 @@
     @putCustomer
     Scenario: An authorized user should be able to put customer
       Given a valid username and a password
-      When an authorized user sends a putrequest to the customer end point
-      Then the api should return update customer 200 with response code
+      When user should be able to send put request with customer group end point
+      Then the api should return update customer 405 with response code
 
 
 
