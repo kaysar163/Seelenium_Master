@@ -116,7 +116,11 @@ public class ApiSteps {
 
     @When("an authorized user sends a put request to the category end point")
     public void anAuthorizedUserSendsAPutRequestToTheCategoryEndPoint() {
-        response=given().auth().basic(apiUsername,apiPassword).when().put(apiBaseUrl+":"+apiPort+"/category/1");
+
+        response=RestAssured.given().
+                headers("Content-Type","application/json").and().body(PayloadUtility.categoryPayloadPut()).
+                auth().basic(apiUsername,apiPassword).
+                when().put(apiBaseUrl+":"+apiPort+"/category/1").then().extract().response();
         System.out.println(response.getBody().prettyPrint());
 
     }
