@@ -138,7 +138,7 @@ public class ApiSteps {
     public void anAuthorizedUserSendsGetOneCategoryRequestToTheCategoryEndPoint() {
         response=RestAssured.given().headers("Content-Type","application/json").and()
                 .body(PayloadUtility.oneCategoryPayload()).auth().basic(apiUsername,apiPassword)
-                .when().get(apiBaseUrl+":"+apiPort+"/category/1").then().extract().response();
+                .when().get(apiBaseUrl+":"+apiPort+"/category"+"/1").then().extract().response();
         System.out.println(response.getBody().prettyPrint());
 
     }
