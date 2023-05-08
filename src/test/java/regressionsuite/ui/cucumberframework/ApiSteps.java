@@ -133,4 +133,34 @@ public class ApiSteps {
         Assert.assertTrue(response.getStatusCode()==arg0);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @When("an authorized user sends get one category request to the category end point")
+    public void anAuthorizedUserSendsGetOneCategoryRequestToTheCategoryEndPoint() {
+        response=RestAssured.given().headers("Content-Type","application/json").and()
+                .body(PayloadUtility.oneCategoryPayload()).auth().basic(apiUsername,apiPassword)
+                .when().get(apiBaseUrl+":"+apiPort+"/category/1").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+        
+    }
+
+    @Then("the api should return one category with {int} response code")
+    public void theApiShouldReturnOneCategoryWithResponseCode(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
 }
