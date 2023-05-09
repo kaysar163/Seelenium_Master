@@ -5,20 +5,33 @@
 
 
           #Muradil :
-
+    @GetAllCategories
+    Scenario: An authorized user should be able to get all categories
+      Given a valid username and a password
+      When an authorized user sends a request to the category end point
+      Then the api should return all categories with 200 response code
 
 
 
 
 
          #Rizvangul :
-
+    @GetOneCategory
+    Scenario: An authorized user should be able to get one category
+      Given a valid username and a password
+      When an authorized user sends get one category request to the category end point
+      Then the api should return one category with 200 response code
 
 
 
 
 
          #Muyesser :
+    @putCategory
+      Scenario:  An authorized user should be able to put category
+      Given a valid username and a password
+      When  an authorized user sends a put request to the category end point
+      Then  the api should return a category with 200 response code
 
 
 
@@ -108,6 +121,12 @@
 
 
          #Gulzar :
+    @GetOneProduct
+      Scenario: An authorized user should be able to get one product
+      Given a valid username and a password
+      When an authorized user sends a request to get one product end point
+      Then  the api should return one product with 200 response code
+
 
 
 

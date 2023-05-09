@@ -101,6 +101,7 @@ public class ApiSteps {
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
 
+
     @When("user should be able to send put request with customer end point")
     public void userShouldBeAbleToSendPutRequestWithCustomerEndPoint() {
           String putCustomerPaylad=PayloadUtility.putCustomerPaylad();
@@ -114,6 +115,71 @@ public class ApiSteps {
 
     @Then("the api should return update customer {int} with response code")
     public void theApiShouldReturnUpdateCustomerWithResponseCode(int arg0) {
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
+
+    @When("an authorized user sends a request to the category end point")
+    public void anAuthorizedUserSendsARequestToTheCategoryEndPoint() {
+        response= given().auth().basic(apiUsername,apiPassword).when()
+                .get(apiBaseUrl+":"+apiPort+"/categories");
+        System.out.println(response.getBody().prettyPrint());
+    }
+
+    @Then("the api should return all categories with {int} response code")
+    public void theApiShouldReturnAllCategoriesWithResponseCode(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
+
+    @When("an authorized user sends a put request to the category end point")
+    public void anAuthorizedUserSendsAPutRequestToTheCategoryEndPoint() {
+
+        response=RestAssured.given().
+                headers("Content-Type","application/json").and().body(PayloadUtility.categoryPayloadPut()).
+                auth().basic(apiUsername,apiPassword).
+                when().put(apiBaseUrl+":"+apiPort+"/category/1").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+
+    }
+
+
+
+    @Then("the api should return a category with {int} response code")
+    public void theApiShouldReturnACategoryWithResponseCode(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+
+    }
+
+    @When("an authorized user sends get one category request to the category end point")
+    public void anAuthorizedUserSendsGetOneCategoryRequestToTheCategoryEndPoint() {
+        response=RestAssured.given().headers("Content-Type","application/json").and()
+                .body(PayloadUtility.oneCategoryPayload()).auth().basic(apiUsername,apiPassword)
+                .when().get(apiBaseUrl+":"+apiPort+"/category"+"/1").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+
+    }
+
+    @Then("the api should return one category with {int} response code")
+    public void theApiShouldReturnOneCategoryWithResponseCode(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
+
+
+    @When("an authorized user sends a request to get one product end point")
+    public void anAuthorizedUserSendsARequestToGetOneProductEndPoint() {
+        response=RestAssured.given().headers("Content-Type","application/json").and()
+                .body(PayloadUtility.getoneproduct()).auth().basic(apiUsername,apiPassword).when().
+                get(apiBaseUrl+":"+apiPort+"/product"+"/235").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+
+    }
+
+    @Then("the api should return one product with {int} response code")
+    public void theApiShouldReturnOneProductWithResponseCode(int arg0) {
+        arg0=200;
+
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
 }

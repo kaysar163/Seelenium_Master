@@ -62,5 +62,76 @@ public class PayloadUtility {
 
     }
 
+    public static String categoryPayload(){
+        long timeStamp=System.currentTimeMillis();
+        String payload=null;
+        CategoryPayload categoryPayload=new CategoryPayload(3,41,0,1,"Xsrkr"+timeStamp);
+        ObjectMapper objectMapper=new ObjectMapper();
+        try {
+            payload=objectMapper.writeValueAsString(categoryPayload());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
+
+    }
+    public  static String categoryPayloadPut(){
+        long timeStamp=System.currentTimeMillis();
+        String payload=null;
+        CategoryPayload categoryPayload1=new CategoryPayload(3,41,0,1,"IWqSUUU"+timeStamp);
+        ObjectMapper objectMapper=new ObjectMapper();
+
+        try {
+            payload=objectMapper.writeValueAsString(categoryPayload1);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
+
+
+    }
+    public  static String getoneproduct(){
+        long timeStamp=System.currentTimeMillis();
+        String payload=null;
+        ProductPayload productPayload1=new ProductPayload(4,13,"simple"+timeStamp,"msj004"+timeStamp,0,
+                0,"2023-03-04","2022-08-03");
+        ObjectMapper objectMapper=new ObjectMapper();
+
+        try {
+            payload=objectMapper.writeValueAsString(productPayload1);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static String oneCategoryPayload(){
+        String payload=null;
+        CategoryPayload oneCategoryPayload1=new CategoryPayload(3,41,0,1,"IWqSUUU1683569883420");
+        ObjectMapper objectMapper=new ObjectMapper();
+        try {
+            payload=objectMapper.writeValueAsString(oneCategoryPayload1);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
+    }
+
 
 }

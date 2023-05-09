@@ -24,6 +24,8 @@ public class CustomerPayload {
     private int taxId;
 
 
+
+
     public CustomerPayload(int entityTypeId, int attributeId, int entityId, String value) {
         this.entityTypeId = entityTypeId;
         this.attributeId = attributeId;
