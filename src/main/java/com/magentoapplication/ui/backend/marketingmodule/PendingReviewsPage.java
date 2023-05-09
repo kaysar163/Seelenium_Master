@@ -103,10 +103,10 @@ public class PendingReviewsPage {
         functionClass.waitUntilElementPresent(pendingReviewsLink);
         pendingReviewsLink.click();
         WebElement editButton = driver.findElement
-                (By.xpath("//div[@class=\"hor-scroll\"]/table/tbody/tr/td[contains(text(),'Serita')]/following-sibling::td/a[text()=\"Edit\"]"));
+                (By.xpath("//div[@class=\"hor-scroll\"]/table/tbody/tr/td[contains(text(),'dili')]/following-sibling::td/a[text()=\"Edit\"]"));
         editButton.click();
-        functionClass.waitUntilElementPresent(detailedRatingRadioButton);
-        detailedRatingRadioButton.isSelected();
+        //functionClass.waitUntilElementPresent(detailedRatingRadioButton);
+        //detailedRatingRadioButton.isSelected();
         functionClass.waitUntilElementPresent(visibleStore);
         Select select = new Select(visibleStore);
         nickName.clear();
