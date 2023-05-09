@@ -3,6 +3,8 @@ package com.magentoapplication.backend.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CustomerPayload {
+    @JsonProperty("id")
+    private int Id;
 
     @JsonProperty("entity_type_id")
     private int entityTypeId;
@@ -35,5 +37,11 @@ public class CustomerPayload {
         this.taxId=taxId;
     }
 
-
+    public CustomerPayload(int id, int entityTypeId, int attributeId, int entityId, String value) {
+        this.Id = id;
+        this.entityTypeId = entityTypeId;
+        this.attributeId = attributeId;
+        this.entityId = entityId;
+        this.value = value;
+    }
 }

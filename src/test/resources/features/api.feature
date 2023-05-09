@@ -63,6 +63,12 @@
 
          #Kaysar :
 
+    @putCustomer
+    Scenario: An authorized user should be able to put customer
+      Given a valid username and a password
+      When user should be able to send put request with customer end point
+      Then the api should return update customer 200 with response code
+
 
 
 

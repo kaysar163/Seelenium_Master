@@ -45,6 +45,22 @@ public class PayloadUtility {
         }
         return payload;
     }
+    public static String putCustomerPaylad(){
+        Faker faker=new Faker();
+        String name= faker.name().firstName();
+        int randNumber=faker.number().numberBetween(0,10);
+        String customerPutPayload=null;
+        CustomerPayload customerPaylad=new CustomerPayload(1,randNumber,1,1,name);
+        ObjectMapper objectMapper=new ObjectMapper();
+        try {
+            customerPutPayload=objectMapper.writeValueAsString(customerPaylad);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return customerPutPayload;
+
+
+    }
 
     public static String categoryPayload(){
         long timeStamp=System.currentTimeMillis();
