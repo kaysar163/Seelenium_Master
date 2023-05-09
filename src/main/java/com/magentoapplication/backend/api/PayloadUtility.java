@@ -81,6 +81,7 @@ public class PayloadUtility {
         CategoryPayload categoryPayload1=new CategoryPayload(3,41,0,1,"IWqSUUU"+timeStamp);
         ObjectMapper objectMapper=new ObjectMapper();
 
+
         try {
             payload=objectMapper.writeValueAsString(categoryPayload1);
         } catch (JsonProcessingException e) {
@@ -132,6 +133,21 @@ public class PayloadUtility {
         }
         return payload;
     }
+    public static String postProductPayload(){
+        Faker faker=new Faker();
+        String name= faker.name().firstName();
+        int randNumber=faker.number().numberBetween(0,10);
+        String PostProductPayload=null;
+        ProductPayload productPayload=new ProductPayload(4,4,"simple",name,0,0);
+        ObjectMapper objectMapper=new ObjectMapper();
+        try {
+            PostProductPayload=objectMapper.writeValueAsString(productPayload);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return PostProductPayload;
 
+
+    }
 
 }
