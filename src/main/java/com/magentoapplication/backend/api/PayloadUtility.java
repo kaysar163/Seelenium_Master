@@ -49,15 +49,15 @@ public class PayloadUtility {
         Faker faker=new Faker();
         String name= faker.name().firstName();
         int randNumber=faker.number().numberBetween(0,10);
-        String customer1Payload=null;
-        CustomerPayload customerPaylad=new CustomerPayload(randNumber,randNumber,randNumber,randNumber,name);
+        String customerPutPayload=null;
+        CustomerPayload customerPaylad=new CustomerPayload(1,randNumber,1,1,name);
         ObjectMapper objectMapper=new ObjectMapper();
         try {
-            customer1Payload=objectMapper.writeValueAsString(customerPaylad);
+            customerPutPayload=objectMapper.writeValueAsString(customerPaylad);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        return customer1Payload;
+        return customerPutPayload;
 
 
     }

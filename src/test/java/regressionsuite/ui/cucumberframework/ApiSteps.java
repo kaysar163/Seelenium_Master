@@ -1,6 +1,6 @@
 package regressionsuite.ui.cucumberframework;
 
-import com.magentoapplication.backend.api.CustomerPayload;
+
 import com.magentoapplication.backend.api.PayloadUtility;
 import com.magentoapplication.utility.ApplicationConfig;
 import io.cucumber.java.en.Given;
@@ -101,13 +101,13 @@ public class ApiSteps {
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
 
-    @When("user should be able to send put request with customer group end point")
-    public void userShouldBeAbleToSendPutRequestWithCustomerGroupEndPoint() {
+    @When("user should be able to send put request with customer end point")
+    public void userShouldBeAbleToSendPutRequestWithCustomerEndPoint() {
           String putCustomerPaylad=PayloadUtility.putCustomerPaylad();
             response=given().
                     header("Content-Type","application/json").and().body(putCustomerPaylad)
                     .auth().basic(apiUsername,apiPassword)
-                    .when().put(apiBaseUrl+":"+apiPort+"/customer"+"/3")
+                    .when().put(apiBaseUrl+":"+apiPort+"/customer")
                     .then().extract().response();
             System.out.println(response.getBody().prettyPrint());
     }

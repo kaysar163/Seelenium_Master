@@ -36,7 +36,7 @@ public class CustomerPayload {
     }
 
     public CustomerPayload(int id, int entityTypeId, int attributeId, int entityId, String value) {
-        Id = id;
+        this.Id = id;
         this.entityTypeId = entityTypeId;
         this.attributeId = attributeId;
         this.entityId = entityId;
