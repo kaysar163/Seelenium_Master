@@ -26,6 +26,16 @@ public class ProductPayload {
     @JsonProperty("updatedAt")
     private String  updatedAt;
 
+    public ProductPayload(int entityTypeId, int attributeSetId,
+                          String typeId, String sku, int hasOptions, int requiredOptions) {
+        this.entityTypeId = entityTypeId;
+        this.attributeSetId = attributeSetId;
+        this.typeId = typeId;
+        this.sku = sku;
+        this.hasOptions = hasOptions;
+        this.requiredOptions = requiredOptions;
+    }
+
     public ProductPayload(int entityTypeId, int attributeSetId, String typeId, String sku, int hasOptions, int requiredOptions, String createdAt, String updatedAt) {
         this.entityTypeId = entityTypeId;
         this.attributeSetId = attributeSetId;

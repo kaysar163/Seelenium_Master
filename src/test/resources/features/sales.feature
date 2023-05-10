@@ -61,10 +61,14 @@
       Then new and updated tax rules should display
 
 
-      #Fazilat :
-
-
-
+     @viewRefundsInTheReports #Fazilet :
+       Scenario Outline: Sales Manager should be able to view refunds in the reports
+       Given Admin user is already in the dashboard page sales
+       When sales manager view refunds from the date "<date From>"
+       Then Total Refunded table should display
+       Examples:
+       |date From|
+       |3/21/2023|
 
 
 
