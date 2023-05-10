@@ -46,80 +46,81 @@ public class CatalogModuleTestRunner extends TestBase {
         catalogDashboardPage=new CatalogDashboardPage(driver);
         context.setAttribute("driver", driver);
     }
-    @Test(description = "kaysar", priority = 1)
+    @Test(description = "kaysar")
     public void addRootCategoriesTest() {
         manageCategoriesPage.fillCategoryInformationAndSave();
         Assert.assertTrue(manageCategoriesPage.VerifyAddCatogories());
     }
 
-    @Test(description = "Meryem", priority = 2)
+    @Test(description = "Meryem", priority = 4)
     public void editRootCategoriesTest() {
         manageCategoriesPage.editCatogoriesInfo();
         Assert.assertTrue(manageCategoriesPage.verifyEditCatogories());
     }
 
-    @Test(description = "Omercam", priority = 3)
+    @Test(description = "Omercam", priority = 5)
     public void deleteRootCategoriesTest() {
         manageCategoriesPage.deleteRootCat();
         Assert.assertTrue(manageCategoriesPage.deleteCategorySuccessful());
     }
 
-    @Test(description = "abdusattar",dependsOnMethods ="addRootCategoriesTest",priority = 4)
+    @Test(description = "abdusattar",dependsOnMethods ="addRootCategoriesTest",priority = 1)
     public void addSubCategory(){
         manageCategoriesPage.addSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyAddSubCategory());
     }
-    @Test(description = "muyesser",priority = 5)
-    public void editSubCategoryTest(){
+    @Test(description = "muyesser",priority = 2)
+    public void editSubCategoryTest()throws Exception{
+        //manageCategoriesPage.addSubCategory();
         manageCategoriesPage.editSubCategory();
         Assert.assertTrue(manageCategoriesPage.verifyEditSubCategory());
     }
 
-    @Test(description = "Memet",priority = 6)
+    @Test(description = "Memet",priority = 3)
     public void subCatDeleteTest(){
         manageCategoriesPage.subCatDelete();
         Assert.assertTrue(manageCategoriesPage.subCatDeleteSuccessful());
     }
-    @Test(description = "rizvangul",priority = 7)
+    @Test(description = "rizvangul",priority = 6)
     public void addProductTest(){
         manageProductsPage.addProduct();
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
     }
 
-    @Test(description = "rizvangul",priority = 8)
+    @Test(description = "rizvangul",dependsOnMethods ="addProductTest",priority = 7)
     public void editProductTest(){
         manageProductsPage.editProduct();
         Assert.assertTrue(manageProductsPage.verifyEditProduct());
 
     }
 
-    @Test(description = "Fazilat",priority = 9)
+    @Test(description = "Fazilat",priority = 8)
     public void deleteProductTest(){
         manageProductsPage.deleteproduct();
         Assert.assertTrue(manageProductsPage.verifydeletedproduct());
 
     }
 
-    @Test(description = "renagul",priority = 10)
+    @Test(description = "renagul",priority = 9)
     public void viewCategoriesTest(){
         Assert.assertTrue(manageCategoriesPage.viewCategoryProducts());
     }
 
-    @Test(description = "muradil",priority = 11)
+    @Test(description = "muradil",priority = 10)
     public void filterProductsInTheCategoryProductsTabTest(){
         manageCategoriesPage.filterProductsInTheCategoryProductsTab();
         Assert.assertTrue(manageCategoriesPage.verifyFilterProductsInTheCategoryProductsTab());
     }
 
     
-    @Test(description = "Toghraq",priority = 16)
+    @Test(description = "Toghraq",priority = 15)
     public void addAttributeUnderCatalogTest() {
         manageAttributesPage.addAttributeUnderCatalog();
         Assert.assertTrue(manageAttributesPage.attributeSaveMessage());
     }
 
-    @Test(description = "kaysar",priority = 12)
+    @Test(description = "kaysar",priority = 11)
     public void addNewSeachTermTest() {
         searchTermsPage.NewSearchInfo();
         Assert.assertTrue( searchTermsPage.VerifyAddNewSerach());
@@ -127,18 +128,18 @@ public class CatalogModuleTestRunner extends TestBase {
 
     }
 
-    @Test(description = "Mirehmidi",priority = 13)
+    @Test(description = "Mirehmidi",priority = 12)
     public void editNewSeachTermTest() {
         searchTermsPage.searchEditTest();
         Assert.assertTrue(searchTermsPage.verifyEditNewSearch());
     }
 
-    @Test(description = "muyesser",priority = 14)
+    @Test(description = "muyesser",priority = 13)
     public void deleteSearchTest(){
         searchTermsPage.deleteExistingSearchTerm();
         Assert.assertTrue(searchTermsPage.verifyDeleteSearchFunction());
     }
-    @Test(description = "Gülzar",priority = 15)
+    @Test(description = "Gülzar",priority = 14)
     public void filterExistingSearchTermTestt(){
         searchTermsPage.filterExistingSearchTermTest();
         Assert.assertTrue(searchTermsPage.verifyFilterTermTest());
