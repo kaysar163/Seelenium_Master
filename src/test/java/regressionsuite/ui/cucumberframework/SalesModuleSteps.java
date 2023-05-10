@@ -22,7 +22,7 @@ public class SalesModuleSteps extends TestBase {
 
     CouponsReportPage couponsReportPage;
     ManageTaxRulePage manageTaxRulePage;
-
+    RefundReportPage refundReportPage;
 
     @Before("@SalesModuleTest")
     public void setUp() {
@@ -43,6 +43,7 @@ public class SalesModuleSteps extends TestBase {
         creditMemosPage=new CreditMemosPage(driver);
         couponsReportPage=new CouponsReportPage(driver);
         manageTaxRulePage=new ManageTaxRulePage(driver);
+        refundReportPage=new RefundReportPage(driver);
 
     }
 
@@ -129,6 +130,18 @@ public class SalesModuleSteps extends TestBase {
 
     }
 
+    @When("sales manager view refunds from the date {string}")
+    public void salesManagerViewRefundsFromTheDate(String arg0) {
+        refundReportPage.viewRefundsInTheReports(arg0);
+    }
+
+    @Then("Total Refunded table should display")
+    public void totalRefundedTableShouldDisplay() {
+        refundReportPage.verifyRefundsInTheReportsViewed();
+    }
+
+
+
     @When("manager view coupons reports between time period {string} and{string}")
     public void managerViewCouponsReportsBetweenTimePeriodAnd(String arg0, String arg1) {
 
@@ -173,4 +186,7 @@ public class SalesModuleSteps extends TestBase {
         Assert.assertTrue(ordersPageSales.isCreditMemoCreated());
         
     }
+
+
+
 }

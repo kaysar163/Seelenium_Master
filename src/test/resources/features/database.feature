@@ -118,7 +118,11 @@ Feature: Database and UI connection tests
 
 
 
-      #halit :
+    @verifyNewlyAddedTaxRuleShouldBeInTheDatabase  #Fazilet :
+      Scenario: verify that newly added tax rule should be in the database
+      Given connection is already established
+      When a new tax rule add to the manage tax rule page
+      Then the newly added tax rule should be in the database
 
 
 
