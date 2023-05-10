@@ -5,6 +5,7 @@ import com.magentoapplication.backend.database.DataAccess;
 import com.magentoapplication.backend.database.DatabaseConnection;
 import com.magentoapplication.ui.backend.backendlogin.BackEndLogin;
 import com.magentoapplication.ui.backend.catalogmodule.ManageCategoriesPage;
+import com.magentoapplication.ui.backend.catalogmodule.ManageProductsPage;
 import com.magentoapplication.ui.backend.catalogmodule.TestHelperCatalog;
 import com.magentoapplication.ui.backend.customersmodule.CustomerGroupPage;
 import com.magentoapplication.ui.backend.customersmodule.CustomerInformationPage;
@@ -49,6 +50,7 @@ public class DatabaseSteps extends TestBase {
     OrdersPageSales ordersPageSales;
 
     ManageTaxRulePage manageTaxRulePage;
+    ManageProductsPage manageProductsPage;
 
 
 
@@ -266,6 +268,23 @@ public class DatabaseSteps extends TestBase {
     @Then("the newly added tax rule should be in the database")
     public void theNewlyAddedTaxRuleShouldBeInTheDatabase() {
         Assert.assertTrue(dataAccess.verifyNewlyAddedTaxRuleInTheDatabase(TestHelperSales.getTaxRuleName(),connection));
+    }
+
+    @When("a user add new product to system")
+    public void aUserAddNewProductToSystem() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.catalogModuleLogin();
+        manageProductsPage=new ManageProductsPage(driver);
+        manageProductsPage.addProduct();
+        Assert.assertTrue(manageProductsPage.verifyAddProduct());
+
+    }
+
+    @Then("new added product should be in the database")
+    public void newAddedProductShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.verifyNewlyAddedProduct(TestHelperCatalog.getProductName(),connection));
+
     }
 }
 
