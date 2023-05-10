@@ -72,9 +72,6 @@
 
 
 
-
-
-
       @viewCouponsInTheReports  #Gulzar
       Scenario Outline: Sales Manager should be able to view coupons in the Reports.
         Given Admin user is already in the dashboard page sales
