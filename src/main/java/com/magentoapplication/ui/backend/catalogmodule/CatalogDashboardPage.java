@@ -44,6 +44,7 @@ public class CatalogDashboardPage {
     WebElement manageAttributesLink;
     @FindBy(xpath = "//span[text()='Search Terms']")
     WebElement searchTerms;
+    
     public void filterProductsInTheCategoryProductsTab(){
         functionClass.waitUntilElementPresent(catalogLink);
         catalogLink.click();

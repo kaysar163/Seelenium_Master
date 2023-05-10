@@ -41,7 +41,11 @@ Feature: Database and UI connection tests
 
 
 
-      #Fazilat :
+  @verifyNewlyAddedOrdersInTheDatabase    #Fazilet :
+  Scenario: Verify that newly added orders should be in the database
+    Given connection is already established
+    When the user add new order
+    Then Newly added order should be in the database
 
 
 
@@ -55,7 +59,13 @@ Feature: Database and UI connection tests
 
 
 
-      #Muradil :
+      #Muradil:
+      @verifyNewlyAddedStoreInTheDatabase
+      Scenario: Verify that newly added store should be in the database
+        Given connection is already established
+        When a user can add new store in database
+        Then the user should added new store
+
 
 
 
@@ -132,3 +142,8 @@ Feature: Database and UI connection tests
 
 
      #Gulzar :
+  @VerifynewAddedProductsShouldBeInTheDatabase
+  Scenario: Verify that  new added products should be in the database
+    Given   connection is already established
+    When    a user add new product to system
+    Then    new added product should be in the database

@@ -15,6 +15,7 @@ public class TagsPage {
     FunctionClass functionClass;
 
     ReportingDashboardPage reportingDashboardPage;
+   
 
     public TagsPage(WebDriver driver) {
         this.driver = driver;
@@ -28,13 +29,19 @@ public class TagsPage {
     )
     List<WebElement> verifyTagsViewedForCustomers;
 
+    
     @FindBy(xpath = "//a[text()='Show Tags']")
     WebElement showTagsLink;
     @FindBy(xpath = "//*[text()='Popular']")
     WebElement popularButton;
     @FindAll({@FindBy(xpath = "//div[@class=\"grid\"]//tbody/tr")})
     List<WebElement> popularTags;
-
+    
+    //veiw tagged product reports
+    @FindAll(
+      @FindBy(xpath = "//table[@id='grid_table']//tbody//tr")
+    )
+    List<WebElement> taggedProductReportsTable;
 
 
     public void viewTagsForCustomers(){
@@ -56,7 +63,17 @@ public class TagsPage {
             return true;
         else return false;
     }
-
+    
+    //user views tags for products report
+    public void seeTagsForProductsReport(){
+        reportingDashboardPage.clickOnProducts1link();
+        functionClass.waitUntilElementPresent(showTagsLink);
+        showTagsLink.click();
+    }
+    public boolean isProductReportsWithTagsExist(){
+       return taggedProductReportsTable.size()>=1;
+    }
+    
 }
 
 
