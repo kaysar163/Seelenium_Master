@@ -12,10 +12,8 @@ import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
 import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
-import com.magentoapplication.ui.backend.salesmodule.ManageTaxRulePage;
-import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
-import com.magentoapplication.ui.backend.salesmodule.TestHelperSales;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
+import com.magentoapplication.ui.backend.storemodule.OrderViewPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
 import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
@@ -44,9 +42,9 @@ public class DatabaseSteps extends TestBase {
     ShoppingCartPriceRulePage shoppingCartPriceRulePage;
     DataAccess dataAccess;
     SalesPage salesPage;
-    OrdersPageSales ordersPageSales;
+    OrderViewPage orderViewPage;
 
-    ManageTaxRulePage manageTaxRulePage;
+
 
 
     String dbUrl = ApplicationConfig.readFromConfigProperties(config, "dbIp");
@@ -167,25 +165,6 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(dataAccess.verifyCatAdded(TestHelperCatalog.getRootName(), connection));
     }
 
-
-
-    @When("the user add new order")
-    public void theUserAddNewOrder() {
-        setupBrowserBackEnd();
-        backEndLogin = new BackEndLogin(driver);
-        backEndLogin.salesModuleLogin();
-        ordersPageSales =new OrdersPageSales(driver);
-        ordersPageSales.createNewOrder();
-        Assert.assertTrue(ordersPageSales.verifyCreateOrder());
-    }
-
-    @Then("Newly added order should be in the database")
-    public void newlyAddedOrderShouldBeInTheDatabase() {
-        Assert.assertTrue(dataAccess.verifyNewlyAddedOrderInTheDatabase(TestHelperSales.getFirstName(),connection));
-    }
-
-
-
     @When("a new cart price rule should be added on the shopping cart price rules page")
     public void aNewCartPriceRuleShouldBeAddedOnTheShoppingCartPriceRulesPage() {
         setupBrowserBackEnd();
@@ -225,23 +204,23 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(dataAccess.verifyNewlyAddedSubCategoriesInTheDatabase(TestHelperCatalog.getSubName(),connection));
     }
 
-
-    @When("a new tax rule add to the manage tax rule page")
-    public void aNewTaxRuleAddToTheManageTaxRulePage() {
+    @When("new added store should be added to the store page")
+    public void newAddedStoreShouldBeAddedToTheStorePage() {
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
-        backEndLogin.salesModuleLogin();
-        manageTaxRulePage=new ManageTaxRulePage(driver);
-        manageTaxRulePage.addAndUpdateTaxRulesFunction();
-        Assert.assertTrue(manageTaxRulePage.verifyAddAndUpdateTaxRulesFunction());
+        backEndLogin.storeModuleLogin();
+        orderViewPage=new OrderViewPage(driver);
+        orderViewPage.addStoreView();
+        Assert.assertTrue(orderViewPage.verifyNewStoreViewAdded());
+
+    }
+
+    @Then("newly added store view should be in the database")
+    public void newlyAddedStoreViewShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.verifyNewlyAddedStoreView(TestHelperStore.getStoreViewName(),connection));
     }
 
 
-    @Then("the newly added tax rule should be in the database")
-    public void theNewlyAddedTaxRuleShouldBeInTheDatabase() {
-        Assert.assertTrue(dataAccess.verifyNewlyAddedTaxRuleInTheDatabase(TestHelperSales.getTaxRuleName(),connection));
-
-    }
 
 
     @After("@DatabaseTest")
@@ -249,7 +228,6 @@ public class DatabaseSteps extends TestBase {
         DatabaseConnection.closeDataBaseConnection(connection);
         closeBrowser();
     }
-
 
 
 }
