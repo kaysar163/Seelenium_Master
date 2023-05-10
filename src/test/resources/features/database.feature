@@ -85,7 +85,11 @@ Feature: Database and UI connection tests
 
 
 
-      #Renagul :
+     @verifyNewlyAddedStoreViewInTheDatabase  #Renagul :
+       Scenario: verify that newly added store view should be in the database
+       Given connection is already established
+       When  new added store should be added to the store page
+       Then  newly added store view should be in the database
 
 
 

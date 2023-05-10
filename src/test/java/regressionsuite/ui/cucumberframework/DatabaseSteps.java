@@ -13,6 +13,7 @@ import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePa
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
+import com.magentoapplication.ui.backend.storemodule.OrderViewPage;
 import com.magentoapplication.ui.backend.storemodule.TestHelperStore;
 import com.magentoapplication.ui.frontend.usermodule.CreateAnAccountPage;
 import com.magentoapplication.ui.frontend.usermodule.TestHelperFrontEnd;
@@ -41,6 +42,9 @@ public class DatabaseSteps extends TestBase {
     ShoppingCartPriceRulePage shoppingCartPriceRulePage;
     DataAccess dataAccess;
     SalesPage salesPage;
+    OrderViewPage orderViewPage;
+
+
 
 
     String dbUrl = ApplicationConfig.readFromConfigProperties(config, "dbIp");
@@ -200,7 +204,22 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(dataAccess.verifyNewlyAddedSubCategoriesInTheDatabase(TestHelperCatalog.getSubName(),connection));
     }
 
+    @When("new added store should be added to the store page")
+    public void newAddedStoreShouldBeAddedToTheStorePage() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.storeModuleLogin();
 
+        orderViewPage=new OrderViewPage(driver);
+        orderViewPage.addStoreView();
+        Assert.assertTrue(orderViewPage.verifyNewStoreViewAdded());
+        
+    }
+
+    @Then("newly added store view should be in the database")
+    public void newlyAddedStoreViewShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.verifyNewlyAddedStoreView(TestHelperStore.getStoreViewName(),connection));
+    }
 
 
 
@@ -210,6 +229,8 @@ public class DatabaseSteps extends TestBase {
         DatabaseConnection.closeDataBaseConnection(connection);
         closeBrowser();
     }
+
+
 }
 
 
