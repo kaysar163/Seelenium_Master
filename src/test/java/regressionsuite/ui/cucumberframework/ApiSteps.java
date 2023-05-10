@@ -197,5 +197,19 @@ public class ApiSteps {
         arg0=200;
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
+
+    @When("user should be able to send Get request with customer groups end point")
+    public void userShouldBeAbleToSendGetRequestWithCustomerGroupsEndPoint() {
+        response= given().auth().basic(apiUsername,apiPassword).when().
+                get(apiBaseUrl+":"+apiPort+"/customergroup").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+    }
+
+
+
+    @Then("the api should return get customer groups response code of {int}")
+    public void theApiShouldReturnGetCustomerGroupsResponseCodeOf(int arg0) {
+        Assert.assertEquals(response.getStatusCode(),arg0);
+    }
 }
 
