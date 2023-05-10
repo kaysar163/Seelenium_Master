@@ -209,11 +209,10 @@ public class DatabaseSteps extends TestBase {
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
         backEndLogin.storeModuleLogin();
-
         orderViewPage=new OrderViewPage(driver);
         orderViewPage.addStoreView();
         Assert.assertTrue(orderViewPage.verifyNewStoreViewAdded());
-        
+
     }
 
     @Then("newly added store view should be in the database")
