@@ -75,6 +75,12 @@
 
 
          #Renagul :
+    @GetAllcustomergroups
+    Scenario: An authorized user should be able to get customer groups
+      Given a valid username and a password
+      When user should be able to send Get request with customer groups end point
+      Then the api should return get customer groups response code of 200
+
 
 
 

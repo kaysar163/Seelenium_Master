@@ -150,5 +150,19 @@ public class PayloadUtility {
 
     }
 
+    public  static String getCustomerGroups(){
+        long timeStamp=System.currentTimeMillis();
+        String payload=null;
+        CustomerPayload customerPayload =new CustomerPayload("xMAX"+timeStamp,11);
+        ObjectMapper objectMapper=new ObjectMapper();
+
+        try {
+            payload=objectMapper.writeValueAsString(customerPayload);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
+    }
+
 
 }
