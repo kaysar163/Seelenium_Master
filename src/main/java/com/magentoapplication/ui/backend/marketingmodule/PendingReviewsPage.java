@@ -1,6 +1,7 @@
 package com.magentoapplication.ui.backend.marketingmodule;
 
 import com.magentoapplication.utility.FunctionClass;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -71,8 +72,17 @@ public class PendingReviewsPage {
     @FindBy(id = "id_9fced84f1fce2cefee7cb952b1d457c7")
     WebElement SearchButton;
 
-    @FindAll(@FindBy(xpath = "//table[@id='reviwGrid_table']//tbody/tr"))
+
+    @FindAll(@FindBy(xpath = "//table[@id='reviwGrid_table']//tbody"))
     List<WebElement> pendingReviewsList;
+    @FindBy(css = "#reviwGrid_table > tbody")
+    WebElement pendingTable;
+    @FindAll(@FindBy(xpath = "//a[text()=\"Edit\"]"))
+    List<WebElement> editIconList;
+    @FindBy(id="status_id")
+    WebElement selectStatus;
+    @FindBy(id="detail")
+    WebElement reviewInfoField;
 
 
     public void updateExistingReviewsTest() {
@@ -102,25 +112,21 @@ public class PendingReviewsPage {
         customerReviewsLink.click();
         functionClass.waitUntilElementPresent(pendingReviewsLink);
         pendingReviewsLink.click();
-        WebElement editButton = driver.findElement
-                (By.xpath("//div[@class=\"hor-scroll\"]/table/tbody/tr/td[contains(text(),'dili')]/following-sibling::td/a[text()=\"Edit\"]"));
-        editButton.click();
-        //functionClass.waitUntilElementPresent(detailedRatingRadioButton);
-        //detailedRatingRadioButton.isSelected();
-        functionClass.waitUntilElementPresent(visibleStore);
-        Select select = new Select(visibleStore);
-        nickName.clear();
-        nickName.sendKeys(functionClass.generateFakeName());
 
-        functionClass.waitUntilElementPresent(summaryOfReviews);
-        summaryOfReviews.clear();
-        summaryOfReviews.sendKeys(functionClass.generateProductDescription() + System.currentTimeMillis());
-        functionClass.waitUntilElementPresent(reviews);
-        reviews.clear();
-        reviews.sendKeys(functionClass.generateProductDescription());
-        functionClass.sleep(3);
+        functionClass.waitUntilElementPresent(pendingTable);
+        for(int i=0;i<editIconList.size();i++){
+            editIconList.get(i).click();
+        }
+        functionClass.waitUntilElementPresent(selectStatus);
+        Select select=new Select(selectStatus);
+        select.selectByVisibleText("Pending");
+        functionClass.waitUntilElementPresent(reviewInfoField);
+        reviewInfoField.sendKeys(functionClass.generateProductDescription());
+        Actions actions=new Actions(driver);
         functionClass.waitUntilElementPresent(saveElementButton);
-        saveElementButton.click();
+        actions.moveToElement(saveElementButton).click().build().perform();
+
+
     }
 
     public boolean verifyUpdatePendingReviews() {
