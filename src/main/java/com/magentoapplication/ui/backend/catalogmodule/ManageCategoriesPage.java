@@ -127,18 +127,25 @@ public class ManageCategoriesPage {
 
 
     public void addSubCategory(){
-
+        driver.navigate().refresh();
+        functionClass.waitUntilElementPresent(catalogLink);
+        catalogLink.click();
+        functionClass.waitUntilElementPresent(manageCategoriesLink);
+        manageCategoriesLink.click();
         functionClass.sleep(2);
         WebElement findRootName=driver.findElement(By.xpath(String.format("//span[contains(text(),'%s')]//parent::a",TestHelperCatalog.getRootName())));
         functionClass.sleep(2);
         findRootName.click();
         functionClass.waitUntilElementPresent(addSubCategoryButton);
-        functionClass.clickOnJavaScript(addSubCategoryButton);
+        functionClass.sleep(3);
+        Actions actions=new Actions(driver);
+        actions.moveToElement(addSubCategoryButton).build().perform();
+        addSubCategoryButton.click();
+        //functionClass.clickOnJavaScript(addSubCategoryButton);
         functionClass.waitUntilElementPresent(subCatName);
-
         TestHelperCatalog.setSubName(functionClass.generateFakeName());
         functionClass.sleep(3);
-        subCatName.clear();
+        //subCatName.clear();
         subCatName.sendKeys(TestHelperCatalog.getSubName());
         functionClass.sleep(3);
         Select select=new Select(isActive);
@@ -172,6 +179,7 @@ public class ManageCategoriesPage {
         TestHelperCatalog.setRootName(functionClass.generateFakeName());
         functionClass.sleep(2);
         rootName.sendKeys(TestHelperCatalog.getRootName());
+        System.out.println(TestHelperCatalog.getRootName());
         functionClass.waitUntilElementPresent(isActive);
         Select select=new Select(isActive);
         select.selectByValue("1");
@@ -198,11 +206,13 @@ public class ManageCategoriesPage {
 
     // meryem
     public void editCatogoriesInfo(){
-        catalogDashboardPage. clickOnCatalogLink();
-        catalogDashboardPage.clickOnManageCategoriesLink();
-        WebElement rootCategoryLink=driver.findElement
-                (By.xpath(String.format("//span[text()='%s (0)']//parent::a", TestHelperCatalog
-                .getRootName())));
+        //catalogDashboardPage. clickOnCatalogLink();
+        //catalogDashboardPage.clickOnManageCategoriesLink();
+        functionClass.waitUntilElementPresent(catalogLink);
+        catalogLink.click();
+        functionClass.waitUntilElementPresent(manageCategoriesLink);
+        manageCategoriesLink.click();
+        WebElement rootCategoryLink=driver.findElement(By.xpath(String.format("//span[text()='%s (0)']//parent::a", TestHelperCatalog.getRootName())));
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(rootCategoryLink);
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -227,12 +237,13 @@ public class ManageCategoriesPage {
         } else return false;
     }
     public void deleteRootCat(){
-        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
-        catalogDashboardPage.clickOnCatalogLink();
-        catalogDashboardPage.clickOnManageCategoriesLink();
-        WebElement rootCategoryLink=driver.findElement
-                (By.xpath(String.format("//span[contains(text(),'%s (0)')]//parent::a", TestHelperCatalog
-                        .getChangeRootName())));
+        functionClass.waitUntilElementPresent(catalogLink);
+        catalogLink.click();
+        functionClass.waitUntilElementPresent(manageCategoriesLink);
+        manageCategoriesLink.click();
+        //catalogDashboardPage.clickOnCatalogLink();
+        //catalogDashboardPage.clickOnManageCategoriesLink();
+        WebElement rootCategoryLink=driver.findElement(By.xpath(String.format("//span[contains(text(),'%s (0)')]//parent::a", TestHelperCatalog.getChangeRootName())));
         functionClass.waitUntilElementPresent(rootCategoryLink);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", rootCategoryLink);
@@ -253,15 +264,18 @@ public class ManageCategoriesPage {
     }
 
 
-    public void  editSubCategory(){
-//        functionClass.waitUntilElementPresent(catalogDashboardPage.catalogLink);
-//        catalogDashboardPage. clickOnCatalogLink();
-//        catalogDashboardPage.clickOnManageCategoriesLink();
+    public void  editSubCategory()throws Exception{
+        functionClass.waitUntilElementPresent(catalogLink);
+        catalogLink.click();
+        functionClass.waitUntilElementPresent(manageCategoriesLink);
+        manageCategoriesLink.click();
         functionClass.sleep(3);
        // Actions actions=new Actions(driver);
         //actions.moveToElement(subcat1).click().perform();
         WebElement subCat=driver.findElement(By.xpath(String.format("//span[contains(text(),'%s (0)')]", TestHelperCatalog.getSubName())));
         functionClass.waitUntilElementPresent(subCat);
+        Actions actions=new Actions(driver);
+        actions.moveToElement(subCat).click().perform();
         subCat.click();
         functionClass.sleep(3);
         functionClass.waitUntilElementPresent(description);
