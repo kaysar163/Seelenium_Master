@@ -254,6 +254,7 @@ public class DatabaseSteps extends TestBase {
         manageProductsPage.addProduct();
         Assert.assertTrue(manageProductsPage.verifyAddProduct());
 
+
     }
 
     @Then("new added product should be in the database")

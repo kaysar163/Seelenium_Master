@@ -138,6 +138,7 @@ Feature: Database and UI connection tests
 
 
      #Gulzar :
+  @writer:Gülzar
   @VerifynewAddedProductsShouldBeInTheDatabase
   Scenario: Verify that  new added products should be in the database
     Given   connection is already established

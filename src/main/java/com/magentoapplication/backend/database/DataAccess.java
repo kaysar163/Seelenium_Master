@@ -264,7 +264,6 @@ public class DataAccess {
             ResultSet resultSet = preparedStatement.executeQuery();
             {
 
-
                 boolean isNewproductAdded = resultSet.next();
                 return isNewproductAdded;
             }
