@@ -288,9 +288,25 @@ public class DataAccess {
     }
 
 
+    public boolean verifyNewlyAddedTaxRuleInTheDatabase(String taxRuleName, Connection connection) {
+        String selectNewlyAddedTaxRule = String.format("select*from mg_tax_calculation_rule where code='%s'", taxRuleName);
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(selectNewlyAddedTaxRule);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            {
+                boolean isTaxRuleAdded = resultSet.next();
+                return isTaxRuleAdded;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
-    }
+    }}
 
 
 

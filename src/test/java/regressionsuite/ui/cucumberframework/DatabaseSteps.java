@@ -12,6 +12,7 @@ import com.magentoapplication.ui.backend.customersmodule.TestHelperClass;
 import com.magentoapplication.ui.backend.marketingmodule.ShoppingCartPriceRulePage;
 import com.magentoapplication.ui.backend.reportingmodule.SalesPage;
 import com.magentoapplication.ui.backend.reportingmodule.TestHelperReporting;
+import com.magentoapplication.ui.backend.salesmodule.ManageTaxRulePage;
 import com.magentoapplication.ui.backend.salesmodule.OrdersPageSales;
 import com.magentoapplication.ui.backend.salesmodule.TestHelperSales;
 import com.magentoapplication.ui.backend.storemodule.ManageStoresPage;
@@ -45,7 +46,9 @@ public class DatabaseSteps extends TestBase {
     DataAccess dataAccess;
     SalesPage salesPage;
     OrderViewPage orderViewPage;
-        OrdersPageSales ordersPageSales;
+    OrdersPageSales ordersPageSales;
+
+    ManageTaxRulePage manageTaxRulePage;
 
 
 
@@ -247,6 +250,22 @@ public class DatabaseSteps extends TestBase {
     @Then("Newly added order should be in the database")
     public void newlyAddedOrderShouldBeInTheDatabase() {
         Assert.assertTrue(dataAccess.verifyNewlyAddedOrderInTheDatabase(TestHelperSales.getFirstName(),connection));
+    }
+
+    @When("a new tax rule add to the manage tax rule page")
+    public void aNewTaxRuleAddToTheManageTaxRulePage() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.salesModuleLogin();
+        manageTaxRulePage=new ManageTaxRulePage(driver);
+        manageTaxRulePage.addAndUpdateTaxRulesFunction();
+        Assert.assertTrue(manageTaxRulePage.verifyAddAndUpdateTaxRulesFunction());
+    }
+
+
+    @Then("the newly added tax rule should be in the database")
+    public void theNewlyAddedTaxRuleShouldBeInTheDatabase() {
+        Assert.assertTrue(dataAccess.verifyNewlyAddedTaxRuleInTheDatabase(TestHelperSales.getTaxRuleName(),connection));
     }
 }
 
