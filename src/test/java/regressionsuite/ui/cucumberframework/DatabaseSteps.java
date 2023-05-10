@@ -230,7 +230,7 @@ public class DatabaseSteps extends TestBase {
     public void aNewTaxRuleAddToTheManageTaxRulePage() {
         setupBrowserBackEnd();
         backEndLogin=new BackEndLogin(driver);
-        backEndLogin.catalogModuleLogin();
+        backEndLogin.salesModuleLogin();
         manageTaxRulePage=new ManageTaxRulePage(driver);
         manageTaxRulePage.addAndUpdateTaxRulesFunction();
         Assert.assertTrue(manageTaxRulePage.verifyAddAndUpdateTaxRulesFunction());
@@ -242,9 +242,6 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(dataAccess.verifyNewlyAddedTaxRuleInTheDatabase(TestHelperSales.getTaxRuleName(),connection));
 
     }
-
-
-
 
 
     @After("@DatabaseTest")
