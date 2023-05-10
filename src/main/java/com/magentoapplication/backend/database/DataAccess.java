@@ -276,10 +276,21 @@ public class DataAccess {
 
     }
 
+    public boolean verifyNewlyAddedStoreView(String storeViewName, Connection connection) {
+        String selectStore = String.format("select * from mg_core_store where name='%s'", storeViewName);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(selectStore);
+             ResultSet resultSet = preparedStatement.executeQuery();) {
+            boolean isNewStoreViewAdded = resultSet.next();
+            return isNewStoreViewAdded;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 
-}
+
+    }
 
 
 
