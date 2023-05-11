@@ -52,6 +52,7 @@ public class DatabaseSteps extends TestBase {
     ManageTaxRulePage manageTaxRulePage;
     ManageProductsPage manageProductsPage;
 
+    ManageStoresPage manageStoresPage;
 
 
 
@@ -229,15 +230,6 @@ public class DatabaseSteps extends TestBase {
     }
 
 
-
-
-    @After("@DatabaseTest")
-    public void tearDown() {
-        DatabaseConnection.closeDataBaseConnection(connection);
-        closeBrowser();
-    }
-
-
     @When("the user add new order")
     public void theUserAddNewOrder() {
             setupBrowserBackEnd();
@@ -281,11 +273,33 @@ public class DatabaseSteps extends TestBase {
 
     }
 
+    @When("a user can add new store in database")
+    public void aUserCanAddNewStoreInDatabase() {
+        setupBrowserBackEnd();
+        backEndLogin=new BackEndLogin(driver);
+        backEndLogin.storeModuleLogin();
+        manageStoresPage=new ManageStoresPage(driver);
+        manageStoresPage.createStore();
+        Assert.assertTrue(manageStoresPage.verifyCreateStore());
+    }
+
+    @Then("the user should added new store")
+    public void theUserShouldAddedNewStore() {
+        Assert.assertTrue(dataAccess.verifyStoreAdded(TestHelperStore.getStoreName(),connection));
+    }
+
     @Then("new added product should be in the database")
     public void newAddedProductShouldBeInTheDatabase() {
         Assert.assertTrue(dataAccess.verifyNewlyAddedProduct(TestHelperCatalog.getProductName(),connection));
 
     }
+
+    @After("@DatabaseTest")
+    public void tearDown() {
+        DatabaseConnection.closeDataBaseConnection(connection);
+        closeBrowser();
+    }
+
 }
 
 

@@ -124,7 +124,7 @@ public class CustomersManagerPage {
         functionClass.sleep(2);
         groupFilterDropdown.click();
         Select selectGroup = new Select(groupFilterDropdown);
-        selectGroup.selectByVisibleText("sabahet");
+        selectGroup.selectByVisibleText("Team2!1215641");
         functionClass.sleep(2);
         searchButton.click();
 
@@ -152,8 +152,10 @@ public class CustomersManagerPage {
             Select select1 = new Select(groupsDropdown);
             select1.selectByValue("313");
             WebElement checkbox=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]//parent::tr//input",TestHelperClass.getEmail())));
-            checkbox.click();
-            submitButton.click();
+//            checkbox.click();
+            functionClass.clickOnJavaScript(checkbox);
+//            submitButton.click();
+            functionClass.clickOnJavaScript(submitButton);
         }
 
         public boolean verifyUpdate() {
