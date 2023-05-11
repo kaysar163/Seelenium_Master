@@ -143,7 +143,6 @@ public class ApiSteps {
     }
 
 
-
     @Then("the api should return a category with {int} response code")
     public void theApiShouldReturnACategoryWithResponseCode(int arg0) {
         arg0=200;
