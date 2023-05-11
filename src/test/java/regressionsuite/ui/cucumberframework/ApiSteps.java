@@ -143,7 +143,6 @@ public class ApiSteps {
     }
 
 
-
     @Then("the api should return a category with {int} response code")
     public void theApiShouldReturnACategoryWithResponseCode(int arg0) {
         arg0=200;
@@ -224,5 +223,21 @@ public class ApiSteps {
         arg0=200;
         Assert.assertTrue(response.getStatusCode()==arg0);
     }
+
+
+    @When("an authorized user sends get one customer request to the customer end point HLT")
+    public void anAuthorizedUserSendsGetOneCustomerRequestToTheCustomerEndPointHLT() {
+        response=RestAssured.given().headers("Content-Type","application/json").and()
+                .body(PayloadUtility.oneCustomerPayload()).auth().basic(apiUsername,apiPassword)
+                .when().get(apiBaseUrl+":"+apiPort+"/customer"+"/1").then().extract().response();
+        System.out.println(response.getBody().prettyPrint());
+    }
+
+    @Then("the api should return one customer with {int} response code HLT")
+    public void theApiShouldReturnOneCustomerWithResponseCodeHLT(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
 }
+
 
