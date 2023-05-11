@@ -211,5 +211,18 @@ public class ApiSteps {
     public void theApiShouldReturnGetCustomerGroupsResponseCodeOf(int arg0) {
         Assert.assertEquals(response.getStatusCode(),arg0);
     }
+
+    @When("an authorized user sends a request to the customer end point fazilet")
+    public void anAuthorizedUserSendsARequestToTheCustomerEndPointFazilet() {
+        response= given().auth().basic(apiUsername,apiPassword).when()
+                .get(apiBaseUrl+":"+apiPort+"/customers");
+        System.out.println(response.getBody().prettyPrint());
+    }
+
+    @Then("the api should return all customers with {int} response code")
+    public void theApiShouldReturnAllCustomersWithResponseCode(int arg0) {
+        arg0=200;
+        Assert.assertTrue(response.getStatusCode()==arg0);
+    }
 }
 
