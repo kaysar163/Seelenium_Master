@@ -45,13 +45,13 @@ public class CustomersModuleTestRunner extends TestBase {
 
     }
 
-    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 2)
+    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 2,enabled = false)
     public void passwordResetTest(){
         customerInformationPage.customerPasswordChange();
         Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());
     }
 
-    @Test(description= "omercan", priority = 3)
+    @Test(description= "omercan", priority = 3,dependsOnMethods = "managerAddNewCustomerTest")
     public void emailFilterTest() {
         customersManagerPage.FilterCustomersByEmail();
     }

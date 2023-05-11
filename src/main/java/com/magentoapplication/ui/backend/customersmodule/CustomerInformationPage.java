@@ -126,7 +126,8 @@ public class CustomerInformationPage {
         accountInformation.click();
         accountInformationCheckBox.click();
         accountPassword.sendKeys(ApplicationConfig.readFromConfigProperties("config.properties","backEndPassword"));
-        saveCustomerButton.click();
+//        saveCustomerButton.click();
+        functionClass.clickOnJavaScript(saveCustomerButton);
     }
     public boolean passwordSuccessfullyChanged(){
         functionClass.waitUntilElementPresent(customersManagerPage.passwordChangeSuccessMessage);
