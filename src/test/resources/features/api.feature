@@ -38,7 +38,11 @@
 
 
 
-         #Fazilat :
+    @GetAllCustomers  #Fazilet :
+      Scenario: An authorized user should be able to get all customers
+      Given a valid username and a password
+      When an authorized user sends a request to the customer end point fazilet
+      Then the api should return all customers with 200 response code
 
 
 
