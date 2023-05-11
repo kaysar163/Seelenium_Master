@@ -48,9 +48,11 @@
 
 
 
-
-            #Halit :
-
+    @GetOneCustomer #Fazilet :
+    Scenario: An authorized user should be able to get one Customer
+      Given  a valid username and a password
+      When an authorized user sends get one customer request to the customer end point HLT
+      Then the api should return one customer with 200 response code HLT
 
 
 
