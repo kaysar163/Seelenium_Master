@@ -164,5 +164,15 @@ public class PayloadUtility {
         return payload;
     }
 
+    public static String oneCustomerPayload() {
+        String payload = null;
+        CustomerPayload oneCustomerPayload = new CustomerPayload(900, 5, 2, 1, "Dolkun");
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            payload = objectMapper.writeValueAsString(oneCustomerPayload);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
 
-}
+    }}
