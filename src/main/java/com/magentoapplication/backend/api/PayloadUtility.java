@@ -164,5 +164,16 @@ public class PayloadUtility {
         return payload;
     }
 
-
+    public static String getAllCustomersPayload(){
+        long timeStamp=System.currentTimeMillis();
+        String payload=null;
+        CustomerPayload customerPayload=new CustomerPayload(1,5,1,"Dolkun8881112223"+timeStamp);
+        ObjectMapper objectMapper=new ObjectMapper();
+        try {
+            payload=objectMapper.writeValueAsString(customerPayload);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return payload;
+    }
 }
