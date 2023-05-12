@@ -66,7 +66,7 @@ public class DataAccess {
     }
 
     public boolean assertStoreExists(String storeName, Connection connection) {
-        String addedStore = String.format("SELECT * FROM `i5751295_mg2`.`mg_core_store_group` WHERE store_name = %s", storeName);
+        String addedStore = String.format("SELECT * FROM `i5751295_mg2`.`mg_core_store_group` WHERE name ='%s'", storeName);
 
         try (
                 PreparedStatement preparedStatement = connection.prepareStatement(addedStore);
@@ -184,8 +184,7 @@ public class DataAccess {
 
 
     public boolean verifyCartPriceRuleAdded(String ruleName, Connection connection) {
-        String selectCartPriceRule = String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'",
-                ApplicationConfig.readFromConfigProperties("testdatafolder/testdata.properties", "ruleName"));
+        String selectCartPriceRule = String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'",ruleName);
 
         PreparedStatement preparedStatement = null;
 
