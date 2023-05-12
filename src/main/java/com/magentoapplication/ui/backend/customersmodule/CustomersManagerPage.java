@@ -103,12 +103,19 @@ public class CustomersManagerPage {
     @FindBy(id = "customerGrid_filter_billing_region")
     WebElement filterState;
 
+    @FindBy(css = "#customerGrid_table > tbody > tr:nth-child(1) > td:nth-child(1) > input")
+    WebElement customerCheckBox;
+
 
 
     public void FilterCustomersByEmail() {
-//        functionClass.waitUntilElementPresent(resetFilterButton);
-//        functionClass.sleep(2);
-//        resetFilterButton.click();
+        functionClass.waitUntilElementPresent(customerLink);
+        customerLink.click();
+        functionClass.waitUntilElementPresent(manageCustomersLink);
+        manageCustomersLink.click();
+        functionClass.waitUntilElementPresent(resetFilterButton);
+        functionClass.sleep(2);
+        resetFilterButton.click();
         functionClass.waitUntilElementPresent(emailField);
         emailField.sendKeys(TestHelperClass.getEmail());
         functionClass.waitUntilElementPresent(searchButton);
@@ -139,23 +146,35 @@ public class CustomersManagerPage {
     }
 
         public void assignGroupToCustomer() {
-//            functionClass.waitUntilElementPresent(resetFilterButton);
+ //          functionClass.waitUntilElementPresent(resetFilterButton);
 //            actions.click(resetFilterButton).build().perform();
-//            functionClass.waitUntilElementPresent(customerLink);
-//            functionClass.clickOnJavaScript(customerLink);
-////            customerLink.click();
-//            functionClass.waitUntilElementPresent(manageCustomersLink);
-//            manageCustomersLink.click();
+            functionClass.waitUntilElementPresent(customerLink);
+            functionClass.clickOnJavaScript(customerLink);
+            customerLink.click();
+           functionClass.waitUntilElementPresent(manageCustomersLink);
+           manageCustomersLink.click();
+           functionClass.waitUntilElementPresent(emailField);
+           emailField.sendKeys(TestHelperClass.getEmail());
+           functionClass.sleep(3);
+           functionClass.waitUntilElementPresent(searchButton);
+           searchButton.click();
+           functionClass.sleep(3);
+           customerCheckBox.click();
+           /*Actions actions1=new Actions(driver);
+           actions1.click(customerCheckBox);*/
+            //WebElement checkbox=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]//parent::tr//input",TestHelperClass.getEmail())));
+            //customerCheckBox.click();
             Select select = new Select(actionsDropdown);
             select.selectByValue("assign_group");
             functionClass.waitUntilElementPresent(groupsDropdown);
             Select select1 = new Select(groupsDropdown);
-            select1.selectByValue("313");
-            WebElement checkbox=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]//parent::tr//input",TestHelperClass.getEmail())));
+            select1.selectByVisibleText(TestHelperClass.getGroupName());
+
 //            checkbox.click();
-            functionClass.clickOnJavaScript(checkbox);
-//            submitButton.click();
-            functionClass.clickOnJavaScript(submitButton);
+            //functionClass.clickOnJavaScript(checkbox);
+            functionClass.waitUntilElementPresent(submitButton);
+            submitButton.click();
+            //functionClass.clickOnJavaScript(submitButton);
         }
 
         public boolean verifyUpdate() {

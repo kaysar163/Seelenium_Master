@@ -45,38 +45,39 @@ public class CustomersModuleTestRunner extends TestBase {
 
     }
 
-    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 2,enabled = false)
+    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 5)
     public void passwordResetTest(){
         customerInformationPage.customerPasswordChange();
         Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());
     }
 
-    @Test(description= "omercan", priority = 3,dependsOnMethods = "managerAddNewCustomerTest")
+    @Test(description= "omercan", priority = 4,dependsOnMethods = "managerAddNewCustomerTest")
     public void emailFilterTest() {
         customersManagerPage.FilterCustomersByEmail();
+
     }
 
-    @Test(priority = 4,dependsOnMethods = "managerAddNewCustomerTest")
+    @Test(priority = 3)
     public void assignACustomerToCustomerGroupTest() {
         customersManagerPage.assignGroupToCustomer();
         Assert.assertTrue(customersManagerPage.verifyUpdate());
     }
 
-    @Test(description = "murdail",priority = 5)
+    @Test(description = "murdail",priority = 6)
     public void addNewAddressTest(){
         customerInformationPage.customerManagerCanAddANewAddressForACustomer();
         Assert.assertTrue(customerInformationPage.verifyAddNewAddress());
 
     }
 
-    @Test(description = "Irshad",dependsOnMethods = {"managerAddNewCustomerTest"}, priority =6)
+    @Test(description = "Irshad",dependsOnMethods = {"managerAddNewCustomerTest"}, priority =7)
     public void deleteCustomerTest(){
         customersManagerPage.deleteCustomer();
         Assert.assertTrue(customersManagerPage.verifyDeleteCustomer());
     }
 
 
-    @Test(description = "manager can export customers-muyesser",priority = 7)
+    @Test(description = "manager can export customers-muyesser",priority = 8)
     public void managerExportCustomerTest(){
         customersManagerPage.exportCustomers();
         Assert.assertTrue(customersManagerPage.verifyExportCustomer());
@@ -84,25 +85,25 @@ public class CustomersModuleTestRunner extends TestBase {
     }
 
 
-    @Test(description = "renagul",priority = 8)
+    @Test(description = "renagul",priority = 9)
     public void FilterCustomerBySate() {
         customersManagerPage.filterCustomerBySate();
         Assert.assertTrue(customersManagerPage.verifyCustomerFilterByState());
     }
 
-    @Test(description= "Fazilet", priority = 9)
+    @Test(description= "Fazilet", priority = 10)
     public void filterCustomerByCountry(){
         customersManagerPage.filterCustomerByCountry();
         Assert.assertTrue(customersManagerPage.verifyCustomerFilteredByCountry());
     }
 
-    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 10)
+    @Test(description = "Filter the Customer By Group Test-Rizvangul", priority = 11)
     public void filterTheCustomerByGroupTest(){
         customersManagerPage.filterTheCustomerByGroup();
         Assert.assertTrue(customersManagerPage.verifyFilterTheCustomerByGroup());
     }
 
-    @Test(description= "Mirehmidi",priority = 11)
+    @Test(description= "Mirehmidi",priority = 12)
     public void FilterCustomersBywebsite() {
         customersManagerPage.filterCustomersBywebsite();
         Assert.assertTrue(customersManagerPage.verifyWebsite());
@@ -111,7 +112,7 @@ public class CustomersModuleTestRunner extends TestBase {
 
 
 
-    @Test(description = "Fazilet", priority = 12)
+    @Test(description = "Fazilet", priority = 2)
     public void addNewCustomerGroup(){
         customerGroupPage.addNewCustomerGroup();
         Assert.assertTrue(customerGroupPage.verifyTheCustomerGroupHasBeenSaved());

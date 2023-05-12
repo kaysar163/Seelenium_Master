@@ -30,6 +30,8 @@ public class TestHelperClass {
         return customerFirstName;
     }
 
+
+
     public static void setCustomerFirstName(String customerFirstName) {
         TestHelperClass.customerFirstName = customerFirstName;
     }
@@ -37,6 +39,7 @@ public class TestHelperClass {
     public static String getEmail() {
         return email;
     }
+
 
     public static void setEmail(String email) {
         TestHelperClass.email = email;

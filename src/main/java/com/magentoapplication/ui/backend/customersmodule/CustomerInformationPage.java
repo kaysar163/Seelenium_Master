@@ -27,6 +27,16 @@ public class CustomerInformationPage {
     WebElement addNewCustomerLink;
     @FindBy(id="//a[text()='Edit']")
     WebElement customerEditButton;
+
+    @FindBy(xpath = "//span[text()='Customers']")
+    WebElement customerLink;
+    @FindBy(xpath = "//tbody/tr/td[contains(text(),'Reinaldo')]//following::td[9]//a[text()='Edit']")
+    WebElement customerEditButton1;
+    //    WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",customerInformationPage.firstName)));
+    @FindBy(xpath = "//*[text()='The customer has been saved.']")
+    WebElement passwordChangeSuccessMessage;
+    @FindBy(xpath = "//span[text()='Manage Customers']")
+    WebElement manageCustomersLink;
     @FindBy(id="_accountfirstname")
     WebElement firstNameField;
     @FindBy(id="_accountlastname")
@@ -83,6 +93,18 @@ public class CustomerInformationPage {
     @FindBy(xpath = "//span[text()='The customer has been saved.']")
     WebElement verifyAddNewAddress;
 
+    @FindBy(xpath = "//span[text()='Search']//parent::span//parent::span//parent::button")
+    WebElement searchButton;
+
+    @FindBy(id="_accountnew_password")
+    WebElement passwordField;
+
+    @FindBy(css="button[title='Save Customer']")
+    WebElement saveCustomer;
+
+    @FindBy(id="_accountcurrent_password")
+    WebElement currentPassword;
+
     public void addCustomerMethod(){
         functionClass.waitUntilElementPresent(addNewCustomerLink);
         addNewCustomerLink.click();
@@ -106,28 +128,46 @@ public class CustomerInformationPage {
         } else return false;
     }
     public void customerPasswordChange(){
-//        functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
-//        Actions actions=new Actions(driver);
-//        actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
-//        functionClass.waitUntilElementPresent(customersManagerPage.resetFilterButton);
-//        functionClass.sleep(2);
-//        customersManagerPage.resetFilterButton.click();
-//        functionClass.waitUntilElementPresent(customersManagerPage.emailField);
-//        customersManagerPage.emailField.sendKeys(TestHelperClass.getEmail());
-//        functionClass.waitUntilElementPresent(customersManagerPage.searchButton);
-//        functionClass.sleep(2);
-//        customersManagerPage.searchButton.click();
-        WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[8]//a[text()='Edit']",TestHelperClass.getEmail())));
-        System.out.println(cusEditButt+"email editing");
-        functionClass.waitUntilElementPresent(cusEditButt);
-        functionClass.sleep(1);
+        functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
         Actions actions=new Actions(driver);
-        actions.click(cusEditButt).build().perform();
+        actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
+        functionClass.waitUntilElementPresent(customersManagerPage.resetFilterButton);
+        functionClass.sleep(2);
+        customersManagerPage.resetFilterButton.click();
+        /*functionClass.waitUntilElementPresent(customerLink);
+        customerLink.click();
+        functionClass.waitUntilElementPresent(manageCustomersLink);
+        manageCustomersLink.click();*/
+
+        functionClass.waitUntilElementPresent(customersManagerPage.emailField);
+       customersManagerPage.emailField.sendKeys(TestHelperClass.getEmail());
+        functionClass.waitUntilElementPresent(customersManagerPage.searchButton);
+
+        functionClass.sleep(2);
+        searchButton.click();
+        functionClass.sleep(3);
+        WebElement existingCustomerLink = driver.findElement(By.xpath(String.format("//table[@id='customerGrid_table']//following::td[contains(text(),'%s')]",TestHelperClass.getEmail() )));
+        functionClass.waitUntilElementPresent(existingCustomerLink);
+        existingCustomerLink.click();
+        //WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[8]//a[text()='Edit']",TestHelperClass.getEmail())));
+        //System.out.println(cusEditButt+"email editing");
+        //functionClass.waitUntilElementPresent(cusEditButt);
+        //functionClass.sleep(1);
+        //Actions actions=new Actions(driver);
+        //actions.click(cusEditButt).build().perform();
+        functionClass.waitUntilElementPresent(accountInformation);
         accountInformation.click();
-        accountInformationCheckBox.click();
+        functionClass.waitUntilElementPresent(passwordField);
+        passwordField.sendKeys(functionClass.currentDate());
+        functionClass.waitUntilElementPresent(currentPassword);
+        currentPassword.sendKeys(ApplicationConfig.readFromConfigProperties("config.properties","backEndPassword"));
+        functionClass.waitUntilElementPresent(saveCustomer);
+        saveCustomer.click();
+
+        /*accountInformationCheckBox.click();
         accountPassword.sendKeys(ApplicationConfig.readFromConfigProperties("config.properties","backEndPassword"));
-//        saveCustomerButton.click();
-        functionClass.clickOnJavaScript(saveCustomerButton);
+        saveCustomerButton.click();*/
+        //functionClass.clickOnJavaScript(saveCustomerButton);
     }
     public boolean passwordSuccessfullyChanged(){
         functionClass.waitUntilElementPresent(customersManagerPage.passwordChangeSuccessMessage);
