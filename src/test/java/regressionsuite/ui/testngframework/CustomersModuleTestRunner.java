@@ -45,15 +45,16 @@ public class CustomersModuleTestRunner extends TestBase {
 
     }
 
-    @Test(description = "Memet",dependsOnMethods = {"managerAddNewCustomerTest"},priority = 5)
+    @Test(description = "Memet",priority = 5)
     public void passwordResetTest(){
         customerInformationPage.customerPasswordChange();
         Assert.assertTrue(customerInformationPage.passwordSuccessfullyChanged());
     }
 
-    @Test(description= "omercan", priority = 4,dependsOnMethods = "managerAddNewCustomerTest")
+    @Test(description= "omercan", priority = 4)
     public void emailFilterTest() {
         customersManagerPage.FilterCustomersByEmail();
+
 
     }
 
@@ -125,7 +126,7 @@ public class CustomersModuleTestRunner extends TestBase {
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupEditedTest());
 
     }
-    @Test(description = "meryem",dependsOnMethods = {"addNewCustomerGroup"}, priority = 14)
+    @Test(description = "meryem", priority = 14)
     public void deleteCustomerGroup() {
         editCustomerGroupPage.deleteCustomerGroupInfo();
         Assert.assertTrue(editCustomerGroupPage.verifyCustomerGroupDeletedTest1());

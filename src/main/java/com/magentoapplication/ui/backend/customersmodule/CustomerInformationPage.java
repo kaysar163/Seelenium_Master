@@ -128,16 +128,16 @@ public class CustomerInformationPage {
         } else return false;
     }
     public void customerPasswordChange(){
-        functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
-        Actions actions=new Actions(driver);
-        actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
-        functionClass.waitUntilElementPresent(customersManagerPage.resetFilterButton);
+        //functionClass.waitUntilElementPresent(customersManagerPage.customerLink);
+        //Actions actions=new Actions(driver);
+        //actions.moveToElement(customersManagerPage.customerLink).moveToElement(customersManagerPage.manageCustomersLink).click().build().perform();
+        //functionClass.waitUntilElementPresent(customersManagerPage.resetFilterButton);
         functionClass.sleep(2);
-        customersManagerPage.resetFilterButton.click();
-        /*functionClass.waitUntilElementPresent(customerLink);
+        //customersManagerPage.resetFilterButton.click();
+        functionClass.waitUntilElementPresent(customerLink);
         customerLink.click();
         functionClass.waitUntilElementPresent(manageCustomersLink);
-        manageCustomersLink.click();*/
+        manageCustomersLink.click();
 
         functionClass.waitUntilElementPresent(customersManagerPage.emailField);
        customersManagerPage.emailField.sendKeys(TestHelperClass.getEmail());

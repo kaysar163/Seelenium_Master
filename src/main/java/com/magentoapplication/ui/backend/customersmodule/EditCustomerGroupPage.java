@@ -93,12 +93,13 @@ public class EditCustomerGroupPage {
     public void deleteCustomerGroupInfo() {
         functionClass.waitUntilElementPresent(customerLink);
         customerLink.click();
-        functionClass.waitUntilElementPresent(manageCustomersLink);
-        manageCustomersLink.click();
-        functionClass.sleep(2);
+        functionClass.waitUntilElementPresent(customerGroupsLink);
+        customerGroupsLink.click();
+        functionClass.sleep(5);
         functionClass.waitUntilElementPresent(groupNameSearchField);
         groupNameSearchField.clear();
         groupNameSearchField.sendKeys(TestHelperClass.getChangedGroupName());
+        functionClass.sleep(2);
         functionClass.waitUntilElementPresent(searButton);
         searButton.click();
         WebElement editCustomerGroupButton=driver.findElement(By.xpath(String.format("//td[contains(text(),'%s')]",TestHelperClass.getChangedGroupName())));
