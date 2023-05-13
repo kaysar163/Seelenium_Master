@@ -4,6 +4,7 @@ import com.magentoapplication.utility.FunctionClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -46,10 +47,27 @@ public class EditCustomerGroupPage {
     WebElement searButton;
     @FindBy(xpath = "//span[text()='The customer group has been deleted.']")
     WebElement verifyCustomerGroupDeletedMessage;
+    @FindBy(xpath = "//span[text()='Customers']")
+    WebElement customerLink;
+    @FindBy(xpath = "//tbody/tr/td[contains(text(),'Reinaldo')]//following::td[9]//a[text()='Edit']")
+    WebElement customerEditButton;
+    //    WebElement cusEditButt=driver.findElement(By.xpath(String.format("//tbody/tr/td[contains(text(),'%s')]//following::td[9]//a[text()='Edit']",customerInformationPage.firstName)));
+    @FindBy(xpath = "//*[text()='The customer has been saved.']")
+    WebElement passwordChangeSuccessMessage;
+    @FindBy(xpath = "//span[text()='Manage Customers']")
+    WebElement manageCustomersLink;
+    @FindBy(xpath = "//span[text()='Search']//parent::span//parent::span//parent::button")
+    WebElement searchButton;
 
     public void editCustomerGroupInfo() {
-//        customersManagerPage.customerLink.click();
-//        customerGroupsLink.click();
+        customersManagerPage.customerLink.click();
+        customerGroupsLink.click();
+        //Actions actions=new Actions(driver);
+
+        /*functionClass.waitUntilElementPresent(customerLink);
+        actions.click(customerLink).build().perform();
+        functionClass.waitUntilElementPresent(manageCustomersLink);
+        manageCustomersLink.click();*/
         functionClass.waitUntilElementPresent(groupNameSearchField);
         groupNameSearchField.sendKeys(TestHelperClass.getGroupName());
         functionClass.waitUntilElementPresent(searButton);
@@ -73,6 +91,10 @@ public class EditCustomerGroupPage {
     }
 
     public void deleteCustomerGroupInfo() {
+        functionClass.waitUntilElementPresent(customerLink);
+        customerLink.click();
+        functionClass.waitUntilElementPresent(manageCustomersLink);
+        manageCustomersLink.click();
         functionClass.sleep(2);
         functionClass.waitUntilElementPresent(groupNameSearchField);
         groupNameSearchField.clear();

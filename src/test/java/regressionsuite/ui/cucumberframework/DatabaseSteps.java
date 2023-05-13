@@ -187,7 +187,7 @@ public class DatabaseSteps extends TestBase {
 
     @Then("the newly added cart price rule should be in the database")
     public void theNewlyAddedCartPriceRuleShouldBeInTheDatabase() {
-        Assert.assertTrue(dataAccess.verifyCartPriceRuleAdded(
+        Assert. assertTrue(dataAccess.verifyCartPriceRuleAdded(
                 ApplicationConfig.readFromConfigProperties
                         ("testdatafolder/testdata.properties","ruleName"),connection));
     }
