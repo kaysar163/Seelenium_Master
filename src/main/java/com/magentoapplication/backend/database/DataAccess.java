@@ -5,6 +5,7 @@ import com.magentoapplication.utility.ApplicationConfig;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetProvider;
+import javax.xml.transform.Result;
 import java.sql.*;
 
 public class DataAccess {
@@ -221,8 +222,23 @@ public class DataAccess {
             throw new RuntimeException(e);
         }
     }
-
-
+                                                                         //
+    public boolean verifyNewlyAddedCreditMemoOnDataBase(String creditMemoNo, Connection connection) {
+        String selectNewlyAddedCreditMemo = String.format("select * from i5751295_mg2.mg_sales_flat_creditmemo where increment_id='%s'", creditMemoNo);
+        System.out.println(selectNewlyAddedCreditMemo);
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(selectNewlyAddedCreditMemo);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            {
+                boolean isCreditMemoAdded = resultSet.next();
+                return isCreditMemoAdded;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
     public boolean verifyNewlyAddedOrderInTheDatabase(String firstName, Connection connection) {
         String selectNewlyAddedOrder = String.format("select customer_firstname from mg_sales_flat_order where customer_firstname='%s'", firstName);
 
@@ -271,8 +287,7 @@ public class DataAccess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
+        
     }
 
     public boolean verifyNewlyAddedStoreView(String storeViewName, Connection connection) {
@@ -303,9 +318,11 @@ public class DataAccess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        
+    }
 
-
-    }}
+    
+}
 
 
 

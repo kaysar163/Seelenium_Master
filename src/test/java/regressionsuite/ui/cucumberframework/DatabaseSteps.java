@@ -221,7 +221,6 @@ public class DatabaseSteps extends TestBase {
         orderViewPage=new OrderViewPage(driver);
         orderViewPage.addStoreView();
         Assert.assertTrue(orderViewPage.verifyNewStoreViewAdded());
-
     }
 
     @Then("newly added store view should be in the database")
@@ -293,7 +292,25 @@ public class DatabaseSteps extends TestBase {
         Assert.assertTrue(dataAccess.verifyNewlyAddedProduct(TestHelperCatalog.getProductName(),connection));
 
     }
-
+    
+    //toghraq
+    @When("a credit memo should be created")
+    public void aCreditMemoShouldBeCreated() {
+        setupBrowserBackEnd();
+        backEndLogin = new BackEndLogin(driver);
+        backEndLogin.salesModuleLogin();
+        ordersPageSales = new OrdersPageSales(driver);
+        ordersPageSales.createNewOrder();
+        ordersPageSales.addCreditMemo();
+        Assert.assertTrue(ordersPageSales.isCreditMemoCreated());
+    }
+    
+    @Then("the newly created credit memo should be appeared on database")
+    public void theNewlyCreatedCreditMemoShouldBeAppearedOnDatabase() {
+        Assert.assertTrue(dataAccess.verifyNewlyAddedCreditMemoOnDataBase(TestHelperSales.getIncrementId(),connection));
+    }
+    
+    
     @After("@DatabaseTest")
     public void tearDown() {
         DatabaseConnection.closeDataBaseConnection(connection);

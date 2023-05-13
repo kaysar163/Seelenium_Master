@@ -4,7 +4,7 @@ package com.magentoapplication.ui.backend.salesmodule;
 public class TestHelperSales {
 
     private  static String taxRuleName;
-
+    
     public static String getTaxRuleName() {
         return taxRuleName;
     }
@@ -32,4 +32,12 @@ public class TestHelperSales {
     public static void setFirstName(String firstName) {
         TestHelperSales.firstName = firstName;
     }
+    
+    private static String incrementId;
+    
+    public static String getIncrementId() { return incrementId;}
+    public static void setIncrementId(String incrementId)
+    { TestHelperSales.incrementId = incrementId; }
+    
+    
 }

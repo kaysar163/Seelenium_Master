@@ -3,6 +3,7 @@ package com.magentoapplication.ui.backend.salesmodule;
 import com.magentoapplication.ui.backend.marketingmodule.TestHelperMarketing;
 import com.magentoapplication.utility.ApplicationConfig;
 import com.magentoapplication.utility.FunctionClass;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -96,9 +97,18 @@ public class OrdersPageSales {
     WebElement cancelButton;
     @FindBy(xpath = "//*[text()='The order has been cancelled.']")
     WebElement orderDeleteSuccessMessage;
-
-
-
+    @FindBy(xpath ="(//button[@title='Invoice'])[1]")
+    WebElement invoiceButton;
+    @FindBy(xpath = "//input[@id='invoice_do_shipment']")
+    WebElement createShipmentCheckBox;
+    @FindBy(xpath = "//input[@id='send_email']")
+    WebElement emailInvoiceCheckBox;
+    @FindBy(xpath = "//button[@title='Submit Invoice']")
+    WebElement submitInvoiceButton;
+    @FindBy(xpath = "(//button[@title='Send Email'])[1]")
+    WebElement sendEmailButton;
+    
+    
     public String createNewOrder() {
         salesDashboardPage.clickOnOrdersLink();
         functionClass.waitUntilElementPresent(CreateNewOrderLink);
@@ -149,10 +159,23 @@ public class OrdersPageSales {
         functionClass.sleep(2);
         String orderNumberText = orderNumberElement.getText();
         String orderNumber = orderNumberText.substring(orderNumberText.indexOf("#") + 1, orderNumberText.indexOf("|")).trim();
+        TestHelperSales.setIncrementId(orderNumber);
         System.out.println("Order number: " + orderNumber);
+        functionClass.waitUntilElementPresent(invoiceButton);
+        invoiceButton.click();
+        functionClass.waitUntilElementPresent(createShipmentCheckBox);
+        createShipmentCheckBox.click();
+        functionClass.waitUntilElementPresent(emailInvoiceCheckBox);
+        emailInvoiceCheckBox.click();
+        functionClass.waitUntilElementPresent(submitInvoiceButton);
+        submitInvoiceButton.click();
+        functionClass.waitUntilElementPresent(sendEmailButton);
+        sendEmailButton.click();
+        functionClass.sleep(2);
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
         return orderNumber;
-
-
+        
     }
     public boolean verifyCreateOrder() {
         functionClass.waitUntilElementPresent(successMessage);
@@ -218,7 +241,7 @@ public class OrdersPageSales {
 //    WebElement searchButton;
     @FindBy(xpath = "//input[@name='real_order_id']")
     WebElement orderNumberInputField;
-    @FindBy(xpath = "//tr//td[contains(text(),'otanBazar')]//following-sibling::td//a[contains(text(),'View')]")
+    @FindBy(xpath = "//tr//td//a[contains(text(),'View')]")
     WebElement viewLink;
     @FindBy(xpath = "(//button[@title='Credit Memo'])[1]")
     WebElement creditMemoButton;
@@ -239,6 +262,7 @@ public class OrdersPageSales {
     @FindBy(xpath = "(//td[contains(text(),'Refunded')])[3]")
     WebElement creditMemoRefunded;
     
+    //views and adds credit memo
     public void viewAndCreateCreditMemo() {
         functionClass.waitUntilElementPresent(salesTab);
         Actions action = new Actions(driver);
@@ -249,7 +273,7 @@ public class OrdersPageSales {
         creditMemoNoInputField.sendKeys(creditMemoNumber);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
-        functionClass.sleep(5);
+//        functionClass.sleep(2);
         action.moveToElement(salesTab).perform();
         functionClass.waitUntilElementPresent(ordersLink);
         ordersLink.click();
@@ -260,8 +284,50 @@ public class OrdersPageSales {
         functionClass.sleep(1);
         searchButton.click();
         functionClass.waitUntilElementPresent(orderNumberInputField);
-        functionClass.sleep(3);
+        functionClass.sleep(1);
         orderNumberInputField.sendKeys(orderNumber);
+        functionClass.waitUntilElementPresent(searchButton);
+        functionClass.sleep(2);
+        searchButton.click();
+        functionClass.waitUntilElementPresent(viewLink);
+        functionClass.sleep(1);
+        viewLink.click();
+        functionClass.waitUntilElementPresent(creditMemoButton);
+        creditMemoButton.click();
+        functionClass.waitUntilElementPresent(returnToStockCheckBox);
+        functionClass.sleep(2);
+        returnToStockCheckBox.click();
+        functionClass.waitUntilElementPresent(qtyToRefund);
+        functionClass.sleep(2);
+        qtyToRefund.clear();
+        qtyToRefund.sendKeys(refundQuantity);
+        functionClass.waitUntilElementPresent(updateQuantityButton);
+        //functionClass.sleep(2);
+        updateQuantityButton.click();
+        functionClass.waitUntilElementPresent(emailCopyOfCreditMemo);
+        //functionClass.sleep(2);
+        emailCopyOfCreditMemo.click();
+        functionClass.waitUntilElementPresent(refundOffLineButton);
+        //functionClass.sleep(1);
+        refundOffLineButton.click();
+    }
+    
+    //only adds credit memo to a completed order
+    public void addCreditMemo(){
+        functionClass.waitUntilElementPresent(salesTab);
+        Actions action = new Actions(driver);
+        action.moveToElement(salesTab).perform();
+        functionClass.waitUntilElementPresent(ordersLink);
+        ordersLink.click();
+        functionClass.waitUntilElementPresent(statusDropdownMenu);
+        functionClass.sleep(2);
+        Select object = new Select(statusDropdownMenu);
+        object.selectByValue("complete");
+//        functionClass.sleep(1);
+//        searchButton.click();
+        functionClass.waitUntilElementPresent(orderNumberInputField);
+        functionClass.sleep(3);
+        orderNumberInputField.sendKeys(TestHelperSales.getIncrementId());
         functionClass.waitUntilElementPresent(searchButton);
         functionClass.sleep(2);
         searchButton.click();

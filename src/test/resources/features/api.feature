@@ -106,7 +106,7 @@
 
 
          #Irsahd :
-
+         
 
 
 
@@ -146,9 +146,6 @@
       Given  a valid username and a password
       When an authorized user sends a request to the post one product end point
       Then the api should return created post with 200 response code
-
-
-
 
 
          #Omercan
