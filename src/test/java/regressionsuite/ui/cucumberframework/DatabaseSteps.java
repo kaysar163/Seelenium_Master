@@ -303,10 +303,14 @@ public class DatabaseSteps extends TestBase {
         ordersPageSales.createNewOrder();
         ordersPageSales.addCreditMemo();
         Assert.assertTrue(ordersPageSales.isCreditMemoCreated());
+        DatabaseConnection.closeDataBaseConnection(connection);
     }
     
     @Then("the newly created credit memo should be appeared on database")
     public void theNewlyCreatedCreditMemoShouldBeAppearedOnDatabase() {
+        connection = DatabaseConnection.connection(dbUrl, dbPort, dbDefault, dbUserName, dbPassword, ConnectionType.MYSQL);
+        backEndLogin = new BackEndLogin(driver);
+        dataAccess = new DataAccess();
         Assert.assertTrue(dataAccess.verifyNewlyAddedCreditMemoOnDataBase(TestHelperSales.getIncrementId(),connection));
     }
     

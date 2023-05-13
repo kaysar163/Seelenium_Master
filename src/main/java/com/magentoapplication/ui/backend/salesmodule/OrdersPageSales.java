@@ -160,7 +160,7 @@ public class OrdersPageSales {
         String orderNumberText = orderNumberElement.getText();
         String orderNumber = orderNumberText.substring(orderNumberText.indexOf("#") + 1, orderNumberText.indexOf("|")).trim();
         TestHelperSales.setIncrementId(orderNumber);
-        System.out.println("Order number: " + orderNumber);
+        System.out.println("Order number: S.A" + orderNumber);
         functionClass.waitUntilElementPresent(invoiceButton);
         invoiceButton.click();
         functionClass.waitUntilElementPresent(createShipmentCheckBox);
