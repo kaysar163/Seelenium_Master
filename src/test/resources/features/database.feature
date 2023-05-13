@@ -17,11 +17,6 @@ Feature: Database and UI connection tests
     When  add new customer group
     Then  Verify new added customer groups in database
 
-
-
-
-
-
     #Omercan :
   @verifyNewlyAddedProductRootCategoryInTheDatabase
   Scenario: Verify that newly added product root category should be in the database
@@ -38,9 +33,6 @@ Feature: Database and UI connection tests
     Then the user should be in the database
 
 
-
-
-
   @verifyNewlyAddedOrdersInTheDatabase    #Fazilet :
   Scenario: Verify that newly added orders should be in the database
     Given connection is already established
@@ -48,16 +40,12 @@ Feature: Database and UI connection tests
     Then Newly added order should be in the database
 
 
-
-
-
-
-      #Irsahd :
-
-
-
-
-
+       #Irshad
+  @verifyCreditMemoOnDB
+  Scenario: Verify that newly added credit memos should be in the database
+    Given connection is already established
+    When a credit memo should be created
+    Then the newly created credit memo should be appeared on database
 
       #Muradil:
       @verifyNewlyAddedStoreInTheDatabase
@@ -65,11 +53,6 @@ Feature: Database and UI connection tests
         Given connection is already established
         When a user can add new store in database
         Then the user should added new store
-
-
-
-
-
 
 
       #Memet :
