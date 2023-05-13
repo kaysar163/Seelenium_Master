@@ -113,13 +113,14 @@ public class CustomersManagerPage {
         customerLink.click();
         functionClass.waitUntilElementPresent(manageCustomersLink);
         manageCustomersLink.click();
+        driver.navigate().refresh();
         functionClass.waitUntilElementPresent(resetFilterButton);
         functionClass.sleep(2);
         resetFilterButton.click();
         functionClass.waitUntilElementPresent(emailField);
         emailField.sendKeys(TestHelperClass.getEmail());
         functionClass.waitUntilElementPresent(searchButton);
-        functionClass.sleep(2);
+        functionClass.sleep(5);
         searchButton.click();
     }
 
@@ -236,6 +237,7 @@ public class CustomersManagerPage {
         functionClass.sleep(2);
         Select select = new Select(CountryDropdown);
         select.selectByValue("TR");
+        functionClass.sleep(3);
         functionClass.waitUntilElementPresent(searchButton);
         searchButton.click();
 
