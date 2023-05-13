@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty","html:target/cucumber-framework-testReport.html","json:target/cucumber.json"},
         features = {"classpath:features"},
-        tags ="@ReportingModuleTest"
+        tags ="@RegressionSuite"
 )
 public class CucumberTestRunner {
 
