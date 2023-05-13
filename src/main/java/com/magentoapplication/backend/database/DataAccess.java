@@ -185,7 +185,7 @@ public class DataAccess {
 
 
     public boolean verifyCartPriceRuleAdded(String ruleName, Connection connection) {
-        String selectCartPriceRule = String.format("SELECT * FROM `i5751295_mg2`.`mg_catalog_category_entity_varchar` WHERE value ='%s'",ruleName);
+        String selectCartPriceRule = String.format("SELECT * FROM `i5751295_mg2`.`mg_salesrule`where name='%s'",ruleName);
 
         PreparedStatement preparedStatement = null;
 
@@ -223,7 +223,7 @@ public class DataAccess {
     }
                                                                          //
     public boolean verifyNewlyAddedCreditMemoOnDataBase(String creditMemoNo, Connection connection) {
-        String selectNewlyAddedCreditMemo = String.format("select * from i5751295_mg2.mg_sales_flat_creditmemo where increment_id='%s'", creditMemoNo);
+        String selectNewlyAddedCreditMemo = String.format("select * from i5751295_mg2.mg_sales_flat_creditmemo_grid where order_increment_id='%s';", creditMemoNo);
         System.out.println(selectNewlyAddedCreditMemo);
         PreparedStatement preparedStatement = null;
         try {
